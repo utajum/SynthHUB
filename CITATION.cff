@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use SynthHub-PWA in your work, please cite it as below."
+title: "SynthHub-PWA: Behringer synthesizer control over WebUSB / WebMIDI"
+type: software
+authors:
+  - alias: utajum
+repository-code: "https://github.com/utajum/SynthHUB"
+url: "https://synth-hub.elevatech.xyz/"
+license: MIT
+version: 0.1.0
+date-released: 2026-07-21
+keywords:
+  - behringer
+  - synthesizer
+  - webmidi
+  - webusb
+  - midi
+  - sysex
+  - pwa
+  - sequencer
+  - synthtribe
+  - music-production
+abstract: >-
+  Browser-native Progressive Web App that manages 71 Behringer synthesizers
+  over WebUSB and WebMIDI SysEx - device settings editor, step sequencer,
+  MIDI recording, patch and pattern libraries. An open alternative to the
+  Behringer SynthTribe desktop application.

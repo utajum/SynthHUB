@@ -1,0 +1,10 @@
+node_modules
+dist
+.astro
+temp
+upstream
+firmware-archive
+package-lock.json
+*.min.js
+*.min.css
+public
