@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00ff9c"/>
+      <stop offset="1" stop-color="#39ff14"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse">
+      <path d="M34 0H0V34" fill="none" stroke="#12211a" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0b0f0d"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect x="16" y="16" width="1168" height="598" rx="18" fill="none" stroke="#17352a" stroke-width="2"/>
+
+  <!-- prompt -->
+  <text x="70" y="150" font-family="'JetBrains Mono',monospace" font-size="30" fill="#5f8f7d">
+    root@synth-hub:~/$ <tspan fill="#00ff9c">./control --all</tspan>
+  </text>
+
+  <!-- title -->
+  <text x="66" y="330" font-family="'JetBrains Mono',monospace" font-weight="800"
+        font-size="128" fill="url(#g)" filter="url(#glow)">SynthHub</text>
+
+  <!-- subtitle -->
+  <text x="72" y="470" font-family="'JetBrains Mono',monospace" font-size="33" fill="#b8ffe4">
+    Control every Behringer synth over WebUSB / WebMIDI
+  </text>
+  <text x="72" y="516" font-family="'JetBrains Mono',monospace" font-size="24" fill="#5f8f7d">
+    71 models - 2600 - TD-3 - RD-8/9 - Model D - Pro-800 - UB-Xa - sequencer - SysEx
+  </text>
+
+  <!-- badges -->
+  <g font-family="'JetBrains Mono',monospace" font-size="22" fill="#04120c">
+    <rect x="72" y="552" width="150" height="40" rx="6" fill="#00ff9c"/>
+    <text x="90" y="579">WebUSB</text>
+    <rect x="236" y="552" width="150" height="40" rx="6" fill="#39ff14"/>
+    <text x="254" y="579">WebMIDI</text>
+    <rect x="400" y="552" width="130" height="40" rx="6" fill="#23e0d0"/>
+    <text x="418" y="579">PWA</text>
+  </g>
+
+  <!-- waveform motif -->
+  <g stroke="url(#g)" stroke-width="8" fill="none" stroke-linejoin="round" filter="url(#glow)" opacity="0.9">
+    <path d="M820 250 h40 v-70 h60 v70 h60 v-70 h60 v70 h60 v-70 h40"/>
+  </g>
+  <g stroke="#1f5c46" stroke-width="4" fill="none" opacity="0.7">
+    <path d="M812 350 c40 -60 80 -60 120 0 s80 60 120 0 s80 -60 120 0"/>
+  </g>
+</svg>

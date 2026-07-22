@@ -103,8 +103,35 @@ export function verCompare(a: string, b: string): number {
   return 0;
 }
 
-export const json = (body: unknown, status = 200): Response =>
+export const json = (
+  body: unknown,
+  status = 200,
+  headers?: Record<string, string>,
+): Response =>
   new Response(JSON.stringify(body), {
     status,
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...(headers ?? {}) },
   });
+
+export function cacheHeaders(o: {
+  browser?: number; // seconds the browser may reuse without revalidating
+  cdn: number; // seconds the CDN serves a fresh copy
+  swr?: number; // seconds the CDN may serve stale while refetching
+  durable?: boolean; // persist across deploys (Netlify Durable Cache)
+  tag?: string; // Cache-Tag for targeted purge
+}): Record<string, string> {
+  const swr = o.swr ?? o.cdn;
+  const cdn =
+    `public, ${o.durable ? 'durable, ' : ''}s-maxage=${o.cdn}, ` +
+    `stale-while-revalidate=${swr}, stale-if-error=${swr}`;
+  const h: Record<string, string> = {
+    'Cache-Control': `public, max-age=${o.browser ?? 0}`,
+    'CDN-Cache-Control': cdn,
+    'Netlify-CDN-Cache-Control': cdn,
+  };
+  if (o.tag) h['Cache-Tag'] = o.tag;
+  return h;
+}
+
+// Explicit no-cache (for live/forced-refresh responses).
+export const NO_STORE: Record<string, string> = { 'Cache-Control': 'no-store' };

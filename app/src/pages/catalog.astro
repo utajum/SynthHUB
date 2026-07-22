@@ -1,0 +1,122 @@
+---
+import Base from '../layouts/Base.astro';
+import index from '../data/devices.index.json';
+
+type Entry = {
+  slug: string;
+  name: string;
+  pids: string[];
+  protocols: number[];
+  functions: string[];
+  hasSequencer: boolean;
+  variantCount: number;
+};
+const devices = (index as Entry[]).slice().sort((a, b) => a.name.localeCompare(b.name));
+const totalPids = new Set(devices.flatMap((d) => d.pids)).size;
+const withSeq = devices.filter((d) => d.hasSequencer).length;
+
+// Column / value legends
+const columns = [
+  { name: 'Model', desc: 'Device name as SynthTribe identifies it. Some rows cover several branded variants (e.g. 2600 / Blue Marvin / Gray Meanie).' },
+  { name: 'USB PIDs', desc: 'USB Product IDs paired with the Behringer / Music Tribe Vendor ID 0x1397. The app matches these to detect a plugged-in unit over WebUSB.' },
+  { name: 'Proto', desc: 'SysEx protocol family (0-5). It selects how parameter messages are encoded on the wire. All share the manufacturer id 00 20 32; see the table below.' },
+  { name: 'Functions', desc: 'The editor sections this device exposes (settings, sequencer, calibration, firmware info, bulk data). Firmware flashing is out of scope.' },
+];
+const protocols = [
+  { id: 0, name: 'Legacy', desc: 'Model D style parameter protocol.' },
+  { id: 1, name: 'Classic mono', desc: 'TD-3, MS-1, Pro-1, K-2, Odyssey, Crave, CAT, Wasp.' },
+  { id: 2, name: 'Micro / compact', desc: 'JT-4000, ProVS mini, Victor, CZ-1 mini, Brains RLD.' },
+  { id: 3, name: 'Modern unified', desc: '2600, RD-8/9, Model 15, UB-Xa, Wave, Poly D, MonoPoly.' },
+  { id: 4, name: 'Mini keys', desc: 'CS mini, D mini, Phara-O mini.' },
+  { id: 5, name: 'Poly', desc: 'Pro-800, JN-80.' },
+];
+const funcs = [
+  { name: 'General', desc: 'Global + MIDI device settings: channel, pitch bend, key priority, clock, velocity, etc.' },
+  { name: 'Sequencer', desc: 'Step / note sequencer editor with live MIDI playback and recording.' },
+  { name: 'PolyChain', desc: 'Chain several identical units together for more voices.' },
+  { name: 'Calibration', desc: 'CV calibration reference points (informational; calibrate with the official tool).' },
+  { name: 'Firmware info', desc: 'Read the device firmware version and compare to the latest (read-only; shown as "Update" in the data).' },
+  { name: 'Sample / Wavetable / Preset / Librarian', desc: 'Bulk SysEx data transfer (send/receive .syx dumps).' },
+];
+---
+
+<Base
+  title="Behringer Device Catalog - 71 Synths - SynthHub"
+  description="Full catalog of 71 Behringer synthesizers controllable over WebUSB / WebMIDI: 2600, TD-3, RD-8/9, Model D, Poly D, Pro-800, MS-1/5, UB-Xa, Model 15, Odyssey, Crave, K-2 and more, with USB product IDs and supported functions."
+  keywords="Behringer synth list, Behringer models, USB product IDs, 2600, TD-3, RD-8, RD-9, Model D, Pro-800, UB-Xa, MS-1, synthesizer catalog, WebMIDI, WebUSB"
+>
+  <section class="panel" style="margin-top:1rem">
+    <header><span>device catalogue // {devices.length} models</span></header>
+    <div class="body">
+      <p class="muted tiny">
+        {devices.length} models - {totalPids} USB product IDs - {withSeq} with a
+        sequencer editor. Open the <a href="/">console</a> and connect over USB
+        to control one.
+      </p>
+
+      <details class="legend" open>
+        <summary>What do the columns mean?</summary>
+        <div class="legend-body">
+          <div class="legend-col">
+            <h3 class="hk-seg">Columns</h3>
+            {columns.map((c) => (
+              <div class="hk-row">
+                <span class="hot tiny">{c.name}</span>
+                <span class="hk-label">{c.desc}</span>
+              </div>
+            ))}
+          </div>
+          <div class="legend-col">
+            <h3 class="hk-seg">Proto = SysEx protocol family</h3>
+            {protocols.map((p) => (
+              <div class="hk-row">
+                <span class="hk-keys"><kbd>{p.id}</kbd> <span class="hot tiny">{p.name}</span></span>
+                <span class="hk-label">{p.desc}</span>
+              </div>
+            ))}
+          </div>
+          <div class="legend-col">
+            <h3 class="hk-seg">Functions</h3>
+            {funcs.map((f) => (
+              <div class="hk-row">
+                <span class="hot tiny" style="max-width:40%">{f.name}</span>
+                <span class="hk-label">{f.desc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </details>
+
+      <table class="mono-table">
+        <thead>
+          <tr>
+            <th title="Device name in SynthTribe">Model</th>
+            <th title="USB Product IDs (Vendor ID 0x1397) used for WebUSB discovery">USB PIDs (VID 0x1397)</th>
+            <th title="SysEx protocol family 0-5 - see legend above">Proto</th>
+            <th title="Editor sections this device exposes">Functions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            devices.map((d) => (
+              <tr>
+                <td class="hot"><a href={`/device/${d.slug}/`}>{d.name}</a></td>
+                <td class="tiny dim">{d.pids.join(', ') || '-'}</td>
+                <td>{d.protocols.join('/')}</td>
+                <td class="tiny">
+                  {d.functions
+                    .filter((f) => !f.startsWith('#'))
+                    .map((f) => (
+                      <span class="pill tiny" style="margin:1px">
+                        {f === 'Update' ? 'Firmware info' : f}
+                      </span>
+                    ))}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,448 @@
+{
+  "slug": "behringer-wave",
+  "name": "Behringer Wave",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "Behringer Wave",
+      "aliases": ["Behringer Wave", "wave"],
+      "pids": ["0x1280", "0x127f"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x39"],
+      "deviceId": "0x00",
+      "cloudFamily": "wave",
+      "cloudModel": "wave",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "wave_custom",
+          "kind": "dropdown",
+          "title": "MIDI Channel",
+          "control": "combo",
+          "options": [
+            "Off",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ],
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "MIDI Channel",
+            "default": 0,
+            "control": "combo",
+            "list": [
+              "Off",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16"
+            ],
+            "index": 0
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "spinbox",
+          "title": "Tuning",
+          "control": "spinbox",
+          "min": 0,
+          "max": 99,
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Tuning",
+            "default": 0,
+            "min": 0,
+            "max": 99,
+            "offset": 400,
+            "control": "spinbox",
+            "index": 1
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "radio",
+          "title": "Local",
+          "control": "radio_box",
+          "options": ["Off", "On"],
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Local",
+            "default": 0,
+            "control": "radio_box",
+            "list": ["Off", "On"],
+            "index": 3
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "dropdown",
+          "title": "Expression Pedal Mode",
+          "control": "combo",
+          "options": [
+            "Off",
+            "Loudness",
+            "VCF-Cutoff",
+            "VCF-Emphasis",
+            "Wavetable Position",
+            "Modulation Wheel"
+          ],
+          "min": 0,
+          "max": 5,
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Expression Pedal Mode",
+            "default": 0,
+            "min": 0,
+            "max": 5,
+            "offset": 0,
+            "list": [
+              "Off",
+              "Loudness",
+              "VCF-Cutoff",
+              "VCF-Emphasis",
+              "Wavetable Position",
+              "Modulation Wheel"
+            ],
+            "control": "combo",
+            "index": 4
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "dropdown",
+          "title": "Channel Aftertouch Mode",
+          "control": "combo",
+          "options": ["Off", "MIDI TX", "MIDI RX", "MIDI TX & RX"],
+          "min": 0,
+          "max": 3,
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Channel Aftertouch Mode",
+            "default": 0,
+            "min": 0,
+            "max": 3,
+            "offset": 0,
+            "list": ["Off", "MIDI TX", "MIDI RX", "MIDI TX & RX"],
+            "control": "combo",
+            "index": 5
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "spinbox",
+          "title": "LCD Brightness",
+          "control": "spinbox",
+          "min": 0,
+          "max": 99,
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "LCD Brightness",
+            "default": 0,
+            "min": 0,
+            "max": 99,
+            "offset": 0,
+            "control": "spinbox",
+            "index": 6
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "spinbox",
+          "title": "LCD Contrast",
+          "control": "spinbox",
+          "min": 0,
+          "max": 99,
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "LCD Contrast",
+            "default": 0,
+            "min": 0,
+            "max": 99,
+            "offset": 0,
+            "control": "spinbox",
+            "index": 7
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "dropdown",
+          "title": "Edit Parameter MIDI RX/TX",
+          "control": "combo",
+          "options": [
+            "Off",
+            "Sound Parameter TX",
+            "Sound Parameter RX",
+            "Sound Parameter TX & RX"
+          ],
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Edit Parameter MIDI RX/TX",
+            "default": 0,
+            "index": 8,
+            "control": "combo",
+            "list": [
+              "Off",
+              "Sound Parameter TX",
+              "Sound Parameter RX",
+              "Sound Parameter TX & RX"
+            ]
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "dropdown",
+          "title": "Firmware Enhancements",
+          "control": "combo",
+          "options": [
+            "Off",
+            "On/Emulated Envelopes",
+            "On/Exponential Envelopes"
+          ],
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Firmware Enhancements",
+            "default": 0,
+            "index": 9,
+            "control": "combo",
+            "list": ["Off", "On/Emulated Envelopes", "On/Exponential Envelopes"]
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "radio",
+          "title": "Oscillator Enhancements",
+          "control": "radio_box",
+          "options": ["Off", "On"],
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Oscillator Enhancements",
+            "default": 0,
+            "index": 10,
+            "control": "radio_box",
+            "list": ["Off", "On"]
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "radio",
+          "title": "LFO Enhancements",
+          "control": "radio_box",
+          "options": ["Off", "On"],
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "LFO Enhancements",
+            "default": 0,
+            "index": 11,
+            "control": "radio_box",
+            "list": ["Off", "On"]
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "dual-dropdown",
+          "title": "Arp/Seq Mode",
+          "control": "dual_combo",
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Arp/Seq Mode",
+            "default": 0,
+            "index": 12,
+            "control": "dual_combo",
+            "offset2": -1,
+            "sub_title1": "Mode A",
+            "list1": ["Sequencer", "Arpeggiator 1", "Arpeggiator 2"],
+            "sub_title2": "Mode B",
+            "list2": ["Up", "Down", "Up & Down", "Random", "Moving"],
+            "func": "{ if(arg1===0){return 0}else{return 10*arg1+(arg2+1)}}"
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "dual-dropdown",
+          "title": "Clock Source and Rate",
+          "control": "dual_combo",
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Clock Source and Rate",
+            "default": 0,
+            "index": 13,
+            "control": "dual_combo",
+            "sub_title1": "Source",
+            "list1": ["Internal", "DIN MIDI", "USB MIDI", "Analog Trigger"],
+            "sub_title2": "Rate",
+            "list2": ["1 ppqn", "2 ppqn", "24 ppqn", "48 ppqn"],
+            "func": "{return 10*arg1+(arg2)}"
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "spinbox",
+          "title": "Gate",
+          "control": "spinbox",
+          "min": 0,
+          "max": 99,
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Gate",
+            "default": 0,
+            "index": 14,
+            "min": 0,
+            "max": 99,
+            "offset": 0,
+            "control": "spinbox"
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "dropdown",
+          "title": "Clock Division",
+          "control": "combo",
+          "options": [
+            "1/4 Note",
+            "1/8 Note",
+            "1/16 Note",
+            "1/32 Note",
+            "1/4 Note Triplet",
+            "1/8 Note Triplet",
+            "1/16 Note Triplet"
+          ],
+          "min": 0,
+          "max": 6,
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Clock Division",
+            "default": 0,
+            "index": 15,
+            "min": 0,
+            "max": 6,
+            "offset": 0,
+            "list": [
+              "1/4 Note",
+              "1/8 Note",
+              "1/16 Note",
+              "1/32 Note",
+              "1/4 Note Triplet",
+              "1/8 Note Triplet",
+              "1/16 Note Triplet"
+            ],
+            "control": "combo"
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "spinbox",
+          "title": "Tempo",
+          "control": "spinbox",
+          "min": 0,
+          "max": 240,
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Tempo",
+            "default": 0,
+            "index": 16,
+            "min": 0,
+            "max": 240,
+            "offset": 0,
+            "bytes": 2,
+            "control": "spinbox"
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "radio",
+          "title": "Metronome mode",
+          "control": "radio_box",
+          "options": ["Off", "On"],
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Metronome mode",
+            "default": 0,
+            "index": 18,
+            "control": "radio_box",
+            "list": ["Off", "On"]
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "dual-dropdown",
+          "title": "OVP",
+          "control": "dual_combo",
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "OVP",
+            "default": 0,
+            "index": 19,
+            "control": "dual_combo",
+            "offset": 0,
+            "sub_title1": "Overdub",
+            "list1": ["Disabled", "Enabled"],
+            "sub_title2": "Key Transpose",
+            "list2": ["Enabled", "Disabled"],
+            "func": "{return 10*arg1+arg2}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Wavetable"
+    },
+    {
+      "name": "WavePreset"
+    },
+    {
+      "name": "Calibration",
+      "type": 2
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

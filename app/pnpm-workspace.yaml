@@ -1,0 +1,31 @@
+allowBuilds:
+  esbuild: true
+  sharp: true
+
+# The Astro Netlify adapter traces the on-demand /api/firmware function via
+# zip-it-and-ship-it -> precinct -> @typescript-eslint/typescript-estree ->
+# ts-api-utils, all of which read the CLASSIC TypeScript compiler API
+# (ts.TypeFlags, ts.SyntaxKind, ...). Our app root pins typescript@7 (the native
+# port), which does NOT expose that API. These tools' peer range already excludes
+# 7.x, but we pin a classic 5.9.3 into their subtree explicitly so resolution is
+# deterministic and never falls back to the root 7.x. The app itself keeps
+# typescript@7 for `tsc` typechecking. Drop this once ts-api-utils supports TS 7.
+packageExtensions:
+  ts-api-utils:
+    dependencies:
+      typescript: 5.9.3
+  '@typescript-eslint/typescript-estree':
+    dependencies:
+      typescript: 5.9.3
+  '@typescript-eslint/project-service':
+    dependencies:
+      typescript: 5.9.3
+  '@typescript-eslint/tsconfig-utils':
+    dependencies:
+      typescript: 5.9.3
+  detective-typescript:
+    dependencies:
+      typescript: 5.9.3
+  detective-vue2:
+    dependencies:
+      typescript: 5.9.3

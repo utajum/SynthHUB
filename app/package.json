@@ -1,0 +1,34 @@
+{
+  "name": "synth-hub",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "Open PWA to manage every Behringer synthesizer over WebMIDI/WebUSB. An alternative to Behringer SynthTribe.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "typecheck": "tsc -p tsconfig.check.json",
+    "verify": "npm run typecheck && npm run coverage && npm run build"
+  },
+  "dependencies": {
+    "@astrojs/netlify": "^8.1.2",
+    "@astrojs/node": "^11.0.2",
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/solid-js": "7.0.1",
+    "@netlify/blobs": "^10.7.9",
+    "astro": "7.1.3",
+    "solid-js": "1.9.14",
+    "zustand": "5.0.14"
+  },
+  "devDependencies": {
+    "@types/w3c-web-usb": "1.0.14",
+    "@vitejs/plugin-basic-ssl": "^2.3.0",
+    "prettier": "3.9.6",
+    "typescript": "7.0.2",
+    "vite": "8.1.5"
+  },
+  "packageManager": "pnpm@11.1.3"
+}

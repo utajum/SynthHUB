@@ -1,0 +1,90 @@
+{
+  "slug": "k-2",
+  "name": "K-2",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "K-2",
+      "aliases": ["K-2", "K20"],
+      "pids": ["0x121c", "0x121d"],
+      "protocol": 1,
+      "modelId": ["0x00", "0x01", "0x04"],
+      "deviceId": "0x00",
+      "cloudFamily": "k-2",
+      "cloudModel": "k-2",
+      "introImg": "intro.png"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 2
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 2,
+            "control": "spinbox",
+            "defaultin": 1,
+            "indexin": 1,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "default": 12,
+            "index": 3,
+            "title": "Pitch Bend Semitones:",
+            "min": 0,
+            "max": 12,
+            "pkt": 17
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 0,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 0,
+            "index": 5,
+            "title": "Key Priority: ",
+            "pkt": 18
+          }
+        }
+      ]
+    },
+    {
+      "name": "PolyChain"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

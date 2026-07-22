@@ -1,0 +1,277 @@
+{
+  "slug": "ms-1",
+  "name": "MS-1",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "MS-1",
+      "aliases": ["MS-1"],
+      "pids": ["0x1218", "0x1219", "0x1232", "0x1233"],
+      "protocol": 1,
+      "modelId": ["0x00", "0x01", "0x20"],
+      "deviceId": "0x00",
+      "cloudFamily": "ms-1",
+      "cloudModel": "ms-1",
+      "introImg": "intro_ms1.jpg"
+    },
+    {
+      "name": "MS101",
+      "aliases": ["MS101"],
+      "pids": ["0x1218", "0x1219"],
+      "protocol": 1,
+      "modelId": ["0x00", "0x01", "0x02"],
+      "deviceId": "0x00",
+      "cloudFamily": "ms-101",
+      "cloudModel": "ms-101",
+      "introImg": "intro_ms101.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 1,
+            "control": "spinbox",
+            "defaultin": 1,
+            "indexin": 2,
+            "defaultout": 1,
+            "indexout": 1,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "default": 12,
+            "index": 6,
+            "title": "Pitch Bend Semitones:",
+            "min": 0,
+            "max": 12,
+            "pkt": 17
+          }
+        },
+        {
+          "type": "velocity",
+          "kind": "composite",
+          "title": "Velocity On",
+          "sysex": {
+            "pkt": 16,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "velocity",
+            "subtype": 1,
+            "defaultonconstant": 1,
+            "indexonconstant": 3,
+            "defaultcurve": 0,
+            "indexcurve": 5,
+            "title": "Velocity On",
+            "pkt": 16
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "clock",
+          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG", "Auto"],
+          "sysex": {
+            "subtype": 1
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG,Auto",
+            "subtype": 1,
+            "defaultsource": 0,
+            "indexsource": 10,
+            "defaultrate": 1,
+            "indexrate": 11,
+            "defaultpolarity": 1,
+            "indexpolarity": 12,
+            "polarity_label": "Rise,Fall"
+          }
+        },
+        {
+          "type": "midiclockout",
+          "kind": "toggle",
+          "title": "MIDI Colock Out",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 23,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "midiclockout",
+            "subtype": 0,
+            "default": 0,
+            "index": 8,
+            "pkt": 23,
+            "title": "MIDI Colock Out"
+          }
+        },
+        {
+          "type": "sequencerautosync",
+          "kind": "toggle",
+          "title": "Sequencer Auto Sync",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 17
+          },
+          "raw": {
+            "type": "sequencerautosync",
+            "default": 0,
+            "index": 9,
+            "title": "Sequencer Auto Sync",
+            "pkt": 17
+          }
+        },
+        {
+          "type": "accentthreshold",
+          "kind": "spinbox",
+          "title": "Accent Velocity Threshold",
+          "default": 96,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 28
+          },
+          "raw": {
+            "type": "accentthreshold",
+            "default": 96,
+            "index": 13,
+            "title": "Accent Velocity Threshold",
+            "pkt": 28
+          }
+        },
+        {
+          "type": "glidemode",
+          "kind": "dropdown",
+          "title": "Glide Mode",
+          "options": ["Normal", "Legato"],
+          "default": 0,
+          "sysex": {
+            "pkt": 39
+          },
+          "raw": {
+            "type": "glidemode",
+            "default": 0,
+            "index": 16,
+            "title": "Glide Mode",
+            "pkt": 39,
+            "optionlabel": "Normal,Legato"
+          }
+        },
+        {
+          "type": "localkeyboardmode",
+          "kind": "toggle",
+          "title": "Local Keyboard Mode",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 47
+          },
+          "minFirmware": "1.0.1",
+          "raw": {
+            "type": "localkeyboardmode",
+            "default": 0,
+            "index": 14,
+            "versionvisible": "1.0.1",
+            "title": "Local Keyboard Mode",
+            "pkt": 47
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "radio",
+          "title": "L M H Held Note Transpose",
+          "control": "radiobutton",
+          "options": ["Disable", "Enable"],
+          "default": 1,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 2,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "lmh",
+            "title": "L M H Held Note Transpose",
+            "control": "radiobutton",
+            "optionlabel": "Disable,Enable",
+            "from": 0,
+            "to": 1,
+            "default": 1,
+            "index": 15,
+            "pkt": 116,
+            "spkt": 2
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "dropdown",
+          "title": "Note Priority",
+          "control": "combobox",
+          "options": ["MS-1", "Low", "High", "Last"],
+          "default": 0,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 4,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "note_priority",
+            "title": "Note Priority",
+            "control": "combobox",
+            "optionlabel": "MS-1,Low,High,Last",
+            "from": 0,
+            "to": 3,
+            "default": 0,
+            "index": 17,
+            "pkt": 116,
+            "spkt": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sequencer",
+      "type": 0,
+      "numofkey": 61,
+      "supportdump": true
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

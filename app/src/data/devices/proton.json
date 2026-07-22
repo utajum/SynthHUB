@@ -1,0 +1,84 @@
+{
+  "slug": "proton",
+  "name": "PROTON",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "PROTON",
+      "aliases": ["PROTON"],
+      "pids": ["0x1261", "0x1262"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x25"],
+      "deviceId": "0x00",
+      "cloudFamily": "proton",
+      "cloudModel": "proton",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "type": 4
+    },
+    {
+      "name": "Update"
+    },
+    {
+      "name": "Calibration",
+      "cvchannels": [
+        {
+          "label": "Assign OSC1_CV",
+          "points": [
+            {
+              "name": "1.0Vdc",
+              "value": 0
+            },
+            {
+              "name": "4.0Vdc",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "label": "Assign OSC2_CV",
+          "points": [
+            {
+              "name": "1.0Vdc",
+              "value": 0
+            },
+            {
+              "name": "4.0Vdc",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "label": "MULT1/2 OSC1_CV",
+          "points": [
+            {
+              "name": "1.0Vdc",
+              "value": 0
+            },
+            {
+              "name": "4.0Vdc",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "label": "MULT1/2 OSC2_CV",
+          "points": [
+            {
+              "name": "1.0Vdc",
+              "value": 0
+            },
+            {
+              "name": "4.0Vdc",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

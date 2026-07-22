@@ -1,0 +1,334 @@
+{
+  "slug": "monopoly",
+  "name": "MONOPOLY",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "MONOPOLY",
+      "aliases": ["MONOPOLY"],
+      "pids": ["0x1238", "0x1239"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x12"],
+      "deviceId": "0x00",
+      "cloudFamily": "monopoly",
+      "cloudModel": "monopoly",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "dropdown",
+          "title": "channel",
+          "control": "combobox",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "All"
+          ],
+          "sysex": {
+            "pkt": 14,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 1,
+            "control": "combobox",
+            "inlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "All"
+            ],
+            "defaultin": 1,
+            "indexin": 1,
+            "outlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16"
+            ],
+            "defaultout": 1,
+            "indexout": 2,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 2,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 2,
+            "index": 7,
+            "title": "Key Priority:",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "transpose",
+          "kind": "spinbox",
+          "title": "MIDI In Transpose",
+          "min": -12,
+          "max": 12,
+          "default": 1,
+          "sysex": {
+            "pkt": 15
+          },
+          "raw": {
+            "type": "transpose",
+            "default": 1,
+            "index": 3,
+            "title": "MIDI In Transpose",
+            "pkt": 15,
+            "min": -12,
+            "max": 12,
+            "offset": -12
+          }
+        },
+        {
+          "type": "velocity",
+          "kind": "composite",
+          "title": "velocity",
+          "sysex": {
+            "pkt": 16,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "velocity",
+            "subtype": 0,
+            "defaultonconstant": 0,
+            "indexonconstant": 4,
+            "defaultoffconstant": 0,
+            "indexoffconstant": 5,
+            "defaultcurve": 0,
+            "indexcurve": 6,
+            "pkt": 16
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "Sync In Setting",
+          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG", "Auto"],
+          "sysex": {
+            "subtype": 0
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG,Auto",
+            "settingtitle": "Sync In Setting",
+            "subtype": 0,
+            "defaultsource": 0,
+            "indexsource": 12,
+            "defaultrate": 2,
+            "indexrate": 11,
+            "defaultpolarity": 1,
+            "indexpolarity": 13
+          }
+        },
+        {
+          "type": "arpeggiatorout",
+          "kind": "toggle",
+          "title": "Arpeggiator Output",
+          "default": 3,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 38
+          },
+          "raw": {
+            "type": "arpeggiatorout",
+            "default": 3,
+            "index": 18,
+            "title": "Arpeggiator Output",
+            "pkt": 38
+          }
+        },
+        {
+          "type": "modulationcurve",
+          "kind": "spinbox",
+          "title": "Modulation Curve",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 21
+          },
+          "raw": {
+            "type": "modulationcurve",
+            "default": 0,
+            "index": 10,
+            "title": "Modulation Curve",
+            "pkt": 21
+          }
+        },
+        {
+          "type": "moduwheeloutput",
+          "kind": "toggle",
+          "title": "Modulation Wheel Output",
+          "default": 3,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 33
+          },
+          "raw": {
+            "type": "moduwheeloutput",
+            "default": 3,
+            "index": 16,
+            "title": "Modulation Wheel Output",
+            "pkt": 33
+          }
+        },
+        {
+          "type": "pitchwheeloutput",
+          "kind": "toggle",
+          "title": "Pitch Wheel Output",
+          "default": 3,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 34
+          },
+          "raw": {
+            "type": "pitchwheeloutput",
+            "default": 3,
+            "index": 15,
+            "title": "Pitch Wheel Output",
+            "pkt": 34
+          }
+        },
+        {
+          "type": "keyboardoutput",
+          "kind": "toggle",
+          "title": "Keyboard Output",
+          "default": 3,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 35
+          },
+          "raw": {
+            "type": "keyboardoutput",
+            "default": 3,
+            "index": 17,
+            "title": "Keyboard Output",
+            "pkt": 35
+          }
+        },
+        {
+          "type": "localkeyboardmodeex",
+          "kind": "toggle",
+          "title": "localkeyboardmodeex",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 47
+          },
+          "minFirmware": "1.0.8",
+          "raw": {
+            "type": "localkeyboardmodeex",
+            "default": 0,
+            "index": 20,
+            "defaultdin": 0,
+            "indexdin": 22,
+            "defaultusb": 0,
+            "indexusb": 23,
+            "versionvisible": "1.0.8",
+            "pkt": 47
+          }
+        },
+        {
+          "type": "glidemode",
+          "kind": "dropdown",
+          "title": "Glide Mode",
+          "options": ["Improved", "Original"],
+          "default": 0,
+          "sysex": {
+            "pkt": 39
+          },
+          "raw": {
+            "type": "glidemode",
+            "default": 0,
+            "index": 14,
+            "optionlabel": "Improved,Original",
+            "title": "Glide Mode",
+            "pkt": 39
+          }
+        },
+        {
+          "type": "arprepeatmode",
+          "kind": "spinbox",
+          "title": "Last Note Up/Down Arp Rest Mode",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 50
+          },
+          "minFirmware": "1.0.7",
+          "raw": {
+            "type": "arprepeatmode",
+            "default": 0,
+            "index": 21,
+            "versionvisible": "1.0.7",
+            "title": "Last Note Up/Down Arp Rest Mode",
+            "pkt": 50
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

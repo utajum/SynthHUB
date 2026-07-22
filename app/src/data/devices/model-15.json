@@ -1,0 +1,228 @@
+{
+  "slug": "model-15",
+  "name": "MODEL 15",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "MODEL 15",
+      "aliases": ["MODEL 15"],
+      "pids": ["0x124d", "0x124e"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x1A"],
+      "deviceId": "0x00",
+      "cloudFamily": "model-15",
+      "cloudModel": "model-15",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 1,
+            "control": "spinbox",
+            "defaultin": 1,
+            "indexin": 0,
+            "defaultout": 1,
+            "indexout": 1,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "maxvalue": 24,
+            "default": 12,
+            "title": "Pitch Bend Semitones:",
+            "index": 2,
+            "min": 0,
+            "max": 12,
+            "pkt": 17
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 0,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 0,
+            "index": 3,
+            "title": "Key Priority: ",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "midiclockout",
+          "kind": "toggle",
+          "title": "MIDI Colock Out",
+          "default": 3,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 23,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "midiclockout",
+            "subtype": 1,
+            "default": 3,
+            "index": 4,
+            "pkt": 23,
+            "title": "MIDI Colock Out:"
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "clock",
+          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG"],
+          "sysex": {
+            "subtype": 5
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG",
+            "indexsource": 8,
+            "indexdivision": 9,
+            "subtype": 5,
+            "defaultrate": 0,
+            "indexrate": 5,
+            "clockdivision": "1/4,1/4T,1/8,1/8T,1/16,1/16T,1/32,1/32T"
+          }
+        },
+        {
+          "type": "cvsetrange",
+          "kind": "dropdown",
+          "title": "CV Range",
+          "options": ["-5V to +5V", "0V to 10V"],
+          "default": 0,
+          "sysex": {
+            "pkt": 46
+          },
+          "raw": {
+            "type": "cvsetrange",
+            "default": 0,
+            "index": 6,
+            "optionlabel": "-5V to +5V,0V to 10V",
+            "pkt": 46,
+            "title": "CV Range"
+          }
+        },
+        {
+          "type": "kbveloutrange",
+          "kind": "dropdown",
+          "title": "Velocity Out Range",
+          "options": ["-5V to +5V", "0V to 10V"],
+          "default": 0,
+          "sysex": {
+            "pkt": 48
+          },
+          "raw": {
+            "type": "kbveloutrange",
+            "default": 0,
+            "optionlabel": "-5V to +5V,0V to 10V",
+            "index": 7,
+            "title": "Velocity Out Range",
+            "pkt": 48
+          }
+        },
+        {
+          "type": "glide",
+          "kind": "spinbox",
+          "title": "Glide",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116
+          },
+          "raw": {
+            "type": "glide",
+            "indexglide": 10,
+            "indexlegato": 11,
+            "title": "Glide",
+            "pkt": 116
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "radio",
+          "title": "Seq play on clock start",
+          "control": "radiobutton",
+          "options": ["Off", "On"],
+          "default": 0,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 6,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "seq_play_on_clock_start",
+            "title": "Seq play on clock start",
+            "optionlabel": "Off,On",
+            "control": "radiobutton",
+            "default": 0,
+            "index": 12,
+            "pkt": 116,
+            "spkt": 6
+          }
+        },
+        {
+          "type": "midithrough",
+          "kind": "composite",
+          "title": "midithrough",
+          "sysex": {
+            "pkt": 40
+          },
+          "raw": {
+            "type": "midithrough",
+            "defaultm2u": 0,
+            "indexm2u": 13,
+            "defaultmst": 0,
+            "indexmst": 14,
+            "defaultu2m": 0,
+            "indexu2m": 15,
+            "pkt": 40
+          }
+        }
+      ]
+    },
+    {
+      "name": "PolyChain"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

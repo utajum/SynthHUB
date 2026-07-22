@@ -1,0 +1,131 @@
+{
+  "slug": "syncussion-sy-1",
+  "name": "SYNCUSSION SY-1",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "SYNCUSSION SY-1",
+      "aliases": ["SYNCUSSION SY-1"],
+      "pids": ["0x1269", "0x1270"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x29"],
+      "deviceId": "0x00",
+      "cloudFamily": "syncussion-sy-1",
+      "cloudModel": "syncussion-sy-1",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "midimode",
+          "kind": "spinbox",
+          "title": "MIDI Mode",
+          "default": 1,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 3,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "midimode",
+            "subtype": 0,
+            "default": 1,
+            "index": 4,
+            "spkt": 3,
+            "offset": 1,
+            "title": "MIDI Mode",
+            "pkt": 116
+          }
+        },
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 4
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 4,
+            "control": "spinbox",
+            "defaultmode": 0,
+            "indexmode": 5,
+            "defaultin": 1,
+            "indexin": 0,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "maxvalue": 24,
+            "default": 12,
+            "index": 2,
+            "title": "Pitch Bend Semitones:",
+            "min": 0,
+            "max": 12,
+            "pkt": 17
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 1,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 1,
+            "index": 3,
+            "title": "Key Priority: ",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "midithrough",
+          "kind": "composite",
+          "title": "midithrough",
+          "sysex": {
+            "pkt": 40,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "midithrough",
+            "subtype": 1,
+            "defaultm2u": 0,
+            "indexm2u": 6,
+            "defaultu2m": 0,
+            "indexu2m": 8,
+            "pkt": 40
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

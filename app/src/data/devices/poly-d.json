@@ -1,0 +1,421 @@
+{
+  "slug": "poly-d",
+  "name": "POLY D",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "POLY D",
+      "aliases": ["POLY D"],
+      "pids": ["0x122a", "0x122b"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x0C"],
+      "deviceId": "0x00",
+      "cloudFamily": "poly-d",
+      "cloudModel": "poly-d",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "dropdown",
+          "title": "channel",
+          "control": "combobox",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "All"
+          ],
+          "sysex": {
+            "pkt": 14,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 1,
+            "control": "combobox",
+            "inlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "All"
+            ],
+            "defaultin": 1,
+            "indexin": 1,
+            "outlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16"
+            ],
+            "defaultout": 1,
+            "indexout": 2,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "default": 12,
+            "index": 9,
+            "title": "Pitch Bend Semitones",
+            "pkt": 17
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 0,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 0,
+            "index": 7,
+            "title": "Key Priority",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "transpose",
+          "kind": "spinbox",
+          "title": "MIDI IN Transpose",
+          "default": 1,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 15
+          },
+          "raw": {
+            "type": "transpose",
+            "default": 1,
+            "index": 3,
+            "title": "MIDI IN Transpose",
+            "pkt": 15
+          }
+        },
+        {
+          "type": "multitrigger",
+          "kind": "toggle",
+          "title": "Multi-Trigger",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 20
+          },
+          "raw": {
+            "type": "multitrigger",
+            "default": 0,
+            "index": 8,
+            "title": "Multi-Trigger",
+            "pkt": 20
+          }
+        },
+        {
+          "type": "velocity",
+          "kind": "composite",
+          "title": "velocity",
+          "sysex": {
+            "pkt": 16,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "velocity",
+            "subtype": 0,
+            "defaultonconstant": 1,
+            "indexonconstant": 4,
+            "defaultoffconstant": 1,
+            "indexoffconstant": 5,
+            "defaultcurve": 0,
+            "indexcurve": 6,
+            "pkt": 16
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "clock",
+          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG"],
+          "sysex": {
+            "subtype": 0
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG",
+            "subtype": 0,
+            "defaultsource": 0,
+            "indexsource": 14,
+            "defaultrate": 1,
+            "indexrate": 13,
+            "defaultpolarity": 1,
+            "indexpolarity": 16
+          }
+        },
+        {
+          "type": "midiclockout",
+          "kind": "toggle",
+          "title": "MIDI Clock Out",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 23,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "midiclockout",
+            "subtype": 1,
+            "default": 0,
+            "index": 18,
+            "title": "MIDI Clock Out",
+            "pkt": 23
+          }
+        },
+        {
+          "type": "sequenceroutput",
+          "kind": "toggle",
+          "title": "Sequencer Output",
+          "default": 3,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 37
+          },
+          "raw": {
+            "type": "sequenceroutput",
+            "default": 3,
+            "index": 23,
+            "title": "Sequencer Output",
+            "pkt": 37
+          }
+        },
+        {
+          "type": "arpeggiatorout",
+          "kind": "toggle",
+          "title": "Arpeggiator Output",
+          "default": 3,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 38
+          },
+          "raw": {
+            "type": "arpeggiatorout",
+            "default": 3,
+            "index": 24,
+            "title": "Arpeggiator Output",
+            "pkt": 38
+          }
+        },
+        {
+          "type": "modulationcurve",
+          "kind": "spinbox",
+          "title": "Modulation Curve",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 21
+          },
+          "raw": {
+            "type": "modulationcurve",
+            "default": 0,
+            "index": 11,
+            "title": "Modulation Curve",
+            "pkt": 21
+          }
+        },
+        {
+          "type": "accentthreshold",
+          "kind": "spinbox",
+          "title": "Accent Velocity Threshold",
+          "default": 96,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 28
+          },
+          "raw": {
+            "type": "accentthreshold",
+            "default": 96,
+            "index": 17,
+            "title": "Accent Velocity Threshold",
+            "pkt": 28
+          }
+        },
+        {
+          "type": "moduwheelrange",
+          "kind": "spinbox",
+          "title": "Modulation Wheel Range",
+          "default": 3,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 32
+          },
+          "raw": {
+            "type": "moduwheelrange",
+            "default": 3,
+            "index": 10,
+            "title": "Modulation Wheel Range",
+            "pkt": 32
+          }
+        },
+        {
+          "type": "moduwheeloutput",
+          "kind": "toggle",
+          "title": "Modulation Wheel Output",
+          "default": 3,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 33
+          },
+          "raw": {
+            "type": "moduwheeloutput",
+            "default": 3,
+            "index": 20,
+            "title": "Modulation Wheel Output",
+            "pkt": 33
+          }
+        },
+        {
+          "type": "pitchwheeloutput",
+          "kind": "toggle",
+          "title": "Pitch Wheel Output",
+          "default": 3,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 34
+          },
+          "raw": {
+            "type": "pitchwheeloutput",
+            "default": 3,
+            "index": 19,
+            "title": "Pitch Wheel Output",
+            "pkt": 34
+          }
+        },
+        {
+          "type": "keyboardoutput",
+          "kind": "toggle",
+          "title": "Keyboard Output",
+          "default": 3,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 35
+          },
+          "raw": {
+            "type": "keyboardoutput",
+            "default": 3,
+            "index": 21,
+            "title": "Keyboard Output",
+            "pkt": 35
+          }
+        },
+        {
+          "type": "keyboardaftertouch",
+          "kind": "toggle",
+          "title": "Keyboard After Touch",
+          "default": 3,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 36
+          },
+          "raw": {
+            "type": "keyboardaftertouch",
+            "default": 3,
+            "index": 22,
+            "title": "Keyboard After Touch",
+            "pkt": 36
+          }
+        },
+        {
+          "type": "localkeyboardmode",
+          "kind": "toggle",
+          "title": "Local Keyboard Mode",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 47
+          },
+          "minFirmware": "1.1.0",
+          "raw": {
+            "type": "localkeyboardmode",
+            "default": 0,
+            "index": 15,
+            "versionvisible": "1.1.0",
+            "title": "Local Keyboard Mode",
+            "pkt": 47
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sequencer",
+      "type": 2
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "slug": "jn-80",
+  "name": "JN-80",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "JN-80",
+      "aliases": ["JN-80"],
+      "pids": ["0x1251", "0x1252"],
+      "protocol": 5,
+      "modelId": ["0x00", "0x01", "0x1D"],
+      "deviceId": "0x00",
+      "cloudFamily": "jn80",
+      "cloudModel": "jn80",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "Update"
+    },
+    {
+      "name": "General",
+      "type": 5
+    },
+    {
+      "name": "#Librarian_JN80"
+    }
+  ]
+}

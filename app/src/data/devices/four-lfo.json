@@ -1,0 +1,23 @@
+{
+  "slug": "four-lfo",
+  "name": "FOUR-LFO",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "FOUR-LFO",
+      "aliases": ["FOUR-LFO"],
+      "pids": ["0x129d", "0x129e"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x49"],
+      "deviceId": "",
+      "cloudFamily": "four-lfo",
+      "cloudModel": "four-lfo",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "Update"
+    }
+  ]
+}

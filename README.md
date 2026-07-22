@@ -1,4 +1,4 @@
-# SynthHub-PWA - Behringer synth control over WebUSB / WebMIDI
+# SynthHub - Behringer synth control over WebUSB / WebMIDI
 
 [![Live app](https://img.shields.io/badge/live-synth--hub.elevatech.xyz-00ff9c)](https://synth-hub.elevatech.xyz/)
 [![Donate](https://img.shields.io/badge/donate-buy%20me%20a%20coffee-ffb000)](https://buymeacoffee.com/utajum)
@@ -59,7 +59,7 @@ behringer/
 
 ## Support the project
 
-If SynthHub-PWA saves you a desktop install (or a stuck note), you can
+If SynthHub saves you a desktop install (or a stuck note), you can
 [buy me a coffee](https://buymeacoffee.com/utajum). It keeps the device
 coverage growing.
 

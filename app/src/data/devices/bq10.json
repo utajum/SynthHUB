@@ -1,0 +1,19 @@
+{
+  "slug": "bq10",
+  "name": "BQ10",
+  "app": "controltribe",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "BQ10",
+      "aliases": ["BQ10", "BQ-10"],
+      "pids": [],
+      "protocol": 1,
+      "modelId": ["0x7f", "0x48", "0x00"],
+      "deviceId": "0x00",
+      "cloudFamily": "bq-10",
+      "cloudModel": "bq-10"
+    }
+  ],
+  "functions": [{ "name": "Device Settings" }, { "name": "Update" }]
+}

@@ -1,0 +1,26 @@
+---
+// Runs before the SolidJS InstallButton island hydrates. `beforeinstallprompt`
+// (and `appinstalled`) can fire during initial load, before the island's
+// onMount listener is attached - so we capture and stash them here, then the
+// component reads/subscribes on mount. Prevents lost prompts / undercounted
+// installs.
+---
+
+<script is:inline>
+  (function () {
+    var s = (window.__pwaInstall = window.__pwaInstall || {
+      deferred: null,
+      installed: false,
+    });
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      s.deferred = e;
+      if (typeof s.onDeferred === 'function') s.onDeferred(e);
+    });
+    window.addEventListener('appinstalled', function () {
+      s.installed = true;
+      s.deferred = null;
+      if (typeof s.onInstalled === 'function') s.onInstalled();
+    });
+  })();
+</script>

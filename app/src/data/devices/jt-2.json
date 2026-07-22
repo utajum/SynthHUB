@@ -1,0 +1,463 @@
+{
+  "slug": "jt-2",
+  "name": "JT-2",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "JT-2",
+      "aliases": ["JT-2"],
+      "pids": ["0x127a", "0x127b"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x4B"],
+      "deviceId": "0x00",
+      "cloudFamily": "jt-2",
+      "cloudModel": "jt-2",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 1,
+            "control": "spinbox",
+            "defaultin": 1,
+            "defaultmode": 0,
+            "indexin": 0,
+            "indexout": 1,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "clock_in_polarity",
+          "kind": "spinbox",
+          "title": "Sync In Polarity",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 25
+          },
+          "raw": {
+            "type": "clock_in_polarity",
+            "default": 0,
+            "index": 4,
+            "title": "Sync In Polarity",
+            "pkt": 25
+          }
+        },
+        {
+          "type": "clockrate",
+          "kind": "spinbox",
+          "title": "Clock Rate",
+          "default": 1,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 26,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "clockrate",
+            "subtype": 0,
+            "default": 1,
+            "index": 6,
+            "title": "Clock Rate",
+            "pkt": 26
+          }
+        },
+        {
+          "type": "midithrough",
+          "kind": "composite",
+          "title": "midithrough",
+          "sysex": {
+            "pkt": 40
+          },
+          "raw": {
+            "type": "midithrough",
+            "defaultm2u": 0,
+            "indexm2u": 8,
+            "defaultmst": 0,
+            "indexmst": 9,
+            "defaultu2m": 0,
+            "indexu2m": 10,
+            "pkt": 40
+          }
+        },
+        {
+          "type": "arp_clock_division",
+          "kind": "spinbox",
+          "title": "ARP Clock Division",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 19
+          },
+          "raw": {
+            "type": "arp_clock_division",
+            "enumeration": "1/4,1/4T,1/8,1/8T,1/16,1/16T,1/32,1/32T",
+            "note": ["5", "7", "8", "10", "11", "13", "14", "16"],
+            "index": 12,
+            "default": 0,
+            "title": "ARP Clock Division",
+            "pkt": 19
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 0,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 0,
+            "index": 13,
+            "title": "Key Priority",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "jt2_glide",
+          "kind": "spinbox",
+          "title": "Portamento",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 2
+          },
+          "raw": {
+            "type": "jt2_glide",
+            "default": 0,
+            "index": 2,
+            "title": "Portamento",
+            "pkt": 116,
+            "spkt": 2
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "maxvalue": 12,
+            "default": 12,
+            "index": 14,
+            "title": "Pitch Bend Semitones",
+            "pkt": 17
+          }
+        },
+        {
+          "type": "multitrigger",
+          "kind": "toggle",
+          "title": "ENV Trigger Mode",
+          "default": 1,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 20,
+            "subtype": 4
+          },
+          "raw": {
+            "type": "multitrigger",
+            "subtype": 4,
+            "default": 1,
+            "index": 17,
+            "title": "ENV Trigger Mode",
+            "pkt": 20
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "slider",
+          "title": "LED Brightness",
+          "control": "slider",
+          "min": 0,
+          "max": 100,
+          "default": 0,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 0,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "ledbrightness",
+            "title": "LED Brightness",
+            "suffix": " %",
+            "control": "slider",
+            "from": 0,
+            "to": 100,
+            "min": 0,
+            "max": 100,
+            "default": 0,
+            "index": 18,
+            "pkt": 116,
+            "spkt": 0
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "radio",
+          "title": "Arp Trigger Mode",
+          "control": "radiobutton",
+          "options": ["Step Aligned", "Free Start:"],
+          "default": 0,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 1,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "arpSyncSelection",
+            "title": "Arp Trigger Mode:",
+            "control": "radiobutton",
+            "optionlabel": "Step Aligned,Free Start:",
+            "from": 0,
+            "to": 1,
+            "default": 0,
+            "index": 16,
+            "pkt": 116,
+            "spkt": 1
+          }
+        },
+        {
+          "type": "modulation_wheel",
+          "kind": "composite",
+          "title": "Modulation Wheel",
+          "sysex": {
+            "pkt": 116,
+            "spkt": 4,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "modulation_wheel",
+            "subtype": 1,
+            "index": 15,
+            "key_value": [
+              {
+                "value": "5",
+                "name": "PORTAMENTO"
+              },
+              {
+                "value": "32",
+                "name": "EG_1_ATTACK"
+              },
+              {
+                "value": "33",
+                "name": "EG_1_DECAY"
+              },
+              {
+                "value": "34",
+                "name": "EG_1_SUSTAIN"
+              },
+              {
+                "value": "35",
+                "name": "EG_1_RELEASE"
+              },
+              {
+                "value": "36",
+                "name": "EG_2_ATTACK"
+              },
+              {
+                "value": "37",
+                "name": "EG_2_DECAY"
+              },
+              {
+                "value": "38",
+                "name": "EG_2_SUSTAIN"
+              },
+              {
+                "value": "39",
+                "name": "EG_2_RELEASE"
+              }
+            ],
+            "title": "Modulation Wheel",
+            "pkt": 116,
+            "spkt": 4
+          }
+        },
+        {
+          "type": "midi_cc",
+          "kind": "spinbox",
+          "title": "midi_cc",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "midi_cc",
+            "index": 21,
+            "title": ""
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "radio",
+          "title": "Velocity for ENV-1",
+          "control": "radiobutton",
+          "options": ["OFF", "ON"],
+          "default": 0,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 8,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "velocity_for_env1",
+            "title": "Velocity for ENV-1:",
+            "control": "radiobutton",
+            "optionlabel": "OFF,ON",
+            "from": 0,
+            "to": 1,
+            "default": 0,
+            "index": 19,
+            "pkt": 116,
+            "spkt": 8
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "radio",
+          "title": "Velocity for ENV-2",
+          "control": "radiobutton",
+          "options": ["OFF", "ON"],
+          "default": 0,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "velocity_for_env2",
+            "title": "Velocity for ENV-2:",
+            "control": "radiobutton",
+            "optionlabel": "OFF,ON",
+            "from": 0,
+            "to": 1,
+            "default": 0,
+            "index": 20,
+            "pkt": 116,
+            "spkt": 9
+          }
+        },
+        {
+          "type": "jt2_midiclockout",
+          "kind": "spinbox",
+          "title": "MIDI Out",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 10,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "jt2_midiclockout",
+            "subtype": 0,
+            "default": 0,
+            "name": "arp_note_midi",
+            "indexarp": 21,
+            "pkt": 116,
+            "spkt": 10,
+            "index": 7,
+            "title": "MIDI Out"
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "radio",
+          "title": "Enhanced Mode",
+          "control": "radiobutton",
+          "options": ["Authentic", "Enhanced"],
+          "default": 0,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 11,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "jt_enhancedmode",
+            "title": "Enhanced Mode:",
+            "control": "radiobutton",
+            "optionlabel": "Authentic,Enhanced",
+            "from": 0,
+            "to": 1,
+            "default": 0,
+            "index": 22,
+            "pkt": 116,
+            "spkt": 11
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "radio",
+          "title": "Note Input Timing",
+          "control": "radiobutton_ll",
+          "options": [
+            "Precise Timing (e.g. DAW/Sequencer)",
+            "Manual Playing (e.g. MIDI Keyboard)"
+          ],
+          "default": 0,
+          "sysex": {
+            "spkt": 12,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "din_mini_port",
+            "title": "Note Input Timing:",
+            "control": "radiobutton_ll",
+            "optionlabel": "Precise Timing (e.g. DAW/Sequencer),Manual Playing (e.g. MIDI Keyboard)",
+            "from": 0,
+            "to": 1,
+            "default": 0,
+            "index": 23,
+            "spkt": 12
+          }
+        }
+      ]
+    },
+    {
+      "name": "PolyChain"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

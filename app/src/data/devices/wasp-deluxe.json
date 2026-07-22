@@ -1,0 +1,109 @@
+{
+  "slug": "wasp-deluxe",
+  "name": "WASP DELUXE",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "WASP DELUXE",
+      "aliases": ["WASP DELUXE", "WASP", "WASPDELUXE"],
+      "pids": ["0x1222", "0x1223"],
+      "protocol": 1,
+      "modelId": ["0x00", "0x01", "0x06"],
+      "deviceId": "0x00",
+      "cloudFamily": "wasp",
+      "cloudModel": "wasp",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 0,
+            "control": "spinbox",
+            "defaultmode": 0,
+            "indexmode": 0,
+            "defaultin": 1,
+            "indexin": 1,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 0,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 0,
+            "index": 3,
+            "title": "Key Priority: ",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "transpose",
+          "kind": "spinbox",
+          "title": "MIDI In Transpose",
+          "min": -12,
+          "max": 12,
+          "default": 1,
+          "sysex": {
+            "pkt": 15
+          },
+          "raw": {
+            "type": "transpose",
+            "default": 1,
+            "index": 2,
+            "title": "MIDI In Transpose",
+            "pkt": 15,
+            "min": -12,
+            "max": 12,
+            "offset": -12
+          }
+        },
+        {
+          "type": "multitrigger",
+          "kind": "toggle",
+          "title": "Multi-Trigger",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 20
+          },
+          "raw": {
+            "type": "multitrigger",
+            "default": 0,
+            "index": 4,
+            "title": "Multi-Trigger",
+            "pkt": 20
+          }
+        }
+      ]
+    },
+    {
+      "name": "PolyChain"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

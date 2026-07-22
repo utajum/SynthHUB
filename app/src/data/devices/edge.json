@@ -1,0 +1,88 @@
+{
+  "slug": "edge",
+  "name": "EDGE",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "EDGE",
+      "aliases": ["EDGE"],
+      "pids": ["0x1259", "0x125a"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x22"],
+      "deviceId": "0x00",
+      "cloudFamily": "edge",
+      "cloudModel": "edge",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "default": 12,
+            "index": 2,
+            "title": "Pitch Bend Semitones:",
+            "min": 0,
+            "max": 12,
+            "pkt": 17
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 0,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 0,
+            "index": 3,
+            "title": "Key Priority: ",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "midithrough",
+          "kind": "composite",
+          "title": "midithrough",
+          "sysex": {
+            "pkt": 40
+          },
+          "raw": {
+            "type": "midithrough",
+            "defaultm2u": 0,
+            "indexm2u": 5,
+            "defaultmst": 0,
+            "indexmst": 6,
+            "defaultu2m": 0,
+            "indexu2m": 7,
+            "pkt": 40
+          }
+        }
+      ]
+    },
+    {
+      "name": "PolyChain"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

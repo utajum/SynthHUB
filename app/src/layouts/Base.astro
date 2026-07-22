@@ -1,0 +1,128 @@
+---
+import '../styles/global.css';
+import SocialLinks from '../components/SocialLinks';
+import InstallButton from '../components/InstallButton';
+import PostHog from '../components/posthog.astro';
+import PwaEarly from '../components/pwa-early.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  ogType?: string;
+  // OG image path (per-device pages override this)
+  image?: string;
+}
+const DEFAULT_KEYWORDS =
+  'SynthHub, Behringer, SynthTribe, synthesizer editor, WebMIDI, WebUSB, MIDI SysEx, ' +
+  'PWA, browser MIDI, Behringer 2600, TD-3, RD-8, RD-9, Model D, Poly D, ' +
+  'Pro-800, MS-1, MS-5, UB-Xa, Model 15, Odyssey, Crave, K-2, step sequencer, ' +
+  'MIDI controller, synth librarian, firmware version, hardware synth, ' +
+  'music production, Music Tribe';
+const {
+  title = 'SynthHub - Behringer Synth Control over WebUSB / WebMIDI',
+  description = 'Control every Behringer synthesizer over WebUSB / WebMIDI. An alternative editor + sequencer for Behringer SynthTribe devices (2600, TD-3, RD-8/9, Model D, Pro-800, UB-Xa and more).',
+  keywords = DEFAULT_KEYWORDS,
+  ogType = 'website',
+  image = '/og-image.png',
+} = Astro.props;
+const year = new Date().getFullYear();
+const site = Astro.site ?? new URL('https://synth-hub.elevatech.xyz');
+const canonical = new URL(Astro.url.pathname, site).href;
+const ogImage = new URL(image, site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <PwaEarly />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="SynthHub" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#00ff9c" />
+    <meta name="color-scheme" content="dark" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="SynthHub" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="SynthHub - control every Behringer synth over WebUSB / WebMIDI" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+        name: 'SynthHub',
+        applicationCategory: 'MultimediaApplication',
+        operatingSystem: 'Any (Chromium browser with WebUSB/WebMIDI)',
+        browserRequirements: 'Requires WebUSB and WebMIDI',
+        description,
+        url: canonical,
+        image: ogImage,
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        keywords,
+      })}
+    />
+
+    <PostHog />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="container row">
+          <a class="brand" href="/">
+            <span class="prompt">root@synth-hub</span>
+            <span class="dim">:~/</span>
+            <span class="caret">_</span>
+            <small>Behringer control // WebUSB - WebMIDI</small>
+          </a>
+          <span class="spacer"></span>
+          <nav class="flex tiny">
+            <a href="/">console</a>
+            <a href="/catalog">catalog</a>
+            <a href="/about">about</a>
+          </nav>
+          <InstallButton client:load />
+          <SocialLinks client:load />
+        </div>
+      </header>
+
+      <div class="container">
+        <slot />
+      </div>
+
+      <footer class="topbar app-footer">
+        <div class="container row tiny">
+          <span class="dim">
+            SynthHub - an alternative editor - not affiliated with Behringer / Music Tribe
+          </span>
+          <span class="spacer"></span>
+          <a class="social-link coffee" href="https://buymeacoffee.com/utajum" target="_blank" rel="noopener noreferrer" title="Support the project">./donate</a>
+          <span class="dim">(c) {year} - MIT - <a href="https://github.com/utajum/SynthHUB" target="_blank" rel="noopener">utajum</a></span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "slug": "1601",
+  "name": "1601 Sequencer",
+  "app": "controltribe",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "1601 Sequencer",
+      "aliases": ["1601", "1601 Sequencer", "S1601"],
+      "pids": [],
+      "protocol": 1,
+      "modelId": ["0x7f", "0x47", "0x00"],
+      "deviceId": "0x00",
+      "cloudFamily": "1601",
+      "cloudModel": "1601"
+    }
+  ],
+  "functions": [{ "name": "Device Settings" }, { "name": "Update" }]
+}

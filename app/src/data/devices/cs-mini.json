@@ -1,0 +1,414 @@
+{
+  "slug": "cs-mini",
+  "name": "CS MINI",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "CS MINI",
+      "aliases": ["CS MINI"],
+      "pids": ["0x12ab", "0x12ac"],
+      "protocol": 4,
+      "modelId": ["0x00", "0x01", "0x51"],
+      "deviceId": "0x00",
+      "cloudFamily": "cs-mini",
+      "cloudModel": "cs-mini",
+      "introImg": "intro.png"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "minipreset",
+          "kind": "spinbox",
+          "title": "Preset",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "subtype": "1"
+          },
+          "raw": {
+            "type": "minipreset",
+            "subtype": "1",
+            "pattern_count": 10,
+            "title": "Preset"
+          }
+        },
+        {
+          "type": "autopoweroff",
+          "kind": "toggle",
+          "title": "Auto Power Off",
+          "default": 1,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 0
+          },
+          "raw": {
+            "type": "autopoweroff",
+            "default": 1,
+            "index": 2,
+            "title": "Auto Power Off",
+            "pkt": 116,
+            "spkt": 0
+          }
+        },
+        {
+          "type": "channel",
+          "kind": "dropdown",
+          "title": "channel",
+          "control": "combobox",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "All"
+          ],
+          "sysex": {
+            "pkt": 14,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 1,
+            "defaultin": 0,
+            "indexin": 0,
+            "defaultout": 0,
+            "indexout": 1,
+            "control": "combobox",
+            "inlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "All"
+            ],
+            "outlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16"
+            ],
+            "pkt": 14
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "Sync In/Out Setting",
+          "options": ["Internal", "MIDI", "USB", "TRIG"],
+          "sysex": {
+            "subtype": 6
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI,USB,TRIG",
+            "settingtitle": "Sync In/Out Setting",
+            "subtype": 6,
+            "defaultsource": 0,
+            "indexsource": 6,
+            "defaultrate": 0,
+            "indexrate": 7,
+            "defaultoutpolarity": 1,
+            "indexoutpolarity": 4,
+            "defaultinpolarity": 1,
+            "indexinpolarity": 3
+          }
+        },
+        {
+          "type": "midishortmessage",
+          "kind": "spinbox",
+          "title": "MIDI Short Message",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 2
+          },
+          "raw": {
+            "type": "midishortmessage",
+            "default": 0,
+            "index": 8,
+            "title": "MIDI Short Message",
+            "pkt": 116,
+            "spkt": 2
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 0,
+          "sysex": {
+            "pkt": 18,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "keypriority",
+            "subtype": 1,
+            "default": 0,
+            "index": 10,
+            "title": "Key Priority",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "temporange",
+          "kind": "spinbox",
+          "title": "Tempo Range",
+          "default": 1,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 1
+          },
+          "raw": {
+            "type": "temporange",
+            "range": "10 BPM ~ 600 BPM,56 BPM ~ 240 BPM",
+            "index": 5,
+            "default": 1,
+            "title": "Tempo Range",
+            "pkt": 116,
+            "spkt": 1
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 0,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "maxvalue": 12,
+            "default": 0,
+            "index": 11,
+            "title": "Pitch Bend Semitones",
+            "min": 0,
+            "max": 12,
+            "pkt": 17
+          }
+        },
+        {
+          "type": "modulation_wheel",
+          "kind": "composite",
+          "title": "Modulation Wheel",
+          "sysex": {
+            "pkt": 116,
+            "spkt": 4,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "modulation_wheel",
+            "subtype": 1,
+            "index": 12,
+            "key_value": [
+              {
+                "value": "36",
+                "name": "PWM MODE"
+              },
+              {
+                "value": "38",
+                "name": "RES LPF"
+              },
+              {
+                "value": "39",
+                "name": "EG RELEASE"
+              },
+              {
+                "value": "42",
+                "name": "DETUNE"
+              },
+              {
+                "value": "44",
+                "name": "CUTOFF LPF"
+              },
+              {
+                "value": "45",
+                "name": "VCF ENV"
+              },
+              {
+                "value": "46",
+                "name": "SUB OSC SPEED"
+              },
+              {
+                "value": "47",
+                "name": "SUB OSC VCO"
+              },
+              {
+                "value": "48",
+                "name": "SUB OSC VCF"
+              },
+              {
+                "value": "49",
+                "name": "EG ATTACK"
+              },
+              {
+                "value": "50",
+                "name": "EG DECAY"
+              },
+              {
+                "value": "51",
+                "name": "EG SUSTAIN"
+              },
+              {
+                "value": "54",
+                "name": "CUTOFF HPF"
+              },
+              {
+                "value": "55",
+                "name": "RES HPF"
+              },
+              {
+                "value": "56",
+                "name": "A MOD"
+              },
+              {
+                "value": "57",
+                "name": "AMOD A"
+              },
+              {
+                "value": "58",
+                "name": "AMOD DEPTH"
+              },
+              {
+                "value": "59",
+                "name": "AMOD SPEED"
+              },
+              {
+                "value": "60",
+                "name": "AMOD D"
+              },
+              {
+                "value": "61",
+                "name": "SPEED PWM"
+              }
+            ],
+            "title": "Modulation Wheel",
+            "pkt": 116,
+            "spkt": 4
+          }
+        },
+        {
+          "type": "newseq",
+          "kind": "spinbox",
+          "title": "Pattern Call",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 5,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "newseq",
+            "subtype": 0,
+            "default": 0,
+            "index": 13,
+            "title": "Pattern Call",
+            "pkt": 116,
+            "spkt": 5
+          }
+        },
+        {
+          "type": "multitrigger",
+          "kind": "toggle",
+          "title": "Multi-Trigger",
+          "default": 1,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 20,
+            "subtype": 3
+          },
+          "raw": {
+            "type": "multitrigger",
+            "subtype": 3,
+            "default": 1,
+            "index": 14,
+            "title": "Multi-Trigger",
+            "pkt": 20
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "slider",
+          "title": "Led Brightness",
+          "control": "slider",
+          "min": 5,
+          "max": 100,
+          "default": 5,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9
+          },
+          "raw": {
+            "type": "custom",
+            "name": "led_brightness",
+            "control": "slider",
+            "default": 5,
+            "index": 16,
+            "title": "Led Brightness",
+            "pkt": 116,
+            "spkt": 9,
+            "min": 5,
+            "max": 100
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update",
+      "type": 0
+    }
+  ]
+}

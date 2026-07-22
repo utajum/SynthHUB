@@ -1,0 +1,128 @@
+{
+  "slug": "2600",
+  "name": "2600",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "2600",
+      "aliases": ["2600"],
+      "pids": ["0x1228", "0x1229"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x0B"],
+      "deviceId": "0x00",
+      "cloudFamily": "2600",
+      "cloudModel": "2600",
+      "introImg": "intro.jpg"
+    },
+    {
+      "name": "2600 Blue Marvin",
+      "aliases": ["2600 Blue Marvin"],
+      "pids": ["0x1240", "0x1241"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x16"],
+      "deviceId": "0x00",
+      "cloudFamily": "2600-blue-marvin",
+      "cloudModel": "2600-blue-marvin",
+      "introImg": "introblue.jpg"
+    },
+    {
+      "name": "2600 Gray Meanie",
+      "aliases": ["2600 Gray Meanie"],
+      "pids": ["0x125d", "0x125e"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x23"],
+      "deviceId": "0x00",
+      "cloudFamily": "2600-gray-meanie",
+      "cloudModel": "2600-gray-meanie",
+      "introImg": "introgray.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "default": 12,
+            "index": 0,
+            "title": "Pitch Bend Semitones",
+            "pkt": 17,
+            "min": 0,
+            "max": 12
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 0,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 0,
+            "index": 1,
+            "title": "Key Priority",
+            "pkt": 18
+          }
+        }
+      ]
+    },
+    {
+      "name": "Calibration",
+      "cvchannels": [
+        {
+          "label": "1",
+          "points": [
+            {
+              "name": "-3.000Vdc",
+              "value": 0
+            },
+            {
+              "name": "2.000Vdc",
+              "value": 1
+            },
+            {
+              "name": "7.000Vdc",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "label": "2",
+          "points": [
+            {
+              "name": "-3.000Vdc",
+              "value": 0
+            },
+            {
+              "name": "2.000Vdc",
+              "value": 1
+            },
+            {
+              "name": "7.000Vdc",
+              "value": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

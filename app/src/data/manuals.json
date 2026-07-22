@@ -1,0 +1,1567 @@
+{
+  "2-xm": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ABA_2-XM_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/64608a8482a740978a1fdefa280044c9/QSG_BE_0718-ABA_2-XM_WW.pdf",
+        "language": "multi",
+        "title": "2-XM Quick Start Guide"
+      }
+    ],
+    "handles": ["0718-aba"],
+    "name": "2-XM"
+  },
+  "2600": {
+    "docs": [
+      {
+        "downloadType": "Quick Start",
+        "file": "QSG_BE_0718-AAI_2600_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/49e6d3c770a94356907fdd6e37f96ca7/QSG_BE_0718-AAI_2600_WW.pdf",
+        "language": null,
+        "title": "Quick Start Guide, All Languages"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "dfa5425b_QSG_BE_0718-AAI_2600_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/a44a1e04997e4b619cb39e58e53e252b/QSG_BE_0718-AAI_2600_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      }
+    ],
+    "handles": ["0718-aai"],
+    "name": "2600"
+  },
+  "aks-mini": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAY_AKS-MINI.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/7a56e137d1af456ea3eef0d00be45dc5/QSG_BE_0722-AAY_AKS-MINI.pdf",
+        "language": "multi",
+        "title": "AKS-MINI Quick Start Guide"
+      }
+    ],
+    "handles": ["0722-aay"],
+    "name": "AKS MINI"
+  },
+  "bds-3": {
+    "docs": [
+      {
+        "downloadType": "Quick Start",
+        "file": "QSG_BE_0718-ACA_BDS-3_A5_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/25be869b87ac49e88e23d38605d9a137/QSG_BE_0718-ACA_BDS-3_A5_WW.pdf",
+        "language": null,
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0718-aca"],
+    "name": "BDS-3"
+  },
+  "behringer-wave": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-ABD_WAVE_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/9cdaa450b21c4cc6b106ae8521c01be4/QSG_BE_0722-ABD_WAVE_WW.pdf",
+        "language": "multi",
+        "title": "WAVE Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-ABD_WAVE.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/62b0dc0d0eaa40ca937cd80d3996e77a/QSG_BE_0722-ABD_WAVE.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "Manual_BE_0722-ABD_WAVE.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/2ee6f3a6dfad48bb85241add20b97f07/Manual_BE_0722-ABD_WAVE.pdf",
+        "language": "multi",
+        "title": "Manual BE 0722 ABD WAVE"
+      }
+    ],
+    "handles": ["0722-abd"],
+    "name": "Behringer Wave"
+  },
+  "bm-11m": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0709-ALM_BM-11M-LOW-PASS-FILTER.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/36ecd29ce1a0401ca4288a0787fbe525/QSG_BE_0709-ALM_BM-11M-LOW-PASS-FILTER.pdf",
+        "language": "multi",
+        "title": "BM-11M-LOW-PASS-FILTER Quick Start Guide"
+      }
+    ],
+    "handles": ["0709-alm"],
+    "name": "BM-11M"
+  },
+  "bm-14m": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0709-AKT_BM-14M-ANALOG-DELAY_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/14f971e9647240fca07a9b54fcf2a40f/QSG_BE_0709-AKT_BM-14M-ANALOG-DELAY_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0709-akt"],
+    "name": "BM-14M"
+  },
+  "bm-15m": {
+    "docs": [
+      {
+        "downloadType": "Quick Start",
+        "file": "QSG_BE_0709-ALP_BM-15M-MURF-BOX.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/055dd8005acf4e7a93cbf6f15d473a2e/QSG_BE_0709-ALP_BM-15M-MURF-BOX.pdf",
+        "language": null,
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0709-alp"],
+    "name": "BM-15M"
+  },
+  "bm-18m": {
+    "docs": [
+      {
+        "downloadType": "Quick Start",
+        "file": "QSG_BE_0709-ALR_BM-18M-CLUSTER-BOX.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/437cfbc6203844f5908cad89cbfbcc6e/QSG_BE_0709-ALR_BM-18M-CLUSTER-BOX.pdf",
+        "language": null,
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0709-alr"],
+    "name": "BM-18M"
+  },
+  "bmx": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "Manual_0704-AAD_BMX_A4_WW_2025-12-11_Rev.0.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/d09aec5733c740eca8f51a442cfad6ec/Manual_0704-AAD_BMX_A4_WW_2025-12-11_Rev.0.pdf",
+        "language": "multi",
+        "title": "BMX QSG"
+      }
+    ],
+    "handles": ["0704-aad"],
+    "name": "BMX"
+  },
+  "bq10": {
+    "docs": [
+      {
+        "downloadType": "Quick Start",
+        "file": "QSG_BE_0718-ABC_BQ-10_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/5568fe1d07f4493cba5ee9c696526e8b/QSG_BE_0718-ABC_BQ-10_WW.pdf",
+        "language": null,
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0718-abc"],
+    "name": "BQ10"
+  },
+  "brains": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0720-ABP_BRAINS_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/278b4e3cd5b94c6aab7156879d84c838/QSG_BE_0720-ABP_BRAINS_WW.pdf",
+        "language": "multi",
+        "title": "BRAINS Quick Start Guide"
+      },
+      {
+        "downloadType": "Misc",
+        "file": "a24b7e04_QSG_BE_0720-ABP_BRAINS_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/a24b7e04643e426b80eef8e922938459/QSG_BE_0720-ABP_BRAINS_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0720-abp"],
+    "name": "BRAINS"
+  },
+  "brains-rld": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0720-ABP_BRAINS_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/278b4e3cd5b94c6aab7156879d84c838/QSG_BE_0720-ABP_BRAINS_WW.pdf",
+        "language": "multi",
+        "title": "BRAINS Quick Start Guide"
+      },
+      {
+        "downloadType": "Misc",
+        "file": "a24b7e04_QSG_BE_0720-ABP_BRAINS_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/a24b7e04643e426b80eef8e922938459/QSG_BE_0720-ABP_BRAINS_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0720-abp"],
+    "name": "BRAINS_RLD"
+  },
+  "cat": {
+    "docs": [
+      {
+        "downloadType": "Quick Start",
+        "file": "QSG_BE_0718-AAH_CAT_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/06159e31b0c34900999e14c6541bb8fb/QSG_BE_0718-AAH_CAT_WW.pdf",
+        "language": null,
+        "title": "CAT  Quick Start Guide, All Languages"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "6c16b8be_QSG_BE_0718-AAH_CAT_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/6c16b8be2ce943c1b752376f0c35479b/QSG_BE_0718-AAH_CAT_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "8dcf1632_QSG_BE_0718-AAH_CAT_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/8dcf1632f3f444c8b2d136f3f4077e24/QSG_BE_0718-AAH_CAT_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide (Multi-Language)"
+      }
+    ],
+    "handles": ["0718-aah"],
+    "name": "CAT"
+  },
+  "cm1a": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0720-ABN_CM1A_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/6fd20238de9f4bf09f28a7ec916c43a9/QSG_BE_0720-ABN_CM1A_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "c127f85a_QSG_BE_0720-ABN_CM1A_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/c127f85a09b448a9a4b0706b6804224a/QSG_BE_0720-ABN_CM1A_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide (Multi-Language)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "55799bd3_QSG_BE_0720-ABN_CM1A_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/55799bd336ec45d7ab799b8b677867af/QSG_BE_0720-ABN_CM1A_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Language"
+      }
+    ],
+    "handles": ["0720-abn"],
+    "name": "CM1A"
+  },
+  "crave": {
+    "docs": [
+      {
+        "downloadType": "Quick Start",
+        "file": "QSG_BE_0718-AAJ_CRAVE_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/2738179094cb452cbf7156253f550601/QSG_BE_0718-AAJ_CRAVE_WW.pdf",
+        "language": null,
+        "title": "Quick Start Guide, All Languages"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAJ_CRAVE_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/b9e378d2cf8b433fae01f341980b5b1e/QSG_BE_0718-AAJ_CRAVE_CN.pdf",
+        "language": null,
+        "title": "CRAVE Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAJ_CRAVE_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/623981811ba147b0bad749d002c45e2b/QSG_BE_0718-AAJ_CRAVE_JP.pdf",
+        "language": "jp",
+        "title": "Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "d03d058b_QSG_BE_0718-AAJ_CRAVE_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/c909b084422e4efd95cf769b47573d5c/QSG_BE_0718-AAJ_CRAVE_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      }
+    ],
+    "handles": ["0718-aaj"],
+    "name": "CRAVE"
+  },
+  "cz-1-mini": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "Manual_BE_0718-ACK_CZ-1-MINI_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/89f102fdb86844549a43713f92e64843/Manual_BE_0718-ACK_CZ-1-MINI_WW.pdf",
+        "language": null,
+        "title": "Manual, EN and CN"
+      }
+    ],
+    "handles": ["0718-ack"],
+    "name": "CZ-1 MINI"
+  },
+  "d-mini": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAW_D-MINI.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/2383dfeba762497d820d2940fb8ce0c8/QSG_BE_0722-AAW_D-MINI.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0722-aaw"],
+    "name": "D MINI"
+  },
+  "edge": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_EDGE_A5_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/1024dbd69a5f48efaad7ee311f867c9e/QSG_BE_EDGE_A5_CN.pdf",
+        "language": null,
+        "title": "BE_EDGE_A5 Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_EDGE_A5_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/980394bf6fca4c058d7da58b33d6f4e2/QSG_BE_EDGE_A5_JP.pdf",
+        "language": "jp",
+        "title": "Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_EDGE_A5_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/eb9d38bc2f1645859332a6c89247fd61/QSG_BE_EDGE_A5_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ABM_EDGE_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/8bde2c594a4e4e35b07fe00fff6290c8/QSG_BE_0718-ABM_EDGE_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0718-abm"],
+    "name": "EDGE"
+  },
+  "four-lfo": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0720-ACN_FOUR_LFO_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/54e464007cf5403caec5a9daf8f3f01f/QSG_BE_0720-ACN_FOUR LFO_WW.pdf",
+        "language": null,
+        "title": "Quick Start Guide, All Languages"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "b9e1c2a2_QSG_BE_0720-ACN_FOUR_LFO_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/b9e1c2a2f0f54599951d76f85587ad60/QSG_BE_0720-ACN_FOUR LFO_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0720-acn"],
+    "name": "FOUR-LFO"
+  },
+  "go-midi-host": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0716-AAH_GO_MIDI_HOST_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/767802e61ecd4b10a9a59f472993211e/QSG_BE_0716-AAH_GO MIDI HOST_WW.pdf",
+        "language": "multi",
+        "title": "GO MIDI HOST Quick Start Guide"
+      }
+    ],
+    "handles": ["0716-aah"],
+    "name": "GO MIDI HOST"
+  },
+  "grind": {
+    "docs": [
+      {
+        "downloadType": "Quick Start",
+        "file": "QSG_BE_0718-ACI_GRIND_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/35d4371777e541d4947a481dfb0941fa/QSG_BE_0718-ACI_GRIND_WW.pdf",
+        "language": null,
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0718-aci"],
+    "name": "GRIND"
+  },
+  "halos": {
+    "docs": [
+      {
+        "downloadType": "Firmware, Release Notes",
+        "file": "Release-Notes_0720-ADN_HALOS_V1.0.6_2025-11-26_Rev-1_1.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/c414b1bff92c423986ca4d164205d469/Release-Notes_0720-ADN_HALOS_V1.0.6_2025-11-26_Rev-1 1.pdf",
+        "language": null,
+        "title": "Firmware Release Notes"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0720-ADN_HALOS_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/f124edb8593f409d9ab61d6110b76229/QSG_BE_0720-ADN_HALOS_WW.pdf",
+        "language": "multi",
+        "title": "HALOS Quick Start Guide"
+      }
+    ],
+    "handles": ["0720-adn"],
+    "name": "HALOS"
+  },
+  "jn-80": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAP_JN-80_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/b22341b3f2674b608b4db82af7af6523/QSG_BE_0722-AAP_JN-80_WW.pdf",
+        "language": "multi",
+        "title": "JN-80 Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "Manual_BE_0722-AAP_JN-80.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/27c7100f24e04dbd9ca251604c7a11ac/Manual_BE_0722-AAP_JN-80.pdf",
+        "language": "multi",
+        "title": "Manual BE 0722 AAP JN 80"
+      }
+    ],
+    "handles": ["0722-aap"],
+    "name": "JN-80"
+  },
+  "jt-2": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAY_JT-2.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/1fefb565c06f4835a37f7fc8e64d4c26/QSG_BE_0718-AAY_JT-2.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAY_JT-2_2026-01-12_Rev.0.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/0720f6983dbdf494b1d98481f3f23e84/QSG_BE_0718-AAY_JT-2_2026-01-12_Rev.0.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide (Multi-Language)"
+      }
+    ],
+    "handles": ["0718-aay"],
+    "name": "JT-2"
+  },
+  "jt-4000-micro": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-ABR_JT-4000-MICRO_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/e6de2fe3efbb458b9e2864e306c3744a/QSG_BE_0722-ABR_JT-4000-MICRO_CN.pdf",
+        "language": null,
+        "title": "JT-4000 MICRO Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-ABR_JT-4000-MICRO_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/4d82af07aaff405eb4fd73f488941fa7/QSG_BE_0722-ABR_JT-4000-MICRO_JP.pdf",
+        "language": "jp",
+        "title": "JT-4000 MICRO Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-ABR_JT-4000-MICRO_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/7bad56e3d4f94b5ca2d36494034e1ea9/QSG_BE_0722-ABR_JT-4000-MICRO_WW.pdf",
+        "language": "multi",
+        "title": "JT-4000 MICRO Quick Start Guide (Multi-Language)"
+      }
+    ],
+    "handles": ["0722-abr"],
+    "name": "JT-4000 MICRO"
+  },
+  "jt-mini": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAX_JT-MINI_A7_WW_WEB.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/59194e138cf34c498b07fe2449cf5e88/QSG_BE_0722-AAX_JT-MINI_A7_WW_WEB.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Language"
+      }
+    ],
+    "handles": ["0722-aax"],
+    "name": "JT MINI"
+  },
+  "k-2": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAG_K-2_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/37fa3c3db2884aaab8d77e0060e55881/QSG_BE_0718-AAG_K-2_CN.pdf",
+        "language": null,
+        "title": "K-2 Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAG_K-2_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/080d3469d7394a8cbcb3179e1599bf22/QSG_BE_0718-AAG_K-2_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "K-2_QSG_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/987045b707d544e9b106aaed6f9d161e/K-2_QSG_CN.pdf",
+        "language": null,
+        "title": "K 2 QSG CN"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "K-2_QSG_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/2e64bab7386a418cb40ac4e10b577b7f/K-2_QSG_JP.pdf",
+        "language": "jp",
+        "title": "K 2 QSG (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "K-2_QSG_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/409e299dd0dd4d7dbb9bb4fee7dfb307/K-2_QSG_WW.pdf",
+        "language": "multi",
+        "title": "K 2 QSG"
+      }
+    ],
+    "handles": ["0718-aag"],
+    "name": "K-2"
+  },
+  "k-2-mk-ii": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ABG_K-2-MK-II_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/286fea3075cb47c9b5e31afbbd1fb955/QSG_BE_0718-ABG_K-2-MK-II_CN.pdf",
+        "language": null,
+        "title": "K-2-MK-II Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ABG_K-2-MK-II_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/e37b7c9f543b4f209062f13a828401b9/QSG_BE_0718-ABG_K-2-MK-II_JP.pdf",
+        "language": "jp",
+        "title": "Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ABG_K-2-MK-II_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/0e1a17c6de3348849cecb22c80cddd70/QSG_BE_0718-ABG_K-2-MK-II_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      }
+    ],
+    "handles": ["0718-abg"],
+    "name": "K-2 MK II"
+  },
+  "kobol-expander": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "3c8cdd6d_QSG_BE_0718-ABY_KOBOL-EXPANDER_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/3c8cdd6dd5414872b4d0a5e729092ffd/QSG_BE_0718-ABY_KOBOL-EXPANDER_WW.pdf",
+        "language": "multi",
+        "title": "KOBOL EXPANDER Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ABY_KOBOL-EXPANDER_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/f131eb12f7b94949aa29d27037d39578/QSG_BE_0718-ABY_KOBOL-EXPANDER_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0718-aby"],
+    "name": "KOBOL EXPANDER"
+  },
+  "lm-drum": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0704-AAC_LM_DRUM_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/386716155510425b94df18d5843b765e/QSG_BE_0704-AAC_LM DRUM_WW.pdf",
+        "language": null,
+        "title": "Quick Start Guide, All Languages"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "ee51f918_QSG_BE_0704-AAC_LM_DRUM_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/ee51f918f6fc4eee98c9981a646b4f68/QSG_BE_0704-AAC_LM DRUM_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "M_BE_0704-AAC_LM_DRUM_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/6cbc2af46e57456390b458f64031d091/M_BE_0704-AAC_LM DRUM_WW.pdf",
+        "language": "multi",
+        "title": "Manual, All Languages"
+      }
+    ],
+    "handles": ["0704-aac"],
+    "name": "LM DRUM"
+  },
+  "model-15": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAW_MODEL_15_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/09ff0f270dab4f33acf8a4caa20cc2d1/QSG_BE_0718-AAW_MODEL 15_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      }
+    ],
+    "handles": ["0718-aaw"],
+    "name": "MODEL 15"
+  },
+  "model-d": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAC_MODEL_D_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/e3eb36f0346f4e55bef93bd75b0b92fd/QSG_BE_0718-AAC_MODEL D_WW.pdf",
+        "language": "multi",
+        "title": "MODEL D Quick Start Guide"
+      },
+      {
+        "downloadType": "Misc",
+        "file": "34652e9a_QSG_BE_0718-AAC_MODEL_D_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/34652e9a124442f89cf9bf63ee2f7e68/QSG_BE_0718-AAC_MODEL D_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "M_BE_0718-AAC_MODEL-D_EN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/638602c2ac004825b208114567a8fde2/M_BE_0718-AAC_MODEL-D_EN.pdf",
+        "language": "en",
+        "title": "Manual English"
+      }
+    ],
+    "handles": ["0718-aac"],
+    "name": "MODEL D"
+  },
+  "monopoly": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAS_MONOPOLY_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/4a2071da9c084d7482edba6321548bba/QSG_BE_0722-AAS_MONOPOLY_CN.pdf",
+        "language": null,
+        "title": "MONOPOLY Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAS_MONOPOLY_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/c48253c1fd7b4a66a3764d653ea84b9e/QSG_BE_0722-AAS_MONOPOLY_JP.pdf",
+        "language": "jp",
+        "title": "Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAS_MONOPOLY_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/355554dd7c7940fea5dda42fd684c744/QSG_BE_0722-AAS_MONOPOLY_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      }
+    ],
+    "handles": ["0722-aas"],
+    "name": "MONOPOLY"
+  },
+  "ms-1": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAI_MS-1_WW_WEB.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/d75799ad3c694a29a2c7728187bfc886/QSG_BE_0722-AAI_MS-1_WW_WEB.pdf",
+        "language": "multi",
+        "title": "MS-1_WW Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "User-Support-Bulletin_BE_0722-AAI_MS-1_VCO-CV-Tuning-Procedure_985-40000-01104_2024-09-12_Rev.B.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/c9a7b525a98d4dee8f9f08d9125f52e9/User-Support-Bulletin_BE_0722-AAI_MS-1_VCO-CV-Tuning-Procedure_985-40000-01104_2024-09-12_Rev.B.pdf",
+        "language": null,
+        "title": "MS-1-BK, Calibration"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "Behringer_MS-101_VCO-CV_Tuning_Procedure_Service_Support_Document.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/27189ea9afcf4326b6c1b45eab0c31c8/Behringer_MS-101_VCO-CV_Tuning_Procedure_Service_Support_Document.pdf",
+        "language": null,
+        "title": "VCO-CV Tuning Procedure Service Support Document"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "Behringer_Updater_Manual_Service_Support_Document.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/15e79ada6c10412a8016108568fe0cc9/Behringer_Updater_Manual_Service_Support_Document.pdf",
+        "language": null,
+        "title": "Updater Manual Service Support Document"
+      }
+    ],
+    "handles": ["0722-aai", "0722-aam", "0722-aan"],
+    "name": "MS-1"
+  },
+  "ms-1-mk-ii": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_0722-ABK_MS-1_MK_II_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/70d517fc81b84245b0c3fda567f41385/QSG_0722-ABK_MS-1%20MK%20II_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0722-abk", "0722-abj", "0722-abl", "0722-acm"],
+    "name": "MS-1 MK II"
+  },
+  "ms-5": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAR_MS-5_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/842106d9a006409db8857bdf209bad1f/QSG_BE_0722-AAR_MS-5_CN.pdf",
+        "language": null,
+        "title": "MS-5 Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAR_MS-5_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/441919028b2c4cfdbc10730d46b39af1/QSG_BE_0722-AAR_MS-5_JP.pdf",
+        "language": "jp",
+        "title": "Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAR_MS-5_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/23c182e6f3be4eaf91478d5d7a11c414/QSG_BE_0722-AAR_MS-5_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      }
+    ],
+    "handles": ["0722-aar"],
+    "name": "MS-5"
+  },
+  "odyssey": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAB_ODYSSEY_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/518774a1bbf946119a09293d5b7a554f/QSG_BE_0722-AAB_ODYSSEY_CN.pdf",
+        "language": null,
+        "title": "ODYSSEY Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAB_ODYSSEY_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/6dd4f7a3fdde4cf787d4d6d52e7873c6/QSG_BE_0722-AAB_ODYSSEY_JP.pdf",
+        "language": "jp",
+        "title": "Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAB_ODYSSEY_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/a3156b8cc06840f5b0d6d0e5008f081b/QSG_BE_0722-AAB_ODYSSEY_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "User-Support-Bulletin_BE_P0BNY_ODYSSEY_User-CV-Procedure.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/0fde995e6bf14695b30577801b615ed2/User-Support-Bulletin_BE_P0BNY_ODYSSEY_User-CV-Procedure.pdf",
+        "language": "multi",
+        "title": "ODYSSEY User Manual"
+      }
+    ],
+    "handles": ["0722-aab"],
+    "name": "ODYSSEY"
+  },
+  "p0etu-perfect-pitch": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0720-ACV_PERFECT_PITCH_PP1_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/60e58a5995fa4b5c9ea94f6938953cf3/QSG_BE_0720-ACV_PERFECT PITCH PP1_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0720-acv"],
+    "name": "P0ETU, PERFECT PITCH"
+  },
+  "phara-o-mini": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAU_PHARA-O_MINI_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/83507058364e48bdb9a648c6bbb0c445/QSG_BE_0722-AAU_PHARA-O MINI_WW.pdf",
+        "language": "multi",
+        "title": "PHARA-O MINI Quick Start Guide"
+      }
+    ],
+    "handles": ["0722-aau"],
+    "name": "PHARA-O MINI"
+  },
+  "poly-d": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAJ_POLY_D_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/9132b1cb33df470a8905554e0a31d01e/QSG_BE_0722-AAJ_POLY D_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      }
+    ],
+    "handles": ["0722-aaj"],
+    "name": "POLY D"
+  },
+  "pro-1": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAJ_CRAVE_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/03e5859e006a4a7f9d975bc129707c32/QSG_BE_0718-AAJ_CRAVE_CN.pdf",
+        "language": null,
+        "title": "CRAVE Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAJ_CRAVE_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/2724539a6f4a4696bb9a3296fc771140/QSG_BE_0718-AAJ_CRAVE_JP.pdf",
+        "language": "jp",
+        "title": "Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAJ_CRAVE_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/d03d058b359644828925a327afaf66db/QSG_BE_0718-AAJ_CRAVE_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAK_PRO-1_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/319ae1004eac4860b071368c09400008/QSG_BE_0718-AAK_PRO-1_CN.pdf",
+        "language": null,
+        "title": "PRO-1 Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAK_PRO-1_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/ffabab92588e49aab108ca8e0678b6fa/QSG_BE_0718-AAK_PRO-1_JP.pdf",
+        "language": "jp",
+        "title": "PRO-1 Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAK_PRO-1_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/56dca72c117b415b917aacf4e6e872d2/QSG_BE_0718-AAK_PRO-1_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0718-aak"],
+    "name": "PRO-1"
+  },
+  "pro-800": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ABF_PRO-800_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/d5b08893f71d4689b54d4664f8b48f4a/QSG_BE_0718-ABF_PRO-800_CN.pdf",
+        "language": null,
+        "title": "PRO-800 Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ABF_PRO-800_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/ea4e118260a04da58e34ecbf9c6fb110/QSG_BE_0718-ABF_PRO-800_JP.pdf",
+        "language": "jp",
+        "title": "Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ABF_PRO-800_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/d070b1451258414fa134b8f71b75b18c/QSG_BE_0718-ABF_PRO-800_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "a56fd261_QSG_BE_0718-ABF_PRO-800_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/9dc9b17736d24c6182d058a1a004410f/QSG_BE_0718-ABF_PRO-800_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide (Multi-Language)"
+      }
+    ],
+    "handles": ["0718-abf"],
+    "name": "PRO 800"
+  },
+  "proton": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAO_PROTON.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/0c97d98d4d5f450bbb098fcc8a11283a/QSG_BE_0718-AAO_PROTON.pdf",
+        "language": null,
+        "title": "Quick Start Guide, All Languages"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAO_PROTON_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/e9389bf7ff9b41bcbd1107bc8bb71105/QSG_BE 0718-AAO_PROTON_WW.pdf",
+        "language": "multi",
+        "title": "PROTON Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "Manual_BE_0718-AAO_PROTON.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/2f34b9736bc7445a953a0601633bbcb9/Manual_BE%200718-AAO_PROTON.pdf",
+        "language": "multi",
+        "title": "Manual, All Languages"
+      }
+    ],
+    "handles": ["0718-aao"],
+    "name": "PROTON"
+  },
+  "provs-mini": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-ABF_PRO_VS_MINI_WW_.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/2bcaabc4ff574019b13c2ea35a1cc61d/QSG_BE_0722-ABF_PRO VS MINI_WW .pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-ABF_PRO_VS_MINI_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/bbda2eb121ee4646ab21f23cc357bab2/QSG_BE_0722-ABF_PRO VS MINI_WW.pdf",
+        "language": "multi",
+        "title": "PRO-VS MINI Quick Start Guide"
+      }
+    ],
+    "handles": ["0722-abf"],
+    "name": "PROVS-MINI"
+  },
+  "rd-8": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "RHYTHM_DESIGNER_RD-8_M_EN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/d89f2cc6ab8e48f69e34f963b90e0a73/RHYTHM DESIGNER RD-8_M_EN.pdf",
+        "language": null,
+        "title": "Manual, English"
+      },
+      {
+        "downloadType": "Quick Start",
+        "file": "QSG_BE_0704-AAA_RHYTHM-DESIGNER-RD-8_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/1cdf157353824c0582088dfc71a72f5c/QSG_BE_0704-AAA_RHYTHM-DESIGNER-RD-8_WW.pdf",
+        "language": null,
+        "title": "Quick Start Guide, All Languages"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_P0DG5_RD-8_A4_WW__2020-10-22_Rev.1.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/473b75081946499fad36d34e8a3d6e61/QSG_BE_P0DG5_RD-8_A4_WW_ 2020-10-22_Rev.1.pdf",
+        "language": "multi",
+        "title": "RD-8 Quick Start Guide"
+      }
+    ],
+    "handles": ["0704-aaa"],
+    "name": "RD-8"
+  },
+  "rd-8-mkii": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "RD-8-MKII_QSG_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/0090ec30d60e401f9802896a3f7c3ad3/RD-8-MKII_QSG_CN.pdf",
+        "language": null,
+        "title": "RD 8 MKII QSG CN"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "RD-8-MKII_QSG_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/a572f81a196e4c479870f2e6564c3e09/RD-8-MKII_QSG_JP.pdf",
+        "language": "jp",
+        "title": "RD 8 MKII QSG (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "RD-8-MKII_QSG_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/1203ce4dac6d48b4a6ba1a939a5a87ff/RD-8-MKII_QSG_WW.pdf",
+        "language": "multi",
+        "title": "RD 8 MKII QSG"
+      }
+    ],
+    "handles": ["0704-aao"],
+    "name": "RD-8 MKII"
+  },
+  "rd-9": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0704-AAB_RD-9_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/89466b72912446c695f9e4772bea0092/QSG_BE_0704-AAB_RD-9_CN.pdf",
+        "language": null,
+        "title": "RD-9 Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0704-AAB_RD-9_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/6ead1b8c70714d90aa430c55e24b7880/QSG_BE_0704-AAB_RD-9_JP.pdf",
+        "language": "jp",
+        "title": "Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0704-AAB_RD-9_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/bb232a41ee954b81bd079976af3914db/QSG_BE_0704-AAB_RD-9_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "c88d5009_QSG_BE_0704-AAB_RD-9_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/c88d5009091e4d4d89163e5943aaebdd/QSG_BE_0704-AAB_RD-9_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "7c437ecc_QSG_BE_0704-AAB_RD-9_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/7c437eccf1184fc8a2a3cc3060afd4a8/QSG_BE_0704-AAB_RD-9_CN.pdf",
+        "language": "zh",
+        "title": "Quick Start Guide, Chinese"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "M_BE_P0DG6_RD-9_EN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/861ab611896c48b480e218397fe354c0/M_BE_P0DG6_RD-9_EN.pdf",
+        "language": "en",
+        "title": "M BE P0DG6 RD 9 Manual"
+      }
+    ],
+    "handles": ["0704-aab"],
+    "name": "RD-9"
+  },
+  "rhythm-designer-rd-6": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0704-AAE_RD-6-SR_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/a5164aca516c449f984f9927a7de6289/QSG_BE_0704-AAE_RD-6-SR_CN.pdf",
+        "language": null,
+        "title": "RD-6-SR Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0704-AAE_RD-6-SR_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/9bdde7794d1c4a9fab721ce71b7d13a6/QSG_BE_0704-AAE_RD-6-SR_JP.pdf",
+        "language": "jp",
+        "title": "Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0704-AAE_RD-6-SR_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/018fceea3c14416a9c674db03d495e00/QSG_BE_0704-AAE_RD-6-SR_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      }
+    ],
+    "handles": [
+      "0704-aae",
+      "0704-aaf",
+      "0704-aag",
+      "0704-aai",
+      "0704-aah",
+      "0704-aaj",
+      "0704-aan",
+      "0704-aal",
+      "0704-aak",
+      "0704-aam"
+    ],
+    "name": "RHYTHM DESIGNER RD-6"
+  },
+  "rhythm-designer-rd-78": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0704-AAR_RD-78_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/89775197d2ed4747a2a7dd35162efc0d/QSG_BE_0704-AAR_RD-78_WW.pdf",
+        "language": "multi",
+        "title": "RD-78 Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0704-AAR_RD-78.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/6e30699e00f34d8da91de3027bf831a9/QSG_BE_0704-AAR_RD-78.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0704-aar"],
+    "name": "RHYTHM DESIGNER RD-78"
+  },
+  "rs-9": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0720-ACY_RS-9_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/288070442b3e4d889930a70d584f06ac/QSG_BE_0720-ACY_RS-9_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      },
+      {
+        "downloadType": "Misc",
+        "file": "d0034032_QSG_BE_0720-ACY_RS-9_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/d00340321d4943a79b74506673b6e339/QSG_BE_0720-ACY_RS-9_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0720-acy"],
+    "name": "RS-9"
+  },
+  "skies": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0720-ADM_SKIES_67x125mm_WW_2025-01-23_Rev.1.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/793227fb395f4263a10080bc4c5cfec4/QSG_BE_0720-ADM_SKIES_67x125mm_WW_2025-01-23_Rev.1.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0720-adm"],
+    "name": "SKIES"
+  },
+  "solina-string-ensemble": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAM_SOLINA_STRING_ENSEMBLE_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/4bc68a5cb348479aabc2af74f3b0d857/QSG_BE_0718-AAM_SOLINA STRING ENSEMBLE_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAM_SOLINA-STRING-ENSEMBLE_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/34d54ceb9760497cb4c95bf3ef2877c0/QSG_BE_0718-AAM_SOLINA-STRING-ENSEMBLE_CN.pdf",
+        "language": null,
+        "title": "SOLINA-STRING-ENSEMBLE Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAM_SOLINA-STRING-ENSEMBLE_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/5bb1a1cac82f4763a01aef73b770e7e0/QSG_BE_0718-AAM_SOLINA-STRING-ENSEMBLE_JP.pdf",
+        "language": "jp",
+        "title": "Quick Start Guide (Japanese)"
+      }
+    ],
+    "handles": ["0718-aam"],
+    "name": "SOLINA STRING ENSEMBLE"
+  },
+  "spice": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ACD_SPICE_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/108510958295485e8671ea86848f76f4/QSG_BE_0718-ACD_SPICE_WW.pdf",
+        "language": "multi",
+        "title": "SPICE Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "2298c789_QSG_BE_0718-ACD_SPICE_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/2298c789edf54ff886c36baf752c189b/QSG_BE_0718-ACD_SPICE_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0718-acd"],
+    "name": "SPICE"
+  },
+  "swing": {
+    "docs": [
+      {
+        "downloadType": "Quick Start",
+        "file": "QSG_BE_0715-AAL_SWING_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/7181d03fd4ee4546964155a3584a57f9/QSG_BE_0715-AAL_SWING_JP.pdf",
+        "language": null,
+        "title": "Quick Start Guide, Japanese"
+      },
+      {
+        "downloadType": "Quick Start",
+        "file": "QSG_BE_0715-AAL_SWING_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/8443640269a24b8fb5174749bc0986a1/QSG_BE_0715-AAL_SWING_CN.pdf",
+        "language": null,
+        "title": "Quick Start Guide, Chinese"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0715-AAL_SWING_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/bf7085e4eaea477d8a563d7977aa6b6e/QSG_BE_0715-AAL_SWING_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      }
+    ],
+    "handles": ["0715-aal"],
+    "name": "Swing"
+  },
+  "syncussion-sy-1": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ABL_SYNCUSSION-SY-1_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/9f625b2f6c8648ccbd08d63bf4361d3c/QSG_BE_0718-ABL_SYNCUSSION-SY-1_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      }
+    ],
+    "handles": ["0718-abl"],
+    "name": "SYNCUSSION SY-1"
+  },
+  "td-3": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAN_TD-3-SR_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/8e295a88a93641f99d1ba62e9ffea387/QSG_BE_0718-AAN_TD-3-SR_JP.pdf",
+        "language": null,
+        "title": "Quick Start Guide, Japanese"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "bf6763ed_QSG_BE_0718-AAN_TD-3-SR_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/bf6763edb6994fbd9c7b7d056a2af095/QSG_BE_0718-AAN_TD-3-SR_JP.pdf",
+        "language": "ja",
+        "title": "Quick Start Guide, Japanese"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAN_TD-3-SR_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/4330a8e8ce43439d868b86f8b658c653/QSG_BE_0718-AAN_TD-3-SR_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAN_TD-3-SR_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/19b271b02393435cb24cd8ee61173b2f/QSG_BE_0718-AAN_TD-3-SR_CN.pdf",
+        "language": "zh",
+        "title": "Quick Start Guide, Chinese"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "TD-3_QSG-CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/298ee0d9f3a24ed1b73f766d267ccef2/TD-3_QSG-CN.pdf",
+        "language": "multi",
+        "title": "TD 3 QSG CN"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "TD-3_QSG-JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/3d4133fb1cc84a65bb16e2d13d2da8d2/TD-3_QSG-JP.pdf",
+        "language": "multi",
+        "title": "TD 3 QSG JP"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "3808a69a_QSG_BE_0718-AAN_TD-3-SR_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/3808a69a9ab14820976f9ccb4a714086/QSG_BE_0718-AAN_TD-3-SR_CN.pdf",
+        "language": null,
+        "title": "TD-3-SR Quick Start Guide"
+      }
+    ],
+    "handles": [
+      "0718-abo",
+      "0718-abp",
+      "0718-aaq",
+      "0718-abu",
+      "0718-abt",
+      "0718-abw",
+      "0718-abs",
+      "0718-abv",
+      "0718-aar",
+      "0718-aan"
+    ],
+    "name": "TD-3"
+  },
+  "td-3-mo": {
+    "docs": [
+      {
+        "downloadType": "Quick Start",
+        "file": "QSG_BE_0718-ACE_TD-3-MO_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/103d46835a0a4456afbb1eed72ce4659/QSG_BE_0718-ACE_TD-3-MO_JP.pdf",
+        "language": null,
+        "title": "Quick Start Guide, Japanese"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ACE_TD-3-MO_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/2d2d2c3455984a71a26568ca01b77f48/QSG_BE_0718-ACE_TD-3-MO_CN.pdf",
+        "language": null,
+        "title": "TD-3-MO Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "2251d4ea_QSG_BE_0718-ACE_TD-3-MO_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/2251d4ea26614274a76df921aceda403/QSG_BE_0718-ACE_TD-3-MO_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ACE_TD-3-MO_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/0fa00a6890d74d22a4d7d7aa2444209e/QSG_BE_0718-ACE_TD-3-MO_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide (Multi-Language)"
+      },
+      {
+        "downloadType": "Quick Start",
+        "file": "QSG_BE_0718-ABX_TD-3-MO_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/495dfa6d373648a8af6bd6440cb206f4/QSG_BE_0718-ABX_TD-3-MO_JP.pdf",
+        "language": null,
+        "title": "Quick Start Guide, Japanese"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ABX_TD-3-MO_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/28a9b77842e34593bbb5495897ce3301/QSG_BE_0718-ABX_TD-3-MO_CN.pdf",
+        "language": null,
+        "title": "TD-3-MO Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ABX_TD-3-MO_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/0bb5115060fa46eabc939cefcac50001/QSG_BE_0718-ABX_TD-3-MO_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      }
+    ],
+    "handles": ["0718-ace", "0718-acf", "0718-abx"],
+    "name": "TD-3-MO"
+  },
+  "toro": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ABE_TORO_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/355b88ebb03548eb8b5a4466ba6a4e83/QSG_BE_0718-ABE_TORO_CN.pdf",
+        "language": null,
+        "title": "TORO Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ABE_TORO_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/92f2ffa59448422db8ef7f629f4aef68/QSG_BE_0718-ABE_TORO_JP.pdf",
+        "language": "jp",
+        "title": "Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-ABE_TORO_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/c33a8a02e1c94a0ca1e744db0b713b93/QSG_BE_0718-ABE_TORO_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      }
+    ],
+    "handles": ["0718-abe"],
+    "name": "Toro"
+  },
+  "ub-1-micro": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-ABS_UB-1-MICRO_2025-04-02_Rev.0.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/e2441bd3e41d45f89d09044dddb6f26c/QSG_BE_0722-ABS_UB-1-MICRO_2025-04-02_Rev.0.pdf",
+        "language": "multi",
+        "title": "Multi Language"
+      }
+    ],
+    "handles": ["0722-abs"],
+    "name": "UB-1 MICRO"
+  },
+  "ub-xa-16": {
+    "docs": [
+      {
+        "downloadType": "Quick Start",
+        "file": "QSG_BE_0722-AAF_UB-Xa_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/5892a189680547bba15786d1acd0d58b/QSG_BE_0722-AAF_UB-Xa_CN.pdf",
+        "language": null,
+        "title": "Quick Start Guide, Chinese"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "a386d382_QSG_BE_0722-AAF_UB-Xa_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/a386d382c5b74627aa87e53dbce3899a/QSG_BE_0722-AAF_UB-Xa_CN.pdf",
+        "language": null,
+        "title": "UB-Xa Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAF_UB-Xa_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/ab9d4a65f0bf421aa9202178bf68f218/QSG_BE_0722-AAF_UB-Xa_JP.pdf",
+        "language": "jp",
+        "title": "Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAF_UB-Xa_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/684f218c86df485f9042dd934d5f56c3/QSG_BE_0722-AAF_UB-Xa_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      }
+    ],
+    "handles": ["0722-aaf"],
+    "name": "UB-Xa 16"
+  },
+  "ub-xa-16-desktop": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAL_UB-Xa-D_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/ca81a12ca11c4244994a45f7525da615/QSG_BE_0718-AAL_UB-Xa-D_CN.pdf",
+        "language": null,
+        "title": "UB-Xa D Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAL_UB-Xa-D_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/fc871b3acc61456f9d83034d88e7d13e/QSG_BE_0718-AAL_UB-Xa-D_JP.pdf",
+        "language": "jp",
+        "title": "UB-Xa D Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAL_UB-Xa-D_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/95d6c45f3ee44f849d053b479509f03f/QSG_BE_0718-AAL_UB-Xa-D_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "10b3efe4_QSG_BE_0718-AAL_UB-Xa-D_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/10b3efe4d3954731a292f9b9a856d4e7/QSG_BE_0718-AAL_UB-Xa-D_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide (Multi-Language)"
+      }
+    ],
+    "handles": ["0718-aal"],
+    "name": "UB-Xa 16 Desktop"
+  },
+  "ub-xa-mini": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAZ_UB-Xa_MINI_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/1d29c467a9154520a41420b9b5fe52dd/QSG_BE_0722-AAZ_UB-Xa MINI_WW.pdf",
+        "language": "multi",
+        "title": "UB-XA MINI Quick Start Guide"
+      }
+    ],
+    "handles": ["0722-aaz"],
+    "name": "UB-Xa MINI"
+  },
+  "victor": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0720-ADA_VICTOR_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/c997314cfbde4bddb9ab4c74dd29e14c/QSG_BE_0720-ADA_VICTOR_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      }
+    ],
+    "handles": ["0720-ada"],
+    "name": "VICTOR"
+  },
+  "vocoder-vc16": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0720-ADC_VOCODER_VC16_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/8d21adf6b3164c75a8343bf16e0b5ec3/QSG_BE_0720-ADC_VOCODER VC16_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "21cd1c77_QSG_BE_0720-ADC_VOCODER_VC16_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/21cd1c77d19948b8a2d1e2400572588d/QSG_BE_0720-ADC_VOCODER VC16_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide, All Languages"
+      }
+    ],
+    "handles": ["0720-adc"],
+    "name": "VOCODER_VC16"
+  },
+  "vocoder-vc340": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAG_VOCODER-VC340_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/61927c031b764a1f9eaeec3b4de6c18a/QSG_BE_0722-AAG_VOCODER-VC340_CN.pdf",
+        "language": null,
+        "title": "VOCODER-VC340 Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAG_VOCODER-VC340_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/bb07cc42457849d2bc13ba0c2cd24add/QSG_BE_0722-AAG_VOCODER-VC340_JP.pdf",
+        "language": "jp",
+        "title": "Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0722-AAG_VOCODER-VC340_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/67802a4a05d84a95a85cc30dfd9c42d1/QSG_BE_0722-AAG_VOCODER-VC340_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      }
+    ],
+    "handles": ["0722-aag"],
+    "name": "Vocoder-VC340"
+  },
+  "wasp-deluxe": {
+    "docs": [
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAF_WASP-DELUXE_CN.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/22be0b58d87a4c1aa2a872f109639b74/QSG_BE_0718-AAF_WASP-DELUXE_CN.pdf",
+        "language": null,
+        "title": "WASP-DELUXE Quick Start Guide"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAF_WASP-DELUXE_JP.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/f62066c59cd44731957e84086b08c2bb/QSG_BE_0718-AAF_WASP-DELUXE_JP.pdf",
+        "language": "jp",
+        "title": "Quick Start Guide (Japanese)"
+      },
+      {
+        "downloadType": "Manual",
+        "file": "QSG_BE_0718-AAF_WASP-DELUXE_WW.pdf",
+        "fileUrl": "https://cdn-media.empowertribe.com/176234399ee64acd86495418ccbb9b21/QSG_BE_0718-AAF_WASP-DELUXE_WW.pdf",
+        "language": "multi",
+        "title": "Quick Start Guide"
+      }
+    ],
+    "handles": ["0718-aaf"],
+    "name": "WASP DELUXE"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "slug": "go-midi-host",
+  "name": "GO MIDI HOST",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "GO MIDI HOST",
+      "aliases": ["GO MIDI HOST"],
+      "pids": ["0x12cb"],
+      "protocol": 3,
+      "modelId": ["", "", ""],
+      "deviceId": "",
+      "cloudFamily": "go_midi_host",
+      "cloudModel": "go_midi_host",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "Update",
+      "type": 3
+    }
+  ]
+}

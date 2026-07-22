@@ -4,6 +4,7 @@ import { createStore } from 'zustand/vanilla';
 import { midi, type MidiPortInfo } from './midi/webmidi';
 import { usb, type UsbDeviceInfo } from './usb/webusb';
 import { discover, type DetectedDevice } from './discovery';
+import { track } from './analytics';
 
 type TransportState =
   'unsupported' | 'idle' | 'requesting' | 'ready' | 'denied';
@@ -48,6 +49,8 @@ export interface AppState {
 
 const LOG_CAP = 500;
 
+const trackedSlugs = new Set<string>();
+
 export const appStore = createStore<AppState>((set, get) => ({
   midiState: MidiEngineSupported() ? 'idle' : 'unsupported',
   usbState: UsbEngineSupported() ? 'idle' : 'unsupported',
@@ -60,16 +63,18 @@ export const appStore = createStore<AppState>((set, get) => ({
   log: [],
 
   async initTransports() {
+    // port updates must flow even without WebMIDI: virtual synth outputs
+    // register through the same engine and still need to reach the store
+    midi.onPorts(({ inputs, outputs }) => {
+      set({ midiInputs: inputs, midiOutputs: outputs });
+      get().refresh();
+    });
     // MIDI (SysEx management channel over USB-MIDI)
     if (MidiEngineSupported()) {
       set({ midiState: 'requesting' });
       try {
         const ok = await midi.init();
         set({ midiState: ok ? 'ready' : 'denied' });
-        midi.onPorts(({ inputs, outputs }) => {
-          set({ midiInputs: inputs, midiOutputs: outputs });
-          get().refresh();
-        });
         midi.onMessage((data, src) => {
           // never log system-realtime traffic (MIDI clock is ~48 msg/s and
           // would flood the ring + trigger store updates per message)
@@ -156,6 +161,25 @@ export const appStore = createStore<AppState>((set, get) => ({
   refresh() {
     const s = get();
     const detected = discover(s.midiInputs, s.midiOutputs, s.usbDevices);
+
+    const nowSlugs = new Set(detected.map((d) => d.slug));
+    for (const d of detected) {
+      if (trackedSlugs.has(d.slug)) continue;
+      track('device_connected', {
+        slug: d.slug,
+        variant: d.variant,
+        protocol: d.protocol,
+        via: d.via.slice().sort().join('+'), // 'midi', 'usb', 'midi+usb'
+        // Human-visible names when the port/USB descriptor reported one.
+        port_name: d.midiPortName ?? null,
+        product_name: d.usbProductName ?? null,
+      });
+    }
+    // Reset the tracked set to the current one — removed slugs will be
+    // eligible to re-fire on reconnect.
+    trackedSlugs.clear();
+    for (const slug of nowSlugs) trackedSlugs.add(slug);
+
     // the URL is the source of truth - never auto-select a connected unit
     // (that would hijack `/` and rewrite the address bar)
     set({ detected });

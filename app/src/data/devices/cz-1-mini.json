@@ -1,0 +1,41 @@
+{
+  "slug": "cz-1-mini",
+  "name": "CZ-1 MINI",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "CZ-1 MINI",
+      "aliases": ["CZ-1 MINI"],
+      "pids": ["0x12c5", "0x12c6"],
+      "protocol": 2,
+      "modelId": ["0x00", "0x01", "0x62"],
+      "deviceId": "0x00",
+      "cloudFamily": "cz-1-mini",
+      "cloudModel": "cz-1-mini",
+      "introImg": "intro.png"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "dumpreceive",
+          "kind": "button",
+          "title": "dumpreceive",
+          "sysex": {
+            "subtype": 0
+          },
+          "raw": {
+            "type": "dumpreceive",
+            "subtype": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update",
+      "type": 3
+    }
+  ]
+}

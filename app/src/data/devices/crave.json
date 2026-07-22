@@ -1,0 +1,155 @@
+{
+  "slug": "crave",
+  "name": "CRAVE",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "CRAVE",
+      "aliases": ["CRAVE"],
+      "pids": ["0x121e", "0x121f"],
+      "protocol": 1,
+      "modelId": ["0x00", "0x01", "0x05"],
+      "deviceId": "0x00",
+      "cloudFamily": "crave",
+      "cloudModel": "crave",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "default": 12,
+            "index": 0,
+            "title": "Pitch Bend Semitones",
+            "min": 0,
+            "max": 12,
+            "pkt": 17
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "Clock Source",
+          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG", "Auto"],
+          "sysex": {
+            "subtype": 1
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG,Auto",
+            "subtype": 1,
+            "defaultsource": 0,
+            "indexsource": 4,
+            "defaultrate": 0,
+            "indexrate": 5,
+            "defaultpolarity": 0,
+            "indexpolarity": 6,
+            "title": "Clock Source"
+          }
+        },
+        {
+          "type": "midiclockout",
+          "kind": "toggle",
+          "title": "MIDI Clock Out",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 23,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "midiclockout",
+            "subtype": 0,
+            "default": 0,
+            "index": 2,
+            "title": "MIDI Clock Out",
+            "pkt": 23
+          }
+        },
+        {
+          "type": "assignvalue",
+          "kind": "spinbox",
+          "title": "Assign Value",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 31
+          },
+          "raw": {
+            "type": "assignvalue",
+            "default": 0,
+            "index": 7,
+            "title": "Assign Value",
+            "pkt": 31
+          }
+        },
+        {
+          "type": "sequencerautosync",
+          "kind": "toggle",
+          "title": "Sequencer Auto Sync",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 29
+          },
+          "raw": {
+            "type": "sequencerautosync",
+            "default": 0,
+            "index": 3,
+            "title": "Sequencer Auto Sync",
+            "pkt": 29
+          }
+        },
+        {
+          "type": "accentthreshold",
+          "kind": "spinbox",
+          "title": "Accent Velocity Threshold",
+          "min": 0,
+          "max": 127,
+          "default": 96,
+          "sysex": {
+            "pkt": 28
+          },
+          "raw": {
+            "type": "accentthreshold",
+            "default": 96,
+            "index": 8,
+            "title": "Accent Velocity Threshold",
+            "min": 0,
+            "max": 127,
+            "pkt": 28
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sequencer",
+      "type": 0,
+      "supportdump": true
+    },
+    {
+      "name": "PolyChain"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "slug": "brains-rld",
+  "name": "BRAINS_RLD",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "BRAINS_RLD",
+      "aliases": ["BRAINS_RLD"],
+      "pids": ["0x12b3"],
+      "protocol": 2,
+      "modelId": ["0x00", "0x01", "0x4C"],
+      "deviceId": "",
+      "cloudFamily": "brains_rld",
+      "cloudModel": "brains_rld",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "preset_upload",
+          "kind": "button",
+          "title": "preset_upload",
+          "sysex": {
+            "subtype": 0
+          },
+          "raw": {
+            "type": "preset_upload",
+            "subtype": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update",
+      "type": 3
+    },
+    {
+      "name": "Calibration",
+      "type": 1
+    }
+  ]
+}

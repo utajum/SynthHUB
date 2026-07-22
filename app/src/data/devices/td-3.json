@@ -1,0 +1,233 @@
+{
+  "slug": "td-3",
+  "name": "TD-3",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "TD-3",
+      "aliases": ["TD-3", "TD-303"],
+      "pids": ["0x1226", "0x1227"],
+      "protocol": 1,
+      "modelId": ["0x00", "0x01", "0x0A"],
+      "deviceId": "0x00",
+      "cloudFamily": "td-3",
+      "cloudModel": "td-3",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 1,
+            "control": "spinbox",
+            "defaultin": 1,
+            "indexin": 1,
+            "defaultout": 1,
+            "indexout": 0,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend",
+          "min": 0,
+          "max": 12,
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "default": 12,
+            "index": 3,
+            "title": "Pitch Bend: ",
+            "min": 0,
+            "max": 12,
+            "pkt": 17
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 0,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "title": "Key Priority: ",
+            "type": "keypriority",
+            "default": 0,
+            "index": 4,
+            "pkt": 18
+          }
+        },
+        {
+          "type": "transpose",
+          "kind": "spinbox",
+          "title": "MIDI In Transpose",
+          "min": -12,
+          "max": 12,
+          "default": 0,
+          "sysex": {
+            "pkt": 15
+          },
+          "raw": {
+            "title": "MIDI In Transpose: ",
+            "type": "transpose",
+            "default": 0,
+            "index": 2,
+            "offset": -12,
+            "pkt": 15,
+            "min": -12,
+            "max": 12
+          }
+        },
+        {
+          "type": "multitrigger",
+          "kind": "toggle",
+          "title": "Multiple Trigger",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 20,
+            "subtype": 1
+          },
+          "raw": {
+            "title": "Multiple Trigger: ",
+            "type": "multitrigger",
+            "subtype": 1,
+            "default": 0,
+            "index": 5,
+            "pkt": 20
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "clock",
+          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG"],
+          "sysex": {
+            "subtype": 1
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG",
+            "subtype": 1,
+            "defaultsource": 0,
+            "indexsource": 8,
+            "defaultrate": 2,
+            "indexrate": 7,
+            "defaultpolarity": 1,
+            "indexpolarity": 6
+          }
+        },
+        {
+          "type": "accentthreshold",
+          "kind": "spinbox",
+          "title": "Accent Velocity threshold",
+          "min": 0,
+          "max": 127,
+          "default": 96,
+          "sysex": {
+            "pkt": 28
+          },
+          "raw": {
+            "title": "Accent Velocity threshold: ",
+            "type": "accentthreshold",
+            "default": 96,
+            "index": 9,
+            "min": 0,
+            "max": 127,
+            "pkt": 28
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sequencer",
+      "type": 1,
+      "supportdump": true
+    },
+    {
+      "name": "PolyChain"
+    },
+    {
+      "name": "Calibration",
+      "cvchannels": [
+        {
+          "label": "VFO",
+          "points": [
+            {
+              "name": "1.000Vdc",
+              "value": 0
+            },
+            {
+              "name": "2.000Vdc",
+              "value": 1
+            },
+            {
+              "name": "3.000Vdc",
+              "value": 2
+            },
+            {
+              "name": "4.000Vdc",
+              "value": 3
+            },
+            {
+              "name": "5.000Vdc",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "label": "LFO",
+          "points": [
+            {
+              "name": "2.000Vdc",
+              "value": 0
+            },
+            {
+              "name": "4.000Vdc",
+              "value": 1
+            },
+            {
+              "name": "6.000Vdc",
+              "value": 2
+            },
+            {
+              "name": "8.000Vdc",
+              "value": 3
+            },
+            {
+              "name": "10.000Vdc",
+              "value": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

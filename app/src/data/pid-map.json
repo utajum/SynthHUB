@@ -1,0 +1,652 @@
+{
+  "0x1255": {
+    "slug": "2-xm",
+    "variant": "2-XM",
+    "protocol": 3
+  },
+  "0x1256": {
+    "slug": "2-xm",
+    "variant": "2-XM",
+    "protocol": 3
+  },
+  "0x1228": {
+    "slug": "2600",
+    "variant": "2600",
+    "protocol": 3
+  },
+  "0x1229": {
+    "slug": "2600",
+    "variant": "2600",
+    "protocol": 3
+  },
+  "0x1240": {
+    "slug": "2600",
+    "variant": "2600 Blue Marvin",
+    "protocol": 3
+  },
+  "0x1241": {
+    "slug": "2600",
+    "variant": "2600 Blue Marvin",
+    "protocol": 3
+  },
+  "0x125d": {
+    "slug": "2600",
+    "variant": "2600 Gray Meanie",
+    "protocol": 3
+  },
+  "0x125e": {
+    "slug": "2600",
+    "variant": "2600 Gray Meanie",
+    "protocol": 3
+  },
+  "0x1285": {
+    "slug": "aks-mini",
+    "variant": "AKS MINI",
+    "protocol": 3
+  },
+  "0x1286": {
+    "slug": "aks-mini",
+    "variant": "AKS MINI",
+    "protocol": 3
+  },
+  "0x128b": {
+    "slug": "sds-3",
+    "variant": "SDS-3",
+    "protocol": 3
+  },
+  "0x128c": {
+    "slug": "sds-3",
+    "variant": "SDS-3",
+    "protocol": 3
+  },
+  "0x1280": {
+    "slug": "behringer-wave",
+    "variant": "Behringer Wave",
+    "protocol": 3
+  },
+  "0x127f": {
+    "slug": "behringer-wave",
+    "variant": "Behringer Wave",
+    "protocol": 3
+  },
+  "0x12b1": {
+    "slug": "bmx",
+    "variant": "BMX",
+    "protocol": 3
+  },
+  "0x12b2": {
+    "slug": "bmx",
+    "variant": "BMX",
+    "protocol": 3
+  },
+  "0x123c": {
+    "slug": "brains",
+    "variant": "BRAINS",
+    "protocol": 3
+  },
+  "0x12b3": {
+    "slug": "brains-rld",
+    "variant": "BRAINS_RLD",
+    "protocol": 2
+  },
+  "0x1224": {
+    "slug": "cat",
+    "variant": "CAT",
+    "protocol": 1
+  },
+  "0x1225": {
+    "slug": "cat",
+    "variant": "CAT",
+    "protocol": 1
+  },
+  "0x1234": {
+    "slug": "cm1a",
+    "variant": "CM1A",
+    "protocol": 3
+  },
+  "0x1235": {
+    "slug": "cm1a",
+    "variant": "CM1A",
+    "protocol": 3
+  },
+  "0x121e": {
+    "slug": "crave",
+    "variant": "CRAVE",
+    "protocol": 1
+  },
+  "0x121f": {
+    "slug": "crave",
+    "variant": "CRAVE",
+    "protocol": 1
+  },
+  "0x12ab": {
+    "slug": "cs-mini",
+    "variant": "CS MINI",
+    "protocol": 4
+  },
+  "0x12ac": {
+    "slug": "cs-mini",
+    "variant": "CS MINI",
+    "protocol": 4
+  },
+  "0x12c5": {
+    "slug": "cz-1-mini",
+    "variant": "CZ-1 MINI",
+    "protocol": 2
+  },
+  "0x12c6": {
+    "slug": "cz-1-mini",
+    "variant": "CZ-1 MINI",
+    "protocol": 2
+  },
+  "0x1278": {
+    "slug": "d-mini",
+    "variant": "D MINI",
+    "protocol": 4
+  },
+  "0x1279": {
+    "slug": "d-mini",
+    "variant": "D MINI",
+    "protocol": 4
+  },
+  "0x1259": {
+    "slug": "edge",
+    "variant": "EDGE",
+    "protocol": 3
+  },
+  "0x125a": {
+    "slug": "edge",
+    "variant": "EDGE",
+    "protocol": 3
+  },
+  "0x129d": {
+    "slug": "four-lfo",
+    "variant": "FOUR-LFO",
+    "protocol": 3
+  },
+  "0x129e": {
+    "slug": "four-lfo",
+    "variant": "FOUR-LFO",
+    "protocol": 3
+  },
+  "0x12cb": {
+    "slug": "go-midi-host",
+    "variant": "GO MIDI HOST",
+    "protocol": 3
+  },
+  "0x12a7": {
+    "slug": "grind",
+    "variant": "GRIND",
+    "protocol": 1
+  },
+  "0x12a8": {
+    "slug": "grind",
+    "variant": "GRIND",
+    "protocol": 1
+  },
+  "0x12d6": {
+    "slug": "halos",
+    "variant": "HALOS",
+    "protocol": 3
+  },
+  "0x12d7": {
+    "slug": "halos",
+    "variant": "HALOS",
+    "protocol": 3
+  },
+  "0x1251": {
+    "slug": "jn-80",
+    "variant": "JN-80",
+    "protocol": 5
+  },
+  "0x1252": {
+    "slug": "jn-80",
+    "variant": "JN-80",
+    "protocol": 5
+  },
+  "0x124f": {
+    "slug": "jt-mini",
+    "variant": "JT MINI",
+    "protocol": 3
+  },
+  "0x1250": {
+    "slug": "jt-mini",
+    "variant": "JT MINI",
+    "protocol": 3
+  },
+  "0x127a": {
+    "slug": "jt-2",
+    "variant": "JT-2",
+    "protocol": 3
+  },
+  "0x127b": {
+    "slug": "jt-2",
+    "variant": "JT-2",
+    "protocol": 3
+  },
+  "0x127d": {
+    "slug": "jt-4000-micro",
+    "variant": "JT-4000 MICRO",
+    "protocol": 2
+  },
+  "0x127e": {
+    "slug": "jt-4000-micro",
+    "variant": "JT-4000 MICRO",
+    "protocol": 2
+  },
+  "0x12c8": {
+    "slug": "jt-4000-micro",
+    "variant": "JT-4000M MICRO",
+    "protocol": 2
+  },
+  "0x12c7": {
+    "slug": "jt-4000-micro",
+    "variant": "JT-4000M MICRO",
+    "protocol": 2
+  },
+  "0x121c": {
+    "slug": "k-2",
+    "variant": "K-2",
+    "protocol": 1
+  },
+  "0x121d": {
+    "slug": "k-2",
+    "variant": "K-2",
+    "protocol": 1
+  },
+  "0x1230": {
+    "slug": "k-2-mk-ii",
+    "variant": "K-2 MK II",
+    "protocol": 1
+  },
+  "0x1231": {
+    "slug": "k-2-mk-ii",
+    "variant": "K-2 MK II",
+    "protocol": 1
+  },
+  "0x1249": {
+    "slug": "kobol-expander",
+    "variant": "KOBOL EXPANDER",
+    "protocol": 3
+  },
+  "0x124a": {
+    "slug": "kobol-expander",
+    "variant": "KOBOL EXPANDER",
+    "protocol": 3
+  },
+  "0x1267": {
+    "slug": "lm-drum",
+    "variant": "LM DRUM",
+    "protocol": 3
+  },
+  "0x1268": {
+    "slug": "lm-drum",
+    "variant": "LM DRUM",
+    "protocol": 3
+  },
+  "0x124d": {
+    "slug": "model-15",
+    "variant": "MODEL 15",
+    "protocol": 3
+  },
+  "0x124e": {
+    "slug": "model-15",
+    "variant": "MODEL 15",
+    "protocol": 3
+  },
+  "0x1214": {
+    "slug": "model-d",
+    "variant": "MODEL D",
+    "protocol": 0
+  },
+  "0x1215": {
+    "slug": "model-d",
+    "variant": "MODEL D",
+    "protocol": 0
+  },
+  "0x1238": {
+    "slug": "monopoly",
+    "variant": "MONOPOLY",
+    "protocol": 3
+  },
+  "0x1239": {
+    "slug": "monopoly",
+    "variant": "MONOPOLY",
+    "protocol": 3
+  },
+  "0x1218": {
+    "slug": "ms-1",
+    "variant": "MS101",
+    "protocol": 1
+  },
+  "0x1219": {
+    "slug": "ms-1",
+    "variant": "MS101",
+    "protocol": 1
+  },
+  "0x1232": {
+    "slug": "ms-1",
+    "variant": "MS-1",
+    "protocol": 1
+  },
+  "0x1233": {
+    "slug": "ms-1",
+    "variant": "MS-1",
+    "protocol": 1
+  },
+  "0x122e": {
+    "slug": "ms-1-mk-ii",
+    "variant": "MS-1 MK II",
+    "protocol": 1
+  },
+  "0x122f": {
+    "slug": "ms-1-mk-ii",
+    "variant": "MS-1 MK II",
+    "protocol": 1
+  },
+  "0x1236": {
+    "slug": "ms-5",
+    "variant": "MS-5",
+    "protocol": 3
+  },
+  "0x1237": {
+    "slug": "ms-5",
+    "variant": "MS-5",
+    "protocol": 3
+  },
+  "0x121a": {
+    "slug": "odyssey",
+    "variant": "ODYSSEY",
+    "protocol": 1
+  },
+  "0x121b": {
+    "slug": "odyssey",
+    "variant": "ODYSSEY",
+    "protocol": 1
+  },
+  "0x127c": {
+    "slug": "p0etu-perfect-pitch",
+    "variant": "P0ETU, PERFECT PITCH",
+    "protocol": 2
+  },
+  "0x128d": {
+    "slug": "p0etu-perfect-pitch",
+    "variant": "P0ETU, PERFECT PITCH",
+    "protocol": 2
+  },
+  "0x1263": {
+    "slug": "phara-o-mini",
+    "variant": "PHARA-O MINI",
+    "protocol": 4
+  },
+  "0x1264": {
+    "slug": "phara-o-mini",
+    "variant": "PHARA-O MINI",
+    "protocol": 4
+  },
+  "0x122a": {
+    "slug": "poly-d",
+    "variant": "POLY D",
+    "protocol": 3
+  },
+  "0x122b": {
+    "slug": "poly-d",
+    "variant": "POLY D",
+    "protocol": 3
+  },
+  "0x125f": {
+    "slug": "pro-800",
+    "variant": "PRO 800",
+    "protocol": 5
+  },
+  "0x1260": {
+    "slug": "pro-800",
+    "variant": "PRO 800",
+    "protocol": 5
+  },
+  "0x1220": {
+    "slug": "pro-1",
+    "variant": "PRO-1",
+    "protocol": 1
+  },
+  "0x1221": {
+    "slug": "pro-1",
+    "variant": "PRO-1",
+    "protocol": 1
+  },
+  "0x1261": {
+    "slug": "proton",
+    "variant": "PROTON",
+    "protocol": 3
+  },
+  "0x1262": {
+    "slug": "proton",
+    "variant": "PROTON",
+    "protocol": 3
+  },
+  "0x124b": {
+    "slug": "provs-mini",
+    "variant": "PROVS-MINI",
+    "protocol": 2
+  },
+  "0x124c": {
+    "slug": "provs-mini",
+    "variant": "PROVS-MINI",
+    "protocol": 2
+  },
+  "0x0030": {
+    "slug": "rd-8",
+    "variant": "RD-8",
+    "protocol": 3
+  },
+  "0x1254": {
+    "slug": "rd-8",
+    "variant": "RD-8",
+    "protocol": 3
+  },
+  "0x0031": {
+    "slug": "rd-8-mkii",
+    "variant": "RD-8 MKII",
+    "protocol": 3
+  },
+  "0x1253": {
+    "slug": "rd-8-mkii",
+    "variant": "RD-8 MKII",
+    "protocol": 3
+  },
+  "0x1242": {
+    "slug": "rd-9",
+    "variant": "RD-9",
+    "protocol": 3
+  },
+  "0x1243": {
+    "slug": "rd-9",
+    "variant": "RD-9",
+    "protocol": 3
+  },
+  "0x122c": {
+    "slug": "rhythm-designer-rd-6",
+    "variant": "RHYTHM DESIGNER RD-6",
+    "protocol": 3
+  },
+  "0x122d": {
+    "slug": "rhythm-designer-rd-6",
+    "variant": "RHYTHM DESIGNER RD-6",
+    "protocol": 3
+  },
+  "0x1287": {
+    "slug": "rhythm-designer-rd-78",
+    "variant": "RHYTHM DESIGNER RD-78",
+    "protocol": 3
+  },
+  "0x1288": {
+    "slug": "rhythm-designer-rd-78",
+    "variant": "RHYTHM DESIGNER RD-78",
+    "protocol": 3
+  },
+  "0x1296": {
+    "slug": "rs-9",
+    "variant": "RS-9",
+    "protocol": 3
+  },
+  "0x1297": {
+    "slug": "rs-9",
+    "variant": "RS-9",
+    "protocol": 3
+  },
+  "0x12c1": {
+    "slug": "skies",
+    "variant": "SKIES",
+    "protocol": 3
+  },
+  "0x12c2": {
+    "slug": "skies",
+    "variant": "SKIES",
+    "protocol": 3
+  },
+  "0x1245": {
+    "slug": "solina-string-ensemble",
+    "variant": "SOLINA STRING ENSEMBLE",
+    "protocol": 3
+  },
+  "0x1246": {
+    "slug": "solina-string-ensemble",
+    "variant": "SOLINA STRING ENSEMBLE",
+    "protocol": 3
+  },
+  "0x1275": {
+    "slug": "spice",
+    "variant": "SPICE",
+    "protocol": 3
+  },
+  "0x1276": {
+    "slug": "spice",
+    "variant": "SPICE",
+    "protocol": 3
+  },
+  "0x123d": {
+    "slug": "swing",
+    "variant": "Swing",
+    "protocol": 1
+  },
+  "0x1269": {
+    "slug": "syncussion-sy-1",
+    "variant": "SYNCUSSION SY-1",
+    "protocol": 3
+  },
+  "0x1270": {
+    "slug": "syncussion-sy-1",
+    "variant": "SYNCUSSION SY-1",
+    "protocol": 3
+  },
+  "0x1226": {
+    "slug": "td-3",
+    "variant": "TD-3",
+    "protocol": 1
+  },
+  "0x1227": {
+    "slug": "td-3-mo",
+    "variant": "TD-3-MO",
+    "protocol": 1
+  },
+  "0x1265": {
+    "slug": "td-3-mo",
+    "variant": "TD-3-MO",
+    "protocol": 1
+  },
+  "0x1266": {
+    "slug": "td-3-mo",
+    "variant": "TD-3-MO",
+    "protocol": 1
+  },
+  "0x1247": {
+    "slug": "toro",
+    "variant": "Toro",
+    "protocol": 3
+  },
+  "0x1248": {
+    "slug": "toro",
+    "variant": "Toro",
+    "protocol": 3
+  },
+  "0x1271": {
+    "slug": "ub-1-micro",
+    "variant": "UB-1 MICRO",
+    "protocol": 3
+  },
+  "0x1272": {
+    "slug": "ub-1-micro",
+    "variant": "UB-1 MICRO",
+    "protocol": 3
+  },
+  "0x125b": {
+    "slug": "ub-xa-16",
+    "variant": "UB-Xa 16",
+    "protocol": 3
+  },
+  "0x125c": {
+    "slug": "ub-xa-16",
+    "variant": "UB-Xa 16",
+    "protocol": 3
+  },
+  "0x1281": {
+    "slug": "ub-xa-16-desktop",
+    "variant": "UB-Xa 16 Desktop",
+    "protocol": 3
+  },
+  "0x1282": {
+    "slug": "ub-xa-16-desktop",
+    "variant": "UB-Xa 16 Desktop",
+    "protocol": 3
+  },
+  "0x12af": {
+    "slug": "ub-xa-mini",
+    "variant": "UB-Xa MINI",
+    "protocol": 3
+  },
+  "0x12b0": {
+    "slug": "ub-xa-mini",
+    "variant": "UB-Xa MINI",
+    "protocol": 3
+  },
+  "0x129f": {
+    "slug": "victor",
+    "variant": "VICTOR",
+    "protocol": 2
+  },
+  "0x12a0": {
+    "slug": "victor",
+    "variant": "VICTOR",
+    "protocol": 2
+  },
+  "0x1216": {
+    "slug": "vocoder-vc340",
+    "variant": "Vocoder-VC340",
+    "protocol": 1
+  },
+  "0x1217": {
+    "slug": "vocoder-vc340",
+    "variant": "Vocoder-VC340",
+    "protocol": 1
+  },
+  "0x12bf": {
+    "slug": "vocoder-vc16",
+    "variant": "VOCODER_VC16",
+    "protocol": 2
+  },
+  "0x12c0": {
+    "slug": "vocoder-vc16",
+    "variant": "VOCODER_VC16",
+    "protocol": 2
+  },
+  "0x1222": {
+    "slug": "wasp-deluxe",
+    "variant": "WASP DELUXE",
+    "protocol": 1
+  },
+  "0x1223": {
+    "slug": "wasp-deluxe",
+    "variant": "WASP DELUXE",
+    "protocol": 1
+  }
+}

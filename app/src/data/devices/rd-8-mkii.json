@@ -1,0 +1,760 @@
+{
+  "slug": "rd-8-mkii",
+  "name": "RD-8 MKII",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "RD-8 MKII",
+      "aliases": ["RD-8 MKII"],
+      "pids": ["0x0031", "0x1253"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x1E"],
+      "deviceId": "0x00",
+      "cloudFamily": "rd8",
+      "cloudModel": "rd8",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "dropdown",
+          "title": "channel",
+          "control": "combobox",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "All",
+            "Out"
+          ],
+          "sysex": {
+            "pkt": 14,
+            "subtype": 3
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 3,
+            "control": "combobox",
+            "inlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "All",
+              "Out"
+            ],
+            "defaultin": 1,
+            "indexin": 7,
+            "outlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "Off"
+            ],
+            "defaultout": 1,
+            "indexout": 8,
+            "defaultusbin": 1,
+            "indexusbin": 11,
+            "defaultusbout": 1,
+            "indexusbout": 12,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "midithrough",
+          "kind": "composite",
+          "title": "midithrough",
+          "sysex": {
+            "pkt": 40
+          },
+          "raw": {
+            "type": "midithrough",
+            "defaultm2u": 0,
+            "indexm2u": 9,
+            "defaultmst": 0,
+            "indexmst": 10,
+            "defaultu2m": 0,
+            "indexu2m": 13,
+            "pkt": 40
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "clock",
+          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG"],
+          "sysex": {
+            "subtype": 3
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG",
+            "subtype": 3,
+            "defaultsource": 0,
+            "indexsource": 5,
+            "defaultrate": 100,
+            "indexrate": 6
+          }
+        },
+        {
+          "type": "voicenotemap",
+          "kind": "composite",
+          "title": "Voice Note Map",
+          "options": [
+            "Low Tom/Low Conga",
+            "Mid Tom/Mid Conga",
+            "High Tom/High Conga",
+            "Rim Shot/Claves",
+            "Hand Clap/Maracas",
+            "Cowbell",
+            "Cymbal",
+            "Open Hat",
+            "Closed Hat"
+          ],
+          "default": "0,0,0,0,0,0,0,0,0,0,0",
+          "sysex": {
+            "pkt": 41,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "voicenotemap",
+            "title": "Voice Note Map",
+            "subtype": 1,
+            "default": "0,0,0,0,0,0,0,0,0,0,0",
+            "index": "14,15,16,17,18,19,20,21,22,23,24",
+            "labels": "Low Tom/Low Conga,Mid Tom/Mid Conga,High Tom/High Conga,Rim Shot/Claves,Hand Clap/Maracas,Cowbell,Cymbal,Open Hat,Closed Hat",
+            "pkt": 41
+          }
+        },
+        {
+          "type": "chainsongs",
+          "kind": "composite",
+          "title": "End Mode",
+          "default": 2,
+          "sysex": {
+            "pkt": 42
+          },
+          "raw": {
+            "type": "chainsongs",
+            "default": 2,
+            "index": 25,
+            "title": "End Mode",
+            "pkt": 42
+          }
+        },
+        {
+          "type": "triggeroutsource",
+          "kind": "composite",
+          "title": "triggeroutsource",
+          "options": [
+            "BASS",
+            "SNARE",
+            "LOW TOM",
+            "MID TOM",
+            "HIGH TOM",
+            "RIM SHOT",
+            "CLAPS",
+            "COWBELL",
+            "CYMBAL",
+            "OPEN HAT",
+            "CLOSED HAT"
+          ],
+          "default": 1,
+          "sysex": {
+            "pkt": 44,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "triggeroutsource",
+            "subtype": 1,
+            "default": 1,
+            "index": 26,
+            "defaultex": 1,
+            "indexex": 27,
+            "pkt": 44,
+            "labels": "BASS,SNARE,LOW TOM,MID TOM,HIGH TOM,RIM SHOT,CLAPS,COWBELL,CYMBAL,OPEN HAT,CLOSED HAT"
+          }
+        },
+        {
+          "type": "preference",
+          "kind": "composite",
+          "title": "preference",
+          "default": "0,0,0,0,0,0,0,0,0,0,1,0,0,0",
+          "sysex": {
+            "subtype": 1
+          },
+          "raw": {
+            "type": "preference",
+            "subtype": 1,
+            "default": "0,0,0,0,0,0,0,0,0,0,1,0,0,0",
+            "index": "28,29,30,31,32,33,34,35,36,37,38,39,40,41"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sequencer",
+      "type": 5,
+      "rows": 16,
+      "columns": 64,
+      "supportdump": true,
+      "lengthlabel": "Pattern Length",
+      "banklabel": "SONG",
+      "patternlabel": "PATTERN",
+      "settings": [
+        {
+          "type": "tempo",
+          "kind": "composite",
+          "title": "Tempo [20,240]",
+          "options": ["Song", "Global", "Pattern"],
+          "min": 20,
+          "max": 240,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9,
+            "subtype": 2
+          },
+          "raw": {
+            "title": "Tempo [20,240]",
+            "type": "tempo",
+            "labels": "Song,Global,Pattern",
+            "min": 20,
+            "max": 240,
+            "subtype": 2,
+            "indexglobal": 35,
+            "indexsong": 36,
+            "indexpattern": 37,
+            "defaultglobal": 0,
+            "defaultsong": 0,
+            "defaultpattern": 0,
+            "pkt": 116,
+            "spkt": 9
+          }
+        },
+        {
+          "type": "swing",
+          "kind": "composite",
+          "title": "Swing [25,75]%",
+          "options": ["Song", "Global", "Pattern"],
+          "min": 25,
+          "max": 75,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9,
+            "subtype": 2
+          },
+          "raw": {
+            "title": "Swing [25,75]%",
+            "type": "swing",
+            "labels": "Song,Global,Pattern",
+            "min": 25,
+            "max": 75,
+            "subtype": 2,
+            "indexglobal": 35,
+            "indexsong": 36,
+            "indexpattern": 37,
+            "defaultglobal": 50,
+            "defaultsong": 50,
+            "defaultpattern": 50,
+            "pkt": 116,
+            "spkt": 9
+          }
+        },
+        {
+          "type": "probability",
+          "kind": "composite",
+          "title": "Probability[1,100]%",
+          "options": ["Song", "Global", "Pattern"],
+          "min": 1,
+          "max": 100,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9,
+            "subtype": 2
+          },
+          "raw": {
+            "title": "Probability[1,100]%",
+            "type": "probability",
+            "labels": "Song,Global,Pattern",
+            "min": 1,
+            "max": 100,
+            "subtype": 2,
+            "indexglobal": 35,
+            "indexsong": 36,
+            "indexpattern": 37,
+            "defaultglobal": 50,
+            "defaultsong": 50,
+            "defaultpattern": 50,
+            "pkt": 116,
+            "spkt": 9
+          }
+        },
+        {
+          "type": "flam",
+          "kind": "composite",
+          "title": "Flam[0,24]",
+          "options": ["Song", "Global", "Pattern"],
+          "min": 0,
+          "max": 24,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9,
+            "subtype": 2
+          },
+          "raw": {
+            "title": "Flam[0,24]",
+            "type": "flam",
+            "labels": "Song,Global,Pattern",
+            "min": 0,
+            "max": 24,
+            "subtype": 2,
+            "indexglobal": 35,
+            "indexsong": 36,
+            "indexpattern": 37,
+            "defaultglobal": 0,
+            "defaultsong": 0,
+            "defaultpattern": 0,
+            "pkt": 116,
+            "spkt": 9
+          }
+        },
+        {
+          "type": "stepsize",
+          "kind": "composite",
+          "title": "Step Size",
+          "options": ["Song", "Global", "Pattern"],
+          "min": 20,
+          "max": 240,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9,
+            "subtype": 1
+          },
+          "raw": {
+            "title": "Step Size",
+            "type": "stepsize",
+            "labels": "Song,Global,Pattern",
+            "labels2": "1/8,1/8T,1/16,16T,1/32",
+            "min": 20,
+            "max": 240,
+            "subtype": 1,
+            "indexglobal": 35,
+            "indexsong": 36,
+            "indexpattern": 37,
+            "defaultglobal": 0,
+            "defaultsong": 0,
+            "defaultpattern": 0,
+            "pkt": 116,
+            "spkt": 9
+          }
+        },
+        {
+          "type": "filterenable",
+          "kind": "dropdown",
+          "title": "Filter Enable",
+          "options": ["Song", "Global", "Pattern"],
+          "min": 20,
+          "max": 240,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9,
+            "subtype": 1
+          },
+          "raw": {
+            "title": "Filter Enable",
+            "type": "filterenable",
+            "labels": "Song,Global,Pattern",
+            "labels2": "Off,On",
+            "min": 20,
+            "max": 240,
+            "subtype": 1,
+            "indexglobal": 35,
+            "indexsong": 36,
+            "indexpattern": 37,
+            "defaultglobal": 0,
+            "defaultsong": 0,
+            "defaultpattern": 0,
+            "pkt": 116,
+            "spkt": 9
+          }
+        },
+        {
+          "type": "filtermode",
+          "kind": "dropdown",
+          "title": "Filter Mode",
+          "options": ["Song", "Global", "Pattern"],
+          "min": 20,
+          "max": 240,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9,
+            "subtype": 1
+          },
+          "raw": {
+            "title": "Filter Mode",
+            "type": "filtermode",
+            "labels": "Song,Global,Pattern",
+            "labels2": "LPF,HPF",
+            "min": 20,
+            "max": 240,
+            "subtype": 1,
+            "indexglobal": 35,
+            "indexsong": 36,
+            "indexpattern": 37,
+            "defaultglobal": 0,
+            "defaultsong": 0,
+            "defaultpattern": 0,
+            "pkt": 116,
+            "spkt": 9
+          }
+        },
+        {
+          "type": "filterautomation",
+          "kind": "dropdown",
+          "title": "Filter Automation",
+          "options": ["Song", "Global", "Pattern"],
+          "min": 20,
+          "max": 240,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9,
+            "subtype": 1
+          },
+          "raw": {
+            "title": "Filter Automation",
+            "type": "filterautomation",
+            "labels": "Song,Global,Pattern",
+            "labels2": "Inactive,Active",
+            "min": 20,
+            "max": 240,
+            "subtype": 1,
+            "indexglobal": 35,
+            "indexsong": 36,
+            "indexpattern": 37,
+            "defaultglobal": 0,
+            "defaultsong": 0,
+            "defaultpattern": 0,
+            "pkt": 116,
+            "spkt": 9
+          }
+        },
+        {
+          "type": "filterstepvalues",
+          "kind": "composite",
+          "title": "Filter Step Values",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58",
+            "59",
+            "60",
+            "61",
+            "62",
+            "63",
+            "64"
+          ],
+          "min": 0,
+          "max": 255,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9,
+            "subtype": 2
+          },
+          "raw": {
+            "title": "Filter Step Values",
+            "type": "filterstepvalues",
+            "labels": "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64",
+            "min": 0,
+            "max": 255,
+            "subtype": 2,
+            "indexglobal": 35,
+            "indexsong": 36,
+            "indexpattern": 37,
+            "defaultglobal": 0,
+            "defaultsong": 0,
+            "defaultpattern": 0,
+            "pkt": 116,
+            "spkt": 9
+          }
+        },
+        {
+          "type": "polymeterenable",
+          "kind": "dropdown",
+          "title": "Polymeter Enable",
+          "options": ["Song", "Global", "Pattern"],
+          "min": 0,
+          "max": 100,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9,
+            "subtype": 1
+          },
+          "raw": {
+            "title": "Polymeter Enable",
+            "type": "polymeterenable",
+            "labels": "Song,Global,Pattern",
+            "labels2": "Off,On",
+            "min": 0,
+            "max": 100,
+            "subtype": 1,
+            "indexglobal": 35,
+            "indexsong": 36,
+            "indexpattern": 37,
+            "defaultglobal": 0,
+            "defaultsong": 0,
+            "defaultpattern": 0,
+            "pkt": 116,
+            "spkt": 9
+          }
+        },
+        {
+          "type": "autoadvance",
+          "kind": "dropdown",
+          "title": "Auto Advance",
+          "options": ["Song", "Global"],
+          "min": 0,
+          "max": 100,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9,
+            "subtype": 1
+          },
+          "raw": {
+            "title": "Auto Advance",
+            "type": "autoadvance",
+            "labels": "Song,Global",
+            "labels2": "Off,On",
+            "min": 0,
+            "max": 100,
+            "subtype": 1,
+            "indexglobal": 35,
+            "indexsong": 36,
+            "indexpattern": 37,
+            "defaultglobal": 0,
+            "defaultsong": 0,
+            "defaultpattern": 0,
+            "pkt": 116,
+            "spkt": 9
+          }
+        },
+        {
+          "type": "autoscroll",
+          "kind": "dropdown",
+          "title": "Auto Scroll",
+          "options": ["Global", "Pattern"],
+          "min": 0,
+          "max": 100,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9,
+            "subtype": 1
+          },
+          "raw": {
+            "title": "Auto Scroll",
+            "type": "autoscroll",
+            "labels": "Global,Pattern",
+            "labels2": "Off,On",
+            "min": 0,
+            "max": 100,
+            "subtype": 1,
+            "indexglobal": 35,
+            "indexsong": 36,
+            "indexpattern": 37,
+            "defaultglobal": 0,
+            "defaultsong": 0,
+            "defaultpattern": 0,
+            "pkt": 116,
+            "spkt": 9
+          }
+        },
+        {
+          "type": "fxbussends",
+          "kind": "dropdown",
+          "title": "FX Bus Sends",
+          "options": ["Song", "Global", "Pattern"],
+          "min": 0,
+          "max": 100,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9,
+            "subtype": 0
+          },
+          "raw": {
+            "title": "FX Bus Sends",
+            "type": "fxbussends",
+            "labels": "Song,Global,Pattern",
+            "min": 0,
+            "max": 100,
+            "subtype": 0,
+            "indexglobal": 35,
+            "indexsong": 36,
+            "indexpattern": 37,
+            "defaultglobal": 0,
+            "defaultsong": 0,
+            "defaultpattern": 0,
+            "pkt": 116,
+            "spkt": 9
+          }
+        },
+        {
+          "type": "mutetracks",
+          "kind": "dropdown",
+          "title": "Mute Tracks",
+          "options": ["Song", "Global", "Pattern"],
+          "min": 0,
+          "max": 100,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9,
+            "subtype": 0
+          },
+          "raw": {
+            "title": "Mute Tracks",
+            "type": "mutetracks",
+            "labels": "Song,Global,Pattern",
+            "min": 0,
+            "max": 100,
+            "subtype": 0,
+            "indexglobal": 35,
+            "indexsong": 36,
+            "indexpattern": 37,
+            "defaultglobal": 0,
+            "defaultsong": 0,
+            "defaultpattern": 0,
+            "pkt": 116,
+            "spkt": 9
+          }
+        },
+        {
+          "type": "solotracks",
+          "kind": "dropdown",
+          "title": "Solo Tracks",
+          "options": ["Song", "Global", "Pattern"],
+          "min": 0,
+          "max": 100,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 9,
+            "subtype": 0
+          },
+          "raw": {
+            "title": "Solo Tracks",
+            "type": "solotracks",
+            "labels": "Song,Global,Pattern",
+            "min": 0,
+            "max": 100,
+            "subtype": 0,
+            "indexglobal": 35,
+            "indexsong": 36,
+            "indexpattern": 37,
+            "defaultglobal": 0,
+            "defaultsong": 0,
+            "defaultpattern": 0,
+            "pkt": 116,
+            "spkt": 9
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

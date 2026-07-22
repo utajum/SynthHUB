@@ -1,0 +1,161 @@
+{
+  "slug": "vocoder-vc340",
+  "name": "Vocoder-VC340",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "Vocoder-VC340",
+      "aliases": ["Vocoder-VC340"],
+      "pids": ["0x1216", "0x1217"],
+      "protocol": 1,
+      "modelId": ["0x00", "0x01", "0x07"],
+      "deviceId": "0x00",
+      "cloudFamily": "vc340",
+      "cloudModel": "vc340",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "dropdown",
+          "title": "channel",
+          "control": "combobox",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "All"
+          ],
+          "sysex": {
+            "pkt": 14,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 1,
+            "control": "combobox",
+            "defaultin": 1,
+            "indexin": 1,
+            "inlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "All"
+            ],
+            "outlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16"
+            ],
+            "defaultout": 1,
+            "indexout": 0,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "transpose",
+          "kind": "spinbox",
+          "title": "MIDI In Transpose",
+          "min": -12,
+          "max": 12,
+          "default": 1,
+          "sysex": {
+            "pkt": 15
+          },
+          "raw": {
+            "type": "transpose",
+            "default": 1,
+            "index": 2,
+            "title": "MIDI In Transpose: ",
+            "offset": -12,
+            "pkt": 15,
+            "min": -12,
+            "max": 12
+          }
+        },
+        {
+          "type": "velocity",
+          "kind": "composite",
+          "title": "velocity",
+          "sysex": {
+            "subtype": 0
+          },
+          "raw": {
+            "type": "velocity",
+            "subtype": 0,
+            "defaultonconstant": 1,
+            "indexonconstant": 3,
+            "defaultoffconstant": 1,
+            "indexoffconstant": 4,
+            "defaultcurve": 0,
+            "indexcurve": 5
+          }
+        },
+        {
+          "type": "midivelocityout",
+          "kind": "toggle",
+          "title": "Velocity Control Loudness",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 24
+          },
+          "raw": {
+            "type": "midivelocityout",
+            "default": 0,
+            "index": 6,
+            "title": "Velocity Control Loudness",
+            "pkt": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}
