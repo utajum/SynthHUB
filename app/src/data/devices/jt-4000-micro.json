@@ -1,0 +1,52 @@
+{
+  "slug": "jt-4000-micro",
+  "name": "JT-4000 MICRO",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "JT-4000 MICRO",
+      "aliases": ["JT-4000 MICRO", "SATURN-4K"],
+      "pids": ["0x127d", "0x127e"],
+      "protocol": 2,
+      "modelId": ["0x00", "0x01", "0x38"],
+      "deviceId": "0x00",
+      "cloudFamily": "jt-4000-micro",
+      "cloudModel": "jt-4000-micro",
+      "introImg": "intro.jpg"
+    },
+    {
+      "name": "JT-4000M MICRO",
+      "aliases": ["JT-4000M MICRO"],
+      "pids": ["0x12c8", "0x12c7"],
+      "protocol": 2,
+      "modelId": ["0x00", "0x01", "0x38"],
+      "deviceId": "0x00",
+      "cloudFamily": "jt-4000m",
+      "cloudModel": "jt-4000m",
+      "introImg": "intro2.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "dumpreceive",
+          "kind": "button",
+          "title": "dumpreceive",
+          "sysex": {
+            "subtype": 1
+          },
+          "raw": {
+            "type": "dumpreceive",
+            "subtype": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update",
+      "type": 3
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+---
+// Per-device SEO route (/device/<slug>): statically prerendered page with
+// device-specific meta + crawlable summary; loads the same workspace as `/`
+// but deep-links this device.
+import Base from '../../layouts/Base.astro';
+import App from '../../components/App';
+import index from '../../data/devices.index.json';
+
+interface IndexEntry {
+  slug: string;
+  name: string;
+  app?: string;
+  protocols?: number[];
+  functions?: string[];
+}
+interface Variant {
+  name: string;
+  aliases?: string[];
+  modelId?: string[];
+}
+interface Def {
+  name?: string;
+  variants?: Variant[];
+  functions?: { name: string }[];
+}
+
+export function getStaticPaths() {
+  const defs = import.meta.glob<{ default: Def }>('../../data/devices/*.json', {
+    eager: true,
+  });
+  return (index as IndexEntry[]).map((entry) => {
+    const def = defs[`../../data/devices/${entry.slug}.json`]?.default ?? {};
+    return { params: { slug: entry.slug }, props: { entry, def } };
+  });
+}
+
+const { entry, def } = Astro.props as { entry: IndexEntry; def: Def };
+const name = def.name ?? entry.name;
+const variants = def.variants ?? [];
+const aliases = [
+  ...new Set(variants.flatMap((v) => [v.name, ...(v.aliases ?? [])])),
+].filter((a) => a && a !== name);
+const functions = (def.functions ?? [])
+  .map((f) => f.name)
+  .filter((n) => n && !n.startsWith('#'));
+const appLabel = entry.app === 'controltribe' ? 'Control Tribe' : 'SynthTribe';
+
+const title = `Behringer ${name} editor - WebUSB / WebMIDI | SynthHub`;
+const fnText = functions.length ? ` Functions: ${functions.join(', ')}.` : '';
+const aliasText = aliases.length ? ` Also known as ${aliases.join(', ')}.` : '';
+const description =
+  `Control the Behringer ${name} in your browser over WebUSB / WebMIDI - ` +
+  `edit device settings, run the step sequencer, record MIDI and check firmware, ` +
+  `no install or drivers.${fnText}${aliasText}`.slice(0, 300);
+---
+
+<Base title={title} description={description} image={`/og/${entry.slug}.png`}>
+  {/* crawlable device summary (screen-reader-only) */}
+  <section class="sr-only">
+    <h1>Behringer {name} - browser editor</h1>
+    <p>{description}</p>
+    <p>Official app: {appLabel}. Connection: WebUSB discovery + WebMIDI SysEx.</p>
+    {aliases.length > 0 && <p>Variants: {aliases.join(', ')}.</p>}
+    {functions.length > 0 && (
+      <ul>
+        {functions.map((f) => (
+          <li>{f}</li>
+        ))}
+      </ul>
+    )}
+  </section>
+  <App client:only="solid-js" initialSlug={entry.slug} />
+</Base>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00ff9c"/>
+      <stop offset="1" stop-color="#39ff14"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="#0b0f0d"/>
+  <rect x="24" y="24" width="464" height="464" rx="76" fill="none"
+        stroke="#17352a" stroke-width="8"/>
+  <!-- caret prompt -->
+  <g filter="url(#glow)" stroke="url(#g)" stroke-width="26"
+     stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <polyline points="120,150 190,200 120,250"/>
+    <line x1="230" y1="250" x2="330" y2="250"/>
+  </g>
+  <!-- synth waveform (square + sine hint) -->
+  <g filter="url(#glow)" stroke="url(#g)" stroke-width="20"
+     stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M96 380 h60 v-60 h70 v60 h70 v-60 h70 v60 h60"/>
+  </g>
+</svg>

@@ -1,0 +1,299 @@
+{
+  "slug": "2-xm",
+  "name": "2-XM",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "2-XM",
+      "aliases": ["2-XM"],
+      "pids": ["0x1255", "0x1256"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x1F"],
+      "deviceId": "0x00",
+      "cloudFamily": "2-xm",
+      "cloudModel": "2-xm",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "dropdown",
+          "title": "channel",
+          "control": "combobox",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "All"
+          ],
+          "sysex": {
+            "pkt": 14,
+            "subtype": 2
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 2,
+            "control": "combobox",
+            "inlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "All"
+            ],
+            "defaultin": 1,
+            "indexin": 0,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 2,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "default": 2,
+            "index": 1,
+            "title": "Pitch Bend Semitones:",
+            "min": 0,
+            "max": 12,
+            "pkt": 17
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 2,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 2,
+            "index": 2,
+            "title": "Key Priority: ",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "multitrigger",
+          "kind": "toggle",
+          "title": "Multi-Trigger",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 20,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "multitrigger",
+            "title": "Multi-Trigger",
+            "default": 0,
+            "index": 3,
+            "subtype": 0,
+            "pkt": 20
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "radio",
+          "title": "Duo Separate",
+          "control": "radiobutton",
+          "options": ["Off", "On"],
+          "default": 0,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 1,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "duoseparate",
+            "title": "Duo Separate",
+            "optionlabel": "Off,On",
+            "control": "radiobutton",
+            "default": 0,
+            "index": 4,
+            "pkt": 116,
+            "spkt": 1
+          }
+        },
+        {
+          "type": "splitvalue",
+          "kind": "spinbox",
+          "title": "Split Value",
+          "default": 60,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 2
+          },
+          "raw": {
+            "type": "splitvalue",
+            "default": 60,
+            "index": 5,
+            "title": "Split Value",
+            "pkt": 116,
+            "spkt": 2
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "radio",
+          "title": "Octave Shift",
+          "control": "radiobutton",
+          "options": ["Octave -1", "Octave 0", "Octave 1"],
+          "default": 0,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 3,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "octaveshift",
+            "title": "Octave Shift",
+            "optionlabel": "Octave -1,Octave 0,Octave 1",
+            "control": "radiobutton",
+            "default": 0,
+            "index": 6,
+            "pkt": 116,
+            "spkt": 3
+          }
+        },
+        {
+          "type": "kbveloutrange",
+          "kind": "dropdown",
+          "title": "Velocity Range",
+          "options": ["0V to 5V", "0V to 10V"],
+          "default": 0,
+          "sysex": {
+            "pkt": 48
+          },
+          "raw": {
+            "type": "kbveloutrange",
+            "title": "Velocity Range",
+            "default": 0,
+            "optionlabel": "0V to 5V,0V to 10V",
+            "index": 7,
+            "pkt": 48
+          }
+        },
+        {
+          "type": "midithrough",
+          "kind": "composite",
+          "title": "midithrough",
+          "sysex": {
+            "pkt": 40
+          },
+          "raw": {
+            "type": "midithrough",
+            "defaultm2u": 0,
+            "indexm2u": 8,
+            "defaultmst": 0,
+            "indexmst": 9,
+            "defaultu2m": 0,
+            "indexu2m": 10,
+            "pkt": 40
+          }
+        }
+      ]
+    },
+    {
+      "name": "PolyChain"
+    },
+    {
+      "name": "Calibration",
+      "cvchannels": [
+        {
+          "label": "CV 1",
+          "points": [
+            {
+              "name": "-2.0Vdc",
+              "value": 0
+            },
+            {
+              "name": "1.0Vdc",
+              "value": 1
+            },
+            {
+              "name": "4.0Vdc",
+              "value": 2
+            },
+            {
+              "name": "7.0Vdc",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "label": "CV 2",
+          "points": [
+            {
+              "name": "-2.0Vdc",
+              "value": 0
+            },
+            {
+              "name": "1.0Vdc",
+              "value": 1
+            },
+            {
+              "name": "4.0Vdc",
+              "value": 2
+            },
+            {
+              "name": "7.0Vdc",
+              "value": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

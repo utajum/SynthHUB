@@ -1,0 +1,320 @@
+{
+  "slug": "spice",
+  "name": "SPICE",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "SPICE",
+      "aliases": ["SPICE"],
+      "pids": ["0x1275", "0x1276"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x34"],
+      "deviceId": "0x00",
+      "cloudFamily": "spice",
+      "cloudModel": "spice",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 1,
+            "control": "spinbox",
+            "defaultin": 1,
+            "indexin": 0,
+            "defaultout": 1,
+            "indexout": 1,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 0,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 2
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 2,
+            "maxvalue": 12,
+            "default": 0,
+            "index": 2,
+            "title": "Pitch Bend Semitones:",
+            "min": 0,
+            "max": 12,
+            "pkt": 17
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 0,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 0,
+            "index": 3,
+            "title": "Key Priority: ",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "midiclockout",
+          "kind": "toggle",
+          "title": "MIDI Colock Out",
+          "default": 3,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 23,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "midiclockout",
+            "subtype": 1,
+            "default": 3,
+            "index": 4,
+            "title": "MIDI Colock Out:",
+            "pkt": 23
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "clock",
+          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG"],
+          "sysex": {
+            "subtype": 4
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG",
+            "indexsource": 6,
+            "subtype": 4,
+            "defaultrate": 0,
+            "indexrate": 5
+          }
+        },
+        {
+          "type": "rhythmlogic",
+          "kind": "spinbox",
+          "title": "Rhythm logic",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 6
+          },
+          "raw": {
+            "type": "rhythmlogic",
+            "index": 7,
+            "title": "Rhythm logic",
+            "pkt": 116,
+            "spkt": 6
+          }
+        },
+        {
+          "type": "glide",
+          "kind": "spinbox",
+          "title": "Glide",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116
+          },
+          "raw": {
+            "type": "glide",
+            "indexglide": 8,
+            "indexlegato": 9,
+            "title": "Glide",
+            "pkt": 116
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "slider",
+          "title": "Glide time",
+          "control": "slider",
+          "default": 0,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 7,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "glidetime",
+            "title": "Glide time",
+            "control": "slider",
+            "from": 0,
+            "to": 127,
+            "default": 0,
+            "index": 10,
+            "pkt": 116,
+            "spkt": 7
+          }
+        },
+        {
+          "type": "retrig",
+          "kind": "toggle",
+          "title": "Retring",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 20
+          },
+          "raw": {
+            "type": "retrig",
+            "default": 0,
+            "index": 11,
+            "title": "Retring",
+            "pkt": 20
+          }
+        },
+        {
+          "type": "midithrough",
+          "kind": "composite",
+          "title": "midithrough",
+          "sysex": {
+            "pkt": 40
+          },
+          "raw": {
+            "type": "midithrough",
+            "defaultm2u": 0,
+            "indexm2u": 12,
+            "defaultmst": 0,
+            "indexmst": 13,
+            "defaultu2m": 0,
+            "indexu2m": 14,
+            "pkt": 40
+          }
+        }
+      ]
+    },
+    {
+      "name": "Calibration",
+      "cvchannels": [
+        {
+          "label": "VCF",
+          "points": [
+            {
+              "name": "-0.2Vdc",
+              "value": 0
+            },
+            {
+              "name": "8.062Vdc",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "label": "VCA",
+          "points": [
+            {
+              "name": "-0.2Vdc",
+              "value": 0
+            },
+            {
+              "name": "8.161Vdc",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "label": "SEQ1",
+          "points": [
+            {
+              "name": "-5.000Vdc",
+              "value": 0
+            },
+            {
+              "name": "-2.000Vdc",
+              "value": 1
+            },
+            {
+              "name": "-1.000Vdc",
+              "value": 2
+            },
+            {
+              "name": "0.000Vdc",
+              "value": 3
+            },
+            {
+              "name": "1.000Vdc",
+              "value": 4
+            },
+            {
+              "name": "2.000Vdc",
+              "value": 5
+            },
+            {
+              "name": "5.000Vdc",
+              "value": 6
+            }
+          ]
+        },
+        {
+          "label": "SEQ2",
+          "points": [
+            {
+              "name": "-5.000Vdc",
+              "value": 0
+            },
+            {
+              "name": "-2.000Vdc",
+              "value": 1
+            },
+            {
+              "name": "-1.000Vdc",
+              "value": 2
+            },
+            {
+              "name": "0.000Vdc",
+              "value": 3
+            },
+            {
+              "name": "1.000Vdc",
+              "value": 4
+            },
+            {
+              "name": "2.000Vdc",
+              "value": 5
+            },
+            {
+              "name": "5.000Vdc",
+              "value": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "slug": "p0etu-perfect-pitch",
+  "name": "P0ETU, PERFECT PITCH",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "P0ETU, PERFECT PITCH",
+      "aliases": ["P0ETU, PERFECT PITCH"],
+      "pids": ["0x127c", "0x128d"],
+      "protocol": 2,
+      "modelId": ["0x00", "0x01", "0x33"],
+      "deviceId": "0x00",
+      "cloudFamily": "perfect-pitch",
+      "cloudModel": "perfect-pitch",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "Update",
+      "type": 3
+    }
+  ]
+}

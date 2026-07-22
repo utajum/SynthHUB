@@ -1,0 +1,23 @@
+{
+  "slug": "halos",
+  "name": "HALOS",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "HALOS",
+      "aliases": ["HALOS"],
+      "pids": ["0x12d6", "0x12d7"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x5F"],
+      "deviceId": "0x00",
+      "cloudFamily": "HALOS",
+      "cloudModel": "halos",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "Update"
+    }
+  ]
+}

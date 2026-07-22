@@ -1,0 +1,232 @@
+{
+  "slug": "pro-800",
+  "name": "PRO 800",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "PRO 800",
+      "aliases": ["PRO 800"],
+      "pids": ["0x125f", "0x1260"],
+      "protocol": 5,
+      "modelId": ["0x00", "0x01", "0x24"],
+      "deviceId": "0x00",
+      "cloudFamily": "pro800",
+      "cloudModel": "pro800",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "Update"
+    },
+    {
+      "name": "uCommonPreset"
+    },
+    {
+      "name": "General",
+      "type": 5
+    },
+    {
+      "name": "UNGeneral",
+      "type": 2,
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "dropdown",
+          "title": "channel",
+          "control": "combobox",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "All"
+          ],
+          "sysex": {
+            "subtype": 6
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 6,
+            "indexmode": 7,
+            "defaultmode": 0,
+            "control": "combobox",
+            "inlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "All"
+            ],
+            "defaultin": 1,
+            "indexin": 8,
+            "outlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "thru"
+            ],
+            "defaultout": 1,
+            "indexout": 10
+          }
+        },
+        {
+          "type": "transpose",
+          "kind": "spinbox",
+          "title": "transpose",
+          "default": 1,
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "transpose",
+            "default": 1,
+            "index": 37
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "pitchbend",
+          "default": 12,
+          "sysex": {
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "maxvalue": 24,
+            "default": 12,
+            "index": 24
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "keypriority",
+          "options": ["Low", "High", "Last"],
+          "default": 0,
+          "raw": {
+            "type": "keypriority",
+            "default": 0,
+            "index": 26
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "Sync In Setting",
+          "options": ["Internal", "MIDI", "USB", "Sync In"],
+          "sysex": {
+            "subtype": 0
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI,USB,Sync In",
+            "settingtitle": "Sync In Setting",
+            "subtype": 0,
+            "defaultsource": 0,
+            "indexsource": 11,
+            "defaultrate": 2,
+            "indexrate": 15,
+            "defaultpolarity": 1,
+            "indexpolarity": 28,
+            "polarity_label": "Active high,Active low,Both edges",
+            "rate_label": "24 PPQN,48 PPQN,96 PPQN,192 PPQN"
+          }
+        },
+        {
+          "type": "clockdivision_pro800",
+          "kind": "spinbox",
+          "title": "clockdivision_pro800",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "clockdivision_pro800",
+            "indexdivision": 25,
+            "clockdivision": "1/4T,1/4,1/8T,1/8,1/16T,1/16,1/32T,1/32"
+          }
+        },
+        {
+          "type": "midiclockout",
+          "kind": "toggle",
+          "title": "midiclockout",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "subtype": 2
+          },
+          "raw": {
+            "type": "midiclockout",
+            "subtype": 2,
+            "default": 0,
+            "index": 21
+          }
+        },
+        {
+          "type": "external_clock_ppqn",
+          "kind": "spinbox",
+          "title": "external_clock_ppqn",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "external_clock_ppqn",
+            "default": 0,
+            "index": 32
+          }
+        },
+        {
+          "type": "sync_in_enable",
+          "kind": "toggle",
+          "title": "sync_in_enable",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "raw": {
+            "type": "sync_in_enable",
+            "default": 0,
+            "index": 31
+          }
+        }
+      ]
+    }
+  ]
+}

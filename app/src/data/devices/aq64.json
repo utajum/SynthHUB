@@ -1,0 +1,19 @@
+{
+  "slug": "aq64",
+  "name": "AQ64",
+  "app": "controltribe",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "AQ64",
+      "aliases": ["AQ64"],
+      "pids": [],
+      "protocol": 1,
+      "modelId": ["0x01", "0x4f", "0x00"],
+      "deviceId": "0x01",
+      "cloudFamily": "aq64",
+      "cloudModel": "aq64"
+    }
+  ],
+  "functions": [{ "name": "Device Settings" }, { "name": "Update" }]
+}

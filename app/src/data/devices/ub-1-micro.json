@@ -1,0 +1,40 @@
+{
+  "slug": "ub-1-micro",
+  "name": "UB-1 MICRO",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "UB-1 MICRO",
+      "aliases": ["UB-1 MICRO"],
+      "pids": ["0x1271", "0x1272"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x31"],
+      "deviceId": "0x00",
+      "cloudFamily": "ub-1-micro",
+      "cloudModel": "ub-1-micro",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "dumpreceive",
+          "kind": "button",
+          "title": "dumpreceive",
+          "sysex": {
+            "subtype": 1
+          },
+          "raw": {
+            "type": "dumpreceive",
+            "subtype": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

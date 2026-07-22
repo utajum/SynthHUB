@@ -1,0 +1,186 @@
+{
+  "slug": "odyssey",
+  "name": "ODYSSEY",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "ODYSSEY",
+      "aliases": ["ODYSSEY", "PRO-ONE"],
+      "pids": ["0x121a", "0x121b"],
+      "protocol": 1,
+      "modelId": ["0x00", "0x01", "0x03"],
+      "deviceId": "0x00",
+      "cloudFamily": "odyssey",
+      "cloudModel": "odyssey",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 1,
+            "control": "spinbox",
+            "defaultin": 1,
+            "indexin": 2,
+            "defaultout": 1,
+            "indexout": 1,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "default": 12,
+            "index": 6,
+            "min": 0,
+            "max": 12,
+            "pkt": 17,
+            "title": "Pitch Bend Semitones"
+          }
+        },
+        {
+          "type": "velocity",
+          "kind": "composite",
+          "title": "Velocity On",
+          "sysex": {
+            "pkt": 16,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "velocity",
+            "subtype": 1,
+            "defaultonconstant": 1,
+            "indexonconstant": 3,
+            "defaultcurve": 0,
+            "indexcurve": 5,
+            "pkt": 16,
+            "title": "Velocity On"
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "clock",
+          "options": ["Internal", "MIDI DIN", "MIDI USB", "Auto"],
+          "sysex": {
+            "subtype": 2
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI DIN,MIDI USB,Auto",
+            "subtype": 2,
+            "defaultsource": 0,
+            "indexsource": 10
+          }
+        },
+        {
+          "type": "midiclockout",
+          "kind": "toggle",
+          "title": "MIDI Clock Out",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 23,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "midiclockout",
+            "subtype": 0,
+            "default": 0,
+            "index": 8,
+            "pkt": 23,
+            "title": "MIDI Clock Out"
+          }
+        },
+        {
+          "type": "sequencerautosync",
+          "kind": "toggle",
+          "title": "Sequencer Auto Sync",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 29
+          },
+          "raw": {
+            "type": "sequencerautosync",
+            "default": 0,
+            "index": 9,
+            "pkt": 29,
+            "title": "Sequencer Auto Sync"
+          }
+        },
+        {
+          "type": "accentthreshold",
+          "kind": "spinbox",
+          "title": "Accent Velocity Threshold",
+          "default": 96,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 28
+          },
+          "raw": {
+            "type": "accentthreshold",
+            "default": 96,
+            "index": 11,
+            "pkt": 28,
+            "title": "Accent Velocity Threshold"
+          }
+        },
+        {
+          "type": "midithrough",
+          "kind": "composite",
+          "title": "midithrough",
+          "sysex": {
+            "pkt": 40
+          },
+          "raw": {
+            "type": "midithrough",
+            "defaultm2u": 0,
+            "indexm2u": 12,
+            "defaultmst": 0,
+            "indexmst": 13,
+            "defaultu2m": 0,
+            "indexu2m": 14,
+            "pkt": 40
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sequencer",
+      "type": 0,
+      "numofkey": 61
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

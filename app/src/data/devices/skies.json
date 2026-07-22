@@ -1,0 +1,26 @@
+{
+  "slug": "skies",
+  "name": "SKIES",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "SKIES",
+      "aliases": ["SKIES"],
+      "pids": ["0x12c1", "0x12c2"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x5E"],
+      "deviceId": "0x00",
+      "cloudFamily": "skies",
+      "cloudModel": "skies",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

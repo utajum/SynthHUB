@@ -1,0 +1,139 @@
+{
+  "slug": "bm-11m",
+  "name": "BM-11M",
+  "app": "guitartribe",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "BM-11M",
+      "aliases": ["BM-11M"],
+      "pids": [],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x57"],
+      "deviceId": "0x00",
+      "cloudFamily": "bm11",
+      "cloudModel": "bm11",
+      "introImg": "BM-11M.png"
+    }
+  ],
+  "functions": [
+    {
+      "name": "FILTER",
+      "settings": [
+        {
+          "type": "cutoff",
+          "title": "Cutoff",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 17
+          },
+          "raw": {
+            "name": "Cutoff",
+            "type": "RotarySlider",
+            "controlvalue": [17],
+            "step": 0.1,
+            "valueratio": 12.7,
+            "keyarray": [
+              "20",
+              "50",
+              "100",
+              "150",
+              "250",
+              "500",
+              "1K",
+              "2K",
+              "5K",
+              "10K",
+              "12K"
+            ]
+          }
+        },
+        {
+          "type": "resonance",
+          "title": "Resonance",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 19
+          },
+          "raw": {
+            "name": "Resonance",
+            "type": "RotarySlider",
+            "controlvalue": [19],
+            "step": 0.1,
+            "valueratio": 12.7
+          }
+        }
+      ]
+    },
+    {
+      "name": "ENVELOPE",
+      "settings": [
+        {
+          "type": "amount",
+          "title": "Amount",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 16
+          },
+          "raw": {
+            "name": "Amount",
+            "type": "RotarySlider",
+            "controlvalue": [16],
+            "step": 0.1,
+            "valueratio": 12.7
+          }
+        },
+        {
+          "type": "mix",
+          "title": "Mix",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "name": "Mix",
+            "type": "RotarySlider",
+            "controlvalue": [18],
+            "step": 0.1,
+            "valueratio": 12.7
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Preset 1",
+      "values": {
+        "filter.cutoff.p17:value": 5.6,
+        "filter.resonance.p19:value": 9.6,
+        "envelope.amount.p16:value": 9.6,
+        "envelope.mix.p18:value": 4.9
+      }
+    },
+    {
+      "name": "Preset 2",
+      "values": {
+        "filter.cutoff.p17:value": 4.2,
+        "filter.resonance.p19:value": 8.3,
+        "envelope.amount.p16:value": 5.6,
+        "envelope.mix.p18:value": 7.7
+      }
+    }
+  ]
+}

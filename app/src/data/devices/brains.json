@@ -1,0 +1,28 @@
+{
+  "slug": "brains",
+  "name": "BRAINS",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "BRAINS",
+      "aliases": ["BRAINS"],
+      "pids": ["0x123c"],
+      "protocol": 3,
+      "modelId": ["", "", ""],
+      "deviceId": "",
+      "cloudFamily": "brains_rld",
+      "cloudModel": "brains_rld",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "Update",
+      "type": 2
+    },
+    {
+      "name": "Calibration",
+      "type": 1
+    }
+  ]
+}

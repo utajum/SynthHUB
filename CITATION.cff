@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-message: "If you use SynthHub-PWA in your work, please cite it as below."
-title: "SynthHub-PWA: Behringer synthesizer control over WebUSB / WebMIDI"
+message: "If you use SynthHub in your work, please cite it as below."
+title: "SynthHub: Behringer synthesizer control over WebUSB / WebMIDI"
 type: software
 authors:
   - alias: utajum

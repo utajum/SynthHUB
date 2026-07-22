@@ -1,0 +1,37 @@
+{
+  "slug": "ub-xa-16-desktop",
+  "name": "UB-Xa 16 Desktop",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "UB-Xa 16 Desktop",
+      "aliases": ["UB-Xa 16 Desktop", "UB-Xa 16 D"],
+      "pids": ["0x1281", "0x1282"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x3A"],
+      "deviceId": "0x7F",
+      "cloudFamily": "ub-xa16D",
+      "cloudModel": "ub-xa16D",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "type": 1
+    },
+    {
+      "name": "#Atrophy",
+      "type": 1
+    },
+    {
+      "name": "#Preset"
+    },
+    {
+      "name": "Librarian"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

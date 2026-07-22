@@ -1,0 +1,231 @@
+{
+  "slug": "kobol-expander",
+  "name": "KOBOL EXPANDER",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "KOBOL EXPANDER",
+      "aliases": ["KOBOL EXPANDER"],
+      "pids": ["0x1249", "0x124a"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x19"],
+      "deviceId": "0x00",
+      "cloudFamily": "kobol-expander",
+      "cloudModel": "kobol-expander",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "dropdown",
+          "title": "channel",
+          "control": "combobox",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "All"
+          ],
+          "sysex": {
+            "subtype": 2
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 2,
+            "control": "combobox",
+            "inlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "All"
+            ],
+            "defaultin": 1,
+            "indexin": 0,
+            "outlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16"
+            ],
+            "defaultout": 1
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend",
+          "min": 0,
+          "max": 12,
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "default": 12,
+            "index": 2,
+            "title": "Pitch Bend: ",
+            "min": 0,
+            "max": 12,
+            "pkt": 17
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 0,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 0,
+            "index": 3,
+            "title": "Key Priority: ",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "multitrigger",
+          "kind": "toggle",
+          "title": "Multi-Trigger",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": "20",
+            "subtype": 0
+          },
+          "raw": {
+            "type": "multitrigger",
+            "default": 0,
+            "index": 4,
+            "subtype": 0,
+            "title": "Multi-Trigger",
+            "pkt": "20"
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "radio",
+          "title": "Gate In Reverse",
+          "control": "radiobutton",
+          "options": ["Off", "On"],
+          "default": 0,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 0,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "gateinreverse",
+            "title": "Gate In Reverse",
+            "optionlabel": "Off,On",
+            "control": "radiobutton",
+            "default": 0,
+            "index": 5,
+            "pkt": 116,
+            "spkt": 0
+          }
+        },
+        {
+          "type": "clock_forward",
+          "kind": "toggle",
+          "title": "Clock Forward",
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 1
+          },
+          "raw": {
+            "type": "clock_forward",
+            "index": 6,
+            "title": "Clock Forward",
+            "pkt": 116,
+            "spkt": 1
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "radio",
+          "title": "Channel Message Forward",
+          "control": "radiobutton",
+          "options": ["Off", "On"],
+          "default": 0,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 2,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "channel_msg_forward",
+            "title": "Channel Message Forward",
+            "optionlabel": "Off,On",
+            "control": "radiobutton",
+            "default": 0,
+            "index": 1,
+            "pkt": 116,
+            "spkt": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "PolyChain"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

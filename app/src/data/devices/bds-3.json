@@ -1,0 +1,182 @@
+{
+  "slug": "bds-3",
+  "name": "BDS-3",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "BDS-3",
+      "aliases": ["BDS-3", "SDS-3"],
+      "pids": ["0x128b", "0x128c"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x3F"],
+      "deviceId": "0x00",
+      "cloudFamily": "bds-3",
+      "cloudModel": "bds-3",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 0,
+            "control": "spinbox",
+            "defaultmode": 0,
+            "indexmode": 0,
+            "defaultin": 1,
+            "indexin": 2,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "midivelocityout",
+          "kind": "toggle",
+          "title": "Velocity Control Loudness",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 24
+          },
+          "raw": {
+            "type": "midivelocityout",
+            "default": 0,
+            "index": 7,
+            "pkt": 24,
+            "title": "Velocity Control Loudness"
+          }
+        },
+        {
+          "type": "decaykill",
+          "kind": "toggle",
+          "title": "Decay Kill",
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 4
+          },
+          "raw": {
+            "type": "decaykill",
+            "index": 16,
+            "title": "Decay Kill",
+            "pkt": 116,
+            "spkt": 4
+          }
+        },
+        {
+          "type": "midithrough",
+          "kind": "composite",
+          "title": "Midi Through",
+          "sysex": {
+            "pkt": 40,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "midithrough",
+            "subtype": 1,
+            "defaultm2u": 0,
+            "indexm2u": 3,
+            "defaultu2m": 0,
+            "indexu2m": 4,
+            "pkt": 40,
+            "title": "Midi Through"
+          }
+        },
+        {
+          "type": "midiclockout",
+          "kind": "toggle",
+          "title": "MIDI Clock Out",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 23,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "midiclockout",
+            "subtype": 0,
+            "default": 0,
+            "index": 6,
+            "pkt": 23,
+            "title": "MIDI Clock Out"
+          }
+        }
+      ]
+    },
+    {
+      "name": "#Calibration",
+      "cvchannels": [
+        {
+          "label": "PWM 1",
+          "points": [
+            {
+              "name": "0.750Vdc",
+              "value": 0
+            },
+            {
+              "name": "4.750Vdc",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "label": "PWM 2",
+          "points": [
+            {
+              "name": "0.750Vdc",
+              "value": 0
+            },
+            {
+              "name": "4.750Vdc",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "label": "Decay time 1",
+          "points": [
+            {
+              "name": "2.000Vdc",
+              "value": 0
+            },
+            {
+              "name": "4.000Vdc",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "label": "Decay time 2",
+          "points": [
+            {
+              "name": "2.000Vdc",
+              "value": 0
+            },
+            {
+              "name": "4.000Vdc",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

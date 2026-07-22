@@ -1,0 +1,110 @@
+{
+  "slug": "pro-1",
+  "name": "PRO-1",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "PRO-1",
+      "aliases": ["PRO-1", "PRO-ONE"],
+      "pids": ["0x1220", "0x1221"],
+      "protocol": 1,
+      "modelId": ["0x00", "0x01", "0x08"],
+      "deviceId": "0x00",
+      "cloudFamily": "pro-1",
+      "cloudModel": "pro-1",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 2
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 2,
+            "control": "spinbox",
+            "defaultin": 1,
+            "indexin": 0,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "default": 12,
+            "index": 2,
+            "title": "Pitch Bend Semitones",
+            "pkt": 17,
+            "min": 0,
+            "max": 12
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 0,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 0,
+            "index": 3,
+            "title": "Key Priority ",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "midiclockout",
+          "kind": "toggle",
+          "title": "MIDI Colock Out",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 23,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "midiclockout",
+            "subtype": 0,
+            "default": 0,
+            "index": 4,
+            "title": "MIDI Colock Out",
+            "pkt": 23
+          }
+        }
+      ]
+    },
+    {
+      "name": "PolyChain"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

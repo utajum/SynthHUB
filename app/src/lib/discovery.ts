@@ -89,8 +89,9 @@ export function discover(
     return d;
   };
 
-  // MIDI inputs
+  // MIDI inputs (virtual in-app ports are never hardware - skip them)
   for (const p of inputs) {
+    if (p.id.startsWith('virtual:')) continue;
     const m = matchMidiName(p.name);
     if (!m) continue;
     const d = ensure(m.slug, m.variant, m.protocol);
@@ -100,6 +101,7 @@ export function discover(
   }
   // MIDI outputs
   for (const p of outputs) {
+    if (p.id.startsWith('virtual:')) continue;
     const m = matchMidiName(p.name);
     if (!m) continue;
     const d = ensure(m.slug, m.variant, m.protocol);

@@ -1,0 +1,24 @@
+{
+  "slug": "vocoder-vc16",
+  "name": "VOCODER_VC16",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "VOCODER_VC16",
+      "aliases": ["VOCODER_VC16"],
+      "pids": ["0x12bf", "0x12c0"],
+      "protocol": 2,
+      "modelId": ["0x00", "0x01", "0x60"],
+      "deviceId": "0x00",
+      "cloudFamily": "vc16",
+      "cloudModel": "vc16",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "Update",
+      "type": 3
+    }
+  ]
+}

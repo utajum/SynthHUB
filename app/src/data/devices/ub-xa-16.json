@@ -1,0 +1,37 @@
+{
+  "slug": "ub-xa-16",
+  "name": "UB-Xa 16",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "UB-Xa 16",
+      "aliases": ["UB-Xa 16"],
+      "pids": ["0x125b", "0x125c"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x21"],
+      "deviceId": "0x7F",
+      "cloudFamily": "ub-xa16",
+      "cloudModel": "ub-xa16",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "type": 1
+    },
+    {
+      "name": "#Atrophy",
+      "type": 1
+    },
+    {
+      "name": "#Preset"
+    },
+    {
+      "name": "Librarian"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

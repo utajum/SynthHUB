@@ -1,0 +1,94 @@
+{
+  "slug": "rhythm-designer-rd-6",
+  "name": "RHYTHM DESIGNER RD-6",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "RHYTHM DESIGNER RD-6",
+      "aliases": ["RHYTHM DESIGNER RD-6"],
+      "pids": ["0x122c", "0x122d"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x0D"],
+      "deviceId": "0x00",
+      "cloudFamily": "rd6",
+      "cloudModel": "rd6",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 1,
+            "control": "spinbox",
+            "defaultin": 1,
+            "indexin": 1,
+            "defaultout": 1,
+            "indexout": 0,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "clock",
+          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG"],
+          "sysex": {
+            "subtype": 0
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG",
+            "subtype": 0,
+            "defaultsource": 0,
+            "indexsource": 4,
+            "defaultrate": 1,
+            "indexrate": 3,
+            "defaultpolarity": 1,
+            "indexpolarity": 2
+          }
+        },
+        {
+          "type": "accentthreshold",
+          "kind": "spinbox",
+          "title": "Accent Velocity Threshold",
+          "default": 96,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 28
+          },
+          "raw": {
+            "type": "accentthreshold",
+            "title": "Accent Velocity Threshold",
+            "default": 96,
+            "index": 5,
+            "pkt": 28
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sequencer",
+      "type": 3,
+      "supportdump": true,
+      "lengthlabel": "LAST STEP"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

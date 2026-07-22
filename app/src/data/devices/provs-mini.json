@@ -1,0 +1,41 @@
+{
+  "slug": "provs-mini",
+  "name": "PROVS-MINI",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "PROVS-MINI",
+      "aliases": ["PROVS-MINI"],
+      "pids": ["0x124b", "0x124c"],
+      "protocol": 2,
+      "modelId": ["0x00", "0x01", "0x33"],
+      "deviceId": "0x00",
+      "cloudFamily": "provs-mini",
+      "cloudModel": "provs-mini",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "dumpreceive",
+          "kind": "button",
+          "title": "dumpreceive",
+          "sysex": {
+            "subtype": 0
+          },
+          "raw": {
+            "type": "dumpreceive",
+            "subtype": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update",
+      "type": 3
+    }
+  ]
+}

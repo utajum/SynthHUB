@@ -1,0 +1,23 @@
+{
+  "slug": "solina-string-ensemble",
+  "name": "SOLINA STRING ENSEMBLE",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "SOLINA STRING ENSEMBLE",
+      "aliases": ["SOLINA"],
+      "pids": ["0x1245", "0x1246"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x1B"],
+      "deviceId": "0x00",
+      "cloudFamily": "solina",
+      "cloudModel": "solina",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "Update"
+    }
+  ]
+}

@@ -1,0 +1,387 @@
+{
+  "slug": "bm-15m",
+  "name": "BM-15M",
+  "app": "guitartribe",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "BM-15M",
+      "aliases": ["BM-15M"],
+      "pids": [],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x59"],
+      "deviceId": "0x00",
+      "cloudFamily": "bm15",
+      "cloudModel": "bm15",
+      "introImg": "BM-15M.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "drive",
+          "title": "Drive",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 2
+          },
+          "raw": {
+            "name": "Drive",
+            "type": "RotarySlider",
+            "step": 0.1,
+            "valueratio": 12.7,
+            "controlvalue": [2]
+          }
+        },
+        {
+          "type": "output",
+          "title": "Output",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 7
+          },
+          "raw": {
+            "name": "Output",
+            "type": "RotarySlider",
+            "step": 0.1,
+            "valueratio": 12.7,
+            "controlvalue": [7]
+          }
+        },
+        {
+          "type": "bypass",
+          "title": "ByPass",
+          "kind": "toggle",
+          "options": ["Off", "On"],
+          "min": 0,
+          "max": 1,
+          "default": 0,
+          "sysex": {
+            "pkt": 87
+          },
+          "raw": {
+            "name": "ByPass",
+            "type": "KickButton",
+            "controlvalue": [87],
+            "valuearray": [63, 127],
+            "linkcomponent": "LED",
+            "linkvalue": [2, 5]
+          }
+        }
+      ]
+    },
+    {
+      "name": "FILTER",
+      "settings": [
+        {
+          "type": "110-200",
+          "title": "110/200",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 20
+          },
+          "raw": {
+            "name": "110/200",
+            "type": "VerticalSlider",
+            "step": 0.1,
+            "valueratio": 12.7,
+            "controlvalue": [20],
+            "ignorepreset": 1
+          }
+        },
+        {
+          "type": "160-300",
+          "title": "160/300",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 21
+          },
+          "raw": {
+            "name": "160/300",
+            "type": "VerticalSlider",
+            "step": 0.1,
+            "valueratio": 12.7,
+            "controlvalue": [21],
+            "ignorepreset": 1
+          }
+        },
+        {
+          "type": "240-450",
+          "title": "240/450",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 22
+          },
+          "raw": {
+            "name": "240/450",
+            "type": "VerticalSlider",
+            "step": 0.1,
+            "valueratio": 12.7,
+            "controlvalue": [22],
+            "ignorepreset": 1
+          }
+        },
+        {
+          "type": "350-675",
+          "title": "350/675",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 23
+          },
+          "raw": {
+            "name": "350/675",
+            "type": "VerticalSlider",
+            "step": 0.1,
+            "valueratio": 12.7,
+            "controlvalue": [23],
+            "ignorepreset": 1
+          }
+        },
+        {
+          "type": "525-1k",
+          "title": "525/1k",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 24
+          },
+          "raw": {
+            "name": "525/1k",
+            "type": "VerticalSlider",
+            "step": 0.1,
+            "valueratio": 12.7,
+            "controlvalue": [24],
+            "ignorepreset": 1
+          }
+        },
+        {
+          "type": "775-1-5k",
+          "title": "775/1.5k",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 25
+          },
+          "raw": {
+            "name": "775/1.5k",
+            "type": "VerticalSlider",
+            "step": 0.1,
+            "valueratio": 12.7,
+            "controlvalue": [25],
+            "ignorepreset": 1
+          }
+        },
+        {
+          "type": "1-2k-2-2k",
+          "title": "1.2k/2.2k",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 26
+          },
+          "raw": {
+            "name": "1.2k/2.2k",
+            "type": "VerticalSlider",
+            "step": 0.1,
+            "valueratio": 12.7,
+            "controlvalue": [26],
+            "ignorepreset": 1
+          }
+        },
+        {
+          "type": "1-8k-3-4k",
+          "title": "1.8k/3.4k",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 27
+          },
+          "raw": {
+            "name": "1.8k/3.4k",
+            "type": "VerticalSlider",
+            "step": 0.1,
+            "valueratio": 12.7,
+            "controlvalue": [27],
+            "ignorepreset": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "ANIMATION",
+      "settings": [
+        {
+          "type": "lfo",
+          "title": "LFO",
+          "kind": "toggle",
+          "options": ["Off", "On"],
+          "min": 0,
+          "max": 1,
+          "default": 0,
+          "sysex": {
+            "pkt": 85
+          },
+          "raw": {
+            "name": "LFO",
+            "type": "Switch",
+            "controlvalue": [85],
+            "keyarray": ["Off", "On"],
+            "valuearray": [0, 127]
+          }
+        },
+        {
+          "type": "freq",
+          "title": "Freq",
+          "kind": "toggle",
+          "options": ["Bass", "Mid"],
+          "min": 0,
+          "max": 1,
+          "default": 0,
+          "sysex": {
+            "pkt": 86
+          },
+          "raw": {
+            "name": "Freq",
+            "type": "Switch",
+            "controlvalue": [86],
+            "keyarray": ["Bass", "Mid"],
+            "valuearray": [0, 127]
+          }
+        },
+        {
+          "type": "envelope",
+          "title": "Envelope",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 1
+          },
+          "raw": {
+            "name": "Envelope",
+            "type": "RotarySlider",
+            "step": 0.1,
+            "valueratio": 12.7,
+            "controlvalue": [1]
+          }
+        },
+        {
+          "type": "mix",
+          "title": "Mix",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 8
+          },
+          "raw": {
+            "name": "Mix",
+            "type": "RotarySlider",
+            "step": 0.1,
+            "valueratio": 12.7,
+            "controlvalue": [8]
+          }
+        },
+        {
+          "type": "rate",
+          "title": "Rate",
+          "kind": "slider",
+          "min": 0,
+          "max": 10,
+          "default": 0,
+          "sysex": {
+            "pkt": 9
+          },
+          "raw": {
+            "name": "Rate",
+            "type": "RotarySlider",
+            "step": 0.1,
+            "valueratio": 12.7,
+            "controlvalue": [9]
+          }
+        },
+        {
+          "type": "pattern",
+          "title": "Pattern",
+          "kind": "spinbox",
+          "min": 1,
+          "max": 12,
+          "default": 1,
+          "sysex": {
+            "pkt": 91
+          },
+          "raw": {
+            "name": "Pattern",
+            "type": "RotarySlider",
+            "min": 1,
+            "max": 12,
+            "valueratio": 1,
+            "valueconstant": -1,
+            "controlvalue": [91]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Preset 1",
+      "values": {
+        "animation.lfo.p85:value": 0,
+        "animation.freq.p86:value": 0,
+        "animation.envelope.p1:value": 4.4,
+        "animation.mix.p8:value": 2.8,
+        "animation.rate.p9:value": 3.6,
+        "animation.pattern.p91:value": 12,
+        "general.drive.p2:value": 4.4,
+        "general.output.p7:value": 4
+      }
+    },
+    {
+      "name": "Preset 2",
+      "values": {
+        "animation.lfo.p85:value": 1,
+        "animation.freq.p86:value": 1,
+        "animation.envelope.p1:value": 6,
+        "animation.mix.p8:value": 7.2,
+        "animation.rate.p9:value": 5.2,
+        "animation.pattern.p91:value": 5,
+        "general.drive.p2:value": 6.8,
+        "general.output.p7:value": 8.4
+      }
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "slug": "toro",
+  "name": "Toro",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "Toro",
+      "aliases": ["Toro"],
+      "pids": ["0x1247", "0x1248"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x18"],
+      "deviceId": "0x00",
+      "cloudFamily": "toro",
+      "cloudModel": "toro",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 2
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 2,
+            "control": "spinbox",
+            "defaultin": 0,
+            "indexin": 0,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend",
+          "min": 0,
+          "max": 12,
+          "default": 2,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "default": 2,
+            "index": 1,
+            "title": "Pitch Bend: ",
+            "min": 0,
+            "max": 12,
+            "pkt": 17
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 2,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 2,
+            "index": 2,
+            "title": "Key Priority: ",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "spinbox",
+          "title": "LED Brightness",
+          "control": "spinbox",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 2,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "ledbrightness",
+            "title": "LED Brightness",
+            "control": "spinbox",
+            "from": 0,
+            "to": 127,
+            "default": 0,
+            "index": 3,
+            "pkt": 116,
+            "spkt": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "PolyChain"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

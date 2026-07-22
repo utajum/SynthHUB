@@ -1,0 +1,181 @@
+{
+  "slug": "cm1a",
+  "name": "CM1A",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "CM1A",
+      "aliases": ["CM1A"],
+      "pids": ["0x1234", "0x1235"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x10"],
+      "deviceId": "0x00",
+      "cloudFamily": "cm1a",
+      "cloudModel": "cm1a",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 2
+          },
+          "raw": {
+            "control": "spinbox",
+            "defaultin": 1,
+            "indexin": 1,
+            "subtype": 2,
+            "type": "channel",
+            "pkt": 14
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "default": 12,
+            "index": 0,
+            "subtype": 1,
+            "title": "Pitch Bend Semitones:",
+            "min": 0,
+            "max": 12,
+            "pkt": 17,
+            "type": "pitchbend"
+          }
+        },
+        {
+          "type": "cvsetmode",
+          "kind": "dropdown",
+          "title": "CV Mode",
+          "options": ["Mono", "Duo"],
+          "default": 0,
+          "raw": {
+            "default": 0,
+            "index": 3,
+            "optionlabel": "Mono,Duo",
+            "type": "cvsetmode",
+            "title": "CV Mode"
+          }
+        },
+        {
+          "type": "cvsetrange",
+          "kind": "dropdown",
+          "title": "CV Range",
+          "options": ["System 15/35/55", "System 100/2500"],
+          "default": 0,
+          "sysex": {
+            "pkt": 46
+          },
+          "raw": {
+            "default": 0,
+            "index": 2,
+            "optionlabel": "System 15/35/55,System 100/2500",
+            "type": "cvsetrange",
+            "pkt": 46,
+            "title": "CV Range"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Calibration",
+      "cvchannels": [
+        {
+          "label": "CV1",
+          "points": [
+            {
+              "name": "-6.290Vdc",
+              "value": 0
+            },
+            {
+              "name": "-2.290Vdc",
+              "value": 1
+            },
+            {
+              "name": "1.710Vdc",
+              "value": 2
+            },
+            {
+              "name": "5.710Vdc",
+              "value": 3
+            },
+            {
+              "name": "-2.000Vdc",
+              "value": 4
+            },
+            {
+              "name": "2.000Vdc",
+              "value": 5
+            },
+            {
+              "name": "6.000Vdc",
+              "value": 6
+            },
+            {
+              "name": "10.000Vdc",
+              "value": 7
+            }
+          ]
+        },
+        {
+          "label": "CV2",
+          "points": [
+            {
+              "name": "-6.290Vdc",
+              "value": 0
+            },
+            {
+              "name": "-2.290Vdc",
+              "value": 1
+            },
+            {
+              "name": "1.710Vdc",
+              "value": 2
+            },
+            {
+              "name": "5.710Vdc",
+              "value": 3
+            },
+            {
+              "name": "-2.000Vdc",
+              "value": 4
+            },
+            {
+              "name": "2.000Vdc",
+              "value": 5
+            },
+            {
+              "name": "6.000Vdc",
+              "value": 6
+            },
+            {
+              "name": "10.000Vdc",
+              "value": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

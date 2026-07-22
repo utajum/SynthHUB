@@ -1,12 +1,13 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import solid from '@astrojs/solid-js';
+import netlify from '@astrojs/netlify';
 import node from '@astrojs/node';
 import sitemap from '@astrojs/sitemap';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import { loadEnv } from 'vite';
 
-// SynthHub PWA is a browser-native PWA (WebMIDI / WebUSB) served as static pages
+// SynthHub is a browser-native PWA (WebMIDI / WebUSB) served as static pages
 // with Solid islands, plus one on-demand backend route (/api/firmware) that does
 // the Music Tribe cloud lookup server-side so credentials never reach the client.
 //
@@ -21,6 +22,8 @@ const cloud = loadEnv(
 for (const [k, v] of Object.entries(cloud))
   if (v && !process.env[k]) process.env[k] = v;
 
+const adapter = process.env.NETLIFY ? netlify() : node({ mode: 'standalone' });
+
 export default defineConfig({
   site: 'https://synth-hub.elevatech.xyz',
   output: 'static',
@@ -33,7 +36,5 @@ export default defineConfig({
     plugins: [basicSsl()],
   },
 
-  adapter: node({
-    mode: 'standalone',
-  }),
+  adapter,
 });

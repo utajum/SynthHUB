@@ -1,0 +1,191 @@
+{
+  "slug": "ms-5",
+  "name": "MS-5",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "MS-5",
+      "aliases": ["MS-5"],
+      "pids": ["0x1236", "0x1237"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x11"],
+      "deviceId": "0x00",
+      "cloudFamily": "ms-5",
+      "cloudModel": "ms-5",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "C_alibration",
+      "cvchannels": [
+        {
+          "label": "1-Bender",
+          "points": [
+            {
+              "name": "-0.332Vdc",
+              "value": 0
+            },
+            {
+              "name": "0.000Vdc",
+              "value": 1
+            },
+            {
+              "name": "0.332Vdc",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "label": "2-KeyBoard",
+          "points": [
+            {
+              "name": "0.000Vdc",
+              "value": 0
+            },
+            {
+              "name": "3.000Vdc",
+              "value": 1
+            },
+            {
+              "name": "6.000Vdc",
+              "value": 2
+            },
+            {
+              "name": "9.000Vdc",
+              "value": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Update"
+    },
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 1
+          },
+          "raw": {
+            "control": "spinbox",
+            "defaultin": 1,
+            "defaultout": 1,
+            "indexin": 1,
+            "indexout": 0,
+            "subtype": 1,
+            "type": "channel",
+            "pkt": 14
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 2,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "default": 2,
+            "index": 2,
+            "type": "keypriority",
+            "title": "Key Priority",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "multitrigger",
+          "kind": "toggle",
+          "title": "Multi-Trigger",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 20
+          },
+          "raw": {
+            "default": 0,
+            "index": 3,
+            "type": "multitrigger",
+            "title": "Multi-Trigger",
+            "pkt": 20
+          }
+        },
+        {
+          "type": "transpose",
+          "kind": "spinbox",
+          "title": "MIDI In Transpose",
+          "min": -12,
+          "max": 12,
+          "default": 0,
+          "sysex": {
+            "pkt": 15
+          },
+          "raw": {
+            "default": 0,
+            "index": 5,
+            "type": "transpose",
+            "title": "MIDI In Transpose",
+            "pkt": 15,
+            "min": -12,
+            "max": 12,
+            "offset": -12
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Midi Pitch Bend",
+          "min": 0,
+          "max": 12,
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "default": 12,
+            "index": 4,
+            "subtype": 1,
+            "type": "pitchbend",
+            "title": "Midi Pitch Bend",
+            "min": 0,
+            "max": 12,
+            "pkt": 17
+          }
+        },
+        {
+          "type": "velocity",
+          "kind": "composite",
+          "title": "velocity",
+          "sysex": {
+            "pkt": 16,
+            "subtype": 0
+          },
+          "raw": {
+            "defaultcurve": 1,
+            "defaultoffconstant": 0,
+            "defaultonconstant": 0,
+            "indexcurve": 8,
+            "indexoffconstant": 7,
+            "indexonconstant": 6,
+            "subtype": 0,
+            "type": "velocity",
+            "pkt": 16
+          }
+        }
+      ]
+    }
+  ]
+}

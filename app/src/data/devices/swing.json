@@ -1,0 +1,29 @@
+{
+  "slug": "swing",
+  "name": "Swing",
+  "app": "controltribe",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "Swing",
+      "aliases": ["Swing", "SWING"],
+      "pids": ["0x123d"],
+      "protocol": 1,
+      "modelId": ["0x7f", "0x42", "0x00"],
+      "deviceId": "0x00",
+      "cloudFamily": "swing",
+      "cloudModel": "swing"
+    }
+  ],
+  "functions": [
+    { "name": "Device Settings" },
+    {
+      "name": "Sequencer",
+      "type": 1,
+      "columns": 64,
+      "pattern_count": 8,
+      "patternlabel": "pattern"
+    },
+    { "name": "Update" }
+  ]
+}

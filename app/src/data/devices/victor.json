@@ -1,0 +1,41 @@
+{
+  "slug": "victor",
+  "name": "VICTOR",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "VICTOR",
+      "aliases": ["VICTOR"],
+      "pids": ["0x129f", "0x12a0"],
+      "protocol": 2,
+      "modelId": ["0x00", "0x01", "0x4c"],
+      "deviceId": "0x00",
+      "cloudFamily": "victor",
+      "cloudModel": "victor",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "program_dump",
+          "kind": "button",
+          "title": "program_dump",
+          "sysex": {
+            "subtype": 0
+          },
+          "raw": {
+            "type": "program_dump",
+            "subtype": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update",
+      "type": 3
+    }
+  ]
+}

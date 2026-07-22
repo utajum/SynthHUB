@@ -1,0 +1,726 @@
+[
+  {
+    "slug": "2-xm",
+    "name": "2-XM",
+    "pids": ["0x1255", "0x1256"],
+    "aliases": ["2-XM"],
+    "protocols": [3],
+    "functions": ["General", "PolyChain", "Calibration", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "2600",
+    "name": "2600",
+    "pids": ["0x1228", "0x1229", "0x1240", "0x1241", "0x125d", "0x125e"],
+    "aliases": ["2600", "2600 Blue Marvin", "2600 Gray Meanie"],
+    "protocols": [3],
+    "functions": ["General", "Calibration", "Update"],
+    "hasSequencer": false,
+    "variantCount": 3
+  },
+  {
+    "slug": "aks-mini",
+    "name": "AKS MINI",
+    "pids": ["0x1285", "0x1286"],
+    "aliases": ["AKS MINI"],
+    "protocols": [3],
+    "functions": ["General", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "bds-3",
+    "name": "BDS-3",
+    "pids": ["0x128b", "0x128c"],
+    "aliases": ["BDS-3", "SDS-3"],
+    "protocols": [3],
+    "functions": ["General", "#Calibration", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "behringer-wave",
+    "name": "Behringer Wave",
+    "pids": ["0x127f", "0x1280"],
+    "aliases": ["Behringer Wave", "wave"],
+    "protocols": [3],
+    "functions": [
+      "General",
+      "Wavetable",
+      "WavePreset",
+      "Calibration",
+      "Update"
+    ],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "bmx",
+    "name": "BMX",
+    "pids": ["0x12b1", "0x12b2"],
+    "aliases": ["BMX"],
+    "protocols": [3],
+    "functions": ["General", "Sequencer", "Sample", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "brains",
+    "name": "BRAINS",
+    "pids": ["0x123c"],
+    "aliases": ["BRAINS"],
+    "protocols": [3],
+    "functions": ["Update", "Calibration"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "brains-rld",
+    "name": "BRAINS_RLD",
+    "pids": ["0x12b3"],
+    "aliases": ["BRAINS_RLD"],
+    "protocols": [2],
+    "functions": ["General", "Update", "Calibration"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "cat",
+    "name": "CAT",
+    "pids": ["0x1224", "0x1225"],
+    "aliases": ["CAT"],
+    "protocols": [1],
+    "functions": ["General", "PolyChain", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "cm1a",
+    "name": "CM1A",
+    "pids": ["0x1234", "0x1235"],
+    "aliases": ["CM1A"],
+    "protocols": [3],
+    "functions": ["General", "Calibration", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "crave",
+    "name": "CRAVE",
+    "pids": ["0x121e", "0x121f"],
+    "aliases": ["CRAVE"],
+    "protocols": [1],
+    "functions": ["General", "Sequencer", "PolyChain", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "cs-mini",
+    "name": "CS MINI",
+    "pids": ["0x12ab", "0x12ac"],
+    "aliases": ["CS MINI"],
+    "protocols": [4],
+    "functions": ["General", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "cz-1-mini",
+    "name": "CZ-1 MINI",
+    "pids": ["0x12c5", "0x12c6"],
+    "aliases": ["CZ-1 MINI"],
+    "protocols": [2],
+    "functions": ["General", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "d-mini",
+    "name": "D MINI",
+    "pids": ["0x1278", "0x1279"],
+    "aliases": ["D MINI"],
+    "protocols": [4],
+    "functions": ["General", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "edge",
+    "name": "EDGE",
+    "pids": ["0x1259", "0x125a"],
+    "aliases": ["EDGE"],
+    "protocols": [3],
+    "functions": ["General", "PolyChain", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "four-lfo",
+    "name": "FOUR-LFO",
+    "pids": ["0x129d", "0x129e"],
+    "aliases": ["FOUR-LFO"],
+    "protocols": [3],
+    "functions": ["Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "go-midi-host",
+    "name": "GO MIDI HOST",
+    "pids": ["0x12cb"],
+    "aliases": ["GO MIDI HOST"],
+    "protocols": [3],
+    "functions": ["Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "grind",
+    "name": "GRIND",
+    "pids": ["0x12a7", "0x12a8"],
+    "aliases": ["GRIND"],
+    "protocols": [1],
+    "functions": ["General", "Sequencer", "PolyChain", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "halos",
+    "name": "HALOS",
+    "pids": ["0x12d6", "0x12d7"],
+    "aliases": ["HALOS"],
+    "protocols": [3],
+    "functions": ["Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "jn-80",
+    "name": "JN-80",
+    "pids": ["0x1251", "0x1252"],
+    "aliases": ["JN-80"],
+    "protocols": [5],
+    "functions": ["Update", "General", "#Librarian_JN80"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "jt-mini",
+    "name": "JT MINI",
+    "pids": ["0x124f", "0x1250"],
+    "aliases": ["JT MINI"],
+    "protocols": [3],
+    "functions": ["General", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "jt-2",
+    "name": "JT-2",
+    "pids": ["0x127a", "0x127b"],
+    "aliases": ["JT-2"],
+    "protocols": [3],
+    "functions": ["General", "PolyChain", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "jt-4000-micro",
+    "name": "JT-4000 MICRO",
+    "pids": ["0x127d", "0x127e", "0x12c7", "0x12c8"],
+    "aliases": ["JT-4000 MICRO", "JT-4000M MICRO", "SATURN-4K"],
+    "protocols": [2],
+    "functions": ["General", "Update"],
+    "hasSequencer": false,
+    "variantCount": 2
+  },
+  {
+    "slug": "k-2",
+    "name": "K-2",
+    "pids": ["0x121c", "0x121d"],
+    "aliases": ["K-2", "K20"],
+    "protocols": [1],
+    "functions": ["General", "PolyChain", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "k-2-mk-ii",
+    "name": "K-2 MK II",
+    "pids": ["0x1230", "0x1231"],
+    "aliases": ["K-2 MK II"],
+    "protocols": [1],
+    "functions": ["General", "PolyChain", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "kobol-expander",
+    "name": "KOBOL EXPANDER",
+    "pids": ["0x1249", "0x124a"],
+    "aliases": ["KOBOL EXPANDER"],
+    "protocols": [3],
+    "functions": ["General", "PolyChain", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "lm-drum",
+    "name": "LM DRUM",
+    "pids": ["0x1267", "0x1268"],
+    "aliases": ["LM DRUM"],
+    "protocols": [3],
+    "functions": ["General", "Sequencer", "Sample", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "model-15",
+    "name": "MODEL 15",
+    "pids": ["0x124d", "0x124e"],
+    "aliases": ["MODEL 15"],
+    "protocols": [3],
+    "functions": ["General", "PolyChain", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "model-d",
+    "name": "MODEL D",
+    "pids": ["0x1214", "0x1215"],
+    "aliases": ["MODEL D", "MODEL D Update"],
+    "protocols": [0],
+    "functions": ["General", "PolyChain", "Calibration", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "monopoly",
+    "name": "MONOPOLY",
+    "pids": ["0x1238", "0x1239"],
+    "aliases": ["MONOPOLY"],
+    "protocols": [3],
+    "functions": ["General", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "ms-1",
+    "name": "MS-1",
+    "pids": ["0x1218", "0x1219", "0x1232", "0x1233"],
+    "aliases": ["MS-1", "MS101"],
+    "protocols": [1],
+    "functions": ["General", "Sequencer", "Update"],
+    "hasSequencer": true,
+    "variantCount": 2
+  },
+  {
+    "slug": "ms-1-mk-ii",
+    "name": "MS-1 MK II",
+    "pids": ["0x122e", "0x122f"],
+    "aliases": ["MS-1 MK II"],
+    "protocols": [1],
+    "functions": ["General", "Sequencer", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "ms-5",
+    "name": "MS-5",
+    "pids": ["0x1236", "0x1237"],
+    "aliases": ["MS-5"],
+    "protocols": [3],
+    "functions": ["C_alibration", "Update", "General"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "odyssey",
+    "name": "ODYSSEY",
+    "pids": ["0x121a", "0x121b"],
+    "aliases": ["ODYSSEY", "PRO-ONE"],
+    "protocols": [1],
+    "functions": ["General", "Sequencer", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "p0etu-perfect-pitch",
+    "name": "P0ETU, PERFECT PITCH",
+    "pids": ["0x127c", "0x128d"],
+    "aliases": ["P0ETU, PERFECT PITCH"],
+    "protocols": [2],
+    "functions": ["Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "phara-o-mini",
+    "name": "PHARA-O MINI",
+    "pids": ["0x1263", "0x1264"],
+    "aliases": ["PHARA-O MINI"],
+    "protocols": [4],
+    "functions": ["General", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "poly-d",
+    "name": "POLY D",
+    "pids": ["0x122a", "0x122b"],
+    "aliases": ["POLY D"],
+    "protocols": [3],
+    "functions": ["General", "Sequencer", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "pro-800",
+    "name": "PRO 800",
+    "pids": ["0x125f", "0x1260"],
+    "aliases": ["PRO 800"],
+    "protocols": [5],
+    "functions": ["Update", "uCommonPreset", "General", "UNGeneral"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "pro-1",
+    "name": "PRO-1",
+    "pids": ["0x1220", "0x1221"],
+    "aliases": ["PRO-1", "PRO-ONE"],
+    "protocols": [1],
+    "functions": ["General", "PolyChain", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "proton",
+    "name": "PROTON",
+    "pids": ["0x1261", "0x1262"],
+    "aliases": ["PROTON"],
+    "protocols": [3],
+    "functions": ["General", "Update", "Calibration"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "provs-mini",
+    "name": "PROVS-MINI",
+    "pids": ["0x124b", "0x124c"],
+    "aliases": ["PROVS-MINI"],
+    "protocols": [2],
+    "functions": ["General", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "rd-8",
+    "name": "RD-8",
+    "pids": ["0x0030", "0x1254"],
+    "aliases": ["RD-8"],
+    "protocols": [3],
+    "functions": ["General", "Sequencer", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "rd-8-mkii",
+    "name": "RD-8 MKII",
+    "pids": ["0x0031", "0x1253"],
+    "aliases": ["RD-8 MKII"],
+    "protocols": [3],
+    "functions": ["General", "Sequencer", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "rd-9",
+    "name": "RD-9",
+    "pids": ["0x1242", "0x1243"],
+    "aliases": ["RD-9", "RHYTHM DESIGNER RD-9"],
+    "protocols": [3],
+    "functions": ["General", "Sequencer", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "rhythm-designer-rd-6",
+    "name": "RHYTHM DESIGNER RD-6",
+    "pids": ["0x122c", "0x122d"],
+    "aliases": ["RHYTHM DESIGNER RD-6"],
+    "protocols": [3],
+    "functions": ["General", "Sequencer", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "rhythm-designer-rd-78",
+    "name": "RHYTHM DESIGNER RD-78",
+    "pids": ["0x1287", "0x1288"],
+    "aliases": ["RHYTHM DESIGNER RD-78"],
+    "protocols": [3],
+    "functions": ["General", "Sequencer", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "rs-9",
+    "name": "RS-9",
+    "pids": ["0x1296", "0x1297"],
+    "aliases": ["RS-9"],
+    "protocols": [3],
+    "functions": ["General", "Sequencer", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "sds-3",
+    "name": "SDS-3",
+    "pids": ["0x128b", "0x128c"],
+    "aliases": ["SDS-3"],
+    "protocols": [3],
+    "functions": ["General", "#Calibration", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "skies",
+    "name": "SKIES",
+    "pids": ["0x12c1", "0x12c2"],
+    "aliases": ["SKIES"],
+    "protocols": [3],
+    "functions": ["General", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "solina-string-ensemble",
+    "name": "SOLINA STRING ENSEMBLE",
+    "pids": ["0x1245", "0x1246"],
+    "aliases": ["SOLINA", "SOLINA STRING ENSEMBLE"],
+    "protocols": [3],
+    "functions": ["Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "spice",
+    "name": "SPICE",
+    "pids": ["0x1275", "0x1276"],
+    "aliases": ["SPICE"],
+    "protocols": [3],
+    "functions": ["General", "Calibration", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "syncussion-sy-1",
+    "name": "SYNCUSSION SY-1",
+    "pids": ["0x1269", "0x1270"],
+    "aliases": ["SYNCUSSION SY-1"],
+    "protocols": [3],
+    "functions": ["General", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "td-3",
+    "name": "TD-3",
+    "pids": ["0x1226", "0x1227"],
+    "aliases": ["TD-3", "TD-303"],
+    "protocols": [1],
+    "functions": ["General", "Sequencer", "PolyChain", "Calibration", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "td-3-mo",
+    "name": "TD-3-MO",
+    "pids": ["0x1227", "0x1265", "0x1266"],
+    "aliases": ["TD-3", "TD-3-MO"],
+    "protocols": [1],
+    "functions": ["General", "Sequencer", "PolyChain", "Calibration", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "toro",
+    "name": "Toro",
+    "pids": ["0x1247", "0x1248"],
+    "aliases": ["Toro"],
+    "protocols": [3],
+    "functions": ["General", "PolyChain", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "ub-1-micro",
+    "name": "UB-1 MICRO",
+    "pids": ["0x1271", "0x1272"],
+    "aliases": ["UB-1 MICRO"],
+    "protocols": [3],
+    "functions": ["General", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "ub-xa-16",
+    "name": "UB-Xa 16",
+    "pids": ["0x125b", "0x125c"],
+    "aliases": ["UB-Xa 16"],
+    "protocols": [3],
+    "functions": ["General", "#Atrophy", "#Preset", "Librarian", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "ub-xa-16-desktop",
+    "name": "UB-Xa 16 Desktop",
+    "pids": ["0x1281", "0x1282"],
+    "aliases": ["UB-Xa 16 D", "UB-Xa 16 Desktop"],
+    "protocols": [3],
+    "functions": ["General", "#Atrophy", "#Preset", "Librarian", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "ub-xa-mini",
+    "name": "UB-Xa MINI",
+    "pids": ["0x12af", "0x12b0"],
+    "aliases": ["UB-Xa MINI"],
+    "protocols": [3],
+    "functions": ["General", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "victor",
+    "name": "VICTOR",
+    "pids": ["0x129f", "0x12a0"],
+    "aliases": ["VICTOR"],
+    "protocols": [2],
+    "functions": ["General", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "vocoder-vc340",
+    "name": "Vocoder-VC340",
+    "pids": ["0x1216", "0x1217"],
+    "aliases": ["Vocoder-VC340"],
+    "protocols": [1],
+    "functions": ["General", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "vocoder-vc16",
+    "name": "VOCODER_VC16",
+    "pids": ["0x12bf", "0x12c0"],
+    "aliases": ["VOCODER_VC16"],
+    "protocols": [2],
+    "functions": ["Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "wasp-deluxe",
+    "name": "WASP DELUXE",
+    "pids": ["0x1222", "0x1223"],
+    "aliases": ["WASP", "WASP DELUXE", "WASPDELUXE"],
+    "protocols": [1],
+    "functions": ["General", "PolyChain", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "swing",
+    "name": "Swing",
+    "app": "controltribe",
+    "pids": ["0x123d"],
+    "aliases": ["Swing", "SWING"],
+    "protocols": [1],
+    "functions": ["Device Settings", "Sequencer", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "1601",
+    "name": "1601 Sequencer",
+    "app": "controltribe",
+    "pids": [],
+    "aliases": ["1601", "1601 Sequencer", "S1601"],
+    "protocols": [1],
+    "functions": ["Device Settings", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "aq64",
+    "name": "AQ64",
+    "app": "controltribe",
+    "pids": [],
+    "aliases": ["AQ64"],
+    "protocols": [1],
+    "functions": ["Device Settings", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "bq10",
+    "name": "BQ10",
+    "app": "controltribe",
+    "pids": [],
+    "aliases": ["BQ10", "BQ-10"],
+    "protocols": [1],
+    "functions": ["Device Settings", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "bm-11m",
+    "name": "BM-11M",
+    "app": "guitartribe",
+    "pids": [],
+    "aliases": ["BM-11M"],
+    "protocols": [3],
+    "functions": ["FILTER", "ENVELOPE", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "bm-14m",
+    "name": "BM-14M",
+    "app": "guitartribe",
+    "pids": [],
+    "aliases": ["BM-14M"],
+    "protocols": [3],
+    "functions": ["General", "LFO", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "bm-15m",
+    "name": "BM-15M",
+    "app": "guitartribe",
+    "pids": [],
+    "aliases": ["BM-15M"],
+    "protocols": [3],
+    "functions": ["General", "FILTER", "ANIMATION", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "bm-18m",
+    "name": "BM-18M",
+    "app": "guitartribe",
+    "pids": [],
+    "aliases": ["BM-18M"],
+    "protocols": [3],
+    "functions": ["General", "LFO", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  }
+]

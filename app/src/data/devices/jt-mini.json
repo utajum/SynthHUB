@@ -1,0 +1,357 @@
+{
+  "slug": "jt-mini",
+  "name": "JT MINI",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "JT MINI",
+      "aliases": ["JT MINI"],
+      "pids": ["0x124f", "0x1250"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x1C"],
+      "deviceId": "0x00",
+      "cloudFamily": "jt-mini",
+      "cloudModel": "jt-mini",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "minipreset",
+          "kind": "spinbox",
+          "title": "Preset",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "subtype": "1"
+          },
+          "raw": {
+            "type": "minipreset",
+            "subtype": "1",
+            "pattern_count": 10,
+            "title": "Preset"
+          }
+        },
+        {
+          "type": "autopoweroff",
+          "kind": "toggle",
+          "title": "Auto Power Off",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 0
+          },
+          "raw": {
+            "type": "autopoweroff",
+            "default": 0,
+            "index": 2,
+            "title": "Auto Power Off",
+            "pkt": 116,
+            "spkt": 0
+          }
+        },
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 1,
+            "defaultin": 0,
+            "indexin": 0,
+            "defaultout": 0,
+            "indexout": 1,
+            "control": "spinbox",
+            "pkt": 14
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "Sync In/Out Setting",
+          "options": ["Internal", "MIDI", "USB", "TRIG"],
+          "sysex": {
+            "subtype": 6
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI,USB,TRIG",
+            "settingtitle": "Sync In/Out Setting",
+            "subtype": 6,
+            "defaultsource": 0,
+            "indexsource": 6,
+            "defaultrate": 0,
+            "indexrate": 7,
+            "defaultoutpolarity": 0,
+            "indexoutpolarity": 3,
+            "defaultinpolarity": 0,
+            "indexinpolarity": 4
+          }
+        },
+        {
+          "type": "midishortmessage",
+          "kind": "spinbox",
+          "title": "MIDI Short Message",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 2
+          },
+          "raw": {
+            "type": "midishortmessage",
+            "default": 0,
+            "index": 8,
+            "title": "MIDI Short Message",
+            "pkt": 116,
+            "spkt": 2
+          }
+        },
+        {
+          "type": "temporange",
+          "kind": "spinbox",
+          "title": "Tempo Range",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 1
+          },
+          "raw": {
+            "type": "temporange",
+            "range": "10 BPM ~ 600 BPM,56 BPM ~ 200 BPM",
+            "index": 5,
+            "default": 0,
+            "title": "Tempo Range",
+            "pkt": 116,
+            "spkt": 1
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 0,
+          "sysex": {
+            "pkt": 18,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "keypriority",
+            "subtype": 1,
+            "default": 0,
+            "index": 10,
+            "title": "Key Priority",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 0,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "maxvalue": 12,
+            "default": 0,
+            "index": 11,
+            "title": "Pitch Bend Semitones",
+            "min": 0,
+            "max": 12,
+            "pkt": 17
+          }
+        },
+        {
+          "type": "modulation_wheel",
+          "kind": "composite",
+          "title": "Modulation Wheel",
+          "sysex": {
+            "pkt": 116,
+            "spkt": 4,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "modulation_wheel",
+            "title": "Modulation Wheel",
+            "subtype": 1,
+            "index": 12,
+            "key_value": [
+              {
+                "value": "36",
+                "name": "VCO PWM MOD"
+              },
+              {
+                "value": "37",
+                "name": "LFO DELAY TIME"
+              },
+              {
+                "value": "39",
+                "name": "EG RELEASE/EG OFF"
+              },
+              {
+                "value": "42",
+                "name": "DETUNE"
+              },
+              {
+                "value": "44",
+                "name": "CUTOFF"
+              },
+              {
+                "value": "45",
+                "name": "VCF EG INT"
+              },
+              {
+                "value": "46",
+                "name": "LFO RATE"
+              },
+              {
+                "value": "47",
+                "name": "VCO PITCH MOD"
+              },
+              {
+                "value": "48",
+                "name": "VCF LFO MOD"
+              },
+              {
+                "value": "49",
+                "name": "EG ATTACK"
+              },
+              {
+                "value": "50",
+                "name": "EG DECAY"
+              },
+              {
+                "value": "51",
+                "name": "EG SUSTAIN"
+              }
+            ],
+            "pkt": 116,
+            "spkt": 4
+          }
+        },
+        {
+          "type": "newseq",
+          "kind": "spinbox",
+          "title": "Pattern Call",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 5,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "newseq",
+            "title": "Pattern Call",
+            "subtype": 0,
+            "default": 0,
+            "index": 13,
+            "pkt": 116,
+            "spkt": 5
+          }
+        },
+        {
+          "type": "bypass_gate",
+          "kind": "toggle",
+          "title": "Gate of VCA Bypass",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 6,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "bypass_gate",
+            "subtype": 0,
+            "default": 0,
+            "index": 14,
+            "title": "Gate of VCA Bypass",
+            "pkt": 116,
+            "spkt": 6
+          }
+        },
+        {
+          "type": "arptriggermode",
+          "kind": "spinbox",
+          "title": "Arp Trigger Mode",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 7,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "arptriggermode",
+            "subtype": 0,
+            "default": 0,
+            "index": 15,
+            "title": "Arp Trigger Mode",
+            "pkt": 116,
+            "spkt": 7
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "radio",
+          "title": "Note Input Timing",
+          "control": "radiobutton_ll",
+          "options": [
+            "Precise Timing (e.g. DAW playback)",
+            "Manual Playing (e.g. MIDI Keyboard)"
+          ],
+          "default": 0,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 8,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "din_mini_port",
+            "title": "Note Input Timing:",
+            "control": "radiobutton_ll",
+            "optionlabel": "Precise Timing (e.g. DAW playback),Manual Playing (e.g. MIDI Keyboard)",
+            "from": 0,
+            "to": 1,
+            "default": 0,
+            "index": 9,
+            "pkt": 116,
+            "spkt": 8
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update",
+      "type": 0
+    }
+  ]
+}

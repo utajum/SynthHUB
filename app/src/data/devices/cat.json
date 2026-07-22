@@ -1,0 +1,100 @@
+{
+  "slug": "cat",
+  "name": "CAT",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "CAT",
+      "aliases": ["CAT"],
+      "pids": ["0x1224", "0x1225"],
+      "protocol": 1,
+      "modelId": ["0x00", "0x01", "0x09"],
+      "deviceId": "0x00",
+      "cloudFamily": "cat",
+      "cloudModel": "cat",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 2
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 2,
+            "control": "spinbox",
+            "defaultin": 1,
+            "indexin": 0,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 2,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "default": 2,
+            "index": 1,
+            "title": "Pitch Bend Semitones:",
+            "min": 0,
+            "max": 12,
+            "pkt": 17
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "radio",
+          "title": "Duo Mode Note Hold",
+          "control": "radiobutton",
+          "options": ["Off", "On"],
+          "default": 1,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 1,
+            "subtype": 0
+          },
+          "minFirmware": "1.0.3",
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "polymodeselect",
+            "title": "Duo Mode Note Hold",
+            "optionlabel": "Off,On",
+            "control": "radiobutton",
+            "default": 1,
+            "index": 2,
+            "pkt": 116,
+            "spkt": 1,
+            "versionvisible": "1.0.3"
+          }
+        }
+      ]
+    },
+    {
+      "name": "PolyChain"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

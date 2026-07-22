@@ -1,0 +1,524 @@
+[
+  {
+    "alias": "SOLINA STRING ENSEMBLE",
+    "slug": "solina-string-ensemble",
+    "variant": "SOLINA STRING ENSEMBLE",
+    "protocol": 3
+  },
+  {
+    "alias": "RHYTHM DESIGNER RD-78",
+    "slug": "rhythm-designer-rd-78",
+    "variant": "RHYTHM DESIGNER RD-78",
+    "protocol": 3
+  },
+  {
+    "alias": "P0ETU, PERFECT PITCH",
+    "slug": "p0etu-perfect-pitch",
+    "variant": "P0ETU, PERFECT PITCH",
+    "protocol": 2
+  },
+  {
+    "alias": "RHYTHM DESIGNER RD-9",
+    "slug": "rd-9",
+    "variant": "RD-9",
+    "protocol": 3
+  },
+  {
+    "alias": "RHYTHM DESIGNER RD-6",
+    "slug": "rhythm-designer-rd-6",
+    "variant": "RHYTHM DESIGNER RD-6",
+    "protocol": 3
+  },
+  {
+    "alias": "2600 Blue Marvin",
+    "slug": "2600",
+    "variant": "2600 Blue Marvin",
+    "protocol": 3
+  },
+  {
+    "alias": "2600 Gray Meanie",
+    "slug": "2600",
+    "variant": "2600 Gray Meanie",
+    "protocol": 3
+  },
+  {
+    "alias": "UB-Xa 16 Desktop",
+    "slug": "ub-xa-16-desktop",
+    "variant": "UB-Xa 16 Desktop",
+    "protocol": 3
+  },
+  {
+    "alias": "SYNCUSSION SY-1",
+    "slug": "syncussion-sy-1",
+    "variant": "SYNCUSSION SY-1",
+    "protocol": 3
+  },
+  {
+    "alias": "Behringer Wave",
+    "slug": "behringer-wave",
+    "variant": "Behringer Wave",
+    "protocol": 3
+  },
+  {
+    "alias": "JT-4000M MICRO",
+    "slug": "jt-4000-micro",
+    "variant": "JT-4000M MICRO",
+    "protocol": 2
+  },
+  {
+    "alias": "KOBOL EXPANDER",
+    "slug": "kobol-expander",
+    "variant": "KOBOL EXPANDER",
+    "protocol": 3
+  },
+  {
+    "alias": "MODEL D Update",
+    "slug": "model-d",
+    "variant": "MODEL D",
+    "protocol": 0
+  },
+  {
+    "alias": "JT-4000 MICRO",
+    "slug": "jt-4000-micro",
+    "variant": "JT-4000 MICRO",
+    "protocol": 2
+  },
+  {
+    "alias": "Vocoder-VC340",
+    "slug": "vocoder-vc340",
+    "variant": "Vocoder-VC340",
+    "protocol": 1
+  },
+  {
+    "alias": "GO MIDI HOST",
+    "slug": "go-midi-host",
+    "variant": "GO MIDI HOST",
+    "protocol": 3
+  },
+  {
+    "alias": "PHARA-O MINI",
+    "slug": "phara-o-mini",
+    "variant": "PHARA-O MINI",
+    "protocol": 4
+  },
+  {
+    "alias": "VOCODER_VC16",
+    "slug": "vocoder-vc16",
+    "variant": "VOCODER_VC16",
+    "protocol": 2
+  },
+  {
+    "alias": "WASP DELUXE",
+    "slug": "wasp-deluxe",
+    "variant": "WASP DELUXE",
+    "protocol": 1
+  },
+  {
+    "alias": "BRAINS_RLD",
+    "slug": "brains-rld",
+    "variant": "BRAINS_RLD",
+    "protocol": 2
+  },
+  {
+    "alias": "MS-1 MK II",
+    "slug": "ms-1-mk-ii",
+    "variant": "MS-1 MK II",
+    "protocol": 1
+  },
+  {
+    "alias": "PROVS-MINI",
+    "slug": "provs-mini",
+    "variant": "PROVS-MINI",
+    "protocol": 2
+  },
+  {
+    "alias": "UB-1 MICRO",
+    "slug": "ub-1-micro",
+    "variant": "UB-1 MICRO",
+    "protocol": 3
+  },
+  {
+    "alias": "UB-Xa 16 D",
+    "slug": "ub-xa-16-desktop",
+    "variant": "UB-Xa 16 Desktop",
+    "protocol": 3
+  },
+  {
+    "alias": "UB-Xa MINI",
+    "slug": "ub-xa-mini",
+    "variant": "UB-Xa MINI",
+    "protocol": 3
+  },
+  {
+    "alias": "WASPDELUXE",
+    "slug": "wasp-deluxe",
+    "variant": "WASP DELUXE",
+    "protocol": 1
+  },
+  {
+    "alias": "CZ-1 MINI",
+    "slug": "cz-1-mini",
+    "variant": "CZ-1 MINI",
+    "protocol": 2
+  },
+  {
+    "alias": "SATURN-4K",
+    "slug": "jt-4000-micro",
+    "variant": "JT-4000 MICRO",
+    "protocol": 2
+  },
+  {
+    "alias": "K-2 MK II",
+    "slug": "k-2-mk-ii",
+    "variant": "K-2 MK II",
+    "protocol": 1
+  },
+  {
+    "alias": "RD-8 MKII",
+    "slug": "rd-8-mkii",
+    "variant": "RD-8 MKII",
+    "protocol": 3
+  },
+  {
+    "alias": "AKS MINI",
+    "slug": "aks-mini",
+    "variant": "AKS MINI",
+    "protocol": 3
+  },
+  {
+    "alias": "FOUR-LFO",
+    "slug": "four-lfo",
+    "variant": "FOUR-LFO",
+    "protocol": 3
+  },
+  {
+    "alias": "MODEL 15",
+    "slug": "model-15",
+    "variant": "MODEL 15",
+    "protocol": 3
+  },
+  {
+    "alias": "MONOPOLY",
+    "slug": "monopoly",
+    "variant": "MONOPOLY",
+    "protocol": 3
+  },
+  {
+    "alias": "UB-Xa 16",
+    "slug": "ub-xa-16",
+    "variant": "UB-Xa 16",
+    "protocol": 3
+  },
+  {
+    "alias": "CS MINI",
+    "slug": "cs-mini",
+    "variant": "CS MINI",
+    "protocol": 4
+  },
+  {
+    "alias": "JT MINI",
+    "slug": "jt-mini",
+    "variant": "JT MINI",
+    "protocol": 3
+  },
+  {
+    "alias": "LM DRUM",
+    "slug": "lm-drum",
+    "variant": "LM DRUM",
+    "protocol": 3
+  },
+  {
+    "alias": "MODEL D",
+    "slug": "model-d",
+    "variant": "MODEL D",
+    "protocol": 0
+  },
+  {
+    "alias": "ODYSSEY",
+    "slug": "odyssey",
+    "variant": "ODYSSEY",
+    "protocol": 1
+  },
+  {
+    "alias": "PRO-ONE",
+    "slug": "odyssey",
+    "variant": "ODYSSEY",
+    "protocol": 1
+  },
+  {
+    "alias": "PRO 800",
+    "slug": "pro-800",
+    "variant": "PRO 800",
+    "protocol": 5
+  },
+  {
+    "alias": "PRO-ONE",
+    "slug": "pro-1",
+    "variant": "PRO-1",
+    "protocol": 1
+  },
+  {
+    "alias": "TD-3-MO",
+    "slug": "td-3-mo",
+    "variant": "TD-3-MO",
+    "protocol": 1
+  },
+  {
+    "alias": "BRAINS",
+    "slug": "brains",
+    "variant": "BRAINS",
+    "protocol": 3
+  },
+  {
+    "alias": "D MINI",
+    "slug": "d-mini",
+    "variant": "D MINI",
+    "protocol": 4
+  },
+  {
+    "alias": "POLY D",
+    "slug": "poly-d",
+    "variant": "POLY D",
+    "protocol": 3
+  },
+  {
+    "alias": "PROTON",
+    "slug": "proton",
+    "variant": "PROTON",
+    "protocol": 3
+  },
+  {
+    "alias": "SOLINA",
+    "slug": "solina-string-ensemble",
+    "variant": "SOLINA STRING ENSEMBLE",
+    "protocol": 3
+  },
+  {
+    "alias": "TD-303",
+    "slug": "td-3",
+    "variant": "TD-3",
+    "protocol": 1
+  },
+  {
+    "alias": "VICTOR",
+    "slug": "victor",
+    "variant": "VICTOR",
+    "protocol": 2
+  },
+  {
+    "alias": "BDS-3",
+    "slug": "bds-3",
+    "variant": "BDS-3",
+    "protocol": 3
+  },
+  {
+    "alias": "SDS-3",
+    "slug": "bds-3",
+    "variant": "BDS-3",
+    "protocol": 3
+  },
+  {
+    "alias": "CRAVE",
+    "slug": "crave",
+    "variant": "CRAVE",
+    "protocol": 1
+  },
+  {
+    "alias": "GRIND",
+    "slug": "grind",
+    "variant": "GRIND",
+    "protocol": 1
+  },
+  {
+    "alias": "HALOS",
+    "slug": "halos",
+    "variant": "HALOS",
+    "protocol": 3
+  },
+  {
+    "alias": "JN-80",
+    "slug": "jn-80",
+    "variant": "JN-80",
+    "protocol": 5
+  },
+  {
+    "alias": "MS101",
+    "slug": "ms-1",
+    "variant": "MS101",
+    "protocol": 1
+  },
+  {
+    "alias": "PRO-1",
+    "slug": "pro-1",
+    "variant": "PRO-1",
+    "protocol": 1
+  },
+  {
+    "alias": "SDS-3",
+    "slug": "sds-3",
+    "variant": "SDS-3",
+    "protocol": 3
+  },
+  {
+    "alias": "SKIES",
+    "slug": "skies",
+    "variant": "SKIES",
+    "protocol": 3
+  },
+  {
+    "alias": "SPICE",
+    "slug": "spice",
+    "variant": "SPICE",
+    "protocol": 3
+  },
+  {
+    "alias": "2-XM",
+    "slug": "2-xm",
+    "variant": "2-XM",
+    "protocol": 3
+  },
+  {
+    "alias": "2600",
+    "slug": "2600",
+    "variant": "2600",
+    "protocol": 3
+  },
+  {
+    "alias": "wave",
+    "slug": "behringer-wave",
+    "variant": "Behringer Wave",
+    "protocol": 3
+  },
+  {
+    "alias": "CM1A",
+    "slug": "cm1a",
+    "variant": "CM1A",
+    "protocol": 3
+  },
+  {
+    "alias": "EDGE",
+    "slug": "edge",
+    "variant": "EDGE",
+    "protocol": 3
+  },
+  {
+    "alias": "JT-2",
+    "slug": "jt-2",
+    "variant": "JT-2",
+    "protocol": 3
+  },
+  {
+    "alias": "MS-1",
+    "slug": "ms-1",
+    "variant": "MS-1",
+    "protocol": 1
+  },
+  {
+    "alias": "MS-5",
+    "slug": "ms-5",
+    "variant": "MS-5",
+    "protocol": 3
+  },
+  {
+    "alias": "RD-8",
+    "slug": "rd-8",
+    "variant": "RD-8",
+    "protocol": 3
+  },
+  {
+    "alias": "RD-9",
+    "slug": "rd-9",
+    "variant": "RD-9",
+    "protocol": 3
+  },
+  {
+    "alias": "RS-9",
+    "slug": "rs-9",
+    "variant": "RS-9",
+    "protocol": 3
+  },
+  {
+    "alias": "TD-3",
+    "slug": "td-3",
+    "variant": "TD-3",
+    "protocol": 1
+  },
+  {
+    "alias": "TD-3",
+    "slug": "td-3-mo",
+    "variant": "TD-3-MO",
+    "protocol": 1
+  },
+  {
+    "alias": "Toro",
+    "slug": "toro",
+    "variant": "Toro",
+    "protocol": 3
+  },
+  {
+    "alias": "WASP",
+    "slug": "wasp-deluxe",
+    "variant": "WASP DELUXE",
+    "protocol": 1
+  },
+  {
+    "alias": "BMX",
+    "slug": "bmx",
+    "variant": "BMX",
+    "protocol": 3
+  },
+  {
+    "alias": "CAT",
+    "slug": "cat",
+    "variant": "CAT",
+    "protocol": 1
+  },
+  {
+    "alias": "K-2",
+    "slug": "k-2",
+    "variant": "K-2",
+    "protocol": 1
+  },
+  {
+    "alias": "K20",
+    "slug": "k-2",
+    "variant": "K-2",
+    "protocol": 1
+  },
+  {
+    "alias": "Swing",
+    "slug": "swing",
+    "variant": "Swing",
+    "protocol": 1
+  },
+  {
+    "alias": "SWING",
+    "slug": "swing",
+    "variant": "Swing",
+    "protocol": 1
+  },
+  {
+    "alias": "BM-11M",
+    "slug": "bm-11m",
+    "variant": "BM-11M",
+    "protocol": 3
+  },
+  {
+    "alias": "BM-14M",
+    "slug": "bm-14m",
+    "variant": "BM-14M",
+    "protocol": 3
+  },
+  {
+    "alias": "BM-15M",
+    "slug": "bm-15m",
+    "variant": "BM-15M",
+    "protocol": 3
+  },
+  {
+    "alias": "BM-18M",
+    "slug": "bm-18m",
+    "variant": "BM-18M",
+    "protocol": 3
+  }
+]

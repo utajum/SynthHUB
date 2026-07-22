@@ -1,0 +1,188 @@
+{
+  "slug": "model-d",
+  "name": "MODEL D",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "MODEL D",
+      "aliases": ["MODEL D", "MODEL D Update"],
+      "pids": ["0x1214", "0x1215"],
+      "protocol": 0,
+      "modelId": ["0x00", "0x01", "0x01"],
+      "deviceId": "0x00",
+      "cloudFamily": "model-d",
+      "cloudModel": "model-d",
+      "introImg": "intro.jpg"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "spinbox",
+          "title": "channel",
+          "control": "spinbox",
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 14,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 0,
+            "control": "spinbox",
+            "defaultmode": 0,
+            "indexmode": 1,
+            "defaultin": 1,
+            "indexin": 0,
+            "pkt": 14
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend",
+          "min": 0,
+          "max": 12,
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 0,
+            "defaultmode": 0,
+            "indexmode": 6,
+            "default": 12,
+            "index": 5,
+            "title": "Pitch Bend",
+            "pkt": 17,
+            "min": 0,
+            "max": 12
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 0,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 0,
+            "index": 2,
+            "title": "Key Priority",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "transpose",
+          "kind": "spinbox",
+          "title": "MIDI In Transpose",
+          "default": 1,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 15
+          },
+          "raw": {
+            "type": "transpose",
+            "default": 1,
+            "index": 7,
+            "title": "MIDI In Transpose",
+            "pkt": 15
+          }
+        },
+        {
+          "type": "multitrigger",
+          "kind": "toggle",
+          "title": "Multi Trigger",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 20
+          },
+          "raw": {
+            "type": "multitrigger",
+            "default": 0,
+            "index": 3,
+            "title": "Multi Trigger",
+            "pkt": 20
+          }
+        },
+        {
+          "type": "zerovolts",
+          "kind": "toggle",
+          "title": "MIDI Note Zero Volts",
+          "default": 36,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 22
+          },
+          "raw": {
+            "type": "zerovolts",
+            "default": 36,
+            "index": 8,
+            "title": "MIDI Note Zero Volts",
+            "pkt": 22
+          }
+        },
+        {
+          "type": "modulationcurve",
+          "kind": "spinbox",
+          "title": "Modulation Curve",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 21
+          },
+          "raw": {
+            "type": "modulationcurve",
+            "default": 0,
+            "index": 9,
+            "title": "Modulation Curve",
+            "pkt": 21
+          }
+        }
+      ]
+    },
+    {
+      "name": "PolyChain"
+    },
+    {
+      "name": "Calibration",
+      "cvchannels": [
+        {
+          "label": "",
+          "points": [
+            {
+              "name": "-2.500Vdc",
+              "value": 0
+            },
+            {
+              "name": "0.000Vdc",
+              "value": 1
+            },
+            {
+              "name": "6.500Vdc",
+              "value": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

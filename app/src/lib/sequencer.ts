@@ -452,8 +452,16 @@ export class Sequencer {
       const s = this.st.steps[step];
       if (s.on && Math.random() * 100 <= s.probability) {
         const vel = Math.min(127, s.velocity + (s.accent ? ACCENT_BOOST : 0));
-        this.fireRatchet(s.note, vel, s.ratchet, dur);
-        this.schedule(() => this.noteOff(s.note), Math.max(20, dur * s.gate));
+        // slide holds the note past the next step's note-on so mono synths
+        // (hardware and virtual) play legato and glide the pitch
+        const gate = s.slide ? Math.max(s.gate, 1.3) : s.gate;
+        if (s.ratchet > 1) {
+          this.fireRatchet(s.note, vel, s.ratchet, dur);
+        } else {
+          // single hit: the gate note-off rules (no fixed ratchet cutoff)
+          this.noteOn(s.note, vel);
+        }
+        this.schedule(() => this.noteOff(s.note), Math.max(20, dur * gate));
       }
     }
     this.emit();

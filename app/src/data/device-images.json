@@ -1,0 +1,432 @@
+{
+  "2-xm": {
+    "image": "/devices/2-xm.webp",
+    "variants": {
+      "2-XM": "/devices/2-xm.webp"
+    }
+  },
+  "2600": {
+    "image": "/devices/2600.webp",
+    "variants": {
+      "2600": "/devices/2600.webp",
+      "2600 Blue Marvin": "/devices/2600-blue-marvin.webp",
+      "2600 Gray Meanie": "/devices/2600-gray-meanie.webp"
+    }
+  },
+  "aks-mini": {
+    "image": "/devices/aks-mini.webp",
+    "variants": {
+      "AKS MINI": "/devices/aks-mini.webp"
+    }
+  },
+  "bds-3": {
+    "image": "/devices/bds-3.webp",
+    "variants": {
+      "BDS-3": "/devices/bds-3.webp"
+    }
+  },
+  "bmx": {
+    "image": "/devices/bmx.webp",
+    "variants": {
+      "BMX": "/devices/bmx.webp"
+    }
+  },
+  "brains": {
+    "image": "/devices/brains.webp",
+    "variants": {
+      "BRAINS": "/devices/brains.webp"
+    }
+  },
+  "brains-rld": {
+    "image": "/devices/brains-rld.webp",
+    "variants": {
+      "BRAINS_RLD": "/devices/brains-rld.webp"
+    }
+  },
+  "cat": {
+    "image": "/devices/cat.webp",
+    "variants": {
+      "CAT": "/devices/cat.webp"
+    }
+  },
+  "cm1a": {
+    "image": "/devices/cm1a.webp",
+    "variants": {
+      "CM1A": "/devices/cm1a.webp"
+    }
+  },
+  "crave": {
+    "image": "/devices/crave.webp",
+    "variants": {
+      "CRAVE": "/devices/crave.webp"
+    }
+  },
+  "cs-mini": {
+    "image": "/devices/cs-mini.webp",
+    "variants": {
+      "CS MINI": "/devices/cs-mini.webp"
+    }
+  },
+  "cz-1-mini": {
+    "image": "/devices/cz-1-mini.webp",
+    "variants": {
+      "CZ-1 MINI": "/devices/cz-1-mini.webp"
+    }
+  },
+  "d-mini": {
+    "image": "/devices/d-mini.webp",
+    "variants": {
+      "D MINI": "/devices/d-mini.webp"
+    }
+  },
+  "edge": {
+    "image": "/devices/edge.webp",
+    "variants": {
+      "EDGE": "/devices/edge.webp"
+    }
+  },
+  "four-lfo": {
+    "image": "/devices/four-lfo.webp",
+    "variants": {
+      "FOUR-LFO": "/devices/four-lfo.webp"
+    }
+  },
+  "go-midi-host": {
+    "image": "/devices/go-midi-host.webp",
+    "variants": {
+      "GO MIDI HOST": "/devices/go-midi-host.webp"
+    }
+  },
+  "grind": {
+    "image": "/devices/grind.webp",
+    "variants": {
+      "GRIND": "/devices/grind.webp"
+    }
+  },
+  "halos": {
+    "image": "/devices/halos.webp",
+    "variants": {
+      "HALOS": "/devices/halos.webp"
+    }
+  },
+  "jn-80": {
+    "image": "/devices/jn-80.webp",
+    "variants": {
+      "JN-80": "/devices/jn-80.webp"
+    }
+  },
+  "jt-2": {
+    "image": "/devices/jt-2.webp",
+    "variants": {
+      "JT-2": "/devices/jt-2.webp"
+    }
+  },
+  "jt-4000-micro": {
+    "image": "/devices/jt-4000-micro.webp",
+    "variants": {
+      "JT-4000 MICRO": "/devices/jt-4000-micro.webp",
+      "JT-4000M MICRO": "/devices/jt-4000m-micro.webp"
+    }
+  },
+  "jt-mini": {
+    "image": "/devices/jt-mini.webp",
+    "variants": {
+      "JT MINI": "/devices/jt-mini.webp"
+    }
+  },
+  "k-2": {
+    "image": "/devices/k-2.webp",
+    "variants": {
+      "K-2": "/devices/k-2.webp"
+    }
+  },
+  "k-2-mk-ii": {
+    "image": "/devices/k-2-mk-ii.webp",
+    "variants": {
+      "K-2 MK II": "/devices/k-2-mk-ii.webp"
+    }
+  },
+  "kobol-expander": {
+    "image": "/devices/kobol-expander.webp",
+    "variants": {
+      "KOBOL EXPANDER": "/devices/kobol-expander.webp"
+    }
+  },
+  "lm-drum": {
+    "image": "/devices/lm-drum.webp",
+    "variants": {
+      "LM DRUM": "/devices/lm-drum.webp"
+    }
+  },
+  "model-15": {
+    "image": "/devices/model-15.webp",
+    "variants": {
+      "MODEL 15": "/devices/model-15.webp"
+    }
+  },
+  "monopoly": {
+    "image": "/devices/monopoly.webp",
+    "variants": {
+      "MONOPOLY": "/devices/monopoly.webp"
+    }
+  },
+  "ms-1": {
+    "image": "/devices/ms-1.webp",
+    "variants": {
+      "MS-1": "/devices/ms-1.webp",
+      "MS101": "/devices/ms101.webp"
+    }
+  },
+  "ms-5": {
+    "image": "/devices/ms-5.webp",
+    "variants": {
+      "MS-5": "/devices/ms-5.webp"
+    }
+  },
+  "ms-1-mk-ii": {
+    "image": "/devices/ms-1-mk-ii.webp",
+    "variants": {
+      "MS-1 MK II": "/devices/ms-1-mk-ii.webp"
+    }
+  },
+  "model-d": {
+    "image": "/devices/model-d.webp",
+    "variants": {
+      "MODEL D": "/devices/model-d.webp"
+    }
+  },
+  "odyssey": {
+    "image": "/devices/odyssey.webp",
+    "variants": {
+      "ODYSSEY": "/devices/odyssey.webp"
+    }
+  },
+  "p0etu-perfect-pitch": {
+    "image": "/devices/p0etu-perfect-pitch.webp",
+    "variants": {
+      "P0ETU, PERFECT PITCH": "/devices/p0etu-perfect-pitch.webp"
+    }
+  },
+  "phara-o-mini": {
+    "image": "/devices/phara-o-mini.webp",
+    "variants": {
+      "PHARA-O MINI": "/devices/phara-o-mini.webp"
+    }
+  },
+  "pro-1": {
+    "image": "/devices/pro-1.webp",
+    "variants": {
+      "PRO-1": "/devices/pro-1.webp"
+    }
+  },
+  "pro-800": {
+    "image": "/devices/pro-800.webp",
+    "variants": {
+      "PRO 800": "/devices/pro-800.webp"
+    }
+  },
+  "proton": {
+    "image": "/devices/proton.webp",
+    "variants": {
+      "PROTON": "/devices/proton.webp"
+    }
+  },
+  "provs-mini": {
+    "image": "/devices/provs-mini.webp",
+    "variants": {
+      "PROVS-MINI": "/devices/provs-mini.webp"
+    }
+  },
+  "poly-d": {
+    "image": "/devices/poly-d.webp",
+    "variants": {
+      "POLY D": "/devices/poly-d.webp"
+    }
+  },
+  "rhythm-designer-rd-6": {
+    "image": "/devices/rhythm-designer-rd-6.webp",
+    "variants": {
+      "RHYTHM DESIGNER RD-6": "/devices/rhythm-designer-rd-6.webp"
+    }
+  },
+  "rhythm-designer-rd-78": {
+    "image": "/devices/rhythm-designer-rd-78.webp",
+    "variants": {
+      "RHYTHM DESIGNER RD-78": "/devices/rhythm-designer-rd-78.webp"
+    }
+  },
+  "rd-8": {
+    "image": "/devices/rd-8.webp",
+    "variants": {
+      "RD-8": "/devices/rd-8.webp"
+    }
+  },
+  "rd-8-mkii": {
+    "image": "/devices/rd-8-mkii.webp",
+    "variants": {
+      "RD-8 MKII": "/devices/rd-8-mkii.webp"
+    }
+  },
+  "rd-9": {
+    "image": "/devices/rd-9.webp",
+    "variants": {
+      "RD-9": "/devices/rd-9.webp"
+    }
+  },
+  "rs-9": {
+    "image": "/devices/rs-9.webp",
+    "variants": {
+      "RS-9": "/devices/rs-9.webp"
+    }
+  },
+  "sds-3": {
+    "image": "/devices/sds-3.webp",
+    "variants": {
+      "SDS-3": "/devices/sds-3.webp"
+    }
+  },
+  "skies": {
+    "image": "/devices/skies.webp",
+    "variants": {
+      "SKIES": "/devices/skies.webp"
+    }
+  },
+  "spice": {
+    "image": "/devices/spice.webp",
+    "variants": {
+      "SPICE": "/devices/spice.webp"
+    }
+  },
+  "syncussion-sy-1": {
+    "image": "/devices/syncussion-sy-1.webp",
+    "variants": {
+      "SYNCUSSION SY-1": "/devices/syncussion-sy-1.webp"
+    }
+  },
+  "solina-string-ensemble": {
+    "image": "/devices/solina-string-ensemble.webp",
+    "variants": {
+      "SOLINA STRING ENSEMBLE": "/devices/solina-string-ensemble.webp"
+    }
+  },
+  "td-3": {
+    "image": "/devices/td-3.webp",
+    "variants": {
+      "TD-3": "/devices/td-3.webp"
+    }
+  },
+  "td-3-mo": {
+    "image": "/devices/td-3-mo.webp",
+    "variants": {
+      "TD-3-MO": "/devices/td-3-mo.webp"
+    }
+  },
+  "toro": {
+    "image": "/devices/toro.webp",
+    "variants": {
+      "Toro": "/devices/toro.webp"
+    }
+  },
+  "ub-1-micro": {
+    "image": "/devices/ub-1-micro.webp",
+    "variants": {
+      "UB-1 MICRO": "/devices/ub-1-micro.webp"
+    }
+  },
+  "ub-xa-mini": {
+    "image": "/devices/ub-xa-mini.webp",
+    "variants": {
+      "UB-Xa MINI": "/devices/ub-xa-mini.webp"
+    }
+  },
+  "ub-xa-16": {
+    "image": "/devices/ub-xa-16.webp",
+    "variants": {
+      "UB-Xa 16": "/devices/ub-xa-16.webp"
+    }
+  },
+  "ub-xa-16-desktop": {
+    "image": "/devices/ub-xa-16-desktop.webp",
+    "variants": {
+      "UB-Xa 16 Desktop": "/devices/ub-xa-16-desktop.webp"
+    }
+  },
+  "vocoder-vc340": {
+    "image": "/devices/vocoder-vc340.webp",
+    "variants": {
+      "Vocoder-VC340": "/devices/vocoder-vc340.webp"
+    }
+  },
+  "victor": {
+    "image": "/devices/victor.webp",
+    "variants": {
+      "VICTOR": "/devices/victor.webp"
+    }
+  },
+  "vocoder-vc16": {
+    "image": "/devices/vocoder-vc16.webp",
+    "variants": {
+      "VOCODER_VC16": "/devices/vocoder-vc16.webp"
+    }
+  },
+  "wasp-deluxe": {
+    "image": "/devices/wasp-deluxe.webp",
+    "variants": {
+      "WASP DELUXE": "/devices/wasp-deluxe.webp"
+    }
+  },
+  "behringer-wave": {
+    "image": "/devices/behringer-wave.webp",
+    "variants": {
+      "Behringer Wave": "/devices/behringer-wave.webp"
+    }
+  },
+  "swing": {
+    "image": "/devices/swing.webp",
+    "variants": {
+      "Swing": "/devices/swing.webp"
+    }
+  },
+  "1601": {
+    "image": "/devices/1601.webp",
+    "variants": {
+      "1601 Sequencer": "/devices/1601.webp"
+    }
+  },
+  "aq64": {
+    "image": "/devices/aq64.webp",
+    "variants": {
+      "AQ64": "/devices/aq64.webp"
+    }
+  },
+  "bq10": {
+    "image": "/devices/bq10.webp",
+    "variants": {
+      "BQ10": "/devices/bq10.webp"
+    }
+  },
+  "bm-11m": {
+    "image": "/devices/bm-11m.webp",
+    "variants": {
+      "BM-11M": "/devices/bm-11m.webp"
+    }
+  },
+  "bm-14m": {
+    "image": "/devices/bm-14m.webp",
+    "variants": {
+      "BM-14M": "/devices/bm-14m.webp"
+    }
+  },
+  "bm-15m": {
+    "image": "/devices/bm-15m.webp",
+    "variants": {
+      "BM-15M": "/devices/bm-15m.webp"
+    }
+  },
+  "bm-18m": {
+    "image": "/devices/bm-18m.webp",
+    "variants": {
+      "BM-18M": "/devices/bm-18m.webp"
+    }
+  }
+}
