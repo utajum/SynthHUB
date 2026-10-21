@@ -40,11 +40,8 @@ test('ValueTree bytes match the JUCE stream layout', () => {
   // type\0 cint(3) | a\0 cint(5) 01 int32 | b\0 cint(4) 05 'hi'\0 |
   // c\0 cint(1+9) 07 [cint(1) cint(5) 01 int32] | cint(1) child K\0 00 00
   const want = [
-    0x53, 0, 1, 3,
-    0x61, 0, 1, 5, 1, 0x2c, 0x01, 0, 0,
-    0x62, 0, 1, 4, 5, 0x68, 0x69, 0,
-    0x63, 0, 1, 10, 7, 1, 1, 1, 5, 1, 1, 0, 0, 0,
-    1, 1, 0x4b, 0, 0, 0,
+    0x53, 0, 1, 3, 0x61, 0, 1, 5, 1, 0x2c, 0x01, 0, 0, 0x62, 0, 1, 4, 5, 0x68,
+    0x69, 0, 0x63, 0, 1, 10, 7, 1, 1, 1, 5, 1, 1, 0, 0, 0, 1, 1, 0x4b, 0, 0, 0,
   ];
   assert.deepEqual([...vtWrite(t)], want);
   assert.deepEqual(vtRead(Uint8Array.from(want)), t);
@@ -143,8 +140,19 @@ const swingControls = () => ctDevice('swing')!.controls;
 test('.swing project round-trips settings and all 8 sequences', () => {
   const settings: Record<number, number> = {};
   for (const c of swingControls()) settings[c.cmd] = c.default;
-  Object.assign(settings, { 0x16: 8, 0x07: 9, 0x21: 126, 0x13: 65, 0x2b: 61, 0x4f: 12, 0x57: 100, 0x0a: 85 });
-  const seqs = Array.from({ length: 8 }, (_, k) => (k === 7 ? sample() : swEmptySeq()));
+  Object.assign(settings, {
+    0x16: 8,
+    0x07: 9,
+    0x21: 126,
+    0x13: 65,
+    0x2b: 61,
+    0x4f: 12,
+    0x57: 100,
+    0x0a: 85,
+  });
+  const seqs = Array.from({ length: 8 }, (_, k) =>
+    k === 7 ? sample() : swEmptySeq(),
+  );
   const back = swProjectFromJson(swProjectToJson({ settings, seqs }));
   assert.deepEqual(back.settings, settings);
   assert.deepEqual(back.seqs, seqs);
@@ -228,7 +236,12 @@ test('.swing project: a ControlTribe save (text values, no extras) decodes', () 
 class FakeSwing implements MidiIO {
   seqs: SwSeq[] = Array.from({ length: 8 }, swEmptySeq);
   slots = this.seqs.map(() =>
-    Array.from({ length: 64 }, () => ({ ratchet: 0, n: [0, 0, 0, 0, 0, 0, 0, 0], v: [0, 0, 0, 0, 0, 0, 0, 0], l: [0, 0, 0, 0, 0, 0, 0, 0] })),
+    Array.from({ length: 64 }, () => ({
+      ratchet: 0,
+      n: [0, 0, 0, 0, 0, 0, 0, 0],
+      v: [0, 0, 0, 0, 0, 0, 0, 0],
+      l: [0, 0, 0, 0, 0, 0, 0, 0],
+    })),
   );
   settings: Record<number, number> = { 0x07: 1, 0x0a: 90, 0x16: 1 };
   sent: number[][] = [];
@@ -285,7 +298,8 @@ class FakeSwing implements MidiIO {
       case 0x72:
         return; // store: never answered
       default:
-        if (m.data.length === 0) return this.reply(m.cmd, this.settings[m.cmd] ?? 0);
+        if (m.data.length === 0)
+          return this.reply(m.cmd, this.settings[m.cmd] ?? 0);
         this.settings[m.cmd] = s;
     }
     this.reply(m.cmd);
@@ -309,7 +323,11 @@ test('SwingLink writes a sequence exactly, then is a no-op, then restores a virg
   assert.deepEqual(swSeqDiff(v0, await l.readSeq(2)), []);
   const full = seqWith((q) => {
     q.len = 1;
-    q.steps[0].notes = Array.from({ length: SW_POLY }, (_, i) => ({ note: 40 + i, vel: 90, len: 3 }));
+    q.steps[0].notes = Array.from({ length: SW_POLY }, (_, i) => ({
+      note: 40 + i,
+      vel: 90,
+      len: 3,
+    }));
   });
   await l.writeSeq(3, await l.readSeq(3), full);
   // the first add gives a virgin sequence gate 60 - re-asserted to 0
@@ -323,6 +341,10 @@ test('SwingLink settings: only changes are written, then an unacked store', asyn
   assert.deepEqual(cur, { 0x07: 1, 0x0a: 90, 0x16: 1 });
   dev.sent = [];
   assert.equal(await l.writeSettings({ 0x07: 5, 0x0a: 90, 0x16: 0 }, cur), 2);
-  assert.deepEqual(dev.sent, [[0x07, 5], [0x16, 0], [0x72, 0]]);
+  assert.deepEqual(dev.sent, [
+    [0x07, 5],
+    [0x16, 0],
+    [0x72, 0],
+  ]);
   assert.deepEqual(await l.readSettings([0x07, 0x16]), { 0x07: 5, 0x16: 0 });
 });

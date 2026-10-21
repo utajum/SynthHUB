@@ -8,8 +8,6 @@
 //   6D s gate   sequence gate %
 //   58 s st r   step ratchet 1-4 (per STEP - a per-note form does not exist:
 //   probed live, 4-arg 58 is ignored and 71 carries one ratchet byte)
-// Files: .swingseq (one sequence) and .swing (project), ControlTribe's
-// formats - codecs + the paced link in devices/_shared/swing.ts.
 //
 // An embedded mono engine powers PLAY / REC / KEYS / GEN / ROLL / LIB. The
 // engine is a monophonic projection (first note per step); engine edits are
@@ -81,7 +79,7 @@ export default function SwingSequencer(props: {
   const [seq, setSeq] = createSignal(0);
   const [len, setLen] = createSignal(16);
   const [swing, setSwing] = createSignal(50);
-  const [gate, setGate] = createSignal(0); // per-sequence gate %
+  const [gate, setGate] = createSignal(90);
   const [steps, setSteps] = createSignal<SwStep[]>(emptySteps());
   const [vel, setVel] = createSignal(127);
   const [nlen, setNlen] = createSignal(3); // app inserts length 3 by default
@@ -457,7 +455,9 @@ export default function SwingSequencer(props: {
     const l = swLink();
     if (!l) return log('swing: no MIDI output');
     if (busy() || reading())
-      return log(`swing: ${label} skipped - wait for the current read to finish`);
+      return log(
+        `swing: ${label} skipped - wait for the current read to finish`,
+      );
     engine.stop();
     setBusy(`${label}...`);
     setReading(true);
@@ -476,7 +476,8 @@ export default function SwingSequencer(props: {
     const cur = await l.readSeq(s);
     const n = await l.writeSeq(s, cur, next, { progress: pct(`seq ${s + 1}`) });
     const bad = swSeqDiff(next, await l.readSeq(s));
-    if (bad.length) throw new Error(`seq ${s + 1} read-back differs: ${bad.join(', ')}`);
+    if (bad.length)
+      throw new Error(`seq ${s + 1} read-back differs: ${bad.join(', ')}`);
     return n;
   };
   const readProject = async (l: SwingLink) => {
@@ -491,31 +492,52 @@ export default function SwingSequencer(props: {
   const exportSeq = () =>
     job('export', async (l) => {
       const q = await l.readSeq(seq(), { progress: pct('reading') });
-      saveFile(`swing-seq${seq() + 1}.${SW_SEQ_EXT}`, swSeqToFile(q), 'application/octet-stream');
+      saveFile(
+        `swing-seq${seq() + 1}.${SW_SEQ_EXT}`,
+        swSeqToFile(q),
+        'application/octet-stream',
+      );
       log(`swing: exported sequence ${seq() + 1}`);
     });
   const importSeq = (f: File) =>
     job('import', async (l) => {
       const q = swSeqFromFile(new Uint8Array(await f.arrayBuffer()));
-      if (!window.confirm(`Replace sequence ${seq() + 1} on the device with ${f.name}?`)) return;
+      if (
+        !window.confirm(
+          `Replace sequence ${seq() + 1} on the device with ${f.name}?`,
+        )
+      )
+        return;
       const n = await putSeq(l, seq(), q);
       log(
         `swing: ${f.name} -> sequence ${seq() + 1} (${n} frames, verified)` +
-          (q.dropped ? `, ${q.dropped} notes off the grid / over 8 per step dropped` : ''),
+          (q.dropped
+            ? `, ${q.dropped} notes off the grid / over 8 per step dropped`
+            : ''),
         'out',
       );
     });
   const saveProject = () =>
     job('save project', async (l) => {
-      saveFile(`swing-project.${SW_PROJECT_EXT}`, swProjectToJson(await readProject(l)));
+      saveFile(
+        `swing-project.${SW_PROJECT_EXT}`,
+        swProjectToJson(await readProject(l)),
+      );
       log('swing: saved project (settings + 8 sequences)');
     });
   const loadProject = (f: File) =>
     job('load project', async (l) => {
       const p = swProjectFromJson(await f.text());
-      if (!window.confirm(`Write ${f.name} (settings + all 8 sequences) to the device?`)) return;
+      if (
+        !window.confirm(
+          `Write ${f.name} (settings + all 8 sequences) to the device?`,
+        )
+      )
+        return;
       const cur = await l.readSettings(Object.keys(p.settings).map(Number));
-      const nSet = await l.writeSettings(p.settings, cur, { progress: pct('settings') });
+      const nSet = await l.writeSettings(p.settings, cur, {
+        progress: pct('settings'),
+      });
       let frames = 0;
       for (let s = 0; s < SW_SEQS; s++) frames += await putSeq(l, s, p.seqs[s]);
       log(
@@ -531,11 +553,7 @@ export default function SwingSequencer(props: {
     title: string;
     then: (f: File) => void;
   }) => (
-    <label
-      class="btn tiny ghost"
-      style={{ cursor: 'pointer' }}
-      title={p.title}
-    >
+    <label class="btn tiny ghost" style={{ cursor: 'pointer' }} title={p.title}>
       {p.label}
       <input
         type="file"
@@ -859,7 +877,7 @@ export default function SwingSequencer(props: {
             style={{ width: '3.6rem' }}
           />
         </label>
-        <label class="tiny dim" title="Gate of this sequence">
+        <label class="tiny dim">
           gate %{' '}
           <input
             type="number"

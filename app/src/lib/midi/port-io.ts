@@ -1,6 +1,6 @@
 // WebMIDI binding for the paced protocol links (devices/_shared/midi-io.ts).
-// Replies are taken from the input whose name matches the output's (KS37 and
-// BSP share one SysEx header); if no input matches, any input is accepted.
+// Replies are taken from the input whose name matches the output's; if no
+// input matches, any input is accepted.
 import { midi } from './webmidi';
 import type { MidiIO } from '../../devices/_shared/midi-io';
 

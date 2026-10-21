@@ -1,4 +1,4 @@
-// Byte-level port seen by the paced protocol links (Arturia, Swing). The app
+// Byte-level port seen by the paced protocol links (Swing). The app
 // binds it to WebMIDI (lib/midi/port-io.ts); tests bind fakes or raw ALSA.
 export interface MidiIO {
   send(bytes: Uint8Array): void;

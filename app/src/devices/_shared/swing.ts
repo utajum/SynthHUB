@@ -90,7 +90,10 @@ export function swSeqDiff(a: SwSeq, b: SwSeq): string[] {
     const x = a.steps[i] ?? { ratchet: 1, notes: [] };
     const y = b.steps[i] ?? { ratchet: 1, notes: [] };
     if (!sameNotes(x.notes, y.notes)) d.push(`step ${i + 1} notes`);
-    else if (x.notes.length && normRatchet(x.ratchet) !== normRatchet(y.ratchet))
+    else if (
+      x.notes.length &&
+      normRatchet(x.ratchet) !== normRatchet(y.ratchet)
+    )
       d.push(`step ${i + 1} ratchet ${x.ratchet} != ${y.ratchet}`);
   }
   return d;
@@ -101,7 +104,11 @@ export function swSeqDiff(a: SwSeq, b: SwSeq): string[] {
 // 69 vel - ControlTribe's order). Length goes after the notes (adds
 // auto-extend it), then swing and gate (an add to a virgin sequence sets
 // gate 60). 6B/6C/6D take 0 too, so a virgin sequence restores exactly.
-export function swSeqWriteFrames(s: number, cur: SwSeq, next: SwSeq): Uint8Array[] {
+export function swSeqWriteFrames(
+  s: number,
+  cur: SwSeq,
+  next: SwSeq,
+): Uint8Array[] {
   const fr: Uint8Array[] = [];
   let added = false;
   for (let st = 0; st < SW_STEPS; st++) {
@@ -144,7 +151,12 @@ export function swSeqToFile(q: SwSeq): Uint8Array {
   q.steps.forEach((st, i) =>
     st.notes.forEach((n) =>
       notes.push(
-        jArr([jInt(127 - n.note), jDouble(i), jDouble(n.vel / 127), jInt(n.len)]),
+        jArr([
+          jInt(127 - n.note),
+          jDouble(i),
+          jDouble(n.vel / 127),
+          jInt(n.len),
+        ]),
       ),
     ),
   );
@@ -164,7 +176,8 @@ export function swSeqToFile(q: SwSeq): Uint8Array {
 
 // add a note to a step (8 slots max); false when dropped
 function pushNote(steps: SwStep[], st: number, n: SwNote): boolean {
-  if (!(st >= 0 && st < SW_STEPS) || !(n.note >= 1 && n.note <= 127)) return false;
+  if (!(st >= 0 && st < SW_STEPS) || !(n.note >= 1 && n.note <= 127))
+    return false;
   if (steps[st].notes.length >= SW_POLY) return false;
   steps[st].notes.push(n);
   return true;
@@ -267,7 +280,15 @@ function settingOut(c: CtControl, v: number): string | number {
   return i >= 0 ? c.options[i] : v;
 }
 
-const NOTE_PC: Record<string, number> = { c: 0, d: 2, e: 4, f: 5, g: 7, a: 9, b: 11 };
+const NOTE_PC: Record<string, number> = {
+  c: 0,
+  d: 2,
+  e: 4,
+  f: 5,
+  g: 7,
+  a: 9,
+  b: 11,
+};
 function noteFromName(s: string): number | undefined {
   const m = /^([a-g])([#b]?)(-?\d+)$/i.exec(s.trim());
   if (!m) return undefined;
@@ -277,7 +298,8 @@ function noteFromName(s: string): number | undefined {
 }
 
 function settingIn(c: CtControl, raw: unknown): number | undefined {
-  if (typeof raw === 'number' && Number.isFinite(raw)) return clamp(raw, 0, 127);
+  if (typeof raw === 'number' && Number.isFinite(raw))
+    return clamp(raw, 0, 127);
   if (typeof raw !== 'string') return undefined;
   const key = raw.trim().toLowerCase();
   const i = c.options?.findIndex((o) => o.trim().toLowerCase() === key) ?? -1;
@@ -303,7 +325,8 @@ export function swProjectToJson(p: SwProject): string {
   }
   const extra: Record<string, number> = {};
   for (const [cmd, v] of Object.entries(p.settings))
-    if (!mapped.has(+cmd)) extra[`0x${(+cmd).toString(16).padStart(2, '0')}`] = v;
+    if (!mapped.has(+cmd))
+      extra[`0x${(+cmd).toString(16).padStart(2, '0')}`] = v;
   const seqSettings: Record<string, unknown> = {};
   p.seqs.forEach((q, k) => {
     const notes: unknown[] = [];
@@ -344,11 +367,14 @@ type Obj = Record<string, unknown>;
 const isObj = (v: unknown): v is Obj =>
   !!v && typeof v === 'object' && !Array.isArray(v);
 const num = (v: unknown): number | undefined => {
-  const n = typeof v === 'number' ? v : typeof v === 'string' ? parseFloat(v) : NaN;
+  const n =
+    typeof v === 'number' ? v : typeof v === 'string' ? parseFloat(v) : NaN;
   return Number.isFinite(n) ? n : undefined;
 };
 
-export function swProjectFromJson(text: string): SwProject & { dropped: number } {
+export function swProjectFromJson(
+  text: string,
+): SwProject & { dropped: number } {
   const j: unknown = JSON.parse(text);
   if (!isObj(j) || (j.model !== undefined && j.model !== 'Swing'))
     throw new Error('not a Swing project (.swing)');
@@ -376,7 +402,8 @@ export function swProjectFromJson(text: string): SwProject & { dropped: number }
       q.len = clamp(num(o['Swing-0048']) ?? 0, 0, SW_STEPS);
       q.swing = clamp(num(o['Swing-0049']) ?? 0, 0, 100);
       q.gate = clamp(num(o['Swing-0050']) ?? 0, 0, 100);
-      const notes = isObj(o.Grid) && Array.isArray(o.Grid.notes) ? o.Grid.notes : [];
+      const notes =
+        isObj(o.Grid) && Array.isArray(o.Grid.notes) ? o.Grid.notes : [];
       for (const n of notes) {
         if (!isObj(n)) continue;
         const attr = ATTR_NAMES.indexOf(String(n.attribute ?? ''));
@@ -401,7 +428,6 @@ export function swProjectFromJson(text: string): SwProject & { dropped: number }
 
 export interface SwOpts {
   progress?: Progress;
-  signal?: AbortSignal;
 }
 
 export class SwingLink {
@@ -416,7 +442,10 @@ export class SwingLink {
 
   // Send one frame; resolve with the payload (bytes after <cmd>) of the first
   // reply echoing <cmd> that satisfies `match`. Strictly serialised.
-  request(frame: Uint8Array, match: (p: number[]) => boolean): Promise<number[]> {
+  request(
+    frame: Uint8Array,
+    match: (p: number[]) => boolean,
+  ): Promise<number[]> {
     const cmd = frame[6];
     const run = () =>
       new Promise<number[]>((resolve, reject) => {
@@ -471,7 +500,6 @@ export class SwingLink {
     const [, len, gate, swing] = await this.query(0x6f, s);
     const steps: SwStep[] = [];
     for (let st = 0; st < SW_STEPS; st++) {
-      o.signal?.throwIfAborted();
       steps.push(swStepFromReply(await this.query(0x71, s, st)));
       o.progress?.(st + 1, SW_STEPS);
     }
@@ -479,20 +507,26 @@ export class SwingLink {
   }
 
   // rewrite sequence `s` (currently `cur`) as `next`; returns frames sent
-  async writeSeq(s: number, cur: SwSeq, next: SwSeq, o: SwOpts = {}): Promise<number> {
+  async writeSeq(
+    s: number,
+    cur: SwSeq,
+    next: SwSeq,
+    o: SwOpts = {},
+  ): Promise<number> {
     const frames = swSeqWriteFrames(s, cur, next);
     for (let i = 0; i < frames.length; i++) {
-      o.signal?.throwIfAborted();
       await this.write(frames[i]);
       o.progress?.(i + 1, frames.length);
     }
     return frames.length;
   }
 
-  async readSettings(cmds: number[], o: SwOpts = {}): Promise<Record<number, number>> {
+  async readSettings(
+    cmds: number[],
+    o: SwOpts = {},
+  ): Promise<Record<number, number>> {
     const out: Record<number, number> = {};
     for (let i = 0; i < cmds.length; i++) {
-      o.signal?.throwIfAborted();
       out[cmds[i]] = (await this.query(cmds[i]))[0];
       o.progress?.(i + 1, cmds.length);
     }
@@ -510,7 +544,6 @@ export class SwingLink {
       .map(Number)
       .filter((c) => next[c] !== cur[c]);
     for (let i = 0; i < todo.length; i++) {
-      o.signal?.throwIfAborted();
       await this.write(swFrame(todo[i], next[todo[i]]));
       o.progress?.(i + 1, todo.length);
     }
