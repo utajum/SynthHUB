@@ -5,6 +5,7 @@
 //   71 s st     -> 71 s st ratchet n[8] v[8] l[8]   step read (8-voice poly)
 //   68 s st n   add note   69 s st n vel   velocity   6E s st n len  length
 //   6A s st n   delete     6B s len        seq length 6C s swing     swing %
+//   6D s gate   sequence gate %
 //   58 s st r   step ratchet 1-4 (per STEP - a per-note form does not exist:
 //   probed live, 4-arg 58 is ignored and 71 carries one ratchet byte)
 //
@@ -22,7 +23,27 @@ import {
 } from 'solid-js';
 import { midi } from '../lib/midi/webmidi';
 import { actions, useApp } from '../lib/store-solid';
-import { buildCtSet } from '../devices/_shared/controltribe';
+import { portIO, saveFile } from '../lib/midi/port-io';
+import { ctDevice } from '../devices/_shared/controltribe';
+import {
+  SW_HDR as HDR,
+  SW_POLY as POLY,
+  SW_PROJECT_EXT,
+  SW_SEQ_EXT,
+  SW_SEQS,
+  SW_STEPS as STEPS,
+  SwingLink,
+  swEmptySteps as emptySteps,
+  swFrame,
+  swProjectFromJson,
+  swProjectToJson,
+  swSeqDiff,
+  swSeqFromFile,
+  swSeqToFile,
+  type SwNote,
+  type SwSeq,
+  type SwStep,
+} from '../devices/_shared/swing';
 import {
   Sequencer,
   defaultStep,
@@ -36,21 +57,9 @@ import GenerativeBar from './GenerativeBar';
 import PatternLibrary from './PatternLibrary';
 import PianoRollModal from './PianoRollModal';
 
-const HDR = [0xf0, 0x00, 0x20, 0x32, 0x7f, 0x42];
-const STEPS = 64;
-const POLY = 8; // hardware note slots per step
 // full MIDI range, highest row first (vertical scroll, no octave paging)
 const ALL_NOTES = Array.from({ length: 128 }, (_, i) => 127 - i);
 
-interface SwNote {
-  note: number;
-  vel: number;
-  len: number;
-}
-interface SwStep {
-  ratchet: number;
-  notes: SwNote[];
-}
 // selection: a step (for ratchet) and optionally one of its notes
 interface SwSel {
   step: number;
@@ -59,8 +68,6 @@ interface SwSel {
 
 const NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 const noteName = (n: number) => `${NAMES[n % 12]}${Math.floor(n / 12) - 2}`;
-const emptySteps = (): SwStep[] =>
-  Array.from({ length: STEPS }, () => ({ ratchet: 1, notes: [] }));
 
 // engine gate (0.1..2 steps) <-> device note length (1..127 steps)
 const gateToLen = (g: number) => Math.max(1, Math.min(127, Math.round(g)));
@@ -96,8 +103,7 @@ export default function SwingSequencer(props: {
 
   const out = () => props.outputId();
 
-  const frame = (...body: number[]) =>
-    Uint8Array.from([...HDR, ...body.map((b) => b & 0x7f), 0xf7]);
+  const frame = swFrame;
 
   const send = (bytes: Uint8Array) => {
     const o = out();
@@ -277,10 +283,11 @@ export default function SwingSequencer(props: {
       if (d.length < 8) return;
       for (let i = 0; i < 6; i++) if (d[i] !== HDR[i]) return;
       const cmd = d[6];
-      if (cmd === 0x0a && d.length >= 9) {
-        setGate(d[7]);
-      } else if (cmd === 0x6f && d.length >= 12 && d[7] === seq()) {
+      // file jobs read through the link and refresh the grid when done
+      if (busy()) return;
+      if (cmd === 0x6f && d.length >= 12 && d[7] === seq()) {
         setLen(d[8]); // 0 = virgin sequence
+        setGate(d[9]);
         setSwing(Math.max(50, d[10]));
         // during a read session the step reads follow the meta reply
         if (reading()) scheduleStepReads(d[7], d[8]);
@@ -300,12 +307,8 @@ export default function SwingSequencer(props: {
       }
     });
     onCleanup(off);
-    // query gate % and the current sequence shortly after mount
-    if (out())
-      setTimeout(() => {
-        send(frame(0x0a)); // gate % (query = no value byte)
-        readSeq(seq());
-      }, 300);
+    // read the current sequence shortly after mount
+    if (out()) setTimeout(() => readSeq(seq()), 300);
     const subs = [
       onCommand('seq:playstop', () => engine.toggle()),
       onCommand('seq:tempo-up', () =>
@@ -428,11 +431,143 @@ export default function SwingSequencer(props: {
     send(frame(0x6c, seq(), n));
   };
   const applyGate = (v: number) => {
+    if (reading()) return;
     const n = Math.max(10, Math.min(95, v | 0));
     setGate(n);
-    const o = out();
-    if (o) midi.send(o, buildCtSet('swing', 0x0a, n));
+    send(frame(0x6d, seq(), n));
   };
+
+  // ---- files: .swingseq (this sequence), .swing (project) ----
+  const [busy, setBusy] = createSignal('');
+  let link: { o: string; l: SwingLink } | undefined;
+  const swLink = () => {
+    const o = out();
+    if (!o) return undefined;
+    if (link?.o !== o) link = { o, l: new SwingLink(portIO(o)) };
+    return link.l;
+  };
+  const log = (text: string, dir: 'info' | 'out' = 'info') =>
+    actions().pushLog({ dir, text });
+  const pct = (label: string) => (i: number, n: number) =>
+    setBusy(`${label} ${Math.round((100 * i) / n)}%`);
+  // run a file job with the grid locked, then re-read the current sequence
+  const job = async (label: string, fn: (l: SwingLink) => Promise<void>) => {
+    const l = swLink();
+    if (!l) return log('swing: no MIDI output');
+    if (busy() || reading())
+      return log(
+        `swing: ${label} skipped - wait for the current read to finish`,
+      );
+    engine.stop();
+    setBusy(`${label}...`);
+    setReading(true);
+    try {
+      await fn(l);
+    } catch (e) {
+      log(`swing: ${label} failed - ${(e as Error).message}`);
+    } finally {
+      setBusy('');
+      setReading(false);
+      readSeq(seq());
+    }
+  };
+  // write `next` into sequence s and verify it by reading it back
+  const putSeq = async (l: SwingLink, s: number, next: SwSeq) => {
+    const cur = await l.readSeq(s);
+    const n = await l.writeSeq(s, cur, next, { progress: pct(`seq ${s + 1}`) });
+    const bad = swSeqDiff(next, await l.readSeq(s));
+    if (bad.length)
+      throw new Error(`seq ${s + 1} read-back differs: ${bad.join(', ')}`);
+    return n;
+  };
+  const readProject = async (l: SwingLink) => {
+    const cmds = (ctDevice('swing')?.controls ?? []).map((c) => c.cmd);
+    const settings = await l.readSettings(cmds, { progress: pct('settings') });
+    const seqs: SwSeq[] = [];
+    for (let s = 0; s < SW_SEQS; s++)
+      seqs.push(await l.readSeq(s, { progress: pct(`seq ${s + 1}`) }));
+    return { settings, seqs };
+  };
+
+  const exportSeq = () =>
+    job('export', async (l) => {
+      const q = await l.readSeq(seq(), { progress: pct('reading') });
+      saveFile(
+        `swing-seq${seq() + 1}.${SW_SEQ_EXT}`,
+        swSeqToFile(q),
+        'application/octet-stream',
+      );
+      log(`swing: exported sequence ${seq() + 1}`);
+    });
+  const importSeq = (f: File) =>
+    job('import', async (l) => {
+      const q = swSeqFromFile(new Uint8Array(await f.arrayBuffer()));
+      if (
+        !window.confirm(
+          `Replace sequence ${seq() + 1} on the device with ${f.name}?`,
+        )
+      )
+        return;
+      const n = await putSeq(l, seq(), q);
+      log(
+        `swing: ${f.name} -> sequence ${seq() + 1} (${n} frames, verified)` +
+          (q.dropped
+            ? `, ${q.dropped} notes off the grid / over 8 per step dropped`
+            : ''),
+        'out',
+      );
+    });
+  const saveProject = () =>
+    job('save project', async (l) => {
+      saveFile(
+        `swing-project.${SW_PROJECT_EXT}`,
+        swProjectToJson(await readProject(l)),
+      );
+      log('swing: saved project (settings + 8 sequences)');
+    });
+  const loadProject = (f: File) =>
+    job('load project', async (l) => {
+      const p = swProjectFromJson(await f.text());
+      if (
+        !window.confirm(
+          `Write ${f.name} (settings + all 8 sequences) to the device?`,
+        )
+      )
+        return;
+      const cur = await l.readSettings(Object.keys(p.settings).map(Number));
+      const nSet = await l.writeSettings(p.settings, cur, {
+        progress: pct('settings'),
+      });
+      let frames = 0;
+      for (let s = 0; s < SW_SEQS; s++) frames += await putSeq(l, s, p.seqs[s]);
+      log(
+        `swing: loaded ${f.name} - ${nSet} settings changed, 8 sequences written (${frames} frames, verified)` +
+          (p.dropped ? `, ${p.dropped} notes dropped` : ''),
+        'out',
+      );
+    });
+  // a button-styled file picker
+  const FileButton = (p: {
+    label: string;
+    accept: string;
+    title: string;
+    then: (f: File) => void;
+  }) => (
+    <label class="btn tiny ghost" style={{ cursor: 'pointer' }} title={p.title}>
+      {p.label}
+      <input
+        type="file"
+        accept={p.accept}
+        disabled={reading()}
+        style={{ display: 'none' }}
+        onChange={(e) => {
+          const f = e.currentTarget.files?.[0];
+          e.currentTarget.value = '';
+          if (f) p.then(f);
+        }}
+      />
+    </label>
+  );
 
   // delete every note (staggered), reset length, then re-read
   const clearSeq = () => {
@@ -671,9 +806,37 @@ export default function SwingSequencer(props: {
         <span class="spacer" />
         <Show when={reading()}>
           <span class="pill tiny">
-            <span class="dot on" /> reading...
+            <span class="dot on" /> {busy() || 'reading...'}
           </span>
         </Show>
+        <button
+          class="btn tiny ghost"
+          disabled={reading()}
+          onClick={exportSeq}
+          title="Save this sequence as a ControlTribe .swingseq file"
+        >
+          export
+        </button>
+        <FileButton
+          label="import"
+          accept={`.${SW_SEQ_EXT},.seq`}
+          title="Write a .swingseq file into this sequence"
+          then={importSeq}
+        />
+        <button
+          class="btn tiny ghost"
+          disabled={reading()}
+          onClick={saveProject}
+          title="Save settings + all 8 sequences as a ControlTribe .swing project"
+        >
+          save project
+        </button>
+        <FileButton
+          label="load project"
+          accept={`.${SW_PROJECT_EXT},.json`}
+          title="Write a .swing project (settings + all 8 sequences) to the device"
+          then={loadProject}
+        />
         <button
           class="btn tiny ghost"
           disabled={reading()}

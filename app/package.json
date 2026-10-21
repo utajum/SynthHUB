@@ -11,6 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "tsc -p tsconfig.check.json",
+    "test": "node --import ./tests/register.mjs --test tests/*.test.ts",
+    "test:live": "node --import ./tests/register.mjs --test --test-concurrency=1 tests/live/*.live.ts",
     "verify": "npm run typecheck && npm run coverage && npm run build"
   },
   "dependencies": {
