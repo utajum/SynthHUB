@@ -4,7 +4,7 @@
 import data from '../../data/controltribe.json';
 
 type CtKind = 'enum' | 'range' | 'step';
-interface CtControl {
+export interface CtControl {
   cmd: number;
   label: string;
   section: string;
