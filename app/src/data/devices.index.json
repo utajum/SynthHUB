@@ -680,6 +680,17 @@
     "variantCount": 1
   },
   {
+    "slug": "qt32",
+    "name": "QT32",
+    "app": "controltribe",
+    "pids": [],
+    "aliases": ["QT32"],
+    "protocols": [1],
+    "functions": ["Device Settings", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
     "slug": "bm-11m",
     "name": "BM-11M",
     "app": "guitartribe",

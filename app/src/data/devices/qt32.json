@@ -1,0 +1,19 @@
+{
+  "slug": "qt32",
+  "name": "QT32",
+  "app": "controltribe",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "QT32",
+      "aliases": ["QT32"],
+      "pids": [],
+      "protocol": 1,
+      "modelId": ["0x7f", "0x46", "0x00"],
+      "deviceId": "0x00",
+      "cloudFamily": "qt32",
+      "cloudModel": "qt32"
+    }
+  ],
+  "functions": [{ "name": "Device Settings" }, { "name": "Update" }]
+}

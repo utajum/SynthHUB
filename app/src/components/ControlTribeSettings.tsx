@@ -1,4 +1,4 @@
-// Control Tribe device-settings editor (Swing / 1601 / AQ64 / BQ10), driven
+// Control Tribe settings editor (Swing / 1601 / AQ64 / BQ10 / QT32), driven
 // by data/controltribe.json. Edits send Set frames immediately; "query all"
 // reads current values back; "store" persists them on the unit. Enums render
 // as dropdowns, plain params as sliders, sequencer steps in CtStepGrid.
@@ -19,9 +19,11 @@ import {
   ctDevice,
   ctHasSteps,
   ctHex,
+  ctId,
   ctOptionValue,
   ctSections,
   ctStepRows,
+  parseCtReply,
 } from '../devices/_shared/controltribe';
 import CtStepGrid from './CtStepGrid';
 
@@ -37,7 +39,7 @@ export default function ControlTribeSettings(props: Props) {
   const stepRows = createMemo(() => ctStepRows(props.slug));
 
   const initial: Record<number, number> = {};
-  for (const c of dev()?.controls ?? []) initial[c.cmd] = c.default;
+  for (const c of dev()?.controls ?? []) initial[ctId(c)] = c.default;
   const [values, setValues] = createSignal<Record<number, number>>(initial);
   const [lastFrame, setLastFrame] = createSignal<string>('');
 
@@ -46,22 +48,8 @@ export default function ControlTribeSettings(props: Props) {
   // mirror device replies (F0 00 20 32 devId prod cmd value F7) into the UI
   onMount(() => {
     const off = midi.onMessage((data) => {
-      const d = dev();
-      if (!d || data.length < 9) return;
-      if (
-        data[0] === 0xf0 &&
-        data[1] === 0x00 &&
-        data[2] === 0x20 &&
-        data[3] === 0x32 &&
-        data[4] === d.deviceId &&
-        data[5] === d.productId
-      ) {
-        const cmd = data[6];
-        const val = data[7];
-        if (d.controls.some((c) => c.cmd === cmd)) {
-          setValues((p) => ({ ...p, [cmd]: val }));
-        }
-      }
+      const r = parseCtReply(props.slug, data);
+      if (r) setValues((p) => ({ ...p, [r.id]: r.value }));
     });
     onCleanup(off);
     // auto-read current values on open so the UI never shows stale defaults
@@ -80,10 +68,16 @@ export default function ControlTribeSettings(props: Props) {
     return true;
   };
 
-  const setParam = (cmd: number, value: number) => {
-    const v = Math.max(0, Math.min(127, value | 0));
-    setValues((p) => ({ ...p, [cmd]: v }));
-    send(buildCtSet(props.slug, cmd, v), `set 0x${cmd.toString(16)}`);
+  // id = ctId(control); 7-bit unless the control's range goes higher
+  const setParam = (id: number, value: number) => {
+    const c = dev()?.controls.find((c) => ctId(c) === id);
+    if (!c) return;
+    const v = Math.max(0, Math.min(Math.max(127, c.max), value | 0));
+    setValues((p) => ({ ...p, [id]: v }));
+    send(
+      buildCtSet(props.slug, c.cmd, v, c.page),
+      `set 0x${c.cmd.toString(16)}`,
+    );
   };
 
   const queryAll = () => {
@@ -96,7 +90,7 @@ export default function ControlTribeSettings(props: Props) {
     for (const c of d.controls) {
       // stagger so we don't flood the port
       setTimeout(
-        () => midi.send(out()!, buildCtQuery(props.slug, c.cmd)),
+        () => midi.send(out()!, buildCtQuery(props.slug, c.cmd, c.page)),
         i * 12,
       );
       i++;
@@ -111,7 +105,7 @@ export default function ControlTribeSettings(props: Props) {
     const d = dev();
     if (!d) return;
     const dump = Object.fromEntries(
-      d.controls.map((c) => [c.method, values()[c.cmd] ?? c.default]),
+      d.controls.map((c) => [c.method, values()[ctId(c)] ?? c.default]),
     );
     const url = URL.createObjectURL(
       new Blob([JSON.stringify(dump, null, 2)], { type: 'application/json' }),
@@ -197,9 +191,9 @@ export default function ControlTribeSettings(props: Props) {
                                     type="range"
                                     min={c.min}
                                     max={c.max}
-                                    value={values()[c.cmd] ?? c.default}
+                                    value={values()[ctId(c)] ?? c.default}
                                     onInput={(e) =>
-                                      setParam(c.cmd, +e.currentTarget.value)
+                                      setParam(ctId(c), +e.currentTarget.value)
                                     }
                                     style={{
                                       width: '120px',
@@ -212,9 +206,9 @@ export default function ControlTribeSettings(props: Props) {
                                     type="number"
                                     min={c.min}
                                     max={c.max}
-                                    value={values()[c.cmd] ?? c.default}
+                                    value={values()[ctId(c)] ?? c.default}
                                     onInput={(e) =>
-                                      setParam(c.cmd, +e.currentTarget.value)
+                                      setParam(ctId(c), +e.currentTarget.value)
                                     }
                                     style={{ width: '70px' }}
                                   />
@@ -224,9 +218,9 @@ export default function ControlTribeSettings(props: Props) {
                           >
                             <td colspan="2">
                               <select
-                                value={values()[c.cmd] ?? c.default}
+                                value={values()[ctId(c)] ?? c.default}
                                 onInput={(e) =>
-                                  setParam(c.cmd, +e.currentTarget.value)
+                                  setParam(ctId(c), +e.currentTarget.value)
                                 }
                                 style={{ width: '11rem' }}
                               >
