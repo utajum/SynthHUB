@@ -498,6 +498,12 @@
     "protocol": 1
   },
   {
+    "alias": "QT32",
+    "slug": "qt32",
+    "variant": "QT32",
+    "protocol": 1
+  },
+  {
     "alias": "BM-11M",
     "slug": "bm-11m",
     "variant": "BM-11M",

@@ -405,6 +405,12 @@
       "BQ10": "/devices/bq10.webp"
     }
   },
+  "qt32": {
+    "image": "/devices/qt32.webp",
+    "variants": {
+      "QT32": "/devices/qt32.webp"
+    }
+  },
   "bm-11m": {
     "image": "/devices/bm-11m.webp",
     "variants": {
