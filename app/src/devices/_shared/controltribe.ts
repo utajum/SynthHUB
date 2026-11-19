@@ -40,6 +40,8 @@ export interface CtControl {
   local?: boolean;
   // value always as <flags> <hi> <lo> (QT32 PLAY 16-bit params)
   wide?: boolean;
+  // index into the device's group frames (table devices)
+  group?: number;
 }
 
 // "options": "notes" in the JSON = MIDI note names, C-2 = 0 .. G8 = 127
@@ -73,6 +75,8 @@ interface CtDevice {
   header?: number[];
   // false when the unit has no 0x72 store (table devices save on their own)
   store?: boolean;
+  // shared arg lists of group frames; a control's own peer is its value
+  groups?: CtArg[][];
   // confirmed one-shot commands (JAM: restore settings, erase all data)
   actions?: { label: string; bytes: number[]; confirm: string }[];
   controls: CtControl[];
@@ -84,8 +88,20 @@ export interface CtStepRow {
 
 const CT_DEVICES = data as unknown as Record<string, CtDevice>;
 for (const d of Object.values(CT_DEVICES))
-  for (const c of d.controls)
+  d.controls.forEach((c, i) => {
     if ((c.options as unknown) === 'notes') c.options = NOTE_NAMES;
+    if (!d.groups) return;
+    // table devices: key by table index (cmds are shared), label from name
+    c.id ??= 0x20000 + i;
+    c.label ??= c.method.replace(
+      /(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Za-z])(?=\d)|(?<=\d)(?=[A-Za-z])/g,
+      ' ',
+    );
+    if (c.group !== undefined)
+      c.args = d.groups[c.group].map((a) =>
+        a.peer === c.method ? { value: true } : a,
+      );
+  });
 
 // management command bytes shared across the devices
 const CT_CMD = {
