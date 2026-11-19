@@ -144,6 +144,56 @@ export function buildRawPatternWrite(
   return buildPKT78(variant, rawPayload);
 }
 
+// SynthTribe `.seq` pattern file (ST 3.3.1 import/exportSequencerData11):
+// i32le magic, i32le byte length + UTF-16LE device name, the same for the
+// firmware version, then i32le length + data. Per type: data size; the data
+// is the 0x78 payload byte for byte.
+const SEQ_FILE_MAGIC = 0x23985476;
+export const SEQ_FILE_DATA_LEN: Record<number, number> = { 11: 0x45 };
+
+export function buildSeqFile(
+  name: string,
+  version: string,
+  data: number[],
+): Uint8Array {
+  const out: number[] = [];
+  const i32 = (v: number) =>
+    out.push(v & 0xff, (v >> 8) & 0xff, (v >> 16) & 0xff, (v >>> 24) & 0xff);
+  const str = (s: string) => {
+    i32(s.length * 2);
+    for (let i = 0; i < s.length; i++) {
+      const c = s.charCodeAt(i);
+      out.push(c & 0xff, c >> 8);
+    }
+  };
+  i32(SEQ_FILE_MAGIC);
+  str(name);
+  str(version);
+  i32(data.length);
+  out.push(...data);
+  return Uint8Array.from(out);
+}
+
+// data block of a `.seq` file, or null if the file is malformed
+export function parseSeqFile(bytes: Uint8Array): number[] | null {
+  const dv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  let o = 0;
+  const i32 = () => {
+    if (o + 4 > bytes.length) return -1;
+    o += 4;
+    return dv.getInt32(o - 4, true);
+  };
+  if (i32() !== SEQ_FILE_MAGIC) return null;
+  for (let s = 0; s < 2; s++) {
+    const n = i32();
+    if (n < 0 || o + n > bytes.length) return null;
+    o += n;
+  }
+  const len = i32();
+  if (len < 0 || o + len > bytes.length) return null;
+  return Array.from(bytes.subarray(o, o + len));
+}
+
 // TD-3 (type 1) body: 303-style split tracks (HW-verified by clock-driven
 // playback capture). Time track: count@0x32, gate u16le@0x34 (note starts),
 // rest u16le@0x36 (silent steps); a step with neither bit ties (extends the

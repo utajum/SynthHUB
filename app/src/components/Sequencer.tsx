@@ -38,6 +38,9 @@ import {
   buildRawPatternWrite,
   MONO_SYNC_TYPES,
   SONG_PKT_TYPES,
+  SEQ_FILE_DATA_LEN,
+  buildSeqFile,
+  parseSeqFile,
   SEQ_TYPE_NAMES,
   seqCaps,
   type SeqCaps,
@@ -947,6 +950,44 @@ function DeviceSyncBar(props: {
     log('info', `exported pattern .syx (${bytes.length} bytes)`);
   };
 
+  // SynthTribe .seq file: the data block is the 0x78 payload
+  const seqLen = SEQ_FILE_DATA_LEN[props.type];
+  const exportSeq = () => {
+    const frame = lastFrame();
+    if (!frame || frame.length !== seqLen) {
+      log('info', 'export .seq: read a pattern first');
+      return;
+    }
+    const bytes = buildSeqFile(variant.name, '', frame);
+    const url = URL.createObjectURL(
+      new Blob([bytes.buffer as ArrayBuffer], {
+        type: 'application/octet-stream',
+      }),
+    );
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${props.slug}-pattern-${props.state().pattern + 1}.seq`;
+    a.click();
+    URL.revokeObjectURL(url);
+    log('info', `exported pattern .seq (${bytes.length} bytes)`);
+  };
+
+  const importSeq = async (file: File) => {
+    const data = parseSeqFile(new Uint8Array(await file.arrayBuffer()));
+    const dump =
+      data && data.length === seqLen
+        ? decodeDump(variant, buildRawPatternWrite(variant, data))
+        : null;
+    if (!dump) {
+      setStatus(
+        `import failed: ${file.name} is not a valid ${variant.name} pattern`,
+      );
+      return;
+    }
+    applyDump(dump);
+    setStatus(`imported ${file.name} - write to device to store it`);
+  };
+
   const importSyx = async (file: File) => {
     const buf = new Uint8Array(await file.arrayBuffer());
     const out = props.outputId();
@@ -1020,6 +1061,32 @@ function DeviceSyncBar(props: {
             }}
           />
         </label>
+        <Show when={seqLen}>
+          <button
+            class="btn ghost tiny"
+            onClick={exportSeq}
+            title="Save the pattern as a SynthTribe .seq file"
+          >
+            export .seq
+          </button>
+          <label
+            class="btn ghost tiny"
+            style={{ cursor: 'pointer' }}
+            title="Load a SynthTribe .seq pattern into the editor"
+          >
+            import .seq
+            <input
+              type="file"
+              accept=".seq"
+              style={{ display: 'none' }}
+              onChange={(e) => {
+                const f = e.currentTarget.files?.[0];
+                if (f) void importSeq(f);
+                e.currentTarget.value = '';
+              }}
+            />
+          </label>
+        </Show>
         <span class="spacer" />
         <span class="tiny dim" title={SEQ_TYPE_NAMES[props.type] ?? ''}>
           {canMap ? 'editable sync' : 'backup/restore only'}
