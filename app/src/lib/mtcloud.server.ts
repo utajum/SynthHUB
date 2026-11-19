@@ -43,8 +43,24 @@ interface Challenge {
   responsePath?: string;
 }
 
-// 2-step SHA-256 challenge-response; returns a bearer token
+// bearer token cache (Control Tribe 1.12.4 BehringerUtils::getToken): one
+// auth per server instance; a 401 drops it (invalidateToken)
+let token: string | null = null;
+let pending: Promise<string> | null = null;
+
 export async function getToken(): Promise<string> {
+  if (token) return token;
+  pending ??= fetchToken().finally(() => (pending = null));
+  return (token = await pending);
+}
+
+// forget `t` unless a newer token already replaced it
+export function invalidateToken(t: string): void {
+  if (token === t) token = null;
+}
+
+// 2-step SHA-256 challenge-response; returns a bearer token
+async function fetchToken(): Promise<string> {
   const creds = cloudCreds();
   if (!creds)
     throw new Error(
@@ -84,10 +100,17 @@ export async function getToken(): Promise<string> {
 // authenticated GET against the cloud (path begins with '/')
 export async function cloudGet(path: string, token: string): Promise<Response> {
   const url = `${cloudBase()}${path}`;
+  const get = (t: string) =>
+    fetch(url, {
+      headers: { Accept: 'application/json', Authorization: `Bearer ${t}` },
+    });
   console.log('[mtcloud] GET', url);
-  const res = await fetch(url, {
-    headers: { Accept: 'application/json', Authorization: `Bearer ${token}` },
-  });
+  let res = await get(token);
+  // cached token expired: drop it and retry once with a fresh one
+  if (res.status === 401) {
+    invalidateToken(token);
+    res = await get(await getToken());
+  }
   console.log('[mtcloud] GET <-', res.status, res.statusText);
   return res;
 }
