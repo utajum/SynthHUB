@@ -74,14 +74,15 @@ export function seqCaps(type: number): SeqCaps {
 }
 
 // Song-based drum machines: their dumps address slots as
-// `0x77 [0x41, song, pattern]` (selector 0x41), not the bare 2-byte mono form.
+// `0x77 [sel, song, pattern]` (sel 0x41 unless noted below), not the bare
+// 2-byte mono form.
 export const SONG_PKT_TYPES = new Set([4, 5, 7, 8, 10, 12]);
 const SONG_SLOT_SELECTOR = 0x41;
 // type 12 (RD-765) uses selector 0x00 (ST 3.3.1 dumpSequencerData12)
 const TYPE_SLOT_SELECTOR: Record<number, number> = { 12: 0x00 };
 
 // Request a pattern. Mono family: `0x77 [bank, pattern]` (byte order
-// HW-verified on MS-1 MK II: bank first). Song family: `0x77 [0x41, song,
+// HW-verified on MS-1 MK II: bank first). Song family: `0x77 [sel, song,
 // pattern]`.
 export function requestPattern(
   variant: DeviceVariant,

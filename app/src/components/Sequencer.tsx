@@ -776,7 +776,7 @@ function DeviceSyncBar(props: {
 }) {
   const variant = props.driver.variant;
   const canMap = MONO_SYNC_TYPES.has(props.type);
-  // song machines: 0x77 carries the 0x41 selector; writes echo byte-exact
+  // song machines: 0x77 carries a slot selector; writes echo byte-exact
   const songMode = SONG_PKT_TYPES.has(props.type);
   const [busy, setBusy] = createSignal(false);
   // raw body of the last read/imported pattern (byte-exact write/export)
@@ -848,7 +848,7 @@ function DeviceSyncBar(props: {
       );
       applyDump(dump);
     });
-    // byte0 = bank, byte1 = pattern; song machines prefix the 0x41 selector
+    // byte0 = bank, byte1 = pattern; song machines prefix a slot selector
     const req = requestPattern(
       variant,
       props.state().bank,
