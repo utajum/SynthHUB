@@ -20,6 +20,17 @@
       "name": "General",
       "settings": [
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "MIDI & Sync"
+          }
+        },
+        {
           "type": "channel",
           "kind": "dropdown",
           "title": "channel",
@@ -73,6 +84,35 @@
             "defaultin": 1,
             "indexin": 0,
             "pkt": 14
+          }
+        },
+        {
+          "type": "midithrough",
+          "kind": "composite",
+          "title": "midithrough",
+          "sysex": {
+            "pkt": 40
+          },
+          "raw": {
+            "type": "midithrough",
+            "defaultm2u": 0,
+            "indexm2u": 8,
+            "defaultmst": 0,
+            "indexmst": 9,
+            "defaultu2m": 0,
+            "indexu2m": 10,
+            "pkt": 40
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Performance",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Performance"
           }
         },
         {
@@ -220,24 +260,6 @@
             "optionlabel": "0V to 5V,0V to 10V",
             "index": 7,
             "pkt": 48
-          }
-        },
-        {
-          "type": "midithrough",
-          "kind": "composite",
-          "title": "midithrough",
-          "sysex": {
-            "pkt": 40
-          },
-          "raw": {
-            "type": "midithrough",
-            "defaultm2u": 0,
-            "indexm2u": 8,
-            "defaultmst": 0,
-            "indexmst": 9,
-            "defaultu2m": 0,
-            "indexu2m": 10,
-            "pkt": 40
           }
         }
       ]

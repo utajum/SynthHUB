@@ -20,6 +20,17 @@
       "name": "General",
       "settings": [
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "MIDI & Sync"
+          }
+        },
+        {
           "type": "wave_custom",
           "kind": "dropdown",
           "title": "MIDI Channel",
@@ -73,25 +84,6 @@
         },
         {
           "type": "wave_custom",
-          "kind": "spinbox",
-          "title": "Tuning",
-          "control": "spinbox",
-          "min": 0,
-          "max": 99,
-          "default": 0,
-          "raw": {
-            "type": "wave_custom",
-            "title": "Tuning",
-            "default": 0,
-            "min": 0,
-            "max": 99,
-            "offset": 400,
-            "control": "spinbox",
-            "index": 1
-          }
-        },
-        {
-          "type": "wave_custom",
           "kind": "radio",
           "title": "Local",
           "control": "radio_box",
@@ -104,41 +96,6 @@
             "control": "radio_box",
             "list": ["Off", "On"],
             "index": 3
-          }
-        },
-        {
-          "type": "wave_custom",
-          "kind": "dropdown",
-          "title": "Expression Pedal Mode",
-          "control": "combo",
-          "options": [
-            "Off",
-            "Loudness",
-            "VCF-Cutoff",
-            "VCF-Emphasis",
-            "Wavetable Position",
-            "Modulation Wheel"
-          ],
-          "min": 0,
-          "max": 5,
-          "default": 0,
-          "raw": {
-            "type": "wave_custom",
-            "title": "Expression Pedal Mode",
-            "default": 0,
-            "min": 0,
-            "max": 5,
-            "offset": 0,
-            "list": [
-              "Off",
-              "Loudness",
-              "VCF-Cutoff",
-              "VCF-Emphasis",
-              "Wavetable Position",
-              "Modulation Wheel"
-            ],
-            "control": "combo",
-            "index": 4
           }
         },
         {
@@ -160,44 +117,6 @@
             "list": ["Off", "MIDI TX", "MIDI RX", "MIDI TX & RX"],
             "control": "combo",
             "index": 5
-          }
-        },
-        {
-          "type": "wave_custom",
-          "kind": "spinbox",
-          "title": "LCD Brightness",
-          "control": "spinbox",
-          "min": 0,
-          "max": 99,
-          "default": 0,
-          "raw": {
-            "type": "wave_custom",
-            "title": "LCD Brightness",
-            "default": 0,
-            "min": 0,
-            "max": 99,
-            "offset": 0,
-            "control": "spinbox",
-            "index": 6
-          }
-        },
-        {
-          "type": "wave_custom",
-          "kind": "spinbox",
-          "title": "LCD Contrast",
-          "control": "spinbox",
-          "min": 0,
-          "max": 99,
-          "default": 0,
-          "raw": {
-            "type": "wave_custom",
-            "title": "LCD Contrast",
-            "default": 0,
-            "min": 0,
-            "max": 99,
-            "offset": 0,
-            "control": "spinbox",
-            "index": 7
           }
         },
         {
@@ -228,78 +147,6 @@
         },
         {
           "type": "wave_custom",
-          "kind": "dropdown",
-          "title": "Firmware Enhancements",
-          "control": "combo",
-          "options": [
-            "Off",
-            "On/Emulated Envelopes",
-            "On/Exponential Envelopes"
-          ],
-          "default": 0,
-          "raw": {
-            "type": "wave_custom",
-            "title": "Firmware Enhancements",
-            "default": 0,
-            "index": 9,
-            "control": "combo",
-            "list": ["Off", "On/Emulated Envelopes", "On/Exponential Envelopes"]
-          }
-        },
-        {
-          "type": "wave_custom",
-          "kind": "radio",
-          "title": "Oscillator Enhancements",
-          "control": "radio_box",
-          "options": ["Off", "On"],
-          "default": 0,
-          "raw": {
-            "type": "wave_custom",
-            "title": "Oscillator Enhancements",
-            "default": 0,
-            "index": 10,
-            "control": "radio_box",
-            "list": ["Off", "On"]
-          }
-        },
-        {
-          "type": "wave_custom",
-          "kind": "radio",
-          "title": "LFO Enhancements",
-          "control": "radio_box",
-          "options": ["Off", "On"],
-          "default": 0,
-          "raw": {
-            "type": "wave_custom",
-            "title": "LFO Enhancements",
-            "default": 0,
-            "index": 11,
-            "control": "radio_box",
-            "list": ["Off", "On"]
-          }
-        },
-        {
-          "type": "wave_custom",
-          "kind": "dual-dropdown",
-          "title": "Arp/Seq Mode",
-          "control": "dual_combo",
-          "default": 0,
-          "raw": {
-            "type": "wave_custom",
-            "title": "Arp/Seq Mode",
-            "default": 0,
-            "index": 12,
-            "control": "dual_combo",
-            "offset2": -1,
-            "sub_title1": "Mode A",
-            "list1": ["Sequencer", "Arpeggiator 1", "Arpeggiator 2"],
-            "sub_title2": "Mode B",
-            "list2": ["Up", "Down", "Up & Down", "Random", "Moving"],
-            "func": "{ if(arg1===0){return 0}else{return 10*arg1+(arg2+1)}}"
-          }
-        },
-        {
-          "type": "wave_custom",
           "kind": "dual-dropdown",
           "title": "Clock Source and Rate",
           "control": "dual_combo",
@@ -315,25 +162,6 @@
             "sub_title2": "Rate",
             "list2": ["1 ppqn", "2 ppqn", "24 ppqn", "48 ppqn"],
             "func": "{return 10*arg1+(arg2)}"
-          }
-        },
-        {
-          "type": "wave_custom",
-          "kind": "spinbox",
-          "title": "Gate",
-          "control": "spinbox",
-          "min": 0,
-          "max": 99,
-          "default": 0,
-          "raw": {
-            "type": "wave_custom",
-            "title": "Gate",
-            "default": 0,
-            "index": 14,
-            "min": 0,
-            "max": 99,
-            "offset": 0,
-            "control": "spinbox"
           }
         },
         {
@@ -410,6 +238,143 @@
           }
         },
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Performance",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Performance"
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "dropdown",
+          "title": "Expression Pedal Mode",
+          "control": "combo",
+          "options": [
+            "Off",
+            "Loudness",
+            "VCF-Cutoff",
+            "VCF-Emphasis",
+            "Wavetable Position",
+            "Modulation Wheel"
+          ],
+          "min": 0,
+          "max": 5,
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Expression Pedal Mode",
+            "default": 0,
+            "min": 0,
+            "max": 5,
+            "offset": 0,
+            "list": [
+              "Off",
+              "Loudness",
+              "VCF-Cutoff",
+              "VCF-Emphasis",
+              "Wavetable Position",
+              "Modulation Wheel"
+            ],
+            "control": "combo",
+            "index": 4
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "dropdown",
+          "title": "Firmware Enhancements",
+          "control": "combo",
+          "options": [
+            "Off",
+            "On/Emulated Envelopes",
+            "On/Exponential Envelopes"
+          ],
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Firmware Enhancements",
+            "default": 0,
+            "index": 9,
+            "control": "combo",
+            "list": ["Off", "On/Emulated Envelopes", "On/Exponential Envelopes"]
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "radio",
+          "title": "Oscillator Enhancements",
+          "control": "radio_box",
+          "options": ["Off", "On"],
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Oscillator Enhancements",
+            "default": 0,
+            "index": 10,
+            "control": "radio_box",
+            "list": ["Off", "On"]
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "radio",
+          "title": "LFO Enhancements",
+          "control": "radio_box",
+          "options": ["Off", "On"],
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "LFO Enhancements",
+            "default": 0,
+            "index": 11,
+            "control": "radio_box",
+            "list": ["Off", "On"]
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "dual-dropdown",
+          "title": "Arp/Seq Mode",
+          "control": "dual_combo",
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Arp/Seq Mode",
+            "default": 0,
+            "index": 12,
+            "control": "dual_combo",
+            "offset2": -1,
+            "sub_title1": "Mode A",
+            "list1": ["Sequencer", "Arpeggiator 1", "Arpeggiator 2"],
+            "sub_title2": "Mode B",
+            "list2": ["Up", "Down", "Up & Down", "Random", "Moving"],
+            "func": "{ if(arg1===0){return 0}else{return 10*arg1+(arg2+1)}}"
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "spinbox",
+          "title": "Gate",
+          "control": "spinbox",
+          "min": 0,
+          "max": 99,
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Gate",
+            "default": 0,
+            "index": 14,
+            "min": 0,
+            "max": 99,
+            "offset": 0,
+            "control": "spinbox"
+          }
+        },
+        {
           "type": "wave_custom",
           "kind": "dual-dropdown",
           "title": "OVP",
@@ -427,6 +392,74 @@
             "sub_title2": "Key Transpose",
             "list2": ["Enabled", "Disabled"],
             "func": "{return 10*arg1+arg2}"
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "System",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "System"
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "spinbox",
+          "title": "Tuning",
+          "control": "spinbox",
+          "min": 0,
+          "max": 99,
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "Tuning",
+            "default": 0,
+            "min": 0,
+            "max": 99,
+            "offset": 400,
+            "control": "spinbox",
+            "index": 1
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "spinbox",
+          "title": "LCD Brightness",
+          "control": "spinbox",
+          "min": 0,
+          "max": 99,
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "LCD Brightness",
+            "default": 0,
+            "min": 0,
+            "max": 99,
+            "offset": 0,
+            "control": "spinbox",
+            "index": 6
+          }
+        },
+        {
+          "type": "wave_custom",
+          "kind": "spinbox",
+          "title": "LCD Contrast",
+          "control": "spinbox",
+          "min": 0,
+          "max": 99,
+          "default": 0,
+          "raw": {
+            "type": "wave_custom",
+            "title": "LCD Contrast",
+            "default": 0,
+            "min": 0,
+            "max": 99,
+            "offset": 0,
+            "control": "spinbox",
+            "index": 7
           }
         }
       ]

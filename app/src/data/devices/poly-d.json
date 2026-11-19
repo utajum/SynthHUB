@@ -20,6 +20,17 @@
       "name": "General",
       "settings": [
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "MIDI & Sync"
+          }
+        },
+        {
           "type": "channel",
           "kind": "dropdown",
           "title": "channel",
@@ -96,41 +107,6 @@
           }
         },
         {
-          "type": "pitchbend",
-          "kind": "composite",
-          "title": "Pitch Bend Semitones",
-          "default": 12,
-          "sysex": {
-            "pkt": 17,
-            "subtype": 1
-          },
-          "raw": {
-            "type": "pitchbend",
-            "subtype": 1,
-            "default": 12,
-            "index": 9,
-            "title": "Pitch Bend Semitones",
-            "pkt": 17
-          }
-        },
-        {
-          "type": "keypriority",
-          "kind": "radio",
-          "title": "Key Priority",
-          "options": ["Low", "High", "Last"],
-          "default": 0,
-          "sysex": {
-            "pkt": 18
-          },
-          "raw": {
-            "type": "keypriority",
-            "default": 0,
-            "index": 7,
-            "title": "Key Priority",
-            "pkt": 18
-          }
-        },
-        {
           "type": "transpose",
           "kind": "spinbox",
           "title": "MIDI IN Transpose",
@@ -146,44 +122,6 @@
             "index": 3,
             "title": "MIDI IN Transpose",
             "pkt": 15
-          }
-        },
-        {
-          "type": "multitrigger",
-          "kind": "toggle",
-          "title": "Multi-Trigger",
-          "default": 0,
-          "min": 0,
-          "max": 1,
-          "sysex": {
-            "pkt": 20
-          },
-          "raw": {
-            "type": "multitrigger",
-            "default": 0,
-            "index": 8,
-            "title": "Multi-Trigger",
-            "pkt": 20
-          }
-        },
-        {
-          "type": "velocity",
-          "kind": "composite",
-          "title": "velocity",
-          "sysex": {
-            "pkt": 16,
-            "subtype": 0
-          },
-          "raw": {
-            "type": "velocity",
-            "subtype": 0,
-            "defaultonconstant": 1,
-            "indexonconstant": 4,
-            "defaultoffconstant": 1,
-            "indexoffconstant": 5,
-            "defaultcurve": 0,
-            "indexcurve": 6,
-            "pkt": 16
           }
         },
         {
@@ -260,60 +198,6 @@
             "index": 24,
             "title": "Arpeggiator Output",
             "pkt": 38
-          }
-        },
-        {
-          "type": "modulationcurve",
-          "kind": "spinbox",
-          "title": "Modulation Curve",
-          "default": 0,
-          "min": 0,
-          "max": 127,
-          "sysex": {
-            "pkt": 21
-          },
-          "raw": {
-            "type": "modulationcurve",
-            "default": 0,
-            "index": 11,
-            "title": "Modulation Curve",
-            "pkt": 21
-          }
-        },
-        {
-          "type": "accentthreshold",
-          "kind": "spinbox",
-          "title": "Accent Velocity Threshold",
-          "default": 96,
-          "min": 0,
-          "max": 127,
-          "sysex": {
-            "pkt": 28
-          },
-          "raw": {
-            "type": "accentthreshold",
-            "default": 96,
-            "index": 17,
-            "title": "Accent Velocity Threshold",
-            "pkt": 28
-          }
-        },
-        {
-          "type": "moduwheelrange",
-          "kind": "spinbox",
-          "title": "Modulation Wheel Range",
-          "default": 3,
-          "min": 0,
-          "max": 127,
-          "sysex": {
-            "pkt": 32
-          },
-          "raw": {
-            "type": "moduwheelrange",
-            "default": 3,
-            "index": 10,
-            "title": "Modulation Wheel Range",
-            "pkt": 32
           }
         },
         {
@@ -406,6 +290,144 @@
             "versionvisible": "1.1.0",
             "title": "Local Keyboard Mode",
             "pkt": 47
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Performance",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Performance"
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 0,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 0,
+            "index": 7,
+            "title": "Key Priority",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "default": 12,
+            "index": 9,
+            "title": "Pitch Bend Semitones",
+            "pkt": 17
+          }
+        },
+        {
+          "type": "multitrigger",
+          "kind": "toggle",
+          "title": "Multi-Trigger",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 20
+          },
+          "raw": {
+            "type": "multitrigger",
+            "default": 0,
+            "index": 8,
+            "title": "Multi-Trigger",
+            "pkt": 20
+          }
+        },
+        {
+          "type": "velocity",
+          "kind": "composite",
+          "title": "velocity",
+          "sysex": {
+            "pkt": 16,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "velocity",
+            "subtype": 0,
+            "defaultonconstant": 1,
+            "indexonconstant": 4,
+            "defaultoffconstant": 1,
+            "indexoffconstant": 5,
+            "defaultcurve": 0,
+            "indexcurve": 6,
+            "pkt": 16
+          }
+        },
+        {
+          "type": "modulationcurve",
+          "kind": "spinbox",
+          "title": "Modulation Curve",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 21
+          },
+          "raw": {
+            "type": "modulationcurve",
+            "default": 0,
+            "index": 11,
+            "title": "Modulation Curve",
+            "pkt": 21
+          }
+        },
+        {
+          "type": "accentthreshold",
+          "kind": "spinbox",
+          "title": "Accent Velocity Threshold",
+          "default": 96,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 28
+          },
+          "raw": {
+            "type": "accentthreshold",
+            "default": 96,
+            "index": 17,
+            "title": "Accent Velocity Threshold",
+            "pkt": 28
+          }
+        },
+        {
+          "type": "moduwheelrange",
+          "kind": "spinbox",
+          "title": "Modulation Wheel Range",
+          "default": 3,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 32
+          },
+          "raw": {
+            "type": "moduwheelrange",
+            "default": 3,
+            "index": 10,
+            "title": "Modulation Wheel Range",
+            "pkt": 32
           }
         }
       ]

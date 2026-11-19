@@ -20,6 +20,17 @@
       "name": "General",
       "settings": [
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "MIDI & Sync"
+          }
+        },
+        {
           "type": "channel",
           "kind": "dropdown",
           "title": "channel",
@@ -96,23 +107,6 @@
           }
         },
         {
-          "type": "keypriority",
-          "kind": "radio",
-          "title": "Key Priority",
-          "options": ["Low", "High", "Last"],
-          "default": 2,
-          "sysex": {
-            "pkt": 18
-          },
-          "raw": {
-            "type": "keypriority",
-            "default": 2,
-            "index": 7,
-            "title": "Key Priority:",
-            "pkt": 18
-          }
-        },
-        {
           "type": "transpose",
           "kind": "spinbox",
           "title": "MIDI In Transpose",
@@ -131,26 +125,6 @@
             "min": -12,
             "max": 12,
             "offset": -12
-          }
-        },
-        {
-          "type": "velocity",
-          "kind": "composite",
-          "title": "velocity",
-          "sysex": {
-            "pkt": 16,
-            "subtype": 0
-          },
-          "raw": {
-            "type": "velocity",
-            "subtype": 0,
-            "defaultonconstant": 0,
-            "indexonconstant": 4,
-            "defaultoffconstant": 0,
-            "indexoffconstant": 5,
-            "defaultcurve": 0,
-            "indexcurve": 6,
-            "pkt": 16
           }
         },
         {
@@ -190,24 +164,6 @@
             "index": 18,
             "title": "Arpeggiator Output",
             "pkt": 38
-          }
-        },
-        {
-          "type": "modulationcurve",
-          "kind": "spinbox",
-          "title": "Modulation Curve",
-          "default": 0,
-          "min": 0,
-          "max": 127,
-          "sysex": {
-            "pkt": 21
-          },
-          "raw": {
-            "type": "modulationcurve",
-            "default": 0,
-            "index": 10,
-            "title": "Modulation Curve",
-            "pkt": 21
           }
         },
         {
@@ -285,6 +241,72 @@
             "indexusb": 23,
             "versionvisible": "1.0.8",
             "pkt": 47
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Performance",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Performance"
+          }
+        },
+        {
+          "type": "keypriority",
+          "kind": "radio",
+          "title": "Key Priority",
+          "options": ["Low", "High", "Last"],
+          "default": 2,
+          "sysex": {
+            "pkt": 18
+          },
+          "raw": {
+            "type": "keypriority",
+            "default": 2,
+            "index": 7,
+            "title": "Key Priority:",
+            "pkt": 18
+          }
+        },
+        {
+          "type": "velocity",
+          "kind": "composite",
+          "title": "velocity",
+          "sysex": {
+            "pkt": 16,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "velocity",
+            "subtype": 0,
+            "defaultonconstant": 0,
+            "indexonconstant": 4,
+            "defaultoffconstant": 0,
+            "indexoffconstant": 5,
+            "defaultcurve": 0,
+            "indexcurve": 6,
+            "pkt": 16
+          }
+        },
+        {
+          "type": "modulationcurve",
+          "kind": "spinbox",
+          "title": "Modulation Curve",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 21
+          },
+          "raw": {
+            "type": "modulationcurve",
+            "default": 0,
+            "index": 10,
+            "title": "Modulation Curve",
+            "pkt": 21
           }
         },
         {
