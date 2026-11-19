@@ -5,7 +5,15 @@ import { midi } from '../lib/midi/webmidi';
 import { splitSysex, hex, isMusicTribeSysex } from '../lib/midi/sysex';
 import { actions } from '../lib/store-solid';
 import type { DeviceVariant } from '../lib/types';
-import { decodeSampleDump } from '../devices/_shared/sample';
+import {
+  decodeSampleDump,
+  retargetBank,
+  SAMPLE_BANK_COUNT,
+} from '../devices/_shared/sample';
+import {
+  parseStoreAck,
+  STORE_ACK_TIMEOUT_MS,
+} from '../devices/_shared/sequencer-sync';
 import { decodeWaveSlotNames } from '../devices/_shared/wavetable';
 
 interface Props {
@@ -38,6 +46,45 @@ export default function BulkDump(props: Props) {
   };
 
   const capturedBytes = () => captured().reduce((n, m) => n + m.length, 0);
+
+  // sample bank import into one bank slot, confirmed by the device ACK
+  const isSample = () => !!props.variant && /sample/i.test(props.name);
+  const [bank, setBank] = createSignal(0);
+  const [bankStatus, setBankStatus] = createSignal('');
+  const importBank = async (file: File) => {
+    const v = props.variant;
+    const out = props.outputId();
+    if (!v || !out) return;
+    const msgs = splitSysex(new Uint8Array(await file.arrayBuffer()));
+    const msg = msgs.length === 1 ? retargetBank(v, msgs[0], bank()) : null;
+    if (!msg) {
+      setBankStatus(`${file.name}: not a one-message sample bank file`);
+      return;
+    }
+    setBankStatus('importing...');
+    const off = midi.onMessage((data) => {
+      const st = parseStoreAck(v, data);
+      if (st === null) return;
+      clearTimeout(timer);
+      off();
+      setBankStatus(
+        st === 0
+          ? 'import completed'
+          : `import failed: the device rejected the bank (status ${st})`,
+      );
+    });
+    const timer = setTimeout(() => {
+      off();
+      setBankStatus(
+        'import failed: the device did not respond. The bank may not have been written.',
+      );
+    }, STORE_ACK_TIMEOUT_MS);
+    midi.send(out, msg);
+    actions().pushLog({
+      dir: 'out',
+      text: `${props.name}: import ${file.name} to bank ${bank() + 1} (${msg.length} bytes)`,
+    });
+  };
 
   const sendFile = async (file: File) => {
     const buf = new Uint8Array(await file.arrayBuffer());
@@ -105,6 +152,7 @@ export default function BulkDump(props: Props) {
   };
 
   let fileInput!: HTMLInputElement;
+  let bankInput!: HTMLInputElement;
 
   return (
     <div class="stack">
@@ -150,6 +198,43 @@ export default function BulkDump(props: Props) {
           </button>
         </Show>
       </div>
+      <Show when={isSample()}>
+        <div class="flex wrap">
+          <input
+            ref={bankInput}
+            type="file"
+            accept=".syx,application/octet-stream"
+            style={{ display: 'none' }}
+            onChange={(e) => {
+              const f = e.currentTarget.files?.[0];
+              if (f) void importBank(f);
+              e.currentTarget.value = '';
+            }}
+          />
+          <select
+            class="tiny"
+            style={{ width: 'auto' }}
+            value={bank()}
+            onChange={(e) => setBank(Number(e.currentTarget.value))}
+            title="Target bank for the import"
+          >
+            <For each={Array.from({ length: SAMPLE_BANK_COUNT }, (_, i) => i)}>
+              {(i) => <option value={i}>bank {i + 1}</option>}
+            </For>
+          </select>
+          <button
+            class="btn"
+            disabled={!props.outputId()}
+            onClick={() => bankInput.click()}
+            title="Write a one-bank .syx file into the selected bank"
+          >
+            IMPORT BANK (.syx)
+          </button>
+          <Show when={bankStatus()}>
+            <span class="tiny dim">{bankStatus()}</span>
+          </Show>
+        </div>
+      </Show>
       <p class="tiny dim">
         SEND streams a .syx file to the device as-is (any Music-Tribe or
         standard SysEx). RECEIVE captures whatever SysEx the device transmits

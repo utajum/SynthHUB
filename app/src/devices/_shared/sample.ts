@@ -63,3 +63,23 @@ export function decodeSampleDump(
     names: kind === 'infos' ? parseSampleNames(bytes) : [],
   };
 }
+
+// banks a bank file can target (SampleController ctor: 16)
+export const SAMPLE_BANK_COUNT = 16;
+
+// Bank import (ST 3.3.1 importOneBankData): a one-message `0x78 0x4x` file
+// goes to `bank` with sub = 0x40 + bank. Null if `data` is not a bank dump.
+export function retargetBank(
+  variant: DeviceVariant,
+  data: Uint8Array,
+  bank: number,
+): Uint8Array | null {
+  const f = parseFrame(variant, data);
+  if (!f || f.cmd !== 0x78 || ((f.payload[0] ?? 0) & 0xf0) !== 0x40)
+    return null;
+  const out = Uint8Array.from(data);
+  // sub byte = first payload byte; the payload stops before a trailing F7
+  const end = data[data.length - 1] === 0xf7 ? data.length - 1 : data.length;
+  out[end - f.payload.length] = 0x40 | (bank & 0x0f);
+  return out;
+}
