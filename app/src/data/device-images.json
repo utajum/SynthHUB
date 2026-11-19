@@ -158,6 +158,12 @@
       "LM DRUM": "/devices/lm-drum.webp"
     }
   },
+  "mini-pops-7": {
+    "image": "/devices/mini-pops-7.webp",
+    "variants": {
+      "MINI POPS 7": "/devices/mini-pops-7.webp"
+    }
+  },
   "model-15": {
     "image": "/devices/model-15.webp",
     "variants": {
@@ -243,10 +249,22 @@
       "POLY D": "/devices/poly-d.webp"
     }
   },
+  "polyeight": {
+    "image": "/devices/polyeight.webp",
+    "variants": {
+      "Polyeight": "/devices/polyeight.webp"
+    }
+  },
   "rhythm-designer-rd-6": {
     "image": "/devices/rhythm-designer-rd-6.webp",
     "variants": {
       "RHYTHM DESIGNER RD-6": "/devices/rhythm-designer-rd-6.webp"
+    }
+  },
+  "rd-765": {
+    "image": "/devices/rd-765.webp",
+    "variants": {
+      "RD-765": "/devices/rd-765.webp"
     }
   },
   "rhythm-designer-rd-78": {
