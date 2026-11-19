@@ -853,7 +853,7 @@ function DeviceSyncBar(props: {
       variant,
       props.state().bank,
       props.state().pattern,
-      { song: songMode },
+      { song: songMode, type: props.type },
     );
     props.driver.sendRaw(out, req);
     log(
