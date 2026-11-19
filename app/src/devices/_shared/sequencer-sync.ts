@@ -140,6 +140,21 @@ export function buildRawPatternWrite(
   return buildPKT78(variant, rawPayload);
 }
 
+// Store ACK (SynthTribe 3.3.x): types whose store waits for `01 <x> <status>`
+// after each 0x78 write; status 0 = stored. No ACK within 3 s = not stored.
+export const STORE_ACK_TYPES = new Set([6, 11, 12]);
+export const STORE_ACK_TIMEOUT_MS = 3000;
+
+// status byte of an inbound store ACK for `variant`, or null
+export function parseStoreAck(
+  variant: DeviceVariant,
+  data: Uint8Array,
+): number | null {
+  const f = parseFrame(variant, data);
+  if (!f || f.cmd !== 0x01 || f.payload.length < 2) return null;
+  return f.payload[1];
+}
+
 // TD-3 (type 1) body: 303-style split tracks (HW-verified by clock-driven
 // playback capture). Time track: count@0x32, gate u16le@0x34 (note starts),
 // rest u16le@0x36 (silent steps); a step with neither bit ties (extends the

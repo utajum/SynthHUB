@@ -38,6 +38,9 @@ import {
   buildRawPatternWrite,
   MONO_SYNC_TYPES,
   SONG_PKT_TYPES,
+  STORE_ACK_TYPES,
+  STORE_ACK_TIMEOUT_MS,
+  parseStoreAck,
   SEQ_TYPE_NAMES,
   seqCaps,
   type SeqCaps,
@@ -911,11 +914,40 @@ function DeviceSyncBar(props: {
       );
       return;
     }
+    const ackWait = STORE_ACK_TYPES.has(props.type);
+    if (ackWait) {
+      setBusy(true);
+      setStatus('storing...');
+      const off = midi.onMessage((data) => {
+        const st = parseStoreAck(variant, data);
+        if (st === null) return;
+        clearTimeout(timer);
+        off();
+        setBusy(false);
+        log('in', `store ACK: status ${st}`);
+        if (st !== 0) {
+          setStatus(
+            `store failed: the device rejected the pattern (status ${st})`,
+          );
+          return;
+        }
+        props.engine.markClean();
+        setStatus('store completed');
+      });
+      const timer = setTimeout(() => {
+        off();
+        setBusy(false);
+        setStatus(
+          'store failed: the device did not respond. The pattern may not have been saved.',
+        );
+      }, STORE_ACK_TIMEOUT_MS);
+    }
     props.driver.sendRaw(out, msg);
     log(
       'out',
       `write bank ${props.state().bank} pattern ${props.state().pattern} (0x78)  >  ${msg.length} bytes sent`,
     );
+    if (ackWait) return;
     // editor content is now on the device
     props.engine.markClean();
     setStatus('pattern written to device');
@@ -978,7 +1010,9 @@ function DeviceSyncBar(props: {
         </button>
         <button
           class="btn ghost tiny"
-          disabled={!props.outputId() || (props.type !== 1 && !lastRaw())}
+          disabled={
+            busy() || !props.outputId() || (props.type !== 1 && !lastRaw())
+          }
           onClick={writePattern}
           title={
             props.type === 1
