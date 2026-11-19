@@ -648,5 +648,15 @@
     "slug": "wasp-deluxe",
     "variant": "WASP DELUXE",
     "protocol": 1
+  },
+  "0x128f": {
+    "slug": "jam",
+    "variant": "JAM",
+    "protocol": 1
+  },
+  "0x1291": {
+    "slug": "jam-play",
+    "variant": "JAM PLAY",
+    "protocol": 1
   }
 }

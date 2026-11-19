@@ -383,10 +383,10 @@ function FunctionView(props: {
       when={props.driver()}
       fallback={<p class="muted">initializing driver...</p>}
     >
-      <Show when={name === 'Sequencer' && props.slug === 'swing'}>
-        <SwingSequencer outputId={props.outputId} />
+      <Show when={name === 'Sequencer' && SWING_SEQ.has(props.slug)}>
+        <SwingSequencer outputId={props.outputId} slug={props.slug} />
       </Show>
-      <Show when={name === 'Sequencer' && props.slug !== 'swing'}>
+      <Show when={name === 'Sequencer' && !SWING_SEQ.has(props.slug)}>
         <SequencerView
           def={props.def}
           fn={props.fn}
@@ -680,6 +680,9 @@ function FunctionView(props: {
     </Show>
   );
 }
+
+// Control Tribe units on the Swing sequencer protocol
+const SWING_SEQ = new Set(['swing', 'jam', 'jam-play']);
 
 // informative + bulk-dump view for functions without per-control UI
 function GenericFunctionView(props: {

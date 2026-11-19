@@ -411,6 +411,18 @@
       "QT32": "/devices/qt32.webp"
     }
   },
+  "jam": {
+    "image": "/devices/jam.webp",
+    "variants": {
+      "JAM": "/devices/jam.webp"
+    }
+  },
+  "jam-play": {
+    "image": "/devices/jam-play.webp",
+    "variants": {
+      "JAM PLAY": "/devices/jam-play.webp"
+    }
+  },
   "bm-11m": {
     "image": "/devices/bm-11m.webp",
     "variants": {

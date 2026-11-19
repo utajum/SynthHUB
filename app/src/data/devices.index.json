@@ -691,6 +691,28 @@
     "variantCount": 1
   },
   {
+    "slug": "jam",
+    "name": "JAM",
+    "app": "controltribe",
+    "pids": ["0x128f"],
+    "aliases": ["JAM"],
+    "protocols": [1],
+    "functions": ["Device Settings", "Sequencer", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
+    "slug": "jam-play",
+    "name": "JAM PLAY",
+    "app": "controltribe",
+    "pids": ["0x1291"],
+    "aliases": ["JAM PLAY", "JAMPLAY"],
+    "protocols": [1],
+    "functions": ["Device Settings", "Sequencer", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
     "slug": "bm-11m",
     "name": "BM-11M",
     "app": "guitartribe",
