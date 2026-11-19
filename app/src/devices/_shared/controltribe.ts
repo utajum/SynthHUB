@@ -10,6 +10,8 @@ type CtKind = 'enum' | 'range' | 'step';
 // or this control's value
 export interface CtArg {
   ref?: string;
+  // another param of a group frame (table devices): its current value
+  peer?: string;
   add?: number;
   const?: number;
   value?: true;
@@ -36,6 +38,8 @@ export interface CtControl {
   args?: CtArg[];
   // UI-only selector feeding other controls' args; never sent
   local?: boolean;
+  // value always as <flags> <hi> <lo> (QT32 PLAY 16-bit params)
+  wide?: boolean;
 }
 
 // "options": "notes" in the JSON = MIDI note names, C-2 = 0 .. G8 = 127
@@ -67,6 +71,8 @@ interface CtDevice {
   productId: number;
   // bytes after F0 00 20 32 when not <deviceId> <productId>
   header?: number[];
+  // false when the unit has no 0x72 store (table devices save on their own)
+  store?: boolean;
   // confirmed one-shot commands (JAM: restore settings, erase all data)
   actions?: { label: string; bytes: number[]; confirm: string }[];
   controls: CtControl[];
@@ -137,6 +143,13 @@ export function buildCtQuery(
   ]);
 }
 
+// one value on the wire: 7-bit, or 3 bytes for wide params
+function ctWire(c: CtControl, v: number): number[] {
+  return c.wide
+    ? [((v >> 6) & 2) | ((v >> 15) & 1), (v >> 8) & 0x7f, v & 0x7f]
+    : [v & 0x7f];
+}
+
 // payload bytes of a control with args; value null -> the bytes before it
 function ctArgBytes(
   d: CtDevice,
@@ -148,7 +161,14 @@ function ctArgBytes(
   for (const a of c.args ?? []) {
     if (a.value) {
       if (value === null) break;
-      out.push(value & 0x7f);
+      out.push(...ctWire(c, value));
+      continue;
+    }
+    if (a.peer) {
+      // a query stops at the first param of a group frame
+      if (value === null) break;
+      const p = d.controls.find((x) => x.method === a.peer)!;
+      out.push(...ctWire(p, values[ctId(p)] ?? p.default));
       continue;
     }
     const r = a.ref ? d.controls.find((x) => x.method === a.ref) : undefined;
@@ -178,6 +198,51 @@ export function buildCtControl(
     ...ctArgBytes(d, c, value, values),
     0xf7,
   ]);
+}
+
+// group frame (args) -> one update per param it carries, or null
+export function parseCtReplies(
+  slug: string,
+  data: Uint8Array,
+  values: Record<number, number> = {},
+): { id: number; value: number }[] | null {
+  const d = ctDevice(slug);
+  const h = d ? ctHeader(d) : [];
+  if (!d || data.length < h.length + 2) return null;
+  if (h.some((b, i) => data[i] !== b)) return null;
+  const n = h.length;
+  const c = d.controls.find((c) => {
+    if (!c.args || c.local || c.cmd !== data[n]) return false;
+    const pre = ctArgBytes(d, c, null, values);
+    return pre.every((b, i) => data[n + 1 + i] === b);
+  });
+  if (!c) return null;
+  const out: { id: number; value: number }[] = [];
+  let i = n + 1;
+  for (const a of c.args!) {
+    if (i >= data.length - 1) break;
+    const r = a.value
+      ? c
+      : a.peer
+        ? d.controls.find((x) => x.method === a.peer)
+        : undefined;
+    if (!r) {
+      i++;
+      continue;
+    }
+    if (r.wide) {
+      const [f, hi, lo] = [data[i], data[i + 1], data[i + 2]];
+      out.push({
+        id: ctId(r),
+        value: ((((f & 1) << 7) | hi) << 8) | ((f & 2) << 6) | lo,
+      });
+      i += 3;
+    } else {
+      out.push({ id: ctId(r), value: data[i] });
+      i++;
+    }
+  }
+  return out;
 }
 
 // device reply -> { id: ctId of the control, value }, or null if not ours

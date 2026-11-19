@@ -23,6 +23,7 @@ import {
   ctOptionValue,
   ctSections,
   ctStepRows,
+  parseCtReplies,
   parseCtReply,
 } from '../devices/_shared/controltribe';
 import CtStepGrid from './CtStepGrid';
@@ -48,8 +49,10 @@ export default function ControlTribeSettings(props: Props) {
   // mirror device replies (F0 00 20 32 devId prod cmd value F7) into the UI
   onMount(() => {
     const off = midi.onMessage((data) => {
-      const r = parseCtReply(props.slug, data, values());
-      if (r) setValues((p) => ({ ...p, [r.id]: r.value }));
+      // group frames (table devices) carry several params
+      const many = parseCtReplies(props.slug, data, values());
+      const r = many ?? [parseCtReply(props.slug, data, values())];
+      for (const x of r) if (x) setValues((p) => ({ ...p, [x.id]: x.value }));
     });
     onCleanup(off);
     // auto-read current values on open so the UI never shows stale defaults
@@ -96,13 +99,15 @@ export default function ControlTribeSettings(props: Props) {
       return;
     }
     let i = 0;
+    const seen = new Set<string>();
     for (const c of d.controls) {
       if (c.local) continue;
+      // controls of one group frame share a query
+      const q = buildCtControl(props.slug, c, null, values());
+      if (seen.has(ctHex(q))) continue;
+      seen.add(ctHex(q));
       // stagger so we don't flood the port
-      setTimeout(
-        () => midi.send(out()!, buildCtControl(props.slug, c, null, values())),
-        i * 12,
-      );
+      setTimeout(() => midi.send(out()!, q), i * 12);
       i++;
     }
     actions().pushLog({
@@ -148,12 +153,14 @@ export default function ControlTribeSettings(props: Props) {
           <button class="btn tiny" onClick={queryAll}>
             query all
           </button>
-          <button
-            class="btn tiny"
-            onClick={() => send(buildCtStore(props.slug), 'store')}
-          >
-            store
-          </button>
+          <Show when={dev()!.store !== false}>
+            <button
+              class="btn tiny"
+              onClick={() => send(buildCtStore(props.slug), 'store')}
+            >
+              store
+            </button>
+          </Show>
           <button class="btn tiny ghost" onClick={exportJson}>
             export json
           </button>
