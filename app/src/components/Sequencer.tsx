@@ -256,7 +256,11 @@ export default function SequencerView(props: Props) {
     : (WIRE_DIMS[props.fn.type ?? -1] ?? MANUAL_DIMS[props.fn.type ?? -1]);
   const isTD3 = !explicitCount && props.fn.type === 1;
   // config group names (MINI POPS 7 "I,II") set the bank count and names
-  const groupNames = props.fn.pattern_group_labels?.split(',');
+  const groups = props.fn.pattern_group_labels
+    ?.split(',')
+    .map((x) => x.trim())
+    .filter(Boolean);
+  const groupNames = groups?.length ? groups : undefined;
   const engine = new Sequencer(isDrum() ? 'drum' : 'mono', maxSteps(), rows(), {
     patternCount: explicitCount
       ? (props.fn.pattern_count as number)
