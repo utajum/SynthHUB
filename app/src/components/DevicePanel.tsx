@@ -28,6 +28,8 @@ import FirmwareView from './FirmwareView';
 import ManualsView from './ManualsView';
 import { fetchManuals } from '../lib/manuals';
 import ImageZoomModal from './ImageZoomModal';
+import Pk61Map from './Pk61Map';
+import Aq64lPanel from './Aq64lPanel';
 import { actions, useApp } from '../lib/store-solid';
 import { midi } from '../lib/midi/webmidi';
 import { buildPresetSyx, sendPresetSyx } from '../devices/_shared/preset';
@@ -43,8 +45,6 @@ import {
 } from '../devices/_shared/params-extra';
 import PolyChainView from './PolyChain';
 import ControlTribeSettings from './ControlTribeSettings';
-import Pk61Map from './Pk61Map';
-import Aq64lPanel from './Aq64lPanel';
 import GuitarTribePresets from './GuitarTribePresets';
 import PatchLibrary from './PatchLibrary';
 import { deviceImage, deviceImageFull } from '../lib/deviceImages';
