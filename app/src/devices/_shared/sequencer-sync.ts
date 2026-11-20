@@ -3,6 +3,7 @@
 // Write: same body with cmd 0x78. Types 0/1 fully modeled;
 // other types round-trip byte-exact via the raw payload.
 import type { DeviceVariant } from '../../lib/types';
+import { midi } from '../../lib/midi/webmidi';
 import type { Step } from '../../lib/sequencer';
 import { defaultStep } from '../../lib/sequencer';
 import {
@@ -135,6 +136,42 @@ export function decodeDump(
     bytes: unpackNibbles(payload.slice(2)),
     raw,
   };
+}
+
+// Store ACK (SynthTribe 3.3.x): types whose store waits for `01 <x> <status>`
+// after each 0x78 write; status 0 = stored. No ACK within 3 s = not stored.
+export const STORE_ACK_TYPES = new Set([6, 11, 12]);
+const STORE_ACK_TIMEOUT_MS = 3000;
+
+// status byte of an inbound store ACK for `variant`, or null
+export function parseStoreAck(
+  variant: DeviceVariant,
+  data: Uint8Array,
+): number | null {
+  const f = parseFrame(variant, data);
+  if (!f || f.cmd !== 0x01 || f.payload.length < 2) return null;
+  return f.payload[1];
+}
+
+// wait for `count` store ACKs (call before sending): the first non-zero
+// status, 0 when all are 0, null when they miss the 3 s deadline
+export function waitStoreAck(
+  variant: DeviceVariant,
+  count = 1,
+): Promise<number | null> {
+  return new Promise((resolve) => {
+    let left = count;
+    const done = (r: number | null) => {
+      clearTimeout(timer);
+      off();
+      resolve(r);
+    };
+    const off = midi.onMessage((data) => {
+      const st = parseStoreAck(variant, data);
+      if (st !== null && (st !== 0 || --left === 0)) done(st);
+    });
+    const timer = setTimeout(() => done(null), STORE_ACK_TIMEOUT_MS);
+  });
 }
 
 // byte-exact write: re-send a previously received 0x78 payload unchanged (the

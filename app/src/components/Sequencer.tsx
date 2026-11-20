@@ -46,6 +46,8 @@ import {
   seq12Frames,
   SEQ_TYPE_NAMES,
   seqCaps,
+  STORE_ACK_TYPES,
+  waitStoreAck,
   type SeqCaps,
 } from '../devices/_shared/sequencer-sync';
 import { buildPKT, hex, parseFrame, splitSysex } from '../lib/midi/sysex';
@@ -925,11 +927,35 @@ function DeviceSyncBar(props: {
       );
       return;
     }
+    const ackWait = STORE_ACK_TYPES.has(props.type);
+    if (ackWait) {
+      setBusy(true);
+      setStatus('storing...');
+      void waitStoreAck(variant).then((st) => {
+        setBusy(false);
+        if (st === null) {
+          setStatus(
+            'store failed: the device did not respond. The pattern may not have been saved.',
+          );
+          return;
+        }
+        log('in', `store ACK: status ${st}`);
+        if (st !== 0) {
+          setStatus(
+            `store failed: the device rejected the pattern (status ${st})`,
+          );
+          return;
+        }
+        props.engine.markClean();
+        setStatus('store completed');
+      });
+    }
     props.driver.sendRaw(out, msg);
     log(
       'out',
       `write bank ${props.state().bank} pattern ${props.state().pattern} (0x78)  >  ${msg.length} bytes sent`,
     );
+    if (ackWait) return;
     // editor content is now on the device
     props.engine.markClean();
     setStatus('pattern written to device');
@@ -1037,11 +1063,19 @@ function DeviceSyncBar(props: {
         )
       )
         return;
-      // like the SynthTribe store: global, song, pattern back to back
+      // like the SynthTribe store: global, song, pattern back to back, then
+      // one store ACK each
+      const acks = waitStoreAck(variant, frames.length);
       frames.forEach((f) => props.driver.sendRaw(out, f));
       log('out', `import ${file.name}: global, song and pattern blocks sent`);
+      setStatus('storing...');
+      const st = await acks;
       setStatus(
-        `imported ${file.name} into song ${bank + 1} pattern ${pattern + 1}`,
+        st === 0
+          ? `imported ${file.name} into song ${bank + 1} pattern ${pattern + 1}`
+          : st === null
+            ? 'store failed: the device did not respond. The pattern may not have been saved.'
+            : `store failed: the device rejected the pattern (status ${st})`,
       );
       return;
     }
@@ -1098,7 +1132,9 @@ function DeviceSyncBar(props: {
         </button>
         <button
           class="btn ghost tiny"
-          disabled={!props.outputId() || (props.type !== 1 && !lastRaw())}
+          disabled={
+            busy() || !props.outputId() || (props.type !== 1 && !lastRaw())
+          }
           onClick={writePattern}
           title={
             props.type === 1
