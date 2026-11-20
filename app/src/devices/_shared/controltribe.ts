@@ -4,6 +4,7 @@
 // + (deviceId, productId) pairs live in data/controltribe.json. JAM / JAM
 // PLAY use a 4-byte `header` instead, and some controls carry `args`.
 import data from '../../data/controltribe.json';
+import { jInt, jNum, jProp, jStr, vtRead, vtWrite } from './juce-valuetree';
 
 type CtKind = 'enum' | 'range' | 'step';
 // one payload byte after cmd: another control's value (+ add), a constant,
@@ -67,6 +68,15 @@ export function ctOptionValue(c: CtControl, i: number): number {
   return c.values?.[i] ?? i;
 }
 
+// one-shot command; `ref` names a control whose value is appended
+// (QT32 PLAY favourite index)
+export interface CtAction {
+  label: string;
+  bytes: number[];
+  confirm?: string;
+  ref?: string;
+}
+
 interface CtDevice {
   name: string;
   deviceId: number;
@@ -78,7 +88,10 @@ interface CtDevice {
   // shared arg lists of group frames; a control's own peer is its value
   groups?: CtArg[][];
   // confirmed one-shot commands (JAM: restore settings, erase all data)
-  actions?: { label: string; bytes: number[]; confirm: string }[];
+  actions?: CtAction[];
+  // project file (MainComponent::saveProject): ValueTree "root" with these
+  // format / device names and one int per param
+  project?: { format: string; device: string; ext: string };
   controls: CtControl[];
 }
 export interface CtStepRow {
@@ -216,12 +229,13 @@ export function buildCtControl(
   ]);
 }
 
-// group frame (args) -> one update per param it carries, or null
-export function parseCtReplies(
+// the args control a reply answers: header, cmd and the bytes before the
+// value match; n = header length
+function ctArgsReply(
   slug: string,
   data: Uint8Array,
-  values: Record<number, number> = {},
-): { id: number; value: number }[] | null {
+  values: Record<number, number>,
+): { d: CtDevice; c: CtControl; n: number } | null {
   const d = ctDevice(slug);
   const h = d ? ctHeader(d) : [];
   if (!d || data.length < h.length + 2) return null;
@@ -232,7 +246,18 @@ export function parseCtReplies(
     const pre = ctArgBytes(d, c, null, values);
     return pre.every((b, i) => data[n + 1 + i] === b);
   });
-  if (!c) return null;
+  return c ? { d, c, n } : null;
+}
+
+// group frame (args) -> one update per param it carries, or null
+export function parseCtReplies(
+  slug: string,
+  data: Uint8Array,
+  values: Record<number, number> = {},
+): { id: number; value: number }[] | null {
+  const m = ctArgsReply(slug, data, values);
+  if (!m) return null;
+  const { d, c, n } = m;
   const out: { id: number; value: number }[] = [];
   let i = n + 1;
   for (const a of c.args!) {
@@ -267,21 +292,16 @@ export function parseCtReply(
   data: Uint8Array,
   values: Record<number, number> = {},
 ): { id: number; value: number } | null {
+  const m = ctArgsReply(slug, data, values);
+  if (m) {
+    const i = m.n + 1 + ctArgBytes(m.d, m.c, null, values).length;
+    return i < data.length - 1 ? { id: ctId(m.c), value: data[i] } : null;
+  }
   const d = ctDevice(slug);
   const h = d ? ctHeader(d) : [];
   if (!d || data.length < h.length + 3) return null;
   if (h.some((b, i) => data[i] !== b)) return null;
   const n = h.length;
-  // args controls: cmd + the expected bytes before the value
-  const a = d.controls.find((c) => {
-    if (!c.args || c.local || c.cmd !== data[n]) return false;
-    const pre = ctArgBytes(d, c, null, values);
-    return pre.every((b, i) => data[n + 1 + i] === b);
-  });
-  if (a) {
-    const i = n + 1 + ctArgBytes(d, a, null, values).length;
-    return i < data.length - 1 ? { id: ctId(a), value: data[i] } : null;
-  }
   const c =
     d.controls.find((c) => c.page === data[n] && c.cmd === data[n + 1]) ??
     d.controls.find(
@@ -297,6 +317,82 @@ export function parseCtReply(
         data[i + 2]
       : data[i];
   return { id: ctId(c), value: v };
+}
+
+// one frame per group frame or control, for a paced read (queries) or write
+// (current values); `match` = the reply prefix that answers it
+export function ctSyncFrames(
+  slug: string,
+  values: Record<number, number>,
+  write: boolean,
+): { frame: Uint8Array; match: number[] }[] {
+  const out: { frame: Uint8Array; match: number[] }[] = [];
+  const seen = new Set<string>();
+  for (const c of ctDevice(slug)?.controls ?? []) {
+    if (c.local) continue;
+    const q = buildCtControl(slug, c, null, values);
+    const key = ctHex(q);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const frame = write
+      ? buildCtControl(slug, c, values[ctId(c)] ?? c.default, values)
+      : q;
+    out.push({ frame, match: Array.from(q.subarray(0, q.length - 1)) });
+  }
+  return out;
+}
+
+export function buildCtProject(
+  slug: string,
+  values: Record<number, number>,
+): Uint8Array {
+  const d = ctDevice(slug);
+  if (!d?.project) throw new Error(`no project file for ${slug}`);
+  return vtWrite({
+    type: 'root',
+    props: [
+      ['format', jStr(d.project.format)],
+      ['formatVersion', jInt(1)],
+      ['device', jStr(d.project.device)],
+      ...d.controls.map((c): [string, ReturnType<typeof jInt>] => [
+        c.method,
+        jInt(values[ctId(c)] ?? c.default),
+      ]),
+    ],
+    children: [],
+  });
+}
+
+// project file -> control values, or the Control Tribe error text
+export function parseCtProject(
+  slug: string,
+  bytes: Uint8Array,
+): Record<number, number> | string {
+  const d = ctDevice(slug);
+  if (!d?.project) return 'That file could not be read.';
+  let t;
+  try {
+    t = vtRead(bytes);
+  } catch {
+    return 'That file could not be read.';
+  }
+  const str = (k: string) => {
+    const v = jProp(t, k);
+    return v?.t === 'string' ? v.v : '';
+  };
+  if (str('format') !== d.project.format || str('device') !== d.project.device)
+    return `That is not a ${d.name} settings file.`;
+  if ((jNum(jProp(t, 'formatVersion')) ?? 0) >= 2)
+    return 'That settings file was written by a newer version of this application.';
+  const out: Record<number, number> = {};
+  for (const c of d.controls) {
+    const v = jNum(jProp(t, c.method));
+    if (v === undefined) continue;
+    // ranges clamp; enums keep the wire value as stored
+    out[ctId(c)] =
+      c.kind === 'range' ? Math.max(c.min, Math.min(c.max, v | 0)) : v | 0;
+  }
+  return out;
 }
 
 // raw frame for a device action: header + bytes

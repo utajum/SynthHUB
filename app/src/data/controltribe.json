@@ -5932,6 +5932,28 @@
     "name": "QT32 PLAY",
     "header": [0, 1, 69, 127],
     "store": false,
+    "actions": [
+      {
+        "label": "Favourite Read",
+        "bytes": [66],
+        "ref": "FavouriteIndex"
+      },
+      {
+        "label": "Favourite Send",
+        "bytes": [67],
+        "ref": "FavouriteIndex"
+      },
+      {
+        "label": "Factory Reset",
+        "bytes": [125],
+        "confirm": "This will erase all settings on the device, restoring it to factory defaults. This action cannot be undone. Proceed?"
+      }
+    ],
+    "project": {
+      "format": "QT32PlayProject",
+      "device": "QT32 PLAY",
+      "ext": ".qt32play"
+    },
     "groups": [
       [
         {
@@ -6325,6 +6347,26 @@
           }
         ],
         "wide": true
+      },
+      {
+        "cmd": 0,
+        "section": "General",
+        "min": 0,
+        "max": 7,
+        "default": 0,
+        "method": "FavouriteIndex",
+        "kind": "enum",
+        "options": [
+          "Favourite 1",
+          "Favourite 2",
+          "Favourite 3",
+          "Favourite 4",
+          "Favourite 5",
+          "Favourite 6",
+          "Favourite 7",
+          "Favourite 8"
+        ],
+        "local": true
       },
       {
         "cmd": 28,
@@ -8365,6 +8407,18 @@
     "name": "GROOVE KEY",
     "header": [0, 1, 66, 0],
     "store": false,
+    "actions": [
+      {
+        "label": "Factory Restore",
+        "bytes": [125],
+        "confirm": "This will erase all sequences and settings on the device, restoring it to factory defaults. This action cannot be undone. Proceed?"
+      }
+    ],
+    "project": {
+      "format": "GrooveKeyProject",
+      "device": "Groove Key",
+      "ext": ".grooveKey"
+    },
     "groups": [
       [
         {
@@ -10901,6 +10955,11 @@
     "name": "PK61",
     "header": [0, 1, 107, 0],
     "store": false,
+    "project": {
+      "format": "PK61Project",
+      "device": "PK61",
+      "ext": ".pk61"
+    },
     "groups": [
       [
         {
