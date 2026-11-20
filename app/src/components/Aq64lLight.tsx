@@ -6,23 +6,24 @@ import { midi } from '../lib/midi/webmidi';
 import { actions } from '../lib/store-solid';
 import {
   AQ_LEDS,
+  aqFromHex,
+  aqHex,
   aqLightFrames,
   aqProgramMode,
 } from '../devices/_shared/aq64l';
 
 interface Frame {
   ms: number;
-  leds: number[]; // 0xRRGGBB, 0 = off
+  leds: number[]; // 0xAARRGGBB, 0 = off
 }
 const blank = (ms = 200): Frame => ({ ms, leds: Array(AQ_LEDS).fill(0) });
-const hex = (c: number) => `#${(c & 0xffffff).toString(16).padStart(6, '0')}`;
 
 export default function Aq64lLight(props: {
   outputId: () => string | undefined;
 }) {
   const [frames, setFrames] = createSignal<Frame[]>([blank()]);
   const [cur, setCur] = createSignal(0);
-  const [colour, setColour] = createSignal(0xff0000);
+  const [colour, setColour] = createSignal(0xffff0000);
   const [loop, setLoop] = createSignal(false);
   const [onPad, setOnPad] = createSignal(true);
   const [playing, setPlaying] = createSignal(false);
@@ -91,7 +92,7 @@ export default function Aq64lLight(props: {
         height: led < 8 ? '16px' : '26px',
         padding: 0,
         background: frames()[cur()].leds[led]
-          ? hex(frames()[cur()].leds[led])
+          ? aqHex(frames()[cur()].leds[led])
           : '#222',
         border: '1px solid #0008',
         'border-radius': '4px',
@@ -160,10 +161,8 @@ export default function Aq64lLight(props: {
           colour
           <input
             type="color"
-            value={hex(colour())}
-            onInput={(e) =>
-              setColour(parseInt(e.currentTarget.value.slice(1), 16))
-            }
+            value={aqHex(colour())}
+            onInput={(e) => setColour(aqFromHex(e.currentTarget.value))}
           />
         </label>
       </div>
