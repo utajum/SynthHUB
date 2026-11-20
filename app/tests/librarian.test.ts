@@ -118,7 +118,8 @@ test('.syx: write streams per preset round-trip to slots', () => {
   );
 });
 
-// minimal UB-Xa: answers gets with a stored file, ACKs writes (NAKs once)
+// minimal UB-Xa: ACKs a get and sends the file after the host EOF, NAKs a
+// missing file, ACKs writes (NAKs once) but never the final EOF
 test('transfers: readFile/writeFile against an emulated device', async () => {
   const { midi } = await import('../src/lib/midi/webmidi.ts');
   const { readFile, writeFile } =
@@ -131,6 +132,7 @@ test('transfers: readFile/writeFile against an emulated device', async () => {
   const store = new Map<string, { size: number; data: number[] }>();
   let rx = new FileReceiver(v);
   let naks = 1;
+  let pending: string | null = null;
   Object.assign(midi, {
     onMessage: (l: (d: Uint8Array) => void) => {
       listeners.add(l);
@@ -139,13 +141,19 @@ test('transfers: readFile/writeFile against an emulated device', async () => {
     send: (_out: string, d: Uint8Array) => {
       if (d[10] === 0x03) {
         const name = String.fromCharCode(...d.slice(16, 32));
-        const f = store.get(name);
-        if (f)
-          for (const m of [
-            ...buildFileWrite(v, name, f.size, f.data, []),
-            FILE_EOF,
-          ])
-            reply(m);
+        pending = store.has(name) ? name : null;
+        reply(pending ? ack : nak);
+        return true;
+      }
+      if (pending && d[3] === 0x7b) {
+        const f = store.get(pending)!;
+        const name = pending;
+        pending = null;
+        for (const m of [
+          ...buildFileWrite(v, name, f.size, f.data, []),
+          FILE_EOF,
+        ])
+          reply(m);
         return true;
       }
       if (d[10] === 0x02 && naks-- > 0) {
@@ -155,6 +163,7 @@ test('transfers: readFile/writeFile against an emulated device', async () => {
       if (rx.feed(d) === 'eof') {
         store.set(rx.name, { size: rx.size, data: rx.data });
         rx = new FileReceiver(v);
+        return true;
       }
       reply(ack);
       return true;
@@ -170,5 +179,8 @@ test('transfers: readFile/writeFile against an emulated device', async () => {
     size: 77,
     data,
   });
-  assert.equal(await readFile(v, 'o', patchFile(10), [], 50), null);
+  // a missing file is NAKed at once, not after the timeout
+  const t0 = Date.now();
+  assert.equal(await readFile(v, 'o', patchFile(10), []), null);
+  assert.ok(Date.now() - t0 < 1000);
 });

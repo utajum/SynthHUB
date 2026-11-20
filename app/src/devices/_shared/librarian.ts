@@ -268,7 +268,8 @@ function universal(d: ArrayLike<number>): Universal | null {
   return d[3] === 0x7f ? 'ack' : d[3] === 0x7e ? 'nak' : null;
 }
 
-// read one file; null on timeout or a bad checksum
+// read one file; null on NAK, timeout or a bad checksum. The device ACKs
+// the get, the host closes it with EOF, then the file follows.
 export function readFile(
   variant: DeviceVariant,
   out: string,
@@ -278,11 +279,22 @@ export function readFile(
 ): Promise<{ size: number; data: number[] } | null> {
   return new Promise((resolve) => {
     const rx = new FileReceiver(variant);
-    const off = midi.onMessage((d) => {
-      if (rx.feed(d) !== 'eof') return;
+    let acked = false;
+    const done = (r: { size: number; data: number[] } | null) => {
       clearTimeout(timer);
       off();
-      resolve(rx.ok ? { size: rx.size, data: rx.data } : null);
+      resolve(r);
+    };
+    const off = midi.onMessage((d) => {
+      const u = universal(d);
+      if (u === 'nak') return done(null);
+      if (u === 'ack') {
+        if (!acked) midi.send(out, FILE_EOF);
+        acked = true;
+        return;
+      }
+      if (rx.feed(d) !== 'eof') return;
+      done(rx.ok ? { size: rx.size, data: rx.data } : null);
     });
     const timer = setTimeout(() => {
       off();
@@ -308,7 +320,8 @@ function nextReply(timeoutMs: number): Promise<Universal | null> {
   });
 }
 
-// write one file, one ACK per frame; a NAK restarts it (3 tries, 300 ms)
+// write one file, one ACK per frame; a NAK restarts it (3 tries, 300 ms).
+// The EOF ACK is optional: no reply within 500 ms counts as stored.
 export async function writeFile(
   variant: DeviceVariant,
   out: string,
@@ -321,10 +334,11 @@ export async function writeFile(
   for (let attempt = 0; attempt < 3; attempt++) {
     let nak = false;
     for (const f of frames) {
-      const reply = nextReply(3000);
+      const last = f === FILE_EOF;
+      const reply = nextReply(last ? 500 : 3000);
       midi.send(out, f);
       const r = await reply;
-      if (r === 'ack') continue;
+      if (r === 'ack' || (last && r === null)) continue;
       if (r !== 'nak') return false;
       nak = true;
       break;

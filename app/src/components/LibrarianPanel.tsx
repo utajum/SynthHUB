@@ -4,6 +4,7 @@
 import { For, Show, createSignal } from 'solid-js';
 import type { DeviceVariant } from '../lib/types';
 import { queryDeviceFirmware } from '../lib/firmware';
+import { saveFile } from '../lib/midi/port-io';
 import { actions } from '../lib/store-solid';
 import {
   NAMES_FILE,
@@ -103,19 +104,6 @@ export default function LibrarianPanel(props: Props) {
     return '';
   };
 
-  const download = (bytes: Uint8Array, name: string) => {
-    const url = URL.createObjectURL(
-      new Blob([bytes.buffer as ArrayBuffer], {
-        type: 'application/octet-stream',
-      }),
-    );
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = name;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
   const exportAs = (ext: 'stpreset' | 'syx') =>
     run(async (out) => {
       const list = await readSlots(out, sel());
@@ -128,7 +116,7 @@ export default function LibrarianPanel(props: Props) {
         list.length === 1
           ? list[0].name.replace(/[^\w -]+/g, '_').trim() || 'preset'
           : 'UB-Xa presets';
-      download(bytes, `${base}.${ext}`);
+      saveFile(`${base}.${ext}`, bytes, 'application/octet-stream');
       return `exported ${list.length} preset(s) as .${ext}`;
     });
 
