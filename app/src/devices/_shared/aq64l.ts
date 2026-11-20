@@ -499,3 +499,108 @@ export async function aqSendPaced(
   }
   return missed;
 }
+
+// ---- program page: paint the 80 LEDs (AQ64LProgramPage, AQ64L::fill*) ---
+// LED ids: 0-63 pads (row by row), 64-71 the top buttons, 72-79 the right
+// buttons. Frames: 66 <on> program mode, 68 <led> <c> erase / set,
+// 6C <c> fill all, 6F <c> <loop> <text> scrolling text (6F 00 00 stops),
+// 70 <specs> colours, 72 <0-100> brightness, 73 <0|1> save to USER1 / 2.
+// <c> = index into the device's 128 colours.
+
+export const AQ_LEDS = 80;
+export const AQ_TOOLS = [
+  'Paint',
+  'Fill Row',
+  'Fill Column',
+  'Fill All',
+  'Pick',
+  'Erase',
+];
+export const AQ_EFFECTS = ['Static', 'Flash', 'Pulse'];
+
+// 128 x 6-bit RGB (AQ64L colour table)
+const PAL6 =
+  '0000000707071f1f1f3f3f3f3f12123f00001500000600003f2e1a3f1400150700090600' +
+  '3f3f123f3f00151500060600213f12143f00071500040a00123f12003f00001500000600' +
+  '123f17003f06001503000600123f21003f15001507000704123f2d003f2500150d000604' +
+  '12303f00293f00101400030612213f00153f00071500010612123f00003f000015000006' +
+  '21123f14003f06001803000b3f123f3f003f1500150600063f12213f0014150007080004' +
+  '3f0500250d001d1400101800000e0000150d00141f00003f0011130900321f1f1f070707' +
+  '3f00002e3f0b2b3a01183f02032200003f2100293f000a3f0f003f1e003f2b061e0f0800' +
+  '3f12002137011c3f05003f000e3f09153f1b0d3f3216223f0c1430211f3934073f3f0016' +
+  '3f1f002d2b00233f002016010e0a0004120303130d05050a050716190e0629000236140f' +
+  '351a063f370927370b192c0307070b363f1a1f3f2e26253f23193f0f0f0f1c1c1c373f3f' +
+  '2700000d00000633000110002d2b000f0c002c1700120500';
+
+// 6-bit -> 8-bit as Control Tribe expands it
+const x8 = (c: number) => {
+  const v = c * 0xff + 0x1f;
+  const t = ((v & 0xffff) * 0x411) >> 16;
+  return ((((v - t) & 0xffff) >> 1) + t) >> 5;
+};
+export const AQ_PALETTE: number[] = Array.from({ length: 128 }, (_, i) => {
+  const [r, g, b] = [0, 1, 2].map((k) =>
+    x8(parseInt(PAL6.slice((i * 3 + k) * 2, (i * 3 + k) * 2 + 2), 16)),
+  );
+  return (0xff000000 | (r << 16) | (g << 8) | b) >>> 0;
+});
+
+export function aqNearest(colour: number): number {
+  let best = Infinity;
+  let idx = 0;
+  AQ_PALETTE.forEach((p, i) => {
+    const d = [16, 8, 0].reduce(
+      (s, k) => s + (((colour >> k) & 0xff) - ((p >> k) & 0xff)) ** 2,
+      0,
+    );
+    if (d < best) [best, idx] = [d, i];
+  });
+  return idx;
+}
+
+export const aqLedRow = (led: number) =>
+  led < 64 ? led >> 3 : led < 72 ? -1 : led - 72;
+export const aqLedCol = (led: number) =>
+  led < 64 ? led & 7 : led < 72 ? led - 64 : 8;
+
+export const aqProgramMode = (on: boolean) => aqFrame(0x66, on ? 1 : 0);
+export const aqBrightness = (pct: number) =>
+  aqFrame(0x72, Math.max(0, Math.min(100, pct)));
+export const aqSaveProgram = (user: 1 | 2) => aqFrame(0x73, user - 1);
+export const aqProgramReset = () => aqFrame(0x6c, 0);
+export const aqScrollStop = () => aqFrame(0x6f, 0, 0);
+export const aqScrollText = (colour: number, loop: boolean, text: string) =>
+  aqFrame(
+    0x6f,
+    aqNearest(colour),
+    loop ? 1 : 0,
+    ...Array.from(text, (c) => c.charCodeAt(0) & 0x7f),
+  );
+
+// sendButtonCommand: the frame of one click with tool / effect / colour,
+// or null (Pick)
+export function aqToolFrame(
+  tool: number,
+  effect: number,
+  colour: number,
+  led: number,
+): Uint8Array | null {
+  if (tool === 3) return aqFrame(0x6c, aqNearest(colour));
+  if (tool === 4) return null;
+  if (tool === 5) return aqFrame(0x68, led, 0);
+  const leds = Array.from({ length: AQ_LEDS }, (_, i) => i).filter((i) =>
+    tool === 1
+      ? aqLedRow(i) === aqLedRow(led)
+      : tool === 2
+        ? aqLedCol(i) === aqLedCol(led)
+        : i === led,
+  );
+  const r7 = (k: number) => Math.round((((colour >> k) & 0xff) * 127) / 255);
+  const spec = (i: number) =>
+    effect === 0
+      ? [3, i, r7(16), r7(8), r7(0)]
+      : effect === 1
+        ? [1, i, aqNearest(colour), 0]
+        : [2, i, aqNearest(colour)];
+  return aqFrame(0x70, ...leds.flatMap(spec));
+}
