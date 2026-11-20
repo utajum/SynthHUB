@@ -47,8 +47,7 @@ import {
   SEQ_TYPE_NAMES,
   seqCaps,
   STORE_ACK_TYPES,
-  STORE_ACK_TIMEOUT_MS,
-  parseStoreAck,
+  waitStoreAck,
   type SeqCaps,
 } from '../devices/_shared/sequencer-sync';
 import { buildPKT, hex, parseFrame, splitSysex } from '../lib/midi/sysex';
@@ -932,12 +931,14 @@ function DeviceSyncBar(props: {
     if (ackWait) {
       setBusy(true);
       setStatus('storing...');
-      const off = midi.onMessage((data) => {
-        const st = parseStoreAck(variant, data);
-        if (st === null) return;
-        clearTimeout(timer);
-        off();
+      void waitStoreAck(variant).then((st) => {
         setBusy(false);
+        if (st === null) {
+          setStatus(
+            'store failed: the device did not respond. The pattern may not have been saved.',
+          );
+          return;
+        }
         log('in', `store ACK: status ${st}`);
         if (st !== 0) {
           setStatus(
@@ -948,13 +949,6 @@ function DeviceSyncBar(props: {
         props.engine.markClean();
         setStatus('store completed');
       });
-      const timer = setTimeout(() => {
-        off();
-        setBusy(false);
-        setStatus(
-          'store failed: the device did not respond. The pattern may not have been saved.',
-        );
-      }, STORE_ACK_TIMEOUT_MS);
     }
     props.driver.sendRaw(out, msg);
     log(
@@ -1069,11 +1063,19 @@ function DeviceSyncBar(props: {
         )
       )
         return;
-      // like the SynthTribe store: global, song, pattern back to back
+      // like the SynthTribe store: global, song, pattern back to back, then
+      // one store ACK each
+      const acks = waitStoreAck(variant, frames.length);
       frames.forEach((f) => props.driver.sendRaw(out, f));
       log('out', `import ${file.name}: global, song and pattern blocks sent`);
+      setStatus('storing...');
+      const st = await acks;
       setStatus(
-        `imported ${file.name} into song ${bank + 1} pattern ${pattern + 1}`,
+        st === 0
+          ? `imported ${file.name} into song ${bank + 1} pattern ${pattern + 1}`
+          : st === null
+            ? 'store failed: the device did not respond. The pattern may not have been saved.'
+            : `store failed: the device rejected the pattern (status ${st})`,
       );
       return;
     }

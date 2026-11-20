@@ -10,10 +10,7 @@ import {
   retargetBank,
   SAMPLE_BANK_COUNT,
 } from '../devices/_shared/sample';
-import {
-  parseStoreAck,
-  STORE_ACK_TIMEOUT_MS,
-} from '../devices/_shared/sequencer-sync';
+import { waitStoreAck } from '../devices/_shared/sequencer-sync';
 import { decodeWaveSlotNames } from '../devices/_shared/wavetable';
 
 interface Props {
@@ -62,23 +59,15 @@ export default function BulkDump(props: Props) {
       return;
     }
     setBankStatus('importing...');
-    const off = midi.onMessage((data) => {
-      const st = parseStoreAck(v, data);
-      if (st === null) return;
-      clearTimeout(timer);
-      off();
+    void waitStoreAck(v).then((st) =>
       setBankStatus(
-        st === 0
-          ? 'import completed'
-          : `import failed: the device rejected the bank (status ${st})`,
-      );
-    });
-    const timer = setTimeout(() => {
-      off();
-      setBankStatus(
-        'import failed: the device did not respond. The bank may not have been written.',
-      );
-    }, STORE_ACK_TIMEOUT_MS);
+        st === null
+          ? 'import failed: the device did not respond. The bank may not have been written.'
+          : st === 0
+            ? 'import completed'
+            : `import failed: the device rejected the bank (status ${st})`,
+      ),
+    );
     midi.send(out, msg);
     actions().pushLog({
       dir: 'out',

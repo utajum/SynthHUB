@@ -34,3 +34,30 @@ test('bank import: sub 0x4x is rewritten to 0x40 + bank', () => {
   );
   assert.equal(retargetBank(v, buildPKT(v, 0x78, [0x30, 0, 0]), 9), null);
 });
+
+test('waitStoreAck: counts ACKs, stops at the first error', async () => {
+  const { midi } = await import('../src/lib/midi/webmidi.ts');
+  const { waitStoreAck } =
+    await import('../src/devices/_shared/sequencer-sync.ts');
+  const ls = new Set<(d: Uint8Array) => void>();
+  Object.assign(midi, {
+    onMessage: (l: (d: Uint8Array) => void) => {
+      ls.add(l);
+      return () => ls.delete(l);
+    },
+  });
+  const v = variant(rd78);
+  const ack = (st: number) =>
+    ls.forEach((l) => l(buildPKT(v, 0x01, [0x00, st])));
+  const three = waitStoreAck(v, 3);
+  ack(0);
+  ack(0);
+  assert.equal(ls.size, 1);
+  ack(0);
+  assert.equal(await three, 0);
+  assert.equal(ls.size, 0);
+  const bad = waitStoreAck(v, 3);
+  ack(0);
+  ack(4);
+  assert.equal(await bad, 4);
+});
