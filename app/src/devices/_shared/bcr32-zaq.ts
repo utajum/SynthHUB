@@ -35,7 +35,7 @@ export const LANE_SKIP = 8;
 export const LANE_DRUM = 7;
 
 // track params (BCR32Zaquencer::buildTrack, BCR32ZaqSync::apply)
-export const TP = {
+export const ZAQ_TRACK = {
   start: 0,
   length: 1,
   offset: 2,
@@ -48,10 +48,15 @@ export const TP = {
   ctrlB: 0x0c,
   mode: 0x0d, // 1 = drum track
   voiceNote: 0x10, // + voice
-  voiceMute: 0x20, // + voice
+  voiceOn: 0x20, // + voice; 1 = plays (BCR32ZaqDrumGrid::paint)
 } as const;
 // global params (BCR32Zaquencer::buildGeneral, writeThru)
-export const GP = { tempo: 0, thru: 3, noteDisplay: 4, chainPlay: 10 } as const;
+export const ZAQ_GLOBAL = {
+  tempo: 0,
+  thru: 3,
+  noteDisplay: 4,
+  chainPlay: 10,
+} as const;
 
 // prettier-ignore
 export const ZAQ_DIVIDERS = [
@@ -114,7 +119,7 @@ export const zaqData = (): ZaqData => ({
   })),
 });
 
-export const zaqIsDrum = (t: ZaqTrack) => t.params[TP.mode] === 1;
+export const zaqIsDrum = (t: ZaqTrack) => t.params[ZAQ_TRACK.mode] === 1;
 
 // value range of a lane (BCR32ZaqLaneEditor::setFromY)
 export function zaqLaneRange(t: ZaqTrack, lane: number): [number, number] {
@@ -122,12 +127,12 @@ export function zaqLaneRange(t: ZaqTrack, lane: number): [number, number] {
   if (lane === 4) return [0, 15];
   if (lane === 7) return [0, 55];
   if (lane === 3) {
-    const d = t.params[TP.divider] ?? -1;
+    const d = t.params[ZAQ_TRACK.divider] ?? -1;
     const k = d >= 0 && d < 10 ? DIVIDER_TICKS[d] - 1 : 5;
     return [-k, k];
   }
   if (lane === 5 || lane === 6) {
-    const c = t.params[lane === 5 ? TP.ctrlA : TP.ctrlB];
+    const c = t.params[lane === 5 ? ZAQ_TRACK.ctrlA : ZAQ_TRACK.ctrlB];
     return [-1, c === -6 ? 7 : c === -5 ? 8 : 127];
   }
   return [0, 127];
@@ -136,12 +141,12 @@ export function zaqLaneRange(t: ZaqTrack, lane: number): [number, number] {
 // a ctrl lane does nothing while its type is OFF
 export const zaqLaneEditable = (t: ZaqTrack, lane: number) =>
   !(lane === 5 || lane === 6) ||
-  t.params[lane === 5 ? TP.ctrlA : TP.ctrlB] !== -4;
+  t.params[lane === 5 ? ZAQ_TRACK.ctrlA : ZAQ_TRACK.ctrlB] !== -4;
 
 // steps outside start / length play no part (paintToggleRow)
 export function zaqInWindow(t: ZaqTrack, step: number): boolean {
-  const s = t.params[TP.start];
-  const n = t.params[TP.length];
+  const s = t.params[ZAQ_TRACK.start];
+  const n = t.params[ZAQ_TRACK.length];
   if (s === undefined || n === undefined) return true;
   return (((step - s + 1) % 32) + 32) % 32 < n;
 }
@@ -192,11 +197,11 @@ export const zaqGlobalWrite = (p: number, v: number) =>
   req(0x47, 2, -1, -1, p, v);
 export const zaqLoadPreset = (n: number) => req(0x48, 2, -1, -1, 0, n);
 
-// drum voice notes and mutes (enqueueDrumParameters)
+// drum voice notes and on / off (enqueueDrumParameters)
 export const zaqDrumReads = (t: number) =>
   Array.from({ length: ZAQ_VOICES }, (_, i) => [
-    req(0x46, 1, t, -1, TP.voiceNote + i),
-    req(0x46, 1, t, -1, TP.voiceMute + i),
+    req(0x46, 1, t, -1, ZAQ_TRACK.voiceNote + i),
+    req(0x46, 1, t, -1, ZAQ_TRACK.voiceOn + i),
   ]).flat();
 
 // BCR32ZaqSync::readAll order
@@ -204,7 +209,7 @@ export function zaqReadAll(): ZaqReq[] {
   const out = [req(0x48, 0, -1, -1, 0)];
   for (const p of [0, 3, 4, 10]) out.push(req(0x47, 1, -1, -1, p));
   for (let t = 0; t < ZAQ_TRACKS; t++) {
-    out.push(req(0x46, 1, t, -1, TP.mode));
+    out.push(req(0x46, 1, t, -1, ZAQ_TRACK.mode));
     for (const p of [0, 1, 2, 3, 4, 5, 6, 7, 0x0b, 0x0c])
       out.push(req(0x46, 1, t, -1, p));
     for (let l = 0; l < ZAQ_LANES; l++) out.push(req(0x45, 1, t, -1, l));
@@ -318,7 +323,11 @@ export function zaqApply(z: ZaqData, r: ZaqReply): ZaqReq[] {
     if (r.param >= 0x30) return [];
     t.params[r.param] = v;
     // a drum track also carries its voice notes and mutes
-    if (r.param === TP.mode && v === 1 && t.params[TP.voiceNote] === undefined)
+    if (
+      r.param === ZAQ_TRACK.mode &&
+      v === 1 &&
+      t.params[ZAQ_TRACK.voiceNote] === undefined
+    )
       return zaqDrumReads(r.track);
     return [];
   }
@@ -368,10 +377,6 @@ export class ZaqLink {
       else this.q.push(r);
     }
     void this.pump();
-  }
-
-  get pending() {
-    return this.q.length + (this.running ? 1 : 0);
   }
 
   idle(): Promise<void> {

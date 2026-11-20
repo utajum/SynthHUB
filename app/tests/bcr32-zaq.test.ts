@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { midi } from '../src/lib/midi/webmidi.ts';
 import {
   LANE_DRUM,
-  TP,
+  ZAQ_TRACK,
   ZaqLink,
   zaqApply,
   zaqData,
@@ -33,7 +33,7 @@ test('frames: BCR32ZaqSync::Request::toMessage', () => {
     `${H} 44 02 01 07 04 03 7f 7f f7`,
   );
   assert.equal(
-    hex(zaqFrame(zaqTrackWrite(3, TP.divider, 5))),
+    hex(zaqFrame(zaqTrackWrite(3, ZAQ_TRACK.divider, 5))),
     `${H} 46 02 03 03 00 00 05 f7`,
   );
   assert.equal(
@@ -113,16 +113,16 @@ test('data: apply, drum voices, ranges, format', () => {
   zaqApply(z, zaqParse(reply(0x47, [2, 0, 2, 0, 0, 5]))!);
   assert.equal(z.globals[0], undefined);
   const t = z.tracks[0];
-  t.params[TP.divider] = 4; // 1/16 = 6 ticks
+  t.params[ZAQ_TRACK.divider] = 4; // 1/16 = 6 ticks
   assert.deepEqual(zaqLaneRange(t, 3), [-5, 5]);
-  t.params[TP.divider] = 0; // 1/1 = 96 ticks
+  t.params[ZAQ_TRACK.divider] = 0; // 1/1 = 96 ticks
   assert.deepEqual(zaqLaneRange(t, 3), [-95, 95]);
-  t.params[TP.ctrlA] = -5; // ratchet
+  t.params[ZAQ_TRACK.ctrlA] = -5; // ratchet
   assert.deepEqual(zaqLaneRange(t, 5), [-1, 8]);
-  t.params[TP.ctrlB] = -4; // OFF
+  t.params[ZAQ_TRACK.ctrlB] = -4; // OFF
   assert.equal(zaqLaneEditable(t, 6), false);
-  t.params[TP.start] = 5;
-  t.params[TP.length] = 4;
+  t.params[ZAQ_TRACK.start] = 5;
+  t.params[ZAQ_TRACK.length] = 4;
   assert.deepEqual(
     [3, 4, 7, 8].map((s) => zaqInWindow(t, s)),
     [false, true, true, false],

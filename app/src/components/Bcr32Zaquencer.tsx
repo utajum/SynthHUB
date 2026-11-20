@@ -15,11 +15,11 @@ import { midi } from '../lib/midi/webmidi';
 import { actions } from '../lib/store-solid';
 import { bcrZaquencerMode } from '../devices/_shared/bcr32';
 import {
-  GP,
+  ZAQ_GLOBAL,
   LANE_DRUM,
   LANE_MUTE,
   LANE_SKIP,
-  TP,
+  ZAQ_TRACK,
   ZAQ_DIRECTIONS,
   ZAQ_DIVIDERS,
   ZAQ_LANE_EDIT,
@@ -200,9 +200,9 @@ export default function Bcr32Zaquencer(props: {
   );
   const named = (a: string[]) => a.map((n, i): [string, number] => [n, i]);
 
-  const thru = () => data().globals[GP.thru];
+  const thru = () => data().globals[ZAQ_GLOBAL.thru];
   const setThru = (src: number, dest: number) =>
-    setGlobal(GP.thru, (src << 4) | dest);
+    setGlobal(ZAQ_GLOBAL.thru, (src << 4) | dest);
 
   return (
     <div class="stack">
@@ -239,12 +239,12 @@ export default function Bcr32Zaquencer(props: {
             min={30}
             max={300}
             step={0.1}
-            disabled={data().globals[GP.tempo] === undefined}
-            value={(data().globals[GP.tempo] ?? NaN) / 10 || ''}
+            disabled={data().globals[ZAQ_GLOBAL.tempo] === undefined}
+            value={(data().globals[ZAQ_GLOBAL.tempo] ?? NaN) / 10 || ''}
             style={{ width: '5rem' }}
             onChange={(e) =>
               setGlobal(
-                GP.tempo,
+                ZAQ_GLOBAL.tempo,
                 Math.max(
                   300,
                   Math.min(3000, Math.round(+e.currentTarget.value * 10)),
@@ -255,21 +255,21 @@ export default function Bcr32Zaquencer(props: {
         </label>
         {sel(
           'chain play',
-          data().globals[GP.chainPlay],
+          data().globals[ZAQ_GLOBAL.chainPlay],
           named(['OFF', 'ON']),
-          (v) => setGlobal(GP.chainPlay, v),
+          (v) => setGlobal(ZAQ_GLOBAL.chainPlay, v),
         )}
         {sel(
           'note display',
-          data().globals[GP.noteDisplay],
+          data().globals[ZAQ_GLOBAL.noteDisplay],
           named(ZAQ_NOTE_DISPLAY),
-          (v) => setGlobal(GP.noteDisplay, v),
+          (v) => setGlobal(ZAQ_GLOBAL.noteDisplay, v),
         )}
         {sel(
           'thru source',
           thru() === undefined ? undefined : thru()! >> 4,
           named(ZAQ_THRU_SOURCES),
-          (v) => setThru(v, v ? (thru() ?? 0) & 0xf : 0),
+          (v) => setThru(v, (thru() ?? 0) & 0xf),
         )}
         <Show when={(thru() ?? 0) >> 4}>
           {sel(
@@ -321,39 +321,46 @@ export default function Bcr32Zaquencer(props: {
           )}
         </For>
         <span class="tiny dim">
-          {t().params[TP.mode] === undefined ? '' : drum() ? 'DRUM' : 'CHORD'}
-          {t().params[TP.ctrlA] === undefined
+          {t().params[ZAQ_TRACK.mode] === undefined
             ? ''
-            : ` / Ctrl A ${zaqCtrlName(t().params[TP.ctrlA]!)} / Ctrl B ${zaqCtrlName(t().params[TP.ctrlB] ?? -4)}`}
+            : drum()
+              ? 'DRUM'
+              : 'CHORD'}
+          {t().params[ZAQ_TRACK.ctrlA] === undefined
+            ? ''
+            : ` / Ctrl A ${zaqCtrlName(t().params[ZAQ_TRACK.ctrlA]!)} / Ctrl B ${zaqCtrlName(t().params[ZAQ_TRACK.ctrlB] ?? -4)}`}
         </span>
       </div>
       <div class="flex wrap">
-        {sel('mute', t().params[TP.mute], named(['OFF', 'ON']), (v) =>
-          setTrackParam(TP.mute, v),
+        {sel('mute', t().params[ZAQ_TRACK.mute], named(['OFF', 'ON']), (v) =>
+          setTrackParam(ZAQ_TRACK.mute, v),
         )}
-        {num('start', t().params[TP.start], 1, 32, (v) =>
-          setTrackParam(TP.start, v),
+        {num('start', t().params[ZAQ_TRACK.start], 1, 32, (v) =>
+          setTrackParam(ZAQ_TRACK.start, v),
         )}
-        {num('length', t().params[TP.length], 1, 32, (v) =>
-          setTrackParam(TP.length, v),
+        {num('length', t().params[ZAQ_TRACK.length], 1, 32, (v) =>
+          setTrackParam(ZAQ_TRACK.length, v),
         )}
-        {num('offset', t().params[TP.offset], 0, 31, (v) =>
-          setTrackParam(TP.offset, v),
+        {num('offset', t().params[ZAQ_TRACK.offset], 0, 31, (v) =>
+          setTrackParam(ZAQ_TRACK.offset, v),
         )}
         {sel(
           'direction',
-          t().params[TP.direction],
+          t().params[ZAQ_TRACK.direction],
           named(ZAQ_DIRECTIONS),
-          (v) => setTrackParam(TP.direction, v),
+          (v) => setTrackParam(ZAQ_TRACK.direction, v),
         )}
-        {sel('divider', t().params[TP.divider], named(ZAQ_DIVIDERS), (v) =>
-          setTrackParam(TP.divider, v),
+        {sel(
+          'divider',
+          t().params[ZAQ_TRACK.divider],
+          named(ZAQ_DIVIDERS),
+          (v) => setTrackParam(ZAQ_TRACK.divider, v),
         )}
-        {num('shuffle even', t().params[TP.shuffleEven], 0, 5, (v) =>
-          setTrackParam(TP.shuffleEven, v),
+        {num('shuffle even', t().params[ZAQ_TRACK.shuffleEven], 0, 5, (v) =>
+          setTrackParam(ZAQ_TRACK.shuffleEven, v),
         )}
-        {num('shuffle odd', t().params[TP.shuffleOdd], 0, 5, (v) =>
-          setTrackParam(TP.shuffleOdd, v),
+        {num('shuffle odd', t().params[ZAQ_TRACK.shuffleOdd], 0, 5, (v) =>
+          setTrackParam(ZAQ_TRACK.shuffleOdd, v),
         )}
       </div>
 
@@ -371,37 +378,40 @@ export default function Bcr32Zaquencer(props: {
               <>
                 <span class="tiny flex" style={{ gap: '0.3rem' }}>
                   <button
-                    class={
-                      t().params[TP.voiceMute + v()]
-                        ? 'btn tiny'
-                        : 'btn tiny ghost'
-                    }
-                    disabled={t().params[TP.voiceMute + v()] === undefined}
-                    title="voice mute"
+                    class="btn tiny"
+                    style={{
+                      color: t().params[ZAQ_TRACK.voiceOn + v()]
+                        ? '#47d18c'
+                        : '#ff5a5f',
+                    }}
+                    disabled={t().params[ZAQ_TRACK.voiceOn + v()] === undefined}
+                    title="voice on / off"
                     onClick={() =>
                       setTrackParam(
-                        TP.voiceMute + v(),
-                        t().params[TP.voiceMute + v()] ? 0 : 1,
+                        ZAQ_TRACK.voiceOn + v(),
+                        t().params[ZAQ_TRACK.voiceOn + v()] ? 0 : 1,
                       )
                     }
                   >
-                    M
+                    {v() + 1}
                   </button>
                   <input
                     type="number"
                     min={0}
                     max={127}
-                    disabled={t().params[TP.voiceNote + v()] === undefined}
-                    value={t().params[TP.voiceNote + v()] ?? ''}
+                    disabled={
+                      t().params[ZAQ_TRACK.voiceNote + v()] === undefined
+                    }
+                    value={t().params[ZAQ_TRACK.voiceNote + v()] ?? ''}
                     style={{ width: '3.4rem' }}
                     onChange={(e) =>
                       setTrackParam(
-                        TP.voiceNote + v(),
+                        ZAQ_TRACK.voiceNote + v(),
                         Math.max(0, Math.min(127, +e.currentTarget.value | 0)),
                       )
                     }
                   />
-                  {zaqNote(t().params[TP.voiceNote + v()] ?? 0)}
+                  {zaqNote(t().params[ZAQ_TRACK.voiceNote + v()] ?? 0)}
                 </span>
                 <Index each={range(ZAQ_STEPS)}>
                   {(s) => {
