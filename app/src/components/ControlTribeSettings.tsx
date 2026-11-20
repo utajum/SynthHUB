@@ -80,7 +80,10 @@ export default function ControlTribeSettings(props: Props) {
   const setParam = (id: number, value: number) => {
     const c = dev()?.controls.find((c) => ctId(c) === id);
     if (!c) return;
-    const v = Math.max(0, Math.min(Math.max(127, c.max), value | 0));
+    const v = Math.max(
+      Math.min(0, c.min),
+      Math.min(Math.max(127, c.max), value | 0),
+    );
     setValues((p) => ({ ...p, [id]: v }));
     // UI-only selectors (JAM knob layer) send nothing
     if (!c.local)
