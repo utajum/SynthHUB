@@ -668,11 +668,11 @@ function FunctionView(props: {
       <Show
         when={
           !props.fn.settings?.length &&
+          props.slug !== 'bcr32' &&
           !['Sequencer', 'Update', 'PolyChain', 'Device Settings'].includes(
             name,
           ) &&
-          !/alibration/i.test(name) &&
-          props.slug !== 'bcr32'
+          !/alibration/i.test(name)
         }
       >
         <GenericFunctionView
