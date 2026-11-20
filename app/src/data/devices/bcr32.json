@@ -17,6 +17,9 @@
   ],
   "functions": [
     {
+      "name": "Presets"
+    },
+    {
       "name": "Update"
     }
   ]
