@@ -15,6 +15,12 @@ export const AQ_HDR = [0xf0, 0x00, 0x20, 0x32, 0x00, 0x01, 0x6d, 0x7f];
 export const AQ_PADS = 64;
 export const AQ_GLOBAL = 16; // pad channel 16 = the global channel
 
+// 0xAARRGGBB <-> the value of an <input type="color">
+export const aqHex = (c: number) =>
+  `#${(c & 0xffffff).toString(16).padStart(6, '0')}`;
+export const aqFromHex = (s: string) =>
+  (0xff000000 | parseInt(s.slice(1), 16)) >>> 0;
+
 export const aqFrame = (...body: number[]) =>
   Uint8Array.from([...AQ_HDR, ...body.map((b) => b & 0x7f), 0xf7]);
 

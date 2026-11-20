@@ -10,6 +10,8 @@ import {
   AQ_PALETTE,
   AQ_TOOLS,
   aqBrightness,
+  aqFromHex,
+  aqHex,
   aqLedCol,
   aqLedRow,
   aqNearest,
@@ -22,8 +24,6 @@ import {
 } from '../devices/_shared/aq64l';
 
 const OFF = 0xff333333;
-const hex = (c: number) => `#${(c & 0xffffff).toString(16).padStart(6, '0')}`;
-const fromHex = (s: string) => (0xff000000 | parseInt(s.slice(1), 16)) >>> 0;
 
 export default function Aq64lProgram(props: {
   outputId: () => string | undefined;
@@ -65,15 +65,15 @@ export default function Aq64lProgram(props: {
     );
   };
 
-  const cell = (led: number, wide = false) => (
+  const cell = (led: number) => (
     <button
       onClick={() => click(led)}
       title={`LED ${led}`}
       style={{
-        width: wide ? '34px' : '34px',
+        width: '34px',
         height: led < 8 ? '18px' : '28px',
         padding: 0,
-        background: hex(leds()[led]),
+        background: aqHex(leds()[led]),
         border: '1px solid #0008',
         'border-radius': '4px',
       }}
@@ -109,8 +109,8 @@ export default function Aq64lProgram(props: {
           colour
           <input
             type="color"
-            value={hex(colour())}
-            onInput={(e) => setColour(fromHex(e.currentTarget.value))}
+            value={aqHex(colour())}
+            onInput={(e) => setColour(aqFromHex(e.currentTarget.value))}
           />
         </label>
         <label class="tiny flex" style={{ gap: '0.3rem' }}>

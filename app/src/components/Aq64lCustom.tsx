@@ -11,6 +11,8 @@ import {
   AQ_TYPE_LABEL,
   aqApplyTool,
   aqCustomFrames,
+  aqFromHex,
+  aqHex,
   aqKeyName,
   aqKeyStroke,
   aqPreset,
@@ -23,8 +25,6 @@ import {
 
 const NOTES = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B'];
 const OCTAVES = ['-2', '-1', '0', '1', '2', '3', '4', '5', '6', '7'];
-const hex = (c: number) => `#${(c & 0xffffff).toString(16).padStart(6, '0')}`;
-const fromHex = (s: string) => (0xff000000 | parseInt(s.slice(1), 16)) >>> 0;
 
 export default function Aq64lCustom(props: {
   outputId: () => string | undefined;
@@ -214,7 +214,7 @@ export default function Aq64lCustom(props: {
                 height: '34px',
                 padding: 0,
                 'border-radius': '4px',
-                background: d.type ? hex(d.colour) : '#222',
+                background: d.type ? aqHex(d.colour) : '#222',
                 border: sel() === i() ? '2px solid #fff' : '1px solid #0008',
                 color: '#000',
                 'font-size': '9px',
@@ -236,9 +236,9 @@ export default function Aq64lCustom(props: {
                 primary colour
                 <input
                   type="color"
-                  value={hex(d().colour)}
+                  value={aqHex(d().colour)}
                   onChange={(e) =>
-                    setPad({ colour: fromHex(e.currentTarget.value) })
+                    setPad({ colour: aqFromHex(e.currentTarget.value) })
                   }
                 />
               </label>
@@ -246,9 +246,9 @@ export default function Aq64lCustom(props: {
                 secondary colour
                 <input
                   type="color"
-                  value={hex(d().onColour)}
+                  value={aqHex(d().onColour)}
                   onChange={(e) =>
-                    setPad({ onColour: fromHex(e.currentTarget.value) })
+                    setPad({ onColour: aqFromHex(e.currentTarget.value) })
                   }
                 />
               </label>
