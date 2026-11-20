@@ -3,7 +3,9 @@
 // per device function. Firmware flashing is out of scope.
 import {
   For,
+  Match,
   Show,
+  Switch,
   createEffect,
   createMemo,
   createResource,
@@ -28,6 +30,8 @@ import FirmwareView from './FirmwareView';
 import ManualsView from './ManualsView';
 import { fetchManuals } from '../lib/manuals';
 import ImageZoomModal from './ImageZoomModal';
+import Pk61Map from './Pk61Map';
+import Aq64lPanel from './Aq64lPanel';
 import { actions, useApp } from '../lib/store-solid';
 import { midi } from '../lib/midi/webmidi';
 import { buildPresetSyx, sendPresetSyx } from '../devices/_shared/preset';
@@ -43,10 +47,13 @@ import {
 } from '../devices/_shared/params-extra';
 import PolyChainView from './PolyChain';
 import ControlTribeSettings from './ControlTribeSettings';
+import Bcr32Panel from './Bcr32Panel';
+import Bcr32Zaquencer from './Bcr32Zaquencer';
 import GuitarTribePresets from './GuitarTribePresets';
 import PatchLibrary from './PatchLibrary';
 import { deviceImage, deviceImageFull } from '../lib/deviceImages';
 import VirtualSynthPanel from './VirtualSynthPanel';
+import GrooveKeySequencer from './GrooveKeySequencer';
 import { hasVirtualSynth, virtualId, isVirtualId } from '../lib/virtualsynth';
 
 interface Props {
@@ -383,10 +390,22 @@ function FunctionView(props: {
       when={props.driver()}
       fallback={<p class="muted">initializing driver...</p>}
     >
-      <Show when={name === 'Sequencer' && props.slug === 'swing'}>
-        <SwingSequencer outputId={props.outputId} />
+      <Show when={name === 'Presets' && props.slug === 'bcr32'}>
+        <Bcr32Panel outputId={props.outputId} />
       </Show>
-      <Show when={name === 'Sequencer' && props.slug !== 'swing'}>
+      <Show when={name === 'Zaquencer' && props.slug === 'bcr32'}>
+        <Bcr32Zaquencer outputId={props.outputId} />
+      </Show>
+      <Show when={name === 'Sequencer' && SWING_SEQ.has(props.slug)}>
+        <SwingSequencer outputId={props.outputId} slug={props.slug} />
+      </Show>
+      <Show
+        when={
+          name === 'Sequencer' &&
+          !SWING_SEQ.has(props.slug) &&
+          props.slug !== 'groove-key'
+        }
+      >
         <SequencerView
           def={props.def}
           fn={props.fn}
@@ -414,8 +433,23 @@ function FunctionView(props: {
         />
       </Show>
 
+      <Show when={name === 'Sequencer' && props.slug === 'groove-key'}>
+        <GrooveKeySequencer outputId={props.outputId} />
+      </Show>
+
       <Show when={name === 'Device Settings'}>
-        <ControlTribeSettings slug={props.slug} outputId={props.outputId} />
+        <Switch
+          fallback={
+            <ControlTribeSettings slug={props.slug} outputId={props.outputId} />
+          }
+        >
+          <Match when={props.slug === 'pk61'}>
+            <Pk61Map outputId={props.outputId} />
+          </Match>
+          <Match when={props.slug === 'aq64l'}>
+            <Aq64lPanel outputId={props.outputId} />
+          </Match>
+        </Switch>
       </Show>
 
       {/* settings-bearing functions (General, Sample, etc.) */}
@@ -664,6 +698,7 @@ function FunctionView(props: {
       <Show
         when={
           !props.fn.settings?.length &&
+          props.slug !== 'bcr32' &&
           !['Sequencer', 'Update', 'PolyChain', 'Device Settings'].includes(
             name,
           ) &&
@@ -680,6 +715,9 @@ function FunctionView(props: {
     </Show>
   );
 }
+
+// Control Tribe units on the Swing sequencer protocol
+const SWING_SEQ = new Set(['swing', 'jam', 'jam-play']);
 
 // informative + bulk-dump view for functions without per-control UI
 function GenericFunctionView(props: {
