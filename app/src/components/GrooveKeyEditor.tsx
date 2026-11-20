@@ -4,6 +4,7 @@
 // writes one pattern or track block to the device.
 import { For, Index, Show, createMemo, createSignal } from 'solid-js';
 import { GK_PATTERNS, GK_TRACKS } from '../devices/_shared/groovekey-seq';
+import { noteName as midiNoteName } from '../lib/sequencer';
 import {
   GK_DRUM_AT,
   GK_DRUM_TRACK_AT,
@@ -53,21 +54,7 @@ import {
 const W = 14; // step width (px)
 const ROWS = 24; // piano roll pitch rows
 const LANE_H = 80;
-const NOTE_NAMES = [
-  'C',
-  'C#',
-  'D',
-  'D#',
-  'E',
-  'F',
-  'F#',
-  'G',
-  'G#',
-  'A',
-  'A#',
-  'B',
-];
-const noteName = (n: number) => NOTE_NAMES[n % 12] + (Math.floor(n / 12) - 2);
+const noteName = (n: number) => midiNoteName(n, -2);
 const range = (n: number) => Array.from({ length: n }, (_, i) => i);
 const named = (a: string[]) => a.map((n, i): [string, number] => [n, i]);
 

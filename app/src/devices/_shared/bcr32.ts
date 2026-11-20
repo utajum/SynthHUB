@@ -184,7 +184,7 @@ export const SYX_EXPORTS: SyxExport[] = [
 const kind = (type: number) => (type === CTRL ? 'Controller' : 'Zaquencer');
 
 // a `04 <type>` block: F0 00 20 32 xx 64 04 <type> <part> ..
-export const isBlock = (m: ArrayLike<number>) =>
+const isBlock = (m: ArrayLike<number>) =>
   m.length >= 12 &&
   m[1] === 0x00 &&
   m[2] === 0x20 &&
@@ -193,7 +193,7 @@ export const isBlock = (m: ArrayLike<number>) =>
   m[6] === 0x04 &&
   (m[7] === ZAQ || m[7] === CTRL);
 
-export const isParamBlock = (m: ArrayLike<number>) =>
+const isParamBlock = (m: ArrayLike<number>) =>
   isBlock(m) && m[7] === ZAQ && m[8] === 0x04;
 
 // request frames of one export, preset-parameter requests last
@@ -216,7 +216,7 @@ const IMPORT_ERRORS = [
   'The device could not write its flash memory, so the preset was not stored.\nRestart the device and try again.',
 ];
 
-export const importErrorText = (code: number) =>
+const importErrorText = (code: number) =>
   IMPORT_ERRORS[code] || `Unspecified error (code ${code}).`;
 
 // file blocks -> the blocks to send for page `type`, or the problem

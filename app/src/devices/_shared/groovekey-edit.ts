@@ -15,7 +15,7 @@ import {
 export { GK_DRUM_OFF, gkDrumPatternOff, gkPatternOff, gkTrackOff };
 
 export const GK_STEPS = 64;
-export const GK_NOTES = 128; // note slots per pattern
+const GK_NOTES = 128; // note slots per pattern
 export const GK_PER_STEP = 8; // notes per step (SequencerGrid poly limit)
 export const GK_VOICES = 10;
 export const GK_SONGS = 16;
@@ -89,7 +89,7 @@ export const GK_DRUMS = [
   'Bass', 'Snare', 'SideStick', 'ClHat', 'OpHat', 'HighTom', 'MidTom',
   'LowTom', 'Ride', 'Crash',
 ];
-export const GK_NOTE_TYPES = ['Invalid', 'Note', 'Rest', 'Tie'];
+const GK_NOTE_TYPES = ['Invalid', 'Note', 'Rest', 'Tie'];
 
 // GATE_PARAMS: gate length / start in steps, by index
 // prettier-ignore

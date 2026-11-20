@@ -11,8 +11,8 @@
 // and after three misses stops waiting.
 import { midi } from '../../lib/midi/webmidi';
 
-export const AQ_HDR = [0xf0, 0x00, 0x20, 0x32, 0x00, 0x01, 0x6d, 0x7f];
-export const AQ_PADS = 64;
+const AQ_HDR = [0xf0, 0x00, 0x20, 0x32, 0x00, 0x01, 0x6d, 0x7f];
+const AQ_PADS = 64;
 export const AQ_GLOBAL = 16; // pad channel 16 = the global channel
 
 // 0xAARRGGBB <-> the value of an <input type="color">
@@ -21,7 +21,7 @@ export const aqHex = (c: number) =>
 export const aqFromHex = (s: string) =>
   (0xff000000 | parseInt(s.slice(1), 16)) >>> 0;
 
-export const aqFrame = (...body: number[]) =>
+const aqFrame = (...body: number[]) =>
   Uint8Array.from([...AQ_HDR, ...body.map((b) => b & 0x7f), 0xf7]);
 
 // pad types (AQ64LCustomMode tool ids)
@@ -123,7 +123,7 @@ const PALETTE: number[] = [
   0xff00d8d8, 0xff70ffd0, 0xff90ff90, 0xffb0ff50, 0xffffff55, 0xfffff2a8,
   0xfff0e4c0, 0xffffc480, 0xffff7060, 0xffb0b0b0, 0xff333333,
 ];
-export const aqPaletteIndex = (c: number) => PALETTE.indexOf(c >>> 0) + 1;
+const aqPaletteIndex = (c: number) => PALETTE.indexOf(c >>> 0) + 1;
 
 const rgb7 = (c: number) => [
   (c >> 17) & 0x7f,
@@ -200,7 +200,7 @@ export function aqCustomFrames(
 }
 
 // device answer to a custom-mode frame (cmd 10-20)
-export const isAqCustomReply = (d: ArrayLike<number>) =>
+const isAqCustomReply = (d: ArrayLike<number>) =>
   d.length > 8 &&
   AQ_HDR.slice(0, 7).every((b, i) => d[i] === b) &&
   d[7] >= 0x10 &&

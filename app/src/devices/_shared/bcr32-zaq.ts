@@ -15,7 +15,7 @@ import { BCR_HDR } from './bcr32';
 
 export const ZAQ_TRACKS = 4;
 export const ZAQ_STEPS = 32;
-export const ZAQ_LANES = 9;
+const ZAQ_LANES = 9;
 export const ZAQ_VOICES = 16;
 export const ZAQ_PAGES = 12;
 
@@ -68,13 +68,13 @@ export const ZAQ_DIRECTIONS = [
   'Forward', 'Reverse', 'Ping-Pong', 'Random', 'Pendulum',
 ];
 // prettier-ignore
-export const ZAQ_LENGTHS = [
+const ZAQ_LENGTHS = [
   '1/96', '1/24', '1/32', '1/12', '1/16', '1/6', '1/8', '1/3', '1/4', '2/3',
   '1/2', '1/3', '1/1', '2/3', '2/1', '4/1',
 ];
 // ctrl type: -6..-1 these, 0-127 a CC number
 // prettier-ignore
-export const ZAQ_CTRL_TYPES = [
+const ZAQ_CTRL_TYPES = [
   'DELAY', 'RATCHET', 'OFF', 'PROG CH', 'AFT TCH', 'PITCH BEND',
 ];
 export const ZAQ_NOTE_DISPLAY = ['OcMi', 'OcNa', 'AlMi', 'AlNa'];
@@ -198,7 +198,7 @@ export const zaqGlobalWrite = (p: number, v: number) =>
 export const zaqLoadPreset = (n: number) => req(0x48, 2, -1, -1, 0, n);
 
 // drum voice notes and on / off (enqueueDrumParameters)
-export const zaqDrumReads = (t: number) =>
+const zaqDrumReads = (t: number) =>
   Array.from({ length: ZAQ_VOICES }, (_, i) => [
     req(0x46, 1, t, -1, ZAQ_TRACK.voiceNote + i),
     req(0x46, 1, t, -1, ZAQ_TRACK.voiceOn + i),
@@ -229,7 +229,7 @@ export interface ZaqReply {
   values: number[];
 }
 
-export function zaqUnpack(d: ArrayLike<number>, max: number): number[] {
+function zaqUnpack(d: ArrayLike<number>, max: number): number[] {
   const out: number[] = [];
   for (let i = 0; i < d.length && out.length < max; i += 8)
     for (let k = 1; k < 8 && i + k < d.length && out.length < max; k++)
@@ -293,7 +293,7 @@ export function zaqParse(d: ArrayLike<number>): ZaqReply | null {
 }
 
 // the reply that answers `q` (BCR32ZaqSync::handleIncoming)
-export const zaqAnswers = (r: ZaqReply, q: ZaqReq) =>
+const zaqAnswers = (r: ZaqReply, q: ZaqReq) =>
   r.cmd === q.cmd &&
   r.op === q.op &&
   (r.cmd === 0x48 ||

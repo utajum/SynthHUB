@@ -248,9 +248,9 @@ export function fxDevice(v: unknown): FxDevice | null {
     d.chains = Array.isArray(d.chains) ? d.chains.map(fxChain) : [];
   return d;
 }
-export const fxChain = (v: unknown): FxDevice[] =>
+const fxChain = (v: unknown): FxDevice[] =>
   Array.isArray(v) ? v.map(fxDevice).filter((d): d is FxDevice => !!d) : [];
-export const fxTrack = (v: unknown): FxTrack => {
+const fxTrack = (v: unknown): FxTrack => {
   const o = (v ?? {}) as Record<string, unknown>;
   return {
     name: typeof o.name === 'string' ? o.name : 'Track',
@@ -267,7 +267,7 @@ export const fxProject = (): FxProject => ({
 // ---- colour ---------------------------------------------------------------
 
 export type Rgb = [number, number, number]; // 0-63 each
-export const unpack = (c: number): Rgb => [
+const unpack = (c: number): Rgb => [
   (c >> 16) & 0x3f,
   (c >> 8) & 0x3f,
   c & 0x3f,
@@ -332,7 +332,7 @@ export interface Clock {
   now(): number;
   after(ms: number, fn: () => void): () => void; // returns cancel
 }
-export const realClock: Clock = {
+const realClock: Clock = {
   now: () => performance.now(),
   after: (ms, fn) => {
     const t = setTimeout(fn, Math.max(0, ms));
@@ -340,7 +340,7 @@ export const realClock: Clock = {
   },
 };
 
-export const fxMs = (t: FxTime, bpm: number) =>
+const fxMs = (t: FxTime, bpm: number) =>
   t.mode ? (2 ** (t.step - 7) * 240000) / bpm : t.free;
 
 // Pattern::applyPinch (Apollo pinch / bilateral time warp)
@@ -445,7 +445,7 @@ function pathPoints(
 
 type Out = (s: Sig[]) => void;
 
-export class FxContext {
+class FxContext {
   bpm = 120;
   macros = [1, 1, 1, 1];
   clock: Clock;
@@ -495,7 +495,7 @@ abstract class Dev {
   }
 }
 
-export class ChainRT {
+class ChainRT {
   devs: Dev[];
   exit: Out = () => {};
   constructor(chain: FxDevice[], ctx: FxContext) {
@@ -1071,7 +1071,7 @@ const makeRT = (d: FxDevice, ctx: FxContext): Dev =>
 
 // ---- screen: per pixel the signals by layer (Pixel::getColor) -------------
 
-export class FxScreen {
+class FxScreen {
   px: Map<number, Sig>[] = Array.from({ length: 101 }, () => new Map());
   onChange: (i: number) => void = () => {};
   enter(s: Sig) {
@@ -1123,11 +1123,7 @@ export const fxLedToIndex = (led: number) =>
   led < 8 ? led + 1 : 11 + Math.floor((led - 8) / 9) * 10 + ((led - 8) % 9);
 
 // the pad press as a signal: grey level from the velocity
-export function fxPadSignal(
-  index: number,
-  velocity: number,
-  macros: number[],
-): Sig {
+function fxPadSignal(index: number, velocity: number, macros: number[]): Sig {
   const v = velocity ? Math.max(1, Math.min(63, velocity >> 1)) : 0;
   return {
     index,

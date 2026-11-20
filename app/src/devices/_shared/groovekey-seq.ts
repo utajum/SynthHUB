@@ -11,7 +11,7 @@
 
 import { midi } from '../../lib/midi/webmidi';
 
-export const GK_HDR = [0xf0, 0x00, 0x20, 0x32, 0x00, 0x01, 0x42, 0x00];
+const GK_HDR = [0xf0, 0x00, 0x20, 0x32, 0x00, 0x01, 0x42, 0x00];
 export const GK_TRACKS = 4; // + the drum track
 export const GK_PATTERNS = 16;
 export const GK_SIZE = 124907;
@@ -22,7 +22,7 @@ export const DRUM_TRACK = 102336;
 export const DRUM_PATTERN = (p: number) => 102347 + p * 1410;
 
 export const gkImage = () => new Uint8Array(GK_SIZE);
-export const gkFrame = (...body: number[]) =>
+const gkFrame = (...body: number[]) =>
   Uint8Array.from([...GK_HDR, 0x74, ...body.map((b) => b & 0x7f), 0xf7]);
 
 // device byte order of each block: runs of [image offset, length]
@@ -88,7 +88,7 @@ export function gkUnpack(d: ArrayLike<number>): number[] {
 
 // item n of a full transfer: 0 project, 1-5 tracks (4 = drums), 6-85 patterns
 export const GK_ITEMS = 1 + 5 + 80;
-export function gkItem(n: number): {
+function gkItem(n: number): {
   type: 0 | 1 | 2;
   track: number;
   pattern: number;
@@ -98,7 +98,7 @@ export function gkItem(n: number): {
   return { type: 2, track: (n - 6) >> 4, pattern: (n - 6) & 15 };
 }
 
-export function gkRequest(img: Uint8Array, n: number): Uint8Array {
+function gkRequest(img: Uint8Array, n: number): Uint8Array {
   const it = gkItem(n);
   if (it.type === 0) return gkFrame(0x30, img[0]);
   if (it.type === 1) return gkFrame(0x31, it.track);
@@ -231,7 +231,7 @@ export function gkToJson(img: Uint8Array): J {
   return root;
 }
 
-export function gkFromJson(j: unknown): Uint8Array {
+function gkFromJson(j: unknown): Uint8Array {
   const img = gkImage();
   for (const [path, base, strides, dims, u16] of SCHEMA) {
     const keys = path.split('.');

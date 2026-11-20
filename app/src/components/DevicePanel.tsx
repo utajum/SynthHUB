@@ -3,7 +3,9 @@
 // per device function. Firmware flashing is out of scope.
 import {
   For,
+  Match,
   Show,
+  Switch,
   createEffect,
   createMemo,
   createResource,
@@ -436,24 +438,18 @@ function FunctionView(props: {
       </Show>
 
       <Show when={name === 'Device Settings'}>
-        <Show
-          when={props.slug === 'pk61'}
+        <Switch
           fallback={
-            <Show
-              when={props.slug === 'aq64l'}
-              fallback={
-                <ControlTribeSettings
-                  slug={props.slug}
-                  outputId={props.outputId}
-                />
-              }
-            >
-              <Aq64lPanel outputId={props.outputId} />
-            </Show>
+            <ControlTribeSettings slug={props.slug} outputId={props.outputId} />
           }
         >
-          <Pk61Map outputId={props.outputId} />
-        </Show>
+          <Match when={props.slug === 'pk61'}>
+            <Pk61Map outputId={props.outputId} />
+          </Match>
+          <Match when={props.slug === 'aq64l'}>
+            <Aq64lPanel outputId={props.outputId} />
+          </Match>
+        </Switch>
       </Show>
 
       {/* settings-bearing functions (General, Sample, etc.) */}
