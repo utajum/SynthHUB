@@ -46,6 +46,7 @@ import {
 import PolyChainView from './PolyChain';
 import ControlTribeSettings from './ControlTribeSettings';
 import Bcr32Panel from './Bcr32Panel';
+import Bcr32Zaquencer from './Bcr32Zaquencer';
 import GuitarTribePresets from './GuitarTribePresets';
 import PatchLibrary from './PatchLibrary';
 import { deviceImage, deviceImageFull } from '../lib/deviceImages';
@@ -389,6 +390,9 @@ function FunctionView(props: {
     >
       <Show when={name === 'Presets' && props.slug === 'bcr32'}>
         <Bcr32Panel outputId={props.outputId} />
+      </Show>
+      <Show when={name === 'Zaquencer' && props.slug === 'bcr32'}>
+        <Bcr32Zaquencer outputId={props.outputId} />
       </Show>
       <Show when={name === 'Sequencer' && SWING_SEQ.has(props.slug)}>
         <SwingSequencer outputId={props.outputId} slug={props.slug} />

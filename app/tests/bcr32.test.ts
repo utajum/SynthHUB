@@ -84,13 +84,13 @@ test('prepareBcl: tabs, blank lines, $end, ASCII and length checks', () => {
   });
 });
 
-test('settings table: 705 params, targets from templates', async () => {
+test('settings table: 706 params, targets from templates', async () => {
   const { ctDevice, buildCtControl, parseCtReplies, ctId } =
     await import('../src/devices/_shared/controltribe.ts');
   const d = ctDevice('bcr32')!;
-  assert.equal(d.controls.length, 705);
+  assert.equal(d.controls.length, 706);
   const c = (m: string) => d.controls.find((x) => x.method === m)!;
-  assert.equal(new Set(d.controls.map(ctId)).size, 705);
+  assert.equal(new Set(d.controls.map(ctId)).size, 706);
   // global: <cmd> <value>, queried with <cmd>
   assert.equal(
     hex(buildCtControl('bcr32', c('OperatingMode'), 2)),
@@ -111,6 +111,23 @@ test('settings table: 705 params, targets from templates', async () => {
   assert.equal(
     hex(buildCtControl('bcr32', c('BtnEnc1Type'), null)),
     `${H} 31 10 f7`,
+  );
+  // DeviceId: 8-bit value split over two bytes (makeParamCommand row 9)
+  const id = c('DeviceId');
+  assert.equal(hex(buildCtControl('bcr32', id, 200)), `${H} 57 01 48 f7`);
+  assert.equal(hex(buildCtControl('bcr32', id, null)), `${H} 57 f7`);
+  assert.deepEqual(parseCtReplies('bcr32', buildCtControl('bcr32', id, 200)), [
+    { id: ctId(id), value: 200 },
+  ]);
+  // a signed value with a zero high byte is 8-bit (BCR32::applyIncoming)
+  assert.deepEqual(
+    parseCtReplies(
+      'bcr32',
+      Uint8Array.from([
+        0xf0, 0, 0x20, 0x32, 0x7f, 0x64, 0x37, 0x01, 0x02, 0x00, 0x01, 0xf7,
+      ]),
+    ),
+    [{ id: ctId(c('Btn2Option')), value: -127 }],
   );
   // signed button option
   const o = c('Btn2Option');

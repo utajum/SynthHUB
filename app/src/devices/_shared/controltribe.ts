@@ -41,6 +41,8 @@ export interface CtControl {
   local?: boolean;
   // value always as <flags> <hi> <lo> (QT32 PLAY 16-bit params)
   wide?: boolean;
+  // 8-bit value as <v >> 7> <v & 7f> (BCR32 DeviceId)
+  pair?: boolean;
   // index into the device's group frames (table devices)
   group?: number;
 }
@@ -191,6 +193,7 @@ export function buildCtQuery(
 
 // one value on the wire: 7-bit, or 3 bytes for wide params
 function ctWire(c: CtControl, v: number): number[] {
+  if (c.pair) return [(v >> 7) & 1, v & 0x7f];
   return c.wide
     ? [((v >> 6) & 2) | ((v >> 15) & 1), (v >> 8) & 0x7f, v & 0x7f]
     : [v & 0x7f];
@@ -293,13 +296,16 @@ export function parseCtReplies(
     }
     if (r.wide) {
       const [f, hi, lo] = [data[i], data[i + 1], data[i + 2]];
-      const v = ((((f & 1) << 7) | hi) << 8) | ((f & 2) << 6) | lo;
-      // signed params (BCR32 button option) come as 16-bit two's complement
-      out.push({
-        id: ctId(r),
-        value: r.min < 0 && v & 0x8000 ? v - 0x10000 : v,
-      });
+      let v = ((((f & 1) << 7) | hi) << 8) | ((f & 2) << 6) | lo;
+      // signed params (BCR32 button option): 16-bit two's complement, or
+      // 8-bit when the high byte is 0 (BCR32::applyIncoming)
+      if (r.min < 0)
+        v = v & 0x8000 ? v - 0x10000 : v < 0x100 && v & 0x80 ? v - 0x100 : v;
+      out.push({ id: ctId(r), value: v });
       i += 3;
+    } else if (r.pair) {
+      out.push({ id: ctId(r), value: ((data[i] & 1) << 7) | data[i + 1] });
+      i += 2;
     } else {
       out.push({ id: ctId(r), value: data[i] });
       i++;
