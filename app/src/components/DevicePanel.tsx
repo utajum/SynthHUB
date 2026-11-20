@@ -29,6 +29,7 @@ import ManualsView from './ManualsView';
 import { fetchManuals } from '../lib/manuals';
 import ImageZoomModal from './ImageZoomModal';
 import Pk61Map from './Pk61Map';
+import Aq64lPanel from './Aq64lPanel';
 import { actions, useApp } from '../lib/store-solid';
 import { midi } from '../lib/midi/webmidi';
 import { buildPresetSyx, sendPresetSyx } from '../devices/_shared/preset';
@@ -423,7 +424,17 @@ function FunctionView(props: {
         <Show
           when={props.slug === 'pk61'}
           fallback={
-            <ControlTribeSettings slug={props.slug} outputId={props.outputId} />
+            <Show
+              when={props.slug === 'aq64l'}
+              fallback={
+                <ControlTribeSettings
+                  slug={props.slug}
+                  outputId={props.outputId}
+                />
+              }
+            >
+              <Aq64lPanel outputId={props.outputId} />
+            </Show>
           }
         >
           <Pk61Map outputId={props.outputId} />
