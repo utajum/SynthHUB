@@ -645,16 +645,20 @@ function FunctionView(props: {
             />
           </Show>
           <For each={props.fn.settings}>
-            {(setting, i) => (
-              <SettingControl
-                slug={props.slug}
-                fnName={name}
-                position={i()}
-                setting={setting}
-                driver={props.driver()!}
-                outputId={props.outputId}
-              />
-            )}
+            {(setting, i) =>
+              setting.type === 'section' ? (
+                <div class="tiny dim device-app-hdr">{setting.title}</div>
+              ) : (
+                <SettingControl
+                  slug={props.slug}
+                  fnName={name}
+                  position={i()}
+                  setting={setting}
+                  driver={props.driver()!}
+                  outputId={props.outputId}
+                />
+              )
+            }
           </For>
         </div>
       </Show>

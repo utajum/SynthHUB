@@ -9,7 +9,9 @@ import {
   buildPKT,
   buildPKT78,
   parseFrame,
+  pack87,
   packNibbles,
+  unpack87,
   unpackNibbles,
 } from '../../lib/midi/sysex';
 
@@ -74,21 +76,25 @@ export function seqCaps(type: number): SeqCaps {
 }
 
 // Song-based drum machines: their dumps address slots as
-// `0x77 [0x41, song, pattern]` (selector 0x41), not the bare 2-byte mono form.
+// `0x77 [sel, song, pattern]` (sel 0x41 unless noted below), not the bare
+// 2-byte mono form.
 export const SONG_PKT_TYPES = new Set([4, 5, 7, 8, 10, 12]);
 const SONG_SLOT_SELECTOR = 0x41;
+// type 12 (RD-765) uses selector 0x00 (ST 3.3.1 dumpSequencerData12)
+const TYPE_SLOT_SELECTOR: Record<number, number> = { 12: 0x00 };
 
 // Request a pattern. Mono family: `0x77 [bank, pattern]` (byte order
-// HW-verified on MS-1 MK II: bank first). Song family: `0x77 [0x41, song,
+// HW-verified on MS-1 MK II: bank first). Song family: `0x77 [sel, song,
 // pattern]`.
 export function requestPattern(
   variant: DeviceVariant,
   bank: number,
   pattern = 0,
-  opts: { song?: boolean } = {},
+  opts: { song?: boolean; type?: number } = {},
 ): Uint8Array {
+  const sel = TYPE_SLOT_SELECTOR[opts.type ?? -1] ?? SONG_SLOT_SELECTOR;
   const payload = opts.song
-    ? [SONG_SLOT_SELECTOR, bank & 0x7f, pattern & 0x7f]
+    ? [sel, bank & 0x7f, pattern & 0x7f]
     : [bank & 0x7f, pattern & 0x7f];
   return buildPKT(variant, 0x77, payload);
 }
@@ -138,6 +144,95 @@ export function buildRawPatternWrite(
   rawPayload: number[],
 ): Uint8Array {
   return buildPKT78(variant, rawPayload);
+}
+
+// SynthTribe `.seq` pattern file (ST 3.3.1 import/exportSequencerData11/12):
+// i32le magic, i32le byte length + UTF-16LE device name, the same for the
+// firmware version, then data blocks as i32le length + bytes. Type 11: one
+// block, the 0x78 payload byte for byte (size per type below).
+const SEQ_FILE_MAGIC = 0x23985476;
+export const SEQ_FILE_DATA_LEN: Record<number, number> = { 11: 0x45 };
+
+// Type 12 (RD-765): global, song and pattern blocks in that file order, each
+// 8-to-7 packed raw data; on the wire 0x77 / 0x78 [sel, song, pattern, ...]
+export const SEQ12_BLOCKS = [
+  { sel: 2, size: 0xe8 },
+  { sel: 1, size: 0x8a },
+  { sel: 0, size: 0x817 },
+];
+
+// .seq block from a type-12 0x78 payload, or null if it is too short
+export function seq12Block(payload: number[], size: number): number[] | null {
+  const raw = unpack87(payload.slice(3));
+  return raw.length < size ? null : pack87(raw.slice(0, size));
+}
+
+// the three 0x78 frames that store type-12 .seq blocks in one slot
+export function seq12Frames(
+  variant: DeviceVariant,
+  blocks: number[][],
+  song: number,
+  pattern: number,
+): Uint8Array[] | null {
+  if (blocks.length !== SEQ12_BLOCKS.length) return null;
+  const out: Uint8Array[] = [];
+  for (const [i, b] of SEQ12_BLOCKS.entries()) {
+    const raw = unpack87(blocks[i]);
+    if (raw.length < b.size) return null;
+    const data = pack87(raw.slice(0, b.size));
+    out.push(buildPKT78(variant, [b.sel, song, pattern, ...data]));
+  }
+  return out;
+}
+
+export function buildSeqFile(
+  name: string,
+  version: string,
+  blocks: number[][],
+): Uint8Array {
+  const out: number[] = [];
+  const i32 = (v: number) =>
+    out.push(v & 0xff, (v >> 8) & 0xff, (v >> 16) & 0xff, (v >>> 24) & 0xff);
+  const str = (s: string) => {
+    i32(s.length * 2);
+    for (let i = 0; i < s.length; i++) {
+      const c = s.charCodeAt(i);
+      out.push(c & 0xff, c >> 8);
+    }
+  };
+  i32(SEQ_FILE_MAGIC);
+  str(name);
+  str(version);
+  for (const b of blocks) {
+    i32(b.length);
+    out.push(...b);
+  }
+  return Uint8Array.from(out);
+}
+
+// data blocks of a `.seq` file, or null if the file is malformed
+export function parseSeqFile(bytes: Uint8Array): number[][] | null {
+  const dv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  let o = 0;
+  const i32 = () => {
+    if (o + 4 > bytes.length) return -1;
+    o += 4;
+    return dv.getInt32(o - 4, true);
+  };
+  if (i32() !== SEQ_FILE_MAGIC) return null;
+  for (let s = 0; s < 2; s++) {
+    const n = i32();
+    if (n < 0 || o + n > bytes.length) return null;
+    o += n;
+  }
+  const blocks: number[][] = [];
+  do {
+    const len = i32();
+    if (len < 0 || o + len > bytes.length) return null;
+    blocks.push(Array.from(bytes.subarray(o, o + len)));
+    o += len;
+  } while (o < bytes.length);
+  return blocks;
 }
 
 // TD-3 (type 1) body: 303-style split tracks (HW-verified by clock-driven

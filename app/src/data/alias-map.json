@@ -108,6 +108,12 @@
     "protocol": 2
   },
   {
+    "alias": "MINI POPS 7",
+    "slug": "mini-pops-7",
+    "variant": "MINI POPS 7",
+    "protocol": 3
+  },
+  {
     "alias": "WASP DELUXE",
     "slug": "wasp-deluxe",
     "variant": "WASP DELUXE",
@@ -172,6 +178,12 @@
     "slug": "k-2-mk-ii",
     "variant": "K-2 MK II",
     "protocol": 1
+  },
+  {
+    "alias": "Polyeight",
+    "slug": "polyeight",
+    "variant": "Polyeight",
+    "protocol": 3
   },
   {
     "alias": "RD-8 MKII",
@@ -285,6 +297,12 @@
     "alias": "PROTON",
     "slug": "proton",
     "variant": "PROTON",
+    "protocol": 3
+  },
+  {
+    "alias": "RD-765",
+    "slug": "rd-765",
+    "variant": "RD-765",
     "protocol": 3
   },
   {

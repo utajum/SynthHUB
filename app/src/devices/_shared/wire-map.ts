@@ -195,6 +195,17 @@ export const WIRE_MAP: Record<string, Record<string, WireSpec>> = {
         { sub: 'usbin' },
       ],
     },
+    // subtype 5 (Polyeight): 00, in, out, usbin, usbout
+    '5': {
+      kind: 'single',
+      items: [
+        { const: 0 },
+        { sub: 'in' },
+        { sub: 'out' },
+        { sub: 'usbin' },
+        { sub: 'usbout' },
+      ],
+    },
   },
 };
 

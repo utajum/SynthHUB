@@ -237,6 +237,24 @@ export function unpack87(bytes: ArrayLike<number>): number[] {
   return out;
 }
 
+// inverse of unpack87: per 7 bytes one byte of high bits (bit j = byte j),
+// then the 7 low parts; a short last group is zero-padded
+// (SynthTribe PackSysexData)
+export function pack87(bytes: ArrayLike<number>): number[] {
+  const out: number[] = [];
+  for (let i = 0; i < bytes.length; i += 7) {
+    let msb = 0;
+    const low: number[] = [];
+    for (let j = 0; j < 7; j++) {
+      const b = i + j < bytes.length ? bytes[i + j] : 0;
+      msb |= ((b >> 7) & 1) << j;
+      low.push(b & 0x7f);
+    }
+    out.push(msb, ...low);
+  }
+  return out;
+}
+
 // "F0 00 20 32 ..." for logs
 export function hex(data: ArrayLike<number>): string {
   return Array.from(data as ArrayLike<number>, (b) =>
