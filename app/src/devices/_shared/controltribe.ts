@@ -87,6 +87,12 @@ interface CtDevice {
   store?: boolean;
   // shared arg lists of group frames; a control's own peer is its value
   groups?: CtArg[][];
+  // a query carries only this many args (BCR32: cmd + target)
+  queryArgs?: number;
+  // BCR32 controller targets: [method prefix, section, count, first
+  // target byte, template], expanded from `templates` at load
+  targets?: [string, string, number, number, string][];
+  templates?: Record<string, CtControl[]>;
   // confirmed one-shot commands (JAM: restore settings, erase all data)
   actions?: CtAction[];
   // project file (MainComponent::saveProject): ValueTree "root" with these
@@ -100,7 +106,17 @@ export interface CtStepRow {
 }
 
 const CT_DEVICES = data as unknown as Record<string, CtDevice>;
-for (const d of Object.values(CT_DEVICES))
+for (const d of Object.values(CT_DEVICES)) {
+  for (const [pre, sect, n, sub0, tpl] of d.targets ?? [])
+    for (let k = 0; k < n; k++)
+      for (const t of d.templates![tpl])
+        d.controls.push({
+          ...t,
+          method: `${pre}${k + 1}${t.method}`,
+          label: t.method.replace(/(?<=[a-z])(?=\d)/, ' '),
+          section: `${sect} ${k + 1}`,
+          args: [{ const: sub0 + k }, { value: true }],
+        });
   d.controls.forEach((c, i) => {
     if ((c.options as unknown) === 'notes') c.options = NOTE_NAMES;
     if (!d.groups) return;
@@ -115,6 +131,7 @@ for (const d of Object.values(CT_DEVICES))
         a.peer === c.method ? { value: true } : a,
       );
   });
+}
 
 // management command bytes shared across the devices
 const CT_CMD = {
@@ -224,7 +241,10 @@ export function buildCtControl(
   return Uint8Array.from([
     ...ctHeader(d),
     c.cmd & 0x7f,
-    ...ctArgBytes(d, c, value, values),
+    ...ctArgBytes(d, c, value, values).slice(
+      0,
+      value === null ? d.queryArgs : undefined,
+    ),
     0xf7,
   ]);
 }
@@ -273,9 +293,11 @@ export function parseCtReplies(
     }
     if (r.wide) {
       const [f, hi, lo] = [data[i], data[i + 1], data[i + 2]];
+      const v = ((((f & 1) << 7) | hi) << 8) | ((f & 2) << 6) | lo;
+      // signed params (BCR32 button option) come as 16-bit two's complement
       out.push({
         id: ctId(r),
-        value: ((((f & 1) << 7) | hi) << 8) | ((f & 2) << 6) | lo,
+        value: r.min < 0 && v & 0x8000 ? v - 0x10000 : v,
       });
       i += 3;
     } else {

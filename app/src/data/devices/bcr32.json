@@ -17,6 +17,9 @@
   ],
   "functions": [
     {
+      "name": "Device Settings"
+    },
+    {
       "name": "Presets"
     },
     {

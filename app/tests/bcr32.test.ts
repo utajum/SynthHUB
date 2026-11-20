@@ -83,3 +83,134 @@ test('prepareBcl: tabs, blank lines, $end, ASCII and length checks', () => {
     errors: ['The file has no BCL lines.'],
   });
 });
+
+test('settings table: 705 params, targets from templates', async () => {
+  const { ctDevice, buildCtControl, parseCtReplies, ctId } =
+    await import('../src/devices/_shared/controltribe.ts');
+  const d = ctDevice('bcr32')!;
+  assert.equal(d.controls.length, 705);
+  const c = (m: string) => d.controls.find((x) => x.method === m)!;
+  assert.equal(new Set(d.controls.map(ctId)).size, 705);
+  // global: <cmd> <value>, queried with <cmd>
+  assert.equal(
+    hex(buildCtControl('bcr32', c('OperatingMode'), 2)),
+    `${H} 1f 02 f7`,
+  );
+  assert.equal(
+    hex(buildCtControl('bcr32', c('OperatingMode'), null)),
+    `${H} 1f f7`,
+  );
+  // track param with a second selector: query stops after the track
+  const a = c('Track2CtrlAlpha');
+  assert.equal(hex(buildCtControl('bcr32', a, 6)), `${H} 2c 01 01 06 f7`);
+  assert.equal(hex(buildCtControl('bcr32', a, null)), `${H} 2c 01 f7`);
+  // controller target 3-byte values; Enc1 is target 0x32
+  const p = c('Enc1Param');
+  assert.equal(p.section, 'Encoder 1');
+  assert.equal(hex(buildCtControl('bcr32', p, 1000)), `${H} 33 32 02 03 68 f7`);
+  assert.equal(
+    hex(buildCtControl('bcr32', c('BtnEnc1Type'), null)),
+    `${H} 31 10 f7`,
+  );
+  // signed button option
+  const o = c('Btn2Option');
+  assert.equal(hex(buildCtControl('bcr32', o, -127)), `${H} 37 01 03 7f 01 f7`);
+  assert.deepEqual(parseCtReplies('bcr32', buildCtControl('bcr32', o, -127)), [
+    { id: ctId(o), value: -127 },
+  ]);
+});
+
+test('.syx: requests, file checks, emulated import and export', async () => {
+  const { midi } = await import('../src/lib/midi/webmidi.ts');
+  const m = await import('../src/devices/_shared/bcr32.ts');
+  const blk = (type: number, part: number, n: number) =>
+    Uint8Array.from([
+      0xf0,
+      0,
+      0x20,
+      0x32,
+      0x7f,
+      0x64,
+      4,
+      type,
+      part,
+      0,
+      0,
+      n,
+      0x55,
+      0xf7,
+    ]);
+  // requests: 07 x8, then 0A 01 x2 with preset parameters
+  const r = m.syxRequests(m.SYX_EXPORTS[0], true);
+  assert.equal(r.length, 10);
+  assert.equal(hex(r[0]), `${H} 07 f7`);
+  assert.equal(hex(r[9]), `${H} 0a 01 f7`);
+  assert.equal(m.syxRequests(m.SYX_EXPORTS[4], true).length, 8);
+  // file checks
+  assert.match(String(m.syxImportPlan([], m.ZAQ, true)), /no SysEx/);
+  assert.match(
+    String(m.syxImportPlan([blk(m.CTRL, 1, 0)], m.ZAQ, true)),
+    /Controller page/,
+  );
+  assert.match(
+    String(m.syxImportPlan([blk(m.ZAQ, 4, 1)], m.ZAQ, false)),
+    /v1.0.3/,
+  );
+  const plan = m.syxImportPlan(
+    [blk(m.ZAQ, 1, 0), blk(m.ZAQ, 4, 1)],
+    m.ZAQ,
+    false,
+  );
+  assert.equal((plan as Uint8Array[]).length, 1);
+
+  const ls = new Set<(d: Uint8Array) => void>();
+  let onSend: (d: Uint8Array) => void = () => {};
+  Object.assign(midi, {
+    onMessage: (l: (d: Uint8Array) => void) => (ls.add(l), () => ls.delete(l)),
+    send: (_o: string, d: Uint8Array) => onSend(d),
+  });
+  const reply = (...b: number[]) =>
+    setTimeout(
+      () =>
+        ls.forEach((l) =>
+          l(Uint8Array.from([0xf0, 0, 0x20, 0x32, 0x7f, 0x64, ...b, 0xf7])),
+        ),
+      1,
+    );
+  // import: status 1 per block, 2 after the last; device must hold the last
+  const sent: number[] = [];
+  onSend = (d) => {
+    sent.push(d[11]);
+    reply(4, m.ZAQ, 1);
+    if (sent.length === 3) reply(4, m.ZAQ, 2);
+  };
+  const three = [0, 1, 2].map((n) => blk(m.ZAQ, 1, n));
+  assert.equal(await m.syxImport('o', three, m.ZAQ), null);
+  assert.deepEqual(sent, [0, 1, 2]);
+  // refusal followed by an error code
+  onSend = () => (reply(4, m.ZAQ, 0), reply(0x0e, 3));
+  assert.match(
+    String(await m.syxImport('o', three, m.ZAQ)),
+    /block 1 of 3:\n\nChecksum error/,
+  );
+  // wrong mode
+  onSend = () => reply(4, m.CTRL, 0);
+  assert.match(
+    String(await m.syxImport('o', three, m.ZAQ)),
+    /not in Zaquencer mode/,
+  );
+  // export: one block per request, other replies ignored
+  let k = 0;
+  onSend = () => (reply(4, m.CTRL, 1, 0, 0, 9), reply(4, m.ZAQ, 3, 0, 0, k++));
+  const got = await m.syxExport('o', m.SYX_EXPORTS[3]);
+  // an error code ends the export, as in the import
+  onSend = () => reply(0x0e, 7);
+  assert.match(
+    String(await m.syxExport('o', m.SYX_EXPORTS[3])),
+    /block 1 of 2:\n\nThe device could not write/,
+  );
+  assert.deepEqual(
+    (got as Uint8Array[]).map((b) => b[11]),
+    [0, 1],
+  );
+});

@@ -763,7 +763,7 @@
     "pids": ["0x12cf"],
     "aliases": ["Behringer BCR", "BCR32"],
     "protocols": [1],
-    "functions": ["Presets", "Update"],
+    "functions": ["Device Settings", "Presets", "Update"],
     "hasSequencer": false,
     "variantCount": 1
   },

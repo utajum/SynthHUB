@@ -29364,5 +29364,1265 @@
         ]
       }
     ]
+  },
+  "bcr32": {
+    "name": "BCR32",
+    "header": [127, 100],
+    "store": false,
+    "queryArgs": 1,
+    "groups": [],
+    "targets": [
+      ["Btn", "Button", 16, 0, "btn"],
+      ["BtnEnc", "Encoder Button", 32, 16, "btn"],
+      ["Foot", "Foot Switch", 2, 48, "btn"],
+      ["Enc", "Encoder", 32, 50, "enc"]
+    ],
+    "templates": {
+      "btn": [
+        {
+          "cmd": 49,
+          "method": "Type",
+          "kind": "enum",
+          "options": ["OFF", "PC", "CC", "NRPN", "NOTE", "AT", "GS", "MMC"],
+          "min": 0,
+          "max": 7,
+          "default": 0
+        },
+        {
+          "cmd": 50,
+          "method": "Channel",
+          "kind": "enum",
+          "options": [
+            "CH 1",
+            "CH 2",
+            "CH 3",
+            "CH 4",
+            "CH 5",
+            "CH 6",
+            "CH 7",
+            "CH 8",
+            "CH 9",
+            "CH 10",
+            "CH 11",
+            "CH 12",
+            "CH 13",
+            "CH 14",
+            "CH 15",
+            "CH 16",
+            "ALL"
+          ],
+          "min": 0,
+          "max": 16,
+          "default": 0
+        },
+        {
+          "cmd": 51,
+          "method": "Param",
+          "kind": "range",
+          "min": 0,
+          "max": 16383,
+          "default": 0,
+          "wide": true
+        },
+        {
+          "cmd": 52,
+          "method": "Val1",
+          "kind": "range",
+          "min": 0,
+          "max": 127,
+          "default": 0,
+          "wide": true
+        },
+        {
+          "cmd": 53,
+          "method": "Val2",
+          "kind": "range",
+          "min": 0,
+          "max": 127,
+          "default": 127,
+          "wide": true
+        },
+        {
+          "cmd": 54,
+          "method": "Mode",
+          "kind": "enum",
+          "options": [
+            "TOG-ON",
+            "TOG-OFF",
+            "INC",
+            "FR OFF",
+            "FR 24",
+            "FR 25",
+            "FR 30",
+            "FR 30d"
+          ],
+          "min": 0,
+          "max": 7,
+          "default": 0
+        },
+        {
+          "cmd": 55,
+          "method": "Option",
+          "kind": "range",
+          "min": -127,
+          "max": 127,
+          "default": 1,
+          "wide": true
+        },
+        {
+          "cmd": 56,
+          "method": "Display",
+          "kind": "enum",
+          "options": ["OFF", "ON"],
+          "min": 0,
+          "max": 1,
+          "default": 0
+        }
+      ],
+      "enc": [
+        {
+          "cmd": 49,
+          "method": "Type",
+          "kind": "enum",
+          "options": ["OFF", "PC", "CC", "NRPN", "PB", "AT", "GS"],
+          "min": 0,
+          "max": 6,
+          "default": 0
+        },
+        {
+          "cmd": 50,
+          "method": "Channel",
+          "kind": "enum",
+          "options": [
+            "CH 1",
+            "CH 2",
+            "CH 3",
+            "CH 4",
+            "CH 5",
+            "CH 6",
+            "CH 7",
+            "CH 8",
+            "CH 9",
+            "CH 10",
+            "CH 11",
+            "CH 12",
+            "CH 13",
+            "CH 14",
+            "CH 15",
+            "CH 16",
+            "ALL"
+          ],
+          "min": 0,
+          "max": 16,
+          "default": 0
+        },
+        {
+          "cmd": 51,
+          "method": "Param",
+          "kind": "range",
+          "min": 0,
+          "max": 16383,
+          "default": 0,
+          "wide": true
+        },
+        {
+          "cmd": 52,
+          "method": "Val1",
+          "kind": "range",
+          "min": 0,
+          "max": 16383,
+          "default": 0,
+          "wide": true
+        },
+        {
+          "cmd": 53,
+          "method": "Val2",
+          "kind": "range",
+          "min": 0,
+          "max": 16383,
+          "default": 127,
+          "wide": true
+        },
+        {
+          "cmd": 54,
+          "method": "Mode",
+          "kind": "enum",
+          "options": [
+            "ABS",
+            "ABS 14",
+            "REL1",
+            "REL2",
+            "REL3",
+            "REL1 14",
+            "REL2 14",
+            "REL3 14",
+            "INC/DEC"
+          ],
+          "min": 0,
+          "max": 8,
+          "default": 0
+        },
+        {
+          "cmd": 55,
+          "method": "Option",
+          "kind": "enum",
+          "options": [
+            "OFF",
+            "1DOT IN",
+            "1DOT EX",
+            "2DOT IN",
+            "2DOT EX",
+            "BAR",
+            "BAR-",
+            "SPRD",
+            "PAN",
+            "QUAL",
+            "CUT",
+            "DAMP",
+            "MCU"
+          ],
+          "min": 0,
+          "max": 12,
+          "default": 0
+        },
+        {
+          "cmd": 56,
+          "method": "Display",
+          "kind": "enum",
+          "options": ["OFF", "ON"],
+          "min": 0,
+          "max": 1,
+          "default": 0
+        }
+      ]
+    },
+    "controls": [
+      {
+        "cmd": 27,
+        "section": "Settings",
+        "method": "FootSwitch1",
+        "kind": "enum",
+        "options": ["CTRL", "ZAQ"],
+        "min": 0,
+        "max": 1,
+        "default": 0
+      },
+      {
+        "cmd": 28,
+        "section": "Settings",
+        "method": "FootSwitch2",
+        "kind": "enum",
+        "options": ["CTRL", "ZAQ"],
+        "min": 0,
+        "max": 1,
+        "default": 0
+      },
+      {
+        "cmd": 30,
+        "section": "Settings",
+        "method": "MidiThruSource",
+        "kind": "enum",
+        "options": ["OFF", "MIDI IN", "USB IN"],
+        "min": 0,
+        "max": 2,
+        "default": 0
+      },
+      {
+        "cmd": 29,
+        "section": "Settings",
+        "method": "MidiThruDest",
+        "kind": "enum",
+        "options": ["OFF", "F A", "F B", "F AB", "A", "B", "AB"],
+        "values": [0, 1, 2, 3, 9, 10, 11],
+        "min": 0,
+        "max": 6,
+        "default": 0
+      },
+      {
+        "cmd": 31,
+        "section": "Settings",
+        "method": "OperatingMode",
+        "kind": "enum",
+        "options": ["USB", "STDL", "MIXED"],
+        "min": 0,
+        "max": 2,
+        "default": 0
+      },
+      {
+        "cmd": 82,
+        "section": "Settings",
+        "method": "LedLuminosity",
+        "kind": "range",
+        "min": 0,
+        "max": 15,
+        "default": 15
+      },
+      {
+        "cmd": 83,
+        "section": "Settings",
+        "method": "EncoderAccel",
+        "kind": "enum",
+        "options": ["1", "2", "3"],
+        "values": [1, 2, 3],
+        "min": 0,
+        "max": 2,
+        "default": 2
+      },
+      {
+        "cmd": 84,
+        "section": "Settings",
+        "method": "FootSwPolarity",
+        "kind": "enum",
+        "options": ["AUTO", "NORMAL", "INVERT"],
+        "min": 0,
+        "max": 2,
+        "default": 0
+      },
+      {
+        "cmd": 86,
+        "section": "Settings",
+        "method": "StartupApp",
+        "kind": "enum",
+        "options": ["CTRL", "ZAQ"],
+        "min": 0,
+        "max": 1,
+        "default": 0
+      },
+      {
+        "cmd": 48,
+        "section": "Settings",
+        "method": "ControllerOutPort",
+        "kind": "enum",
+        "options": ["U", "A", "B", "AB", "U A", "U B", "U AB"],
+        "values": [4, 1, 2, 3, 5, 6, 7],
+        "min": 0,
+        "max": 6,
+        "default": 4
+      },
+      {
+        "cmd": 85,
+        "section": "Settings",
+        "method": "CtrlDeadtime",
+        "kind": "range",
+        "min": 10,
+        "max": 100,
+        "default": 100
+      },
+      {
+        "cmd": 23,
+        "section": "Zaquencer",
+        "method": "StartOn",
+        "kind": "enum",
+        "options": ["GATE", "CLOCK"],
+        "min": 0,
+        "max": 1,
+        "default": 0
+      },
+      {
+        "cmd": 24,
+        "section": "Zaquencer",
+        "method": "ClockRateOut",
+        "kind": "enum",
+        "options": ["1 PPQ", "2 PPQ", "4 PPQ", "24 PPQ", "48 PPQ"],
+        "min": 0,
+        "max": 4,
+        "default": 3
+      },
+      {
+        "cmd": 80,
+        "section": "Zaquencer",
+        "method": "SyncMode",
+        "kind": "enum",
+        "options": ["INT", "SYNC IN", "MIDI IN", "USB IN"],
+        "min": 0,
+        "max": 3,
+        "default": 0
+      },
+      {
+        "cmd": 81,
+        "section": "Zaquencer",
+        "method": "ClockOutPort",
+        "kind": "enum",
+        "options": ["OFF", "A", "B", "AB", "U", "U A", "U B", "U AB"],
+        "min": 0,
+        "max": 7,
+        "default": 0
+      },
+      {
+        "cmd": 35,
+        "section": "Zaquencer",
+        "method": "Scale",
+        "kind": "enum",
+        "options": [
+          "USER",
+          "OFF",
+          "MAJ",
+          "MIN",
+          "DORIAN",
+          "PHRYGN",
+          "LYDIAN",
+          "MIXOLYD",
+          "LOCRIAN",
+          "WHOLE T",
+          "MIN7",
+          "DIM7",
+          "OCT W H",
+          "OCT H W",
+          "MAJ PENT",
+          "MIN PENT",
+          "INVERT"
+        ],
+        "values": [127, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+        "min": 0,
+        "max": 16,
+        "default": 0
+      },
+      {
+        "cmd": 36,
+        "section": "Zaquencer",
+        "method": "ScaleBase",
+        "kind": "enum",
+        "options": [
+          "C",
+          "Db",
+          "D",
+          "Eb",
+          "E",
+          "F",
+          "Gb",
+          "G",
+          "Ab",
+          "A",
+          "Bb",
+          "B"
+        ],
+        "min": 0,
+        "max": 11,
+        "default": 0
+      },
+      {
+        "cmd": 37,
+        "section": "Zaquencer",
+        "method": "TransposeMode",
+        "kind": "enum",
+        "options": [
+          "OFF",
+          "CH 1",
+          "CH 2",
+          "CH 3",
+          "CH 4",
+          "CH 5",
+          "CH 6",
+          "CH 7",
+          "CH 8",
+          "CH 9",
+          "CH 10",
+          "CH 11",
+          "CH 12",
+          "CH 13",
+          "CH 14",
+          "CH 15",
+          "CH 16",
+          "TRACK",
+          "CH: 1-4",
+          "CH: 2-5",
+          "CH: 3-6",
+          "CH: 4-7",
+          "CH: 5-8",
+          "CH: 6-9",
+          "CH: 7-10",
+          "CH: 8-11",
+          "CH: 9-12",
+          "CH: 10-13",
+          "CH: 11-14",
+          "CH: 12-15",
+          "CH: 13-16"
+        ],
+        "min": 0,
+        "max": 30,
+        "default": 0
+      },
+      {
+        "cmd": 38,
+        "section": "Zaquencer",
+        "method": "TriggerMode",
+        "kind": "enum",
+        "options": [
+          "OFF",
+          "CH 1",
+          "CH 2",
+          "CH 3",
+          "CH 4",
+          "CH 5",
+          "CH 6",
+          "CH 7",
+          "CH 8",
+          "CH 9",
+          "CH 10",
+          "CH 11",
+          "CH 12",
+          "CH 13",
+          "CH 14",
+          "CH 15",
+          "CH 16"
+        ],
+        "min": 0,
+        "max": 16,
+        "default": 0
+      },
+      {
+        "cmd": 39,
+        "section": "Zaquencer",
+        "method": "QuantizationMode",
+        "kind": "enum",
+        "options": [
+          "96",
+          "t32",
+          "32",
+          "t16",
+          "16",
+          "t8",
+          "8",
+          "t4",
+          "4",
+          "t2",
+          "2",
+          "t1bar",
+          "1bar",
+          "t2bar",
+          "2bar",
+          "4bar"
+        ],
+        "min": 0,
+        "max": 15,
+        "default": 10
+      },
+      {
+        "cmd": 40,
+        "section": "Zaquencer",
+        "method": "QuantizationMixer",
+        "kind": "enum",
+        "options": ["OFF", "ON"],
+        "min": 0,
+        "max": 1,
+        "default": 0
+      },
+      {
+        "cmd": 41,
+        "section": "Track 1",
+        "method": "Track1Mode",
+        "label": "Mode",
+        "kind": "enum",
+        "options": ["CHORD", "DRUM"],
+        "min": 0,
+        "max": 1,
+        "default": 0,
+        "args": [
+          {
+            "const": 0
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 42,
+        "section": "Track 1",
+        "method": "Track1Port",
+        "label": "Port",
+        "kind": "enum",
+        "options": ["U", "IN", "A", "B", "AB", "U A", "U B", "U AB"],
+        "values": [4, 0, 1, 2, 3, 5, 6, 7],
+        "min": 0,
+        "max": 7,
+        "default": 4,
+        "args": [
+          {
+            "const": 0
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 43,
+        "section": "Track 1",
+        "method": "Track1Channel",
+        "label": "Channel",
+        "kind": "enum",
+        "options": [
+          "CH 1",
+          "CH 2",
+          "CH 3",
+          "CH 4",
+          "CH 5",
+          "CH 6",
+          "CH 7",
+          "CH 8",
+          "CH 9",
+          "CH 10",
+          "CH 11",
+          "CH 12",
+          "CH 13",
+          "CH 14",
+          "CH 15",
+          "CH 16"
+        ],
+        "min": 0,
+        "max": 15,
+        "default": 0,
+        "args": [
+          {
+            "const": 0
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 44,
+        "section": "Track 1",
+        "method": "Track1CtrlAlpha",
+        "label": "Ctrl Alpha",
+        "kind": "enum",
+        "options": [
+          "DELAY",
+          "RATCHET",
+          "OFF",
+          "PROG CH",
+          "AFT TCH",
+          "PITCH BEND",
+          "CC"
+        ],
+        "values": [122, 123, 124, 125, 126, 127, 0],
+        "min": 0,
+        "max": 6,
+        "default": 124,
+        "args": [
+          {
+            "const": 0
+          },
+          {
+            "const": 1
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 44,
+        "section": "Track 1",
+        "method": "Track1CtrlAlphaValue",
+        "label": "Ctrl Alpha Value",
+        "kind": "range",
+        "min": 0,
+        "max": 127,
+        "default": 0,
+        "args": [
+          {
+            "const": 0
+          },
+          {
+            "const": 0
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 45,
+        "section": "Track 1",
+        "method": "Track1CtrlBeta",
+        "label": "Ctrl Beta",
+        "kind": "enum",
+        "options": [
+          "DELAY",
+          "RATCHET",
+          "OFF",
+          "PROG CH",
+          "AFT TCH",
+          "PITCH BEND",
+          "CC"
+        ],
+        "values": [122, 123, 124, 125, 126, 127, 0],
+        "min": 0,
+        "max": 6,
+        "default": 124,
+        "args": [
+          {
+            "const": 0
+          },
+          {
+            "const": 1
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 45,
+        "section": "Track 1",
+        "method": "Track1CtrlBetaValue",
+        "label": "Ctrl Beta Value",
+        "kind": "range",
+        "min": 0,
+        "max": 127,
+        "default": 0,
+        "args": [
+          {
+            "const": 0
+          },
+          {
+            "const": 0
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 41,
+        "section": "Track 2",
+        "method": "Track2Mode",
+        "label": "Mode",
+        "kind": "enum",
+        "options": ["CHORD", "DRUM"],
+        "min": 0,
+        "max": 1,
+        "default": 0,
+        "args": [
+          {
+            "const": 1
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 42,
+        "section": "Track 2",
+        "method": "Track2Port",
+        "label": "Port",
+        "kind": "enum",
+        "options": ["U", "IN", "A", "B", "AB", "U A", "U B", "U AB"],
+        "values": [4, 0, 1, 2, 3, 5, 6, 7],
+        "min": 0,
+        "max": 7,
+        "default": 4,
+        "args": [
+          {
+            "const": 1
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 43,
+        "section": "Track 2",
+        "method": "Track2Channel",
+        "label": "Channel",
+        "kind": "enum",
+        "options": [
+          "CH 1",
+          "CH 2",
+          "CH 3",
+          "CH 4",
+          "CH 5",
+          "CH 6",
+          "CH 7",
+          "CH 8",
+          "CH 9",
+          "CH 10",
+          "CH 11",
+          "CH 12",
+          "CH 13",
+          "CH 14",
+          "CH 15",
+          "CH 16"
+        ],
+        "min": 0,
+        "max": 15,
+        "default": 0,
+        "args": [
+          {
+            "const": 1
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 44,
+        "section": "Track 2",
+        "method": "Track2CtrlAlpha",
+        "label": "Ctrl Alpha",
+        "kind": "enum",
+        "options": [
+          "DELAY",
+          "RATCHET",
+          "OFF",
+          "PROG CH",
+          "AFT TCH",
+          "PITCH BEND",
+          "CC"
+        ],
+        "values": [122, 123, 124, 125, 126, 127, 0],
+        "min": 0,
+        "max": 6,
+        "default": 124,
+        "args": [
+          {
+            "const": 1
+          },
+          {
+            "const": 1
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 44,
+        "section": "Track 2",
+        "method": "Track2CtrlAlphaValue",
+        "label": "Ctrl Alpha Value",
+        "kind": "range",
+        "min": 0,
+        "max": 127,
+        "default": 0,
+        "args": [
+          {
+            "const": 1
+          },
+          {
+            "const": 0
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 45,
+        "section": "Track 2",
+        "method": "Track2CtrlBeta",
+        "label": "Ctrl Beta",
+        "kind": "enum",
+        "options": [
+          "DELAY",
+          "RATCHET",
+          "OFF",
+          "PROG CH",
+          "AFT TCH",
+          "PITCH BEND",
+          "CC"
+        ],
+        "values": [122, 123, 124, 125, 126, 127, 0],
+        "min": 0,
+        "max": 6,
+        "default": 124,
+        "args": [
+          {
+            "const": 1
+          },
+          {
+            "const": 1
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 45,
+        "section": "Track 2",
+        "method": "Track2CtrlBetaValue",
+        "label": "Ctrl Beta Value",
+        "kind": "range",
+        "min": 0,
+        "max": 127,
+        "default": 0,
+        "args": [
+          {
+            "const": 1
+          },
+          {
+            "const": 0
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 41,
+        "section": "Track 3",
+        "method": "Track3Mode",
+        "label": "Mode",
+        "kind": "enum",
+        "options": ["CHORD", "DRUM"],
+        "min": 0,
+        "max": 1,
+        "default": 0,
+        "args": [
+          {
+            "const": 2
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 42,
+        "section": "Track 3",
+        "method": "Track3Port",
+        "label": "Port",
+        "kind": "enum",
+        "options": ["U", "IN", "A", "B", "AB", "U A", "U B", "U AB"],
+        "values": [4, 0, 1, 2, 3, 5, 6, 7],
+        "min": 0,
+        "max": 7,
+        "default": 4,
+        "args": [
+          {
+            "const": 2
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 43,
+        "section": "Track 3",
+        "method": "Track3Channel",
+        "label": "Channel",
+        "kind": "enum",
+        "options": [
+          "CH 1",
+          "CH 2",
+          "CH 3",
+          "CH 4",
+          "CH 5",
+          "CH 6",
+          "CH 7",
+          "CH 8",
+          "CH 9",
+          "CH 10",
+          "CH 11",
+          "CH 12",
+          "CH 13",
+          "CH 14",
+          "CH 15",
+          "CH 16"
+        ],
+        "min": 0,
+        "max": 15,
+        "default": 0,
+        "args": [
+          {
+            "const": 2
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 44,
+        "section": "Track 3",
+        "method": "Track3CtrlAlpha",
+        "label": "Ctrl Alpha",
+        "kind": "enum",
+        "options": [
+          "DELAY",
+          "RATCHET",
+          "OFF",
+          "PROG CH",
+          "AFT TCH",
+          "PITCH BEND",
+          "CC"
+        ],
+        "values": [122, 123, 124, 125, 126, 127, 0],
+        "min": 0,
+        "max": 6,
+        "default": 124,
+        "args": [
+          {
+            "const": 2
+          },
+          {
+            "const": 1
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 44,
+        "section": "Track 3",
+        "method": "Track3CtrlAlphaValue",
+        "label": "Ctrl Alpha Value",
+        "kind": "range",
+        "min": 0,
+        "max": 127,
+        "default": 0,
+        "args": [
+          {
+            "const": 2
+          },
+          {
+            "const": 0
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 45,
+        "section": "Track 3",
+        "method": "Track3CtrlBeta",
+        "label": "Ctrl Beta",
+        "kind": "enum",
+        "options": [
+          "DELAY",
+          "RATCHET",
+          "OFF",
+          "PROG CH",
+          "AFT TCH",
+          "PITCH BEND",
+          "CC"
+        ],
+        "values": [122, 123, 124, 125, 126, 127, 0],
+        "min": 0,
+        "max": 6,
+        "default": 124,
+        "args": [
+          {
+            "const": 2
+          },
+          {
+            "const": 1
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 45,
+        "section": "Track 3",
+        "method": "Track3CtrlBetaValue",
+        "label": "Ctrl Beta Value",
+        "kind": "range",
+        "min": 0,
+        "max": 127,
+        "default": 0,
+        "args": [
+          {
+            "const": 2
+          },
+          {
+            "const": 0
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 41,
+        "section": "Track 4",
+        "method": "Track4Mode",
+        "label": "Mode",
+        "kind": "enum",
+        "options": ["CHORD", "DRUM"],
+        "min": 0,
+        "max": 1,
+        "default": 0,
+        "args": [
+          {
+            "const": 3
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 42,
+        "section": "Track 4",
+        "method": "Track4Port",
+        "label": "Port",
+        "kind": "enum",
+        "options": ["U", "IN", "A", "B", "AB", "U A", "U B", "U AB"],
+        "values": [4, 0, 1, 2, 3, 5, 6, 7],
+        "min": 0,
+        "max": 7,
+        "default": 4,
+        "args": [
+          {
+            "const": 3
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 43,
+        "section": "Track 4",
+        "method": "Track4Channel",
+        "label": "Channel",
+        "kind": "enum",
+        "options": [
+          "CH 1",
+          "CH 2",
+          "CH 3",
+          "CH 4",
+          "CH 5",
+          "CH 6",
+          "CH 7",
+          "CH 8",
+          "CH 9",
+          "CH 10",
+          "CH 11",
+          "CH 12",
+          "CH 13",
+          "CH 14",
+          "CH 15",
+          "CH 16"
+        ],
+        "min": 0,
+        "max": 15,
+        "default": 0,
+        "args": [
+          {
+            "const": 3
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 44,
+        "section": "Track 4",
+        "method": "Track4CtrlAlpha",
+        "label": "Ctrl Alpha",
+        "kind": "enum",
+        "options": [
+          "DELAY",
+          "RATCHET",
+          "OFF",
+          "PROG CH",
+          "AFT TCH",
+          "PITCH BEND",
+          "CC"
+        ],
+        "values": [122, 123, 124, 125, 126, 127, 0],
+        "min": 0,
+        "max": 6,
+        "default": 124,
+        "args": [
+          {
+            "const": 3
+          },
+          {
+            "const": 1
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 44,
+        "section": "Track 4",
+        "method": "Track4CtrlAlphaValue",
+        "label": "Ctrl Alpha Value",
+        "kind": "range",
+        "min": 0,
+        "max": 127,
+        "default": 0,
+        "args": [
+          {
+            "const": 3
+          },
+          {
+            "const": 0
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 45,
+        "section": "Track 4",
+        "method": "Track4CtrlBeta",
+        "label": "Ctrl Beta",
+        "kind": "enum",
+        "options": [
+          "DELAY",
+          "RATCHET",
+          "OFF",
+          "PROG CH",
+          "AFT TCH",
+          "PITCH BEND",
+          "CC"
+        ],
+        "values": [122, 123, 124, 125, 126, 127, 0],
+        "min": 0,
+        "max": 6,
+        "default": 124,
+        "args": [
+          {
+            "const": 3
+          },
+          {
+            "const": 1
+          },
+          {
+            "value": true
+          }
+        ]
+      },
+      {
+        "cmd": 45,
+        "section": "Track 4",
+        "method": "Track4CtrlBetaValue",
+        "label": "Ctrl Beta Value",
+        "kind": "range",
+        "min": 0,
+        "max": 127,
+        "default": 0,
+        "args": [
+          {
+            "const": 3
+          },
+          {
+            "const": 0
+          },
+          {
+            "value": true
+          }
+        ]
+      }
+    ]
   }
 }
