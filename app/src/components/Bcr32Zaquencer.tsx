@@ -163,10 +163,15 @@ export default function Bcr32Zaquencer(props: {
       {label}
       <select
         disabled={v === undefined}
-        value={v ?? ''}
         onChange={(e) => set(Number(e.currentTarget.value))}
       >
-        <For each={opts}>{([n, x]) => <option value={x}>{n}</option>}</For>
+        <For each={opts}>
+          {([n, x]) => (
+            <option value={x} selected={x === v}>
+              {n}
+            </option>
+          )}
+        </For>
       </select>
     </label>
   );
