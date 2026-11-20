@@ -28,6 +28,7 @@ import FirmwareView from './FirmwareView';
 import ManualsView from './ManualsView';
 import { fetchManuals } from '../lib/manuals';
 import ImageZoomModal from './ImageZoomModal';
+import Pk61Map from './Pk61Map';
 import { actions, useApp } from '../lib/store-solid';
 import { midi } from '../lib/midi/webmidi';
 import { buildPresetSyx, sendPresetSyx } from '../devices/_shared/preset';
@@ -419,7 +420,14 @@ function FunctionView(props: {
       </Show>
 
       <Show when={name === 'Device Settings'}>
-        <ControlTribeSettings slug={props.slug} outputId={props.outputId} />
+        <Show
+          when={props.slug === 'pk61'}
+          fallback={
+            <ControlTribeSettings slug={props.slug} outputId={props.outputId} />
+          }
+        >
+          <Pk61Map outputId={props.outputId} />
+        </Show>
       </Show>
 
       {/* settings-bearing functions (General, Sample, etc.) */}

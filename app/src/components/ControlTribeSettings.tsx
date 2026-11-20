@@ -5,6 +5,7 @@
 import {
   For,
   Show,
+  type JSX,
   createMemo,
   createSignal,
   onCleanup,
@@ -30,12 +31,23 @@ import {
   parseCtReplies,
   parseCtReply,
   type CtAction,
+  type CtControl,
 } from '../devices/_shared/controltribe';
 import CtStepGrid from './CtStepGrid';
 
 interface Props {
   slug: string;
   outputId: () => string | undefined;
+  // show only these controls (PK61 device map: one element, current mode)
+  only?: (c: CtControl, values: Record<number, number>) => boolean;
+  // own editors by method, shown above the section (PK61 name, pad colour)
+  custom?: Record<
+    string,
+    (
+      get: (method: string) => number,
+      set: (method: string, v: number) => void,
+    ) => JSX.Element
+  >;
 }
 
 export default function ControlTribeSettings(props: Props) {
@@ -47,6 +59,16 @@ export default function ControlTribeSettings(props: Props) {
   const initial: Record<number, number> = {};
   for (const c of dev()?.controls ?? []) initial[ctId(c)] = c.default;
   const [values, setValues] = createSignal<Record<number, number>>(initial);
+  const shown = createMemo(() =>
+    sections()
+      .map((s) => ({
+        ...s,
+        controls: s.controls.filter(
+          (c) => !props.only || props.only(c, values()),
+        ),
+      }))
+      .filter((s) => s.controls.length),
+  );
   const [lastFrame, setLastFrame] = createSignal<string>('');
 
   const out = () => props.outputId();
@@ -293,13 +315,34 @@ export default function ControlTribeSettings(props: Props) {
         </Show>
 
         <div class="scroll" style={{ 'max-height': '460px' }}>
-          <For each={sections()}>
+          <For each={shown()}>
             {(sec) => (
               <div class="stack" style={{ 'margin-bottom': '0.6rem' }}>
                 <div class="tiny dim device-app-hdr">{sec.section}</div>
+                <For
+                  each={sec.controls.filter((c) => props.custom?.[c.method])}
+                >
+                  {(c) =>
+                    props.custom![c.method](
+                      (m) => {
+                        const x = dev()!.controls.find((y) => y.method === m)!;
+                        return values()[ctId(x)] ?? x.default;
+                      },
+                      (m, v) =>
+                        setParam(
+                          ctId(dev()!.controls.find((y) => y.method === m)!),
+                          v,
+                        ),
+                    )
+                  }
+                </For>
                 <table class="mono-table">
                   <tbody>
-                    <For each={sec.controls}>
+                    <For
+                      each={sec.controls.filter(
+                        (c) => !props.custom?.[c.method],
+                      )}
+                    >
                       {(c) => (
                         <tr>
                           <td class="hot" style={{ width: '45%' }}>
