@@ -39,13 +39,16 @@ import {
   MONO_SYNC_TYPES,
   SONG_PKT_TYPES,
   SEQ_FILE_DATA_LEN,
+  SEQ12_BLOCKS,
   buildSeqFile,
   parseSeqFile,
+  seq12Block,
+  seq12Frames,
   SEQ_TYPE_NAMES,
   seqCaps,
   type SeqCaps,
 } from '../devices/_shared/sequencer-sync';
-import { hex, splitSysex } from '../lib/midi/sysex';
+import { buildPKT, hex, parseFrame, splitSysex } from '../lib/midi/sysex';
 import { isVirtualId } from '../lib/virtualsynth';
 
 interface Props {
@@ -950,15 +953,59 @@ function DeviceSyncBar(props: {
     log('info', `exported pattern .syx (${bytes.length} bytes)`);
   };
 
-  // SynthTribe .seq file: the data block is the 0x78 payload
+  // SynthTribe .seq file: type 11 = the 0x78 payload; type 12 = the global,
+  // song and pattern blocks of this slot, read from the device
   const seqLen = SEQ_FILE_DATA_LEN[props.type];
-  const exportSeq = () => {
-    const frame = lastFrame();
-    if (!frame || frame.length !== seqLen) {
-      log('info', 'export .seq: read a pattern first');
-      return;
+  const isSeq12 = props.type === 12;
+
+  // one type-12 block: 0x77 [sel, song, pattern] -> 0x78 [sel, ...]
+  const readSeq12Block = (out: string, sel: number, size: number) =>
+    new Promise<number[] | null>((resolve) => {
+      const off = midi.onMessage((data) => {
+        const f = parseFrame(variant, data);
+        if (f?.cmd !== 0x78 || f.payload[0] !== sel) return;
+        clearTimeout(timer);
+        off();
+        resolve(seq12Block(Array.from(f.payload), size));
+      });
+      const timer = setTimeout(() => {
+        off();
+        resolve(null);
+      }, 3000);
+      props.driver.sendRaw(
+        out,
+        buildPKT(variant, 0x77, [
+          sel,
+          props.state().bank,
+          props.state().pattern,
+        ]),
+      );
+    });
+
+  const exportSeq = async () => {
+    const out = props.outputId();
+    let blocks: number[][] = [];
+    if (isSeq12) {
+      if (!out) return log('info', 'export .seq: no MIDI output');
+      setBusy(true);
+      for (const b of SEQ12_BLOCKS) {
+        const block = await readSeq12Block(out, b.sel, b.size);
+        if (block) blocks.push(block);
+      }
+      setBusy(false);
+      if (blocks.length !== SEQ12_BLOCKS.length) {
+        setStatus('export .seq failed: the device did not send all 3 blocks');
+        return;
+      }
+    } else {
+      const frame = lastFrame();
+      if (!frame || frame.length !== seqLen) {
+        log('info', 'export .seq: read a pattern first');
+        return;
+      }
+      blocks = [frame];
     }
-    const bytes = buildSeqFile(variant.name, '', frame);
+    const bytes = buildSeqFile(variant.name, '', blocks);
     const url = URL.createObjectURL(
       new Blob([bytes.buffer as ArrayBuffer], {
         type: 'application/octet-stream',
@@ -973,7 +1020,36 @@ function DeviceSyncBar(props: {
   };
 
   const importSeq = async (file: File) => {
-    const data = parseSeqFile(new Uint8Array(await file.arrayBuffer()));
+    const blocks = parseSeqFile(new Uint8Array(await file.arrayBuffer()));
+    if (isSeq12) {
+      const out = props.outputId();
+      const { bank, pattern } = props.state();
+      const frames = blocks && seq12Frames(variant, blocks, bank, pattern);
+      if (!out) {
+        setStatus('import .seq: no MIDI output');
+        return;
+      }
+      if (!frames) {
+        setStatus(
+          `import failed: ${file.name} is not a valid ${variant.name} pattern`,
+        );
+        return;
+      }
+      if (
+        !window.confirm(
+          `Write ${file.name} to song ${bank + 1} pattern ${pattern + 1} on the device?`,
+        )
+      )
+        return;
+      // like the SynthTribe store: global, song, pattern back to back
+      frames.forEach((f) => props.driver.sendRaw(out, f));
+      log('out', `import ${file.name}: global, song and pattern blocks sent`);
+      setStatus(
+        `imported ${file.name} into song ${bank + 1} pattern ${pattern + 1}`,
+      );
+      return;
+    }
+    const data = blocks?.length === 1 ? blocks[0] : null;
     const dump =
       data && data.length === seqLen
         ? decodeDump(variant, buildRawPatternWrite(variant, data))
@@ -1061,10 +1137,11 @@ function DeviceSyncBar(props: {
             }}
           />
         </label>
-        <Show when={seqLen}>
+        <Show when={seqLen || isSeq12}>
           <button
             class="btn ghost tiny"
-            onClick={exportSeq}
+            disabled={busy()}
+            onClick={() => void exportSeq()}
             title="Save the pattern as a SynthTribe .seq file"
           >
             export .seq
@@ -1072,7 +1149,11 @@ function DeviceSyncBar(props: {
           <label
             class="btn ghost tiny"
             style={{ cursor: 'pointer' }}
-            title="Load a SynthTribe .seq pattern into the editor"
+            title={
+              isSeq12
+                ? 'Write a SynthTribe .seq file (global, song, pattern) into this slot'
+                : 'Load a SynthTribe .seq pattern into the editor'
+            }
           >
             import .seq
             <input

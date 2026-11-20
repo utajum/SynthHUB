@@ -9,7 +9,9 @@ import {
   buildPKT,
   buildPKT78,
   parseFrame,
+  pack87,
   packNibbles,
+  unpack87,
   unpackNibbles,
 } from '../../lib/midi/sysex';
 
@@ -144,17 +146,49 @@ export function buildRawPatternWrite(
   return buildPKT78(variant, rawPayload);
 }
 
-// SynthTribe `.seq` pattern file (ST 3.3.1 import/exportSequencerData11):
+// SynthTribe `.seq` pattern file (ST 3.3.1 import/exportSequencerData11/12):
 // i32le magic, i32le byte length + UTF-16LE device name, the same for the
-// firmware version, then i32le length + data. Per type: data size; the data
-// is the 0x78 payload byte for byte.
+// firmware version, then data blocks as i32le length + bytes. Type 11: one
+// block, the 0x78 payload byte for byte (size per type below).
 const SEQ_FILE_MAGIC = 0x23985476;
 export const SEQ_FILE_DATA_LEN: Record<number, number> = { 11: 0x45 };
+
+// Type 12 (RD-765): global, song and pattern blocks in that file order, each
+// 8-to-7 packed raw data; on the wire 0x77 / 0x78 [sel, song, pattern, ...]
+export const SEQ12_BLOCKS = [
+  { sel: 2, size: 0xe8 },
+  { sel: 1, size: 0x8a },
+  { sel: 0, size: 0x817 },
+];
+
+// .seq block from a type-12 0x78 payload, or null if it is too short
+export function seq12Block(payload: number[], size: number): number[] | null {
+  const raw = unpack87(payload.slice(3));
+  return raw.length < size ? null : pack87(raw.slice(0, size));
+}
+
+// the three 0x78 frames that store type-12 .seq blocks in one slot
+export function seq12Frames(
+  variant: DeviceVariant,
+  blocks: number[][],
+  song: number,
+  pattern: number,
+): Uint8Array[] | null {
+  if (blocks.length !== SEQ12_BLOCKS.length) return null;
+  const out: Uint8Array[] = [];
+  for (const [i, b] of SEQ12_BLOCKS.entries()) {
+    const raw = unpack87(blocks[i]);
+    if (raw.length < b.size) return null;
+    const data = pack87(raw.slice(0, b.size));
+    out.push(buildPKT78(variant, [b.sel, song, pattern, ...data]));
+  }
+  return out;
+}
 
 export function buildSeqFile(
   name: string,
   version: string,
-  data: number[],
+  blocks: number[][],
 ): Uint8Array {
   const out: number[] = [];
   const i32 = (v: number) =>
@@ -169,13 +203,15 @@ export function buildSeqFile(
   i32(SEQ_FILE_MAGIC);
   str(name);
   str(version);
-  i32(data.length);
-  out.push(...data);
+  for (const b of blocks) {
+    i32(b.length);
+    out.push(...b);
+  }
   return Uint8Array.from(out);
 }
 
-// data block of a `.seq` file, or null if the file is malformed
-export function parseSeqFile(bytes: Uint8Array): number[] | null {
+// data blocks of a `.seq` file, or null if the file is malformed
+export function parseSeqFile(bytes: Uint8Array): number[][] | null {
   const dv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   let o = 0;
   const i32 = () => {
@@ -189,9 +225,14 @@ export function parseSeqFile(bytes: Uint8Array): number[] | null {
     if (n < 0 || o + n > bytes.length) return null;
     o += n;
   }
-  const len = i32();
-  if (len < 0 || o + len > bytes.length) return null;
-  return Array.from(bytes.subarray(o, o + len));
+  const blocks: number[][] = [];
+  do {
+    const len = i32();
+    if (len < 0 || o + len > bytes.length) return null;
+    blocks.push(Array.from(bytes.subarray(o, o + len)));
+    o += len;
+  } while (o < bytes.length);
+  return blocks;
 }
 
 // TD-3 (type 1) body: 303-style split tracks (HW-verified by clock-driven
