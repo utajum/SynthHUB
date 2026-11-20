@@ -43,6 +43,7 @@ import {
 } from '../devices/_shared/params-extra';
 import PolyChainView from './PolyChain';
 import ControlTribeSettings from './ControlTribeSettings';
+import Bcr32Panel from './Bcr32Panel';
 import GuitarTribePresets from './GuitarTribePresets';
 import PatchLibrary from './PatchLibrary';
 import { deviceImage, deviceImageFull } from '../lib/deviceImages';
@@ -383,6 +384,9 @@ function FunctionView(props: {
       when={props.driver()}
       fallback={<p class="muted">initializing driver...</p>}
     >
+      <Show when={name === 'Presets' && props.slug === 'bcr32'}>
+        <Bcr32Panel outputId={props.outputId} />
+      </Show>
       <Show when={name === 'Sequencer' && SWING_SEQ.has(props.slug)}>
         <SwingSequencer outputId={props.outputId} slug={props.slug} />
       </Show>
@@ -664,6 +668,7 @@ function FunctionView(props: {
       <Show
         when={
           !props.fn.settings?.length &&
+          props.slug !== 'bcr32' &&
           !['Sequencer', 'Update', 'PolyChain', 'Device Settings'].includes(
             name,
           ) &&
