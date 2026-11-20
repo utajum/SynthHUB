@@ -427,14 +427,15 @@ const anchorOf = (pads: number[]) => {
 // notes and colours from the bottom-left pad, which plays the root:
 // chromatic = naturals with the sharps above, scale = its degrees (each
 // row one octave over the one below), drum grid = up from the start note
+// (clamped at 127: the drum frame has no off flag)
 function aqRelayout(
   p: AqPreset,
   pads: number[],
   colours: { key: number; root: number },
 ) {
-  const a = p.pads[anchorOf(pads)];
-  const r0 = ROW(anchorOf(pads));
-  const c0 = COL(anchorOf(pads));
+  const at = anchorOf(pads);
+  const a = p.pads[at];
+  const [r0, c0] = [ROW(at), COL(at)];
   const w = new Set(pads.map(COL)).size;
   const base = a.octaves * 12 + (a.type === 5 ? 0 : a.note);
   const scale = (AQ_SCALES[a.mode - 1] ?? AQ_SCALES[0])[1];
