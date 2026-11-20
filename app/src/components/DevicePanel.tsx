@@ -50,6 +50,7 @@ import GuitarTribePresets from './GuitarTribePresets';
 import PatchLibrary from './PatchLibrary';
 import { deviceImage, deviceImageFull } from '../lib/deviceImages';
 import VirtualSynthPanel from './VirtualSynthPanel';
+import GrooveKeySequencer from './GrooveKeySequencer';
 import { hasVirtualSynth, virtualId, isVirtualId } from '../lib/virtualsynth';
 
 interface Props {
@@ -418,6 +419,10 @@ function FunctionView(props: {
           variant={props.driver()!.variant}
           outputId={props.outputId}
         />
+      </Show>
+
+      <Show when={name === 'Sequencer' && props.slug === 'groove-key'}>
+        <GrooveKeySequencer outputId={props.outputId} />
       </Show>
 
       <Show when={name === 'Device Settings'}>
