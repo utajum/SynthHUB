@@ -44,6 +44,7 @@ import {
 import PolyChainView from './PolyChain';
 import ControlTribeSettings from './ControlTribeSettings';
 import Pk61Map from './Pk61Map';
+import Aq64lPanel from './Aq64lPanel';
 import GuitarTribePresets from './GuitarTribePresets';
 import PatchLibrary from './PatchLibrary';
 import { deviceImage, deviceImageFull } from '../lib/deviceImages';
@@ -419,7 +420,17 @@ function FunctionView(props: {
         <Show
           when={props.slug === 'pk61'}
           fallback={
-            <ControlTribeSettings slug={props.slug} outputId={props.outputId} />
+            <Show
+              when={props.slug === 'aq64l'}
+              fallback={
+                <ControlTribeSettings
+                  slug={props.slug}
+                  outputId={props.outputId}
+                />
+              }
+            >
+              <Aq64lPanel outputId={props.outputId} />
+            </Show>
           }
         >
           <Pk61Map outputId={props.outputId} />
