@@ -20,21 +20,14 @@
       "name": "General",
       "settings": [
         {
-          "type": "enhancedmode",
-          "kind": "toggle",
-          "title": "Enhanced Mode",
-          "default": 0,
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
           "min": 0,
-          "max": 1,
-          "sysex": {
-            "pkt": 43
-          },
+          "max": 127,
           "raw": {
-            "type": "enhancedmode",
-            "default": 0,
-            "index": 26,
-            "title": "Enhanced Mode",
-            "pkt": 43
+            "type": "section",
+            "title": "MIDI & Sync"
           }
         },
         {
@@ -157,6 +150,46 @@
           }
         },
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Performance",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Performance"
+          }
+        },
+        {
+          "type": "enhancedmode",
+          "kind": "toggle",
+          "title": "Enhanced Mode",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 43
+          },
+          "raw": {
+            "type": "enhancedmode",
+            "default": 0,
+            "index": 26,
+            "title": "Enhanced Mode",
+            "pkt": 43
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Sequencer",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Sequencer"
+          }
+        },
+        {
           "type": "voicenotemap",
           "kind": "composite",
           "title": "Voice Note Map",
@@ -229,6 +262,17 @@
             "index": 27,
             "labels": "BASS,SNARE,LOW TOM,MID TOM,HIGH TOM,RIM SHOT,CLAPS",
             "pkt": 44
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "System",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "System"
           }
         },
         {

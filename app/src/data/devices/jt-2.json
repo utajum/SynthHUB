@@ -20,6 +20,17 @@
       "name": "General",
       "settings": [
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "MIDI & Sync"
+          }
+        },
+        {
           "type": "channel",
           "kind": "spinbox",
           "title": "channel",
@@ -98,23 +109,78 @@
           }
         },
         {
-          "type": "arp_clock_division",
+          "type": "midi_cc",
           "kind": "spinbox",
-          "title": "ARP Clock Division",
+          "title": "midi_cc",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "midi_cc",
+            "index": 21,
+            "title": ""
+          }
+        },
+        {
+          "type": "jt2_midiclockout",
+          "kind": "spinbox",
+          "title": "MIDI Out",
           "default": 0,
           "min": 0,
           "max": 127,
           "sysex": {
-            "pkt": 19
+            "pkt": 116,
+            "spkt": 10,
+            "subtype": 0
           },
           "raw": {
-            "type": "arp_clock_division",
-            "enumeration": "1/4,1/4T,1/8,1/8T,1/16,1/16T,1/32,1/32T",
-            "note": ["5", "7", "8", "10", "11", "13", "14", "16"],
-            "index": 12,
+            "type": "jt2_midiclockout",
+            "subtype": 0,
             "default": 0,
-            "title": "ARP Clock Division",
-            "pkt": 19
+            "name": "arp_note_midi",
+            "indexarp": 21,
+            "pkt": 116,
+            "spkt": 10,
+            "index": 7,
+            "title": "MIDI Out"
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "radio",
+          "title": "Note Input Timing",
+          "control": "radiobutton_ll",
+          "options": [
+            "Precise Timing (e.g. DAW/Sequencer)",
+            "Manual Playing (e.g. MIDI Keyboard)"
+          ],
+          "default": 0,
+          "sysex": {
+            "spkt": 12,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "din_mini_port",
+            "title": "Note Input Timing:",
+            "control": "radiobutton_ll",
+            "optionlabel": "Precise Timing (e.g. DAW/Sequencer),Manual Playing (e.g. MIDI Keyboard)",
+            "from": 0,
+            "to": 1,
+            "default": 0,
+            "index": 23,
+            "spkt": 12
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Performance",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Performance"
           }
         },
         {
@@ -174,53 +240,23 @@
           }
         },
         {
-          "type": "multitrigger",
-          "kind": "toggle",
-          "title": "ENV Trigger Mode",
-          "default": 1,
-          "min": 0,
-          "max": 1,
-          "sysex": {
-            "pkt": 20,
-            "subtype": 4
-          },
-          "raw": {
-            "type": "multitrigger",
-            "subtype": 4,
-            "default": 1,
-            "index": 17,
-            "title": "ENV Trigger Mode",
-            "pkt": 20
-          }
-        },
-        {
-          "type": "custom",
-          "kind": "slider",
-          "title": "LED Brightness",
-          "control": "slider",
-          "min": 0,
-          "max": 100,
+          "type": "arp_clock_division",
+          "kind": "spinbox",
+          "title": "ARP Clock Division",
           "default": 0,
+          "min": 0,
+          "max": 127,
           "sysex": {
-            "pkt": 116,
-            "spkt": 0,
-            "subtype": 0
+            "pkt": 19
           },
           "raw": {
-            "type": "custom",
-            "subtype": 0,
-            "name": "ledbrightness",
-            "title": "LED Brightness",
-            "suffix": " %",
-            "control": "slider",
-            "from": 0,
-            "to": 100,
-            "min": 0,
-            "max": 100,
+            "type": "arp_clock_division",
+            "enumeration": "1/4,1/4T,1/8,1/8T,1/16,1/16T,1/32,1/32T",
+            "note": ["5", "7", "8", "10", "11", "13", "14", "16"],
+            "index": 12,
             "default": 0,
-            "index": 18,
-            "pkt": 116,
-            "spkt": 0
+            "title": "ARP Clock Division",
+            "pkt": 19
           }
         },
         {
@@ -248,6 +284,26 @@
             "index": 16,
             "pkt": 116,
             "spkt": 1
+          }
+        },
+        {
+          "type": "multitrigger",
+          "kind": "toggle",
+          "title": "ENV Trigger Mode",
+          "default": 1,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 20,
+            "subtype": 4
+          },
+          "raw": {
+            "type": "multitrigger",
+            "subtype": 4,
+            "default": 1,
+            "index": 17,
+            "title": "ENV Trigger Mode",
+            "pkt": 20
           }
         },
         {
@@ -307,18 +363,6 @@
           }
         },
         {
-          "type": "midi_cc",
-          "kind": "spinbox",
-          "title": "midi_cc",
-          "min": 0,
-          "max": 127,
-          "raw": {
-            "type": "midi_cc",
-            "index": 21,
-            "title": ""
-          }
-        },
-        {
           "type": "custom",
           "kind": "radio",
           "title": "Velocity for ENV-1",
@@ -373,30 +417,6 @@
           }
         },
         {
-          "type": "jt2_midiclockout",
-          "kind": "spinbox",
-          "title": "MIDI Out",
-          "default": 0,
-          "min": 0,
-          "max": 127,
-          "sysex": {
-            "pkt": 116,
-            "spkt": 10,
-            "subtype": 0
-          },
-          "raw": {
-            "type": "jt2_midiclockout",
-            "subtype": 0,
-            "default": 0,
-            "name": "arp_note_midi",
-            "indexarp": 21,
-            "pkt": 116,
-            "spkt": 10,
-            "index": 7,
-            "title": "MIDI Out"
-          }
-        },
-        {
           "type": "custom",
           "kind": "radio",
           "title": "Enhanced Mode",
@@ -424,31 +444,44 @@
           }
         },
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "System",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "System"
+          }
+        },
+        {
           "type": "custom",
-          "kind": "radio",
-          "title": "Note Input Timing",
-          "control": "radiobutton_ll",
-          "options": [
-            "Precise Timing (e.g. DAW/Sequencer)",
-            "Manual Playing (e.g. MIDI Keyboard)"
-          ],
+          "kind": "slider",
+          "title": "LED Brightness",
+          "control": "slider",
+          "min": 0,
+          "max": 100,
           "default": 0,
           "sysex": {
-            "spkt": 12,
+            "pkt": 116,
+            "spkt": 0,
             "subtype": 0
           },
           "raw": {
             "type": "custom",
             "subtype": 0,
-            "name": "din_mini_port",
-            "title": "Note Input Timing:",
-            "control": "radiobutton_ll",
-            "optionlabel": "Precise Timing (e.g. DAW/Sequencer),Manual Playing (e.g. MIDI Keyboard)",
+            "name": "ledbrightness",
+            "title": "LED Brightness",
+            "suffix": " %",
+            "control": "slider",
             "from": 0,
-            "to": 1,
+            "to": 100,
+            "min": 0,
+            "max": 100,
             "default": 0,
-            "index": 23,
-            "spkt": 12
+            "index": 18,
+            "pkt": 116,
+            "spkt": 0
           }
         }
       ]

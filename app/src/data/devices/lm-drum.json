@@ -20,23 +20,14 @@
       "name": "General",
       "settings": [
         {
-          "type": "autosave",
-          "kind": "toggle",
-          "title": "Auto Save",
-          "default": "0",
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
           "min": 0,
-          "max": 1,
-          "sysex": {
-            "pkt": 116,
-            "spkt": 11
-          },
+          "max": 127,
           "raw": {
-            "type": "autosave",
-            "title": "Auto Save",
-            "default": "0",
-            "index": "2",
-            "pkt": 116,
-            "spkt": 11
+            "type": "section",
+            "title": "MIDI & Sync"
           }
         },
         {
@@ -189,6 +180,17 @@
           }
         },
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Pads & Voices",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Pads & Voices"
+          }
+        },
+        {
           "type": "voicechanmap",
           "kind": "dropdown",
           "title": "Voice Channel Map",
@@ -257,39 +259,43 @@
           }
         },
         {
-          "type": "chainsongs",
+          "type": "triggeroutsource",
           "kind": "composite",
-          "title": "End Mode",
-          "default": 2,
+          "title": "triggeroutsource",
+          "options": [
+            "BASS",
+            "SNARE",
+            "SIDESTICK",
+            "CLOSED HAT",
+            "OPEN HAT",
+            "HI TOM",
+            "MID TOM",
+            "LOW TOM",
+            "RIDE",
+            "CRASH",
+            "CABASA",
+            "TAMBOURINE",
+            "HIGH CONGA",
+            "LOW CONGA",
+            "COWBELL",
+            "CLAPS"
+          ],
+          "default": 0,
           "sysex": {
-            "pkt": 42
+            "pkt": 44,
+            "subtype": 2
           },
           "raw": {
-            "type": "chainsongs",
-            "default": 2,
-            "index": 30,
-            "title": "End Mode",
-            "pkt": 42
-          }
-        },
-        {
-          "type": "clickon",
-          "kind": "toggle",
-          "title": "Beep On",
-          "default": "0",
-          "min": 0,
-          "max": 1,
-          "sysex": {
-            "pkt": 116,
-            "spkt": 12
-          },
-          "raw": {
-            "type": "clickon",
-            "default": "0",
-            "index": "31",
-            "title": "Beep On",
-            "pkt": 116,
-            "spkt": 12
+            "type": "triggeroutsource",
+            "subtype": 2,
+            "default": 0,
+            "defaultex": 0,
+            "defaultexex": 0,
+            "index": 32,
+            "indexex": 33,
+            "indexexex": 34,
+            "labels": "BASS,SNARE,SIDESTICK,CLOSED HAT,OPEN HAT,HI TOM,MID TOM,LOW TOM,RIDE,CRASH,CABASA,TAMBOURINE,HIGH CONGA,LOW CONGA,COWBELL,CLAPS",
+            "pkt": 44
           }
         },
         {
@@ -339,46 +345,6 @@
           }
         },
         {
-          "type": "triggeroutsource",
-          "kind": "composite",
-          "title": "triggeroutsource",
-          "options": [
-            "BASS",
-            "SNARE",
-            "SIDESTICK",
-            "CLOSED HAT",
-            "OPEN HAT",
-            "HI TOM",
-            "MID TOM",
-            "LOW TOM",
-            "RIDE",
-            "CRASH",
-            "CABASA",
-            "TAMBOURINE",
-            "HIGH CONGA",
-            "LOW CONGA",
-            "COWBELL",
-            "CLAPS"
-          ],
-          "default": 0,
-          "sysex": {
-            "pkt": 44,
-            "subtype": 2
-          },
-          "raw": {
-            "type": "triggeroutsource",
-            "subtype": 2,
-            "default": 0,
-            "defaultex": 0,
-            "defaultexex": 0,
-            "index": 32,
-            "indexex": 33,
-            "indexexex": 34,
-            "labels": "BASS,SNARE,SIDESTICK,CLOSED HAT,OPEN HAT,HI TOM,MID TOM,LOW TOM,RIDE,CRASH,CABASA,TAMBOURINE,HIGH CONGA,LOW CONGA,COWBELL,CLAPS",
-            "pkt": 44
-          }
-        },
-        {
           "type": "randhat",
           "kind": "spinbox",
           "title": "Random Closed Hat",
@@ -421,6 +387,33 @@
           }
         },
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Sequencer",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Sequencer"
+          }
+        },
+        {
+          "type": "chainsongs",
+          "kind": "composite",
+          "title": "End Mode",
+          "default": 2,
+          "sysex": {
+            "pkt": 42
+          },
+          "raw": {
+            "type": "chainsongs",
+            "default": 2,
+            "index": 30,
+            "title": "End Mode",
+            "pkt": 42
+          }
+        },
+        {
           "type": "sample_record_mode",
           "kind": "dropdown",
           "title": "Sample Record Mode",
@@ -437,6 +430,57 @@
             "index": 54,
             "labels": "RAW,AGC,NOR",
             "spkt": -1
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "System",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "System"
+          }
+        },
+        {
+          "type": "autosave",
+          "kind": "toggle",
+          "title": "Auto Save",
+          "default": "0",
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 11
+          },
+          "raw": {
+            "type": "autosave",
+            "title": "Auto Save",
+            "default": "0",
+            "index": "2",
+            "pkt": 116,
+            "spkt": 11
+          }
+        },
+        {
+          "type": "clickon",
+          "kind": "toggle",
+          "title": "Beep On",
+          "default": "0",
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 12
+          },
+          "raw": {
+            "type": "clickon",
+            "default": "0",
+            "index": "31",
+            "title": "Beep On",
+            "pkt": 116,
+            "spkt": 12
           }
         },
         {

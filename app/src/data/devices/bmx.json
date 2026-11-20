@@ -20,23 +20,14 @@
       "name": "General",
       "settings": [
         {
-          "type": "autosave",
-          "kind": "toggle",
-          "title": "Auto Save",
-          "default": "0",
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
           "min": 0,
-          "max": 1,
-          "sysex": {
-            "pkt": 116,
-            "spkt": 11
-          },
+          "max": 127,
           "raw": {
-            "type": "autosave",
-            "default": "0",
-            "index": "2",
-            "title": "Auto Save",
-            "pkt": 116,
-            "spkt": 11
+            "type": "section",
+            "title": "MIDI & Sync"
           }
         },
         {
@@ -162,6 +153,55 @@
           }
         },
         {
+          "type": "custom",
+          "kind": "radio",
+          "title": "Chromatic MIDI IN",
+          "control": "radiobutton",
+          "options": ["Off", "On"],
+          "default": 0,
+          "sysex": {
+            "spkt": -1
+          },
+          "raw": {
+            "type": "custom",
+            "name": "bmx-chromaticmidi",
+            "title": "Chromatic MIDI IN",
+            "control": "radiobutton",
+            "optionlabel": "Off,On",
+            "from": 0,
+            "to": 1,
+            "default": 0,
+            "index": 47,
+            "spkt": -1
+          }
+        },
+        {
+          "type": "local_off_en",
+          "kind": "toggle",
+          "title": "Local Off",
+          "default": "0",
+          "min": 0,
+          "max": 1,
+          "raw": {
+            "type": "local_off_en",
+            "name": "bmx-local_off_en",
+            "title": "Local Off",
+            "default": "0",
+            "index": 64
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Pads & Voices",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Pads & Voices"
+          }
+        },
+        {
           "type": "voicechanmap_bmx",
           "kind": "dropdown",
           "title": "Voice Channel Map",
@@ -226,103 +266,6 @@
           }
         },
         {
-          "type": "chainsongs",
-          "kind": "composite",
-          "title": "End Mode",
-          "default": 2,
-          "sysex": {
-            "pkt": 42
-          },
-          "raw": {
-            "title": "End Mode",
-            "type": "chainsongs",
-            "default": 2,
-            "index": 30,
-            "pkt": 42
-          }
-        },
-        {
-          "type": "custom",
-          "kind": "radio",
-          "title": "Chromatic MIDI IN",
-          "control": "radiobutton",
-          "options": ["Off", "On"],
-          "default": 0,
-          "sysex": {
-            "spkt": -1
-          },
-          "raw": {
-            "type": "custom",
-            "name": "bmx-chromaticmidi",
-            "title": "Chromatic MIDI IN",
-            "control": "radiobutton",
-            "optionlabel": "Off,On",
-            "from": 0,
-            "to": 1,
-            "default": 0,
-            "index": 47,
-            "spkt": -1
-          }
-        },
-        {
-          "type": "clickon",
-          "kind": "toggle",
-          "title": "Beep On",
-          "default": "0",
-          "min": 0,
-          "max": 1,
-          "sysex": {
-            "pkt": 116,
-            "spkt": 12
-          },
-          "raw": {
-            "type": "clickon",
-            "default": "0",
-            "index": "31",
-            "title": "Beep On",
-            "pkt": 116,
-            "spkt": 12
-          }
-        },
-        {
-          "type": "custom",
-          "kind": "radio",
-          "title": "Velocity-Sensitive Pad",
-          "control": "radiobutton",
-          "options": ["Off", "On"],
-          "default": 0,
-          "sysex": {
-            "spkt": -1
-          },
-          "raw": {
-            "type": "custom",
-            "name": "bmx-velocitysens",
-            "title": "Velocity-Sensitive Pad",
-            "control": "radiobutton",
-            "optionlabel": "Off,On",
-            "from": 0,
-            "to": 1,
-            "default": 0,
-            "index": 60,
-            "spkt": -1
-          }
-        },
-        {
-          "type": "local_off_en",
-          "kind": "toggle",
-          "title": "Local Off",
-          "default": "0",
-          "min": 0,
-          "max": 1,
-          "raw": {
-            "type": "local_off_en",
-            "name": "bmx-local_off_en",
-            "title": "Local Off",
-            "default": "0",
-            "index": 64
-          }
-        },
-        {
           "type": "triggeroutsource",
           "kind": "composite",
           "title": "triggeroutsource",
@@ -355,6 +298,29 @@
           }
         },
         {
+          "type": "custom",
+          "kind": "radio",
+          "title": "Velocity-Sensitive Pad",
+          "control": "radiobutton",
+          "options": ["Off", "On"],
+          "default": 0,
+          "sysex": {
+            "spkt": -1
+          },
+          "raw": {
+            "type": "custom",
+            "name": "bmx-velocitysens",
+            "title": "Velocity-Sensitive Pad",
+            "control": "radiobutton",
+            "optionlabel": "Off,On",
+            "from": 0,
+            "to": 1,
+            "default": 0,
+            "index": 60,
+            "spkt": -1
+          }
+        },
+        {
           "type": "accentthreshold",
           "kind": "spinbox",
           "title": "Accent Velocity Threshold",
@@ -375,6 +341,33 @@
           }
         },
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Sequencer",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Sequencer"
+          }
+        },
+        {
+          "type": "chainsongs",
+          "kind": "composite",
+          "title": "End Mode",
+          "default": 2,
+          "sysex": {
+            "pkt": 42
+          },
+          "raw": {
+            "title": "End Mode",
+            "type": "chainsongs",
+            "default": 2,
+            "index": 30,
+            "pkt": 42
+          }
+        },
+        {
           "type": "sample_record_mode",
           "kind": "dropdown",
           "title": "Sample Record Mode",
@@ -387,6 +380,57 @@
             "default": "0",
             "index": 46,
             "labels": "RAW,AGC,NOR"
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "System",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "System"
+          }
+        },
+        {
+          "type": "autosave",
+          "kind": "toggle",
+          "title": "Auto Save",
+          "default": "0",
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 11
+          },
+          "raw": {
+            "type": "autosave",
+            "default": "0",
+            "index": "2",
+            "title": "Auto Save",
+            "pkt": 116,
+            "spkt": 11
+          }
+        },
+        {
+          "type": "clickon",
+          "kind": "toggle",
+          "title": "Beep On",
+          "default": "0",
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 12
+          },
+          "raw": {
+            "type": "clickon",
+            "default": "0",
+            "index": "31",
+            "title": "Beep On",
+            "pkt": 116,
+            "spkt": 12
           }
         },
         {

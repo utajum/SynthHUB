@@ -20,6 +20,17 @@
       "name": "General",
       "settings": [
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "MIDI & Sync"
+          }
+        },
+        {
           "type": "channel",
           "kind": "spinbox",
           "title": "channel",
@@ -39,6 +50,35 @@
             "defaultin": 1,
             "indexin": 0,
             "pkt": 14
+          }
+        },
+        {
+          "type": "transpose",
+          "kind": "spinbox",
+          "title": "MIDI In Transpose",
+          "default": 1,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 15
+          },
+          "raw": {
+            "type": "transpose",
+            "default": 1,
+            "index": 7,
+            "title": "MIDI In Transpose",
+            "pkt": 15
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Performance",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Performance"
           }
         },
         {
@@ -83,24 +123,6 @@
           }
         },
         {
-          "type": "transpose",
-          "kind": "spinbox",
-          "title": "MIDI In Transpose",
-          "default": 1,
-          "min": 0,
-          "max": 127,
-          "sysex": {
-            "pkt": 15
-          },
-          "raw": {
-            "type": "transpose",
-            "default": 1,
-            "index": 7,
-            "title": "MIDI In Transpose",
-            "pkt": 15
-          }
-        },
-        {
           "type": "multitrigger",
           "kind": "toggle",
           "title": "Multi Trigger",
@@ -116,6 +138,17 @@
             "index": 3,
             "title": "Multi Trigger",
             "pkt": 20
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "System",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "System"
           }
         },
         {

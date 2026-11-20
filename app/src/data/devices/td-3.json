@@ -20,6 +20,17 @@
       "name": "General",
       "settings": [
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "MIDI & Sync"
+          }
+        },
+        {
           "type": "channel",
           "kind": "spinbox",
           "title": "channel",
@@ -39,6 +50,58 @@
             "defaultout": 1,
             "indexout": 0,
             "pkt": 14
+          }
+        },
+        {
+          "type": "transpose",
+          "kind": "spinbox",
+          "title": "MIDI In Transpose",
+          "min": -12,
+          "max": 12,
+          "default": 0,
+          "sysex": {
+            "pkt": 15
+          },
+          "raw": {
+            "title": "MIDI In Transpose: ",
+            "type": "transpose",
+            "default": 0,
+            "index": 2,
+            "offset": -12,
+            "pkt": 15,
+            "min": -12,
+            "max": 12
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "clock",
+          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG"],
+          "sysex": {
+            "subtype": 1
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG",
+            "subtype": 1,
+            "defaultsource": 0,
+            "indexsource": 8,
+            "defaultrate": 2,
+            "indexrate": 7,
+            "defaultpolarity": 1,
+            "indexpolarity": 6
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Performance",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Performance"
           }
         },
         {
@@ -81,27 +144,6 @@
           }
         },
         {
-          "type": "transpose",
-          "kind": "spinbox",
-          "title": "MIDI In Transpose",
-          "min": -12,
-          "max": 12,
-          "default": 0,
-          "sysex": {
-            "pkt": 15
-          },
-          "raw": {
-            "title": "MIDI In Transpose: ",
-            "type": "transpose",
-            "default": 0,
-            "index": 2,
-            "offset": -12,
-            "pkt": 15,
-            "min": -12,
-            "max": 12
-          }
-        },
-        {
           "type": "multitrigger",
           "kind": "toggle",
           "title": "Multiple Trigger",
@@ -119,26 +161,6 @@
             "default": 0,
             "index": 5,
             "pkt": 20
-          }
-        },
-        {
-          "type": "clock",
-          "kind": "composite",
-          "title": "clock",
-          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG"],
-          "sysex": {
-            "subtype": 1
-          },
-          "raw": {
-            "type": "clock",
-            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG",
-            "subtype": 1,
-            "defaultsource": 0,
-            "indexsource": 8,
-            "defaultrate": 2,
-            "indexrate": 7,
-            "defaultpolarity": 1,
-            "indexpolarity": 6
           }
         },
         {
