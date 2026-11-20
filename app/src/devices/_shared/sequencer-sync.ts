@@ -141,7 +141,7 @@ export function decodeDump(
 // Store ACK (SynthTribe 3.3.x): types whose store waits for `01 <x> <status>`
 // after each 0x78 write; status 0 = stored. No ACK within 3 s = not stored.
 export const STORE_ACK_TYPES = new Set([6, 11, 12]);
-export const STORE_ACK_TIMEOUT_MS = 3000;
+const STORE_ACK_TIMEOUT_MS = 3000;
 
 // status byte of an inbound store ACK for `variant`, or null
 export function parseStoreAck(
