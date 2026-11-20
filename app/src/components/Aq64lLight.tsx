@@ -393,41 +393,19 @@ export default function Aq64lLight(props: {
 
   // the parts with their own editor
   const extra = (i: number, d: FxDevice) => {
-    if (d.type === 'keyfilter')
-      return toggles(
-        d.filter as boolean[],
-        10,
-        (j) => `${j}`,
-        (j) =>
-          editDev(
-            i,
-            (x) =>
-              void ((x.filter as boolean[])[j] = !(x.filter as boolean[])[j]),
-          ),
-      );
-    if (d.type === 'macrofilter')
-      return toggles(
-        d.filter as boolean[],
-        10,
-        (j) => `${j + 1}`,
-        (j) =>
-          editDev(
-            i,
-            (x) =>
-              void ((x.filter as boolean[])[j] = !(x.filter as boolean[])[j]),
-          ),
-      );
-    if (d.type === 'refresh')
-      return toggles(
-        d.macros as boolean[],
-        4,
-        (j) => `M${j + 1}`,
-        (j) =>
-          editDev(
-            i,
-            (x) =>
-              void ((x.macros as boolean[])[j] = !(x.macros as boolean[])[j]),
-          ),
+    // filters and refresh: a toggle per key / macro value / macro
+    const flags: Record<string, [string, number, (j: number) => string]> = {
+      keyfilter: ['filter', 10, (j) => `${j}`],
+      macrofilter: ['filter', 10, (j) => `${j + 1}`],
+      refresh: ['macros', 4, (j) => `M${j + 1}`],
+    };
+    const fl = flags[d.type];
+    if (fl)
+      return toggles(d[fl[0]] as boolean[], fl[1], fl[2], (j) =>
+        editDev(i, (x) => {
+          const a = x[fl[0]] as boolean[];
+          a[j] = !a[j];
+        }),
       );
     if (d.type === 'copy')
       return (

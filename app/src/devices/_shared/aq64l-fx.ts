@@ -157,8 +157,9 @@ const MAKE: Record<string, () => FxDevice> = {
 };
 export const FX_NAMES = Object.keys(MAKE);
 export const fxMake = (name: string) => MAKE[name]();
-export const fxName = (d: FxDevice) =>
-  FX_NAMES.find((n) => MAKE[n]().type === d.type) ?? d.type;
+// file type -> menu name ("colorfilter" -> "Color Filter")
+const NAME_OF = new Map(FX_NAMES.map((n) => [MAKE[n]().type, n]));
+export const fxName = (d: FxDevice) => NAME_OF.get(d.type) ?? d.type;
 
 // labels of the enums (Control Tribe device editors)
 export const FX_ENUMS = {
@@ -239,7 +240,7 @@ const num = (v: unknown, d: number) =>
 export function fxDevice(v: unknown): FxDevice | null {
   if (!v || typeof v !== 'object') return null;
   const o = v as Record<string, unknown>;
-  const name = FX_NAMES.find((n) => MAKE[n]().type === o.type);
+  const name = NAME_OF.get(String(o.type));
   if (!name) return null;
   const d = { ...MAKE[name](), ...o } as FxDevice;
   for (const k of ['chain', 'preprocess']) if (k in d) d[k] = fxChain(d[k]);
