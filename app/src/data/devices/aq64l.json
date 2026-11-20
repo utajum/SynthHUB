@@ -1,0 +1,23 @@
+{
+  "slug": "aq64l",
+  "name": "AQ64L",
+  "app": "controltribe",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "AQ64L",
+      "aliases": ["AQ64L"],
+      "pids": ["0x12e0"],
+      "protocol": 1,
+      "modelId": ["0x00", "0x01", "0x6d"],
+      "deviceId": "0x7f",
+      "cloudFamily": "aq64l",
+      "cloudModel": "aq64l"
+    }
+  ],
+  "functions": [
+    {
+      "name": "Update"
+    }
+  ]
+}

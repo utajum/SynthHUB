@@ -1,0 +1,23 @@
+{
+  "slug": "bcr32",
+  "name": "BCR32",
+  "app": "controltribe",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "BCR32",
+      "aliases": ["Behringer BCR", "BCR32"],
+      "pids": ["0x12cf"],
+      "protocol": 1,
+      "modelId": ["0x7f", "0x64", "0x00"],
+      "deviceId": "0x00",
+      "cloudFamily": "bcr32",
+      "cloudModel": "bcr32"
+    }
+  ],
+  "functions": [
+    {
+      "name": "Update"
+    }
+  ]
+}

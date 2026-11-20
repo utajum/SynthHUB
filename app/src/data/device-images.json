@@ -423,6 +423,36 @@
       "JAM PLAY": "/devices/jam-play.webp"
     }
   },
+  "qt32-play": {
+    "image": "/devices/qt32-play.webp",
+    "variants": {
+      "QT32 PLAY": "/devices/qt32-play.webp"
+    }
+  },
+  "groove-key": {
+    "image": "/devices/groove-key.webp",
+    "variants": {
+      "GROOVE KEY": "/devices/groove-key.webp"
+    }
+  },
+  "pk61": {
+    "image": "/devices/pk61.webp",
+    "variants": {
+      "PK61": "/devices/pk61.webp"
+    }
+  },
+  "aq64l": {
+    "image": "/devices/aq64l.webp",
+    "variants": {
+      "AQ64L": "/devices/aq64l.webp"
+    }
+  },
+  "bcr32": {
+    "image": "/devices/bcr32.webp",
+    "variants": {
+      "BCR32": "/devices/bcr32.webp"
+    }
+  },
   "bm-11m": {
     "image": "/devices/bm-11m.webp",
     "variants": {

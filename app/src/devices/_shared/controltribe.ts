@@ -4,12 +4,15 @@
 // + (deviceId, productId) pairs live in data/controltribe.json. JAM / JAM
 // PLAY use a 4-byte `header` instead, and some controls carry `args`.
 import data from '../../data/controltribe.json';
+import { jInt, jNum, jProp, jStr, vtRead, vtWrite } from './juce-valuetree';
 
 type CtKind = 'enum' | 'range' | 'step';
 // one payload byte after cmd: another control's value (+ add), a constant,
 // or this control's value
 export interface CtArg {
   ref?: string;
+  // another param of a group frame (table devices): its current value
+  peer?: string;
   add?: number;
   const?: number;
   value?: true;
@@ -36,6 +39,10 @@ export interface CtControl {
   args?: CtArg[];
   // UI-only selector feeding other controls' args; never sent
   local?: boolean;
+  // value always as <flags> <hi> <lo> (QT32 PLAY 16-bit params)
+  wide?: boolean;
+  // index into the device's group frames (table devices)
+  group?: number;
 }
 
 // "options": "notes" in the JSON = MIDI note names, C-2 = 0 .. G8 = 127
@@ -61,14 +68,30 @@ export function ctOptionValue(c: CtControl, i: number): number {
   return c.values?.[i] ?? i;
 }
 
+// one-shot command; `ref` names a control whose value is appended
+// (QT32 PLAY favourite index)
+export interface CtAction {
+  label: string;
+  bytes: number[];
+  confirm?: string;
+  ref?: string;
+}
+
 interface CtDevice {
   name: string;
   deviceId: number;
   productId: number;
   // bytes after F0 00 20 32 when not <deviceId> <productId>
   header?: number[];
+  // false when the unit has no 0x72 store (table devices save on their own)
+  store?: boolean;
+  // shared arg lists of group frames; a control's own peer is its value
+  groups?: CtArg[][];
   // confirmed one-shot commands (JAM: restore settings, erase all data)
-  actions?: { label: string; bytes: number[]; confirm: string }[];
+  actions?: CtAction[];
+  // project file (MainComponent::saveProject): ValueTree "root" with these
+  // format / device names and one int per param
+  project?: { format: string; device: string; ext: string };
   controls: CtControl[];
 }
 export interface CtStepRow {
@@ -78,8 +101,20 @@ export interface CtStepRow {
 
 const CT_DEVICES = data as unknown as Record<string, CtDevice>;
 for (const d of Object.values(CT_DEVICES))
-  for (const c of d.controls)
+  d.controls.forEach((c, i) => {
     if ((c.options as unknown) === 'notes') c.options = NOTE_NAMES;
+    if (!d.groups) return;
+    // table devices: key by table index (cmds are shared), label from name
+    c.id ??= 0x20000 + i;
+    c.label ??= c.method.replace(
+      /(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Za-z])(?=\d)|(?<=\d)(?=[A-Za-z])/g,
+      ' ',
+    );
+    if (c.group !== undefined)
+      c.args = d.groups[c.group].map((a) =>
+        a.peer === c.method ? { value: true } : a,
+      );
+  });
 
 // management command bytes shared across the devices
 const CT_CMD = {
@@ -137,6 +172,13 @@ export function buildCtQuery(
   ]);
 }
 
+// one value on the wire: 7-bit, or 3 bytes for wide params
+function ctWire(c: CtControl, v: number): number[] {
+  return c.wide
+    ? [((v >> 6) & 2) | ((v >> 15) & 1), (v >> 8) & 0x7f, v & 0x7f]
+    : [v & 0x7f];
+}
+
 // payload bytes of a control with args; value null -> the bytes before it
 function ctArgBytes(
   d: CtDevice,
@@ -148,7 +190,14 @@ function ctArgBytes(
   for (const a of c.args ?? []) {
     if (a.value) {
       if (value === null) break;
-      out.push(value & 0x7f);
+      out.push(...ctWire(c, value));
+      continue;
+    }
+    if (a.peer) {
+      // a query stops at the first param of a group frame
+      if (value === null) break;
+      const p = d.controls.find((x) => x.method === a.peer)!;
+      out.push(...ctWire(p, values[ctId(p)] ?? p.default));
       continue;
     }
     const r = a.ref ? d.controls.find((x) => x.method === a.ref) : undefined;
@@ -180,27 +229,79 @@ export function buildCtControl(
   ]);
 }
 
+// the args control a reply answers: header, cmd and the bytes before the
+// value match; n = header length
+function ctArgsReply(
+  slug: string,
+  data: Uint8Array,
+  values: Record<number, number>,
+): { d: CtDevice; c: CtControl; n: number } | null {
+  const d = ctDevice(slug);
+  const h = d ? ctHeader(d) : [];
+  if (!d || data.length < h.length + 2) return null;
+  if (h.some((b, i) => data[i] !== b)) return null;
+  const n = h.length;
+  const c = d.controls.find((c) => {
+    if (!c.args || c.local || c.cmd !== data[n]) return false;
+    const pre = ctArgBytes(d, c, null, values);
+    return pre.every((b, i) => data[n + 1 + i] === b);
+  });
+  return c ? { d, c, n } : null;
+}
+
+// group frame (args) -> one update per param it carries, or null
+export function parseCtReplies(
+  slug: string,
+  data: Uint8Array,
+  values: Record<number, number> = {},
+): { id: number; value: number }[] | null {
+  const m = ctArgsReply(slug, data, values);
+  if (!m) return null;
+  const { d, c, n } = m;
+  const out: { id: number; value: number }[] = [];
+  let i = n + 1;
+  for (const a of c.args!) {
+    if (i >= data.length - 1) break;
+    const r = a.value
+      ? c
+      : a.peer
+        ? d.controls.find((x) => x.method === a.peer)
+        : undefined;
+    if (!r) {
+      i++;
+      continue;
+    }
+    if (r.wide) {
+      const [f, hi, lo] = [data[i], data[i + 1], data[i + 2]];
+      out.push({
+        id: ctId(r),
+        value: ((((f & 1) << 7) | hi) << 8) | ((f & 2) << 6) | lo,
+      });
+      i += 3;
+    } else {
+      out.push({ id: ctId(r), value: data[i] });
+      i++;
+    }
+  }
+  return out;
+}
+
 // device reply -> { id: ctId of the control, value }, or null if not ours
 export function parseCtReply(
   slug: string,
   data: Uint8Array,
   values: Record<number, number> = {},
 ): { id: number; value: number } | null {
+  const m = ctArgsReply(slug, data, values);
+  if (m) {
+    const i = m.n + 1 + ctArgBytes(m.d, m.c, null, values).length;
+    return i < data.length - 1 ? { id: ctId(m.c), value: data[i] } : null;
+  }
   const d = ctDevice(slug);
   const h = d ? ctHeader(d) : [];
   if (!d || data.length < h.length + 3) return null;
   if (h.some((b, i) => data[i] !== b)) return null;
   const n = h.length;
-  // args controls: cmd + the expected bytes before the value
-  const a = d.controls.find((c) => {
-    if (!c.args || c.local || c.cmd !== data[n]) return false;
-    const pre = ctArgBytes(d, c, null, values);
-    return pre.every((b, i) => data[n + 1 + i] === b);
-  });
-  if (a) {
-    const i = n + 1 + ctArgBytes(d, a, null, values).length;
-    return i < data.length - 1 ? { id: ctId(a), value: data[i] } : null;
-  }
   const c =
     d.controls.find((c) => c.page === data[n] && c.cmd === data[n + 1]) ??
     d.controls.find(
@@ -216,6 +317,82 @@ export function parseCtReply(
         data[i + 2]
       : data[i];
   return { id: ctId(c), value: v };
+}
+
+// one frame per group frame or control, for a paced read (queries) or write
+// (current values); `match` = the reply prefix that answers it
+export function ctSyncFrames(
+  slug: string,
+  values: Record<number, number>,
+  write: boolean,
+): { frame: Uint8Array; match: number[] }[] {
+  const out: { frame: Uint8Array; match: number[] }[] = [];
+  const seen = new Set<string>();
+  for (const c of ctDevice(slug)?.controls ?? []) {
+    if (c.local) continue;
+    const q = buildCtControl(slug, c, null, values);
+    const key = ctHex(q);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const frame = write
+      ? buildCtControl(slug, c, values[ctId(c)] ?? c.default, values)
+      : q;
+    out.push({ frame, match: Array.from(q.subarray(0, q.length - 1)) });
+  }
+  return out;
+}
+
+export function buildCtProject(
+  slug: string,
+  values: Record<number, number>,
+): Uint8Array {
+  const d = ctDevice(slug);
+  if (!d?.project) throw new Error(`no project file for ${slug}`);
+  return vtWrite({
+    type: 'root',
+    props: [
+      ['format', jStr(d.project.format)],
+      ['formatVersion', jInt(1)],
+      ['device', jStr(d.project.device)],
+      ...d.controls.map((c): [string, ReturnType<typeof jInt>] => [
+        c.method,
+        jInt(values[ctId(c)] ?? c.default),
+      ]),
+    ],
+    children: [],
+  });
+}
+
+// project file -> control values, or the Control Tribe error text
+export function parseCtProject(
+  slug: string,
+  bytes: Uint8Array,
+): Record<number, number> | string {
+  const d = ctDevice(slug);
+  if (!d?.project) return 'That file could not be read.';
+  let t;
+  try {
+    t = vtRead(bytes);
+  } catch {
+    return 'That file could not be read.';
+  }
+  const str = (k: string) => {
+    const v = jProp(t, k);
+    return v?.t === 'string' ? v.v : '';
+  };
+  if (str('format') !== d.project.format || str('device') !== d.project.device)
+    return `That is not a ${d.name} settings file.`;
+  if ((jNum(jProp(t, 'formatVersion')) ?? 0) >= 2)
+    return 'That settings file was written by a newer version of this application.';
+  const out: Record<number, number> = {};
+  for (const c of d.controls) {
+    const v = jNum(jProp(t, c.method));
+    if (v === undefined) continue;
+    // ranges clamp; enums keep the wire value as stored
+    out[ctId(c)] =
+      c.kind === 'range' ? Math.max(c.min, Math.min(c.max, v | 0)) : v | 0;
+  }
+  return out;
 }
 
 // raw frame for a device action: header + bytes

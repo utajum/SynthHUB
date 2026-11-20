@@ -522,6 +522,48 @@
     "protocol": 1
   },
   {
+    "alias": "QT32 PLAY",
+    "slug": "qt32-play",
+    "variant": "QT32 PLAY",
+    "protocol": 1
+  },
+  {
+    "alias": "GROOVE KEY",
+    "slug": "groove-key",
+    "variant": "GROOVE KEY",
+    "protocol": 1
+  },
+  {
+    "alias": "POLYKEYS PK61",
+    "slug": "pk61",
+    "variant": "PK61",
+    "protocol": 1
+  },
+  {
+    "alias": "PK61",
+    "slug": "pk61",
+    "variant": "PK61",
+    "protocol": 1
+  },
+  {
+    "alias": "AQ64L",
+    "slug": "aq64l",
+    "variant": "AQ64L",
+    "protocol": 1
+  },
+  {
+    "alias": "Behringer BCR",
+    "slug": "bcr32",
+    "variant": "BCR32",
+    "protocol": 1
+  },
+  {
+    "alias": "BCR32",
+    "slug": "bcr32",
+    "variant": "BCR32",
+    "protocol": 1
+  },
+  {
     "alias": "BM-11M",
     "slug": "bm-11m",
     "variant": "BM-11M",

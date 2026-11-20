@@ -1,0 +1,26 @@
+{
+  "slug": "groove-key",
+  "name": "GROOVE KEY",
+  "app": "controltribe",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "GROOVE KEY",
+      "aliases": ["GROOVE KEY"],
+      "pids": ["0x1293"],
+      "protocol": 1,
+      "modelId": ["0x00", "0x01", "0x42"],
+      "deviceId": "0x00",
+      "cloudFamily": "groovekey",
+      "cloudModel": "groovekey"
+    }
+  ],
+  "functions": [
+    {
+      "name": "Device Settings"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}
