@@ -7,6 +7,9 @@ import { actions } from '../lib/store-solid';
 import {
   AQ_CC_MODES,
   AQ_GLOBAL,
+  AQ_KEY_PALETTE,
+  AQ_REGION_TYPES,
+  AQ_SCALES,
   AQ_TYPES,
   AQ_TYPE_LABEL,
   aqApplyTool,
@@ -18,13 +21,20 @@ import {
   aqPreset,
   aqPresetFromJson,
   aqPresetToJson,
+  aqRegionSettings,
   aqSendPaced,
+  aqSetRegion,
   type AqPad,
   type AqPreset,
+  type AqRegionSettings,
 } from '../devices/_shared/aq64l';
 
 const NOTES = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B'];
 const OCTAVES = ['-2', '-1', '0', '1', '2', '3', '4', '5', '6', '7'];
+const CHANNELS = [
+  ...Array.from({ length: 16 }, (_, i) => `${i + 1}`),
+  'Global',
+];
 
 export default function Aq64lCustom(props: {
   outputId: () => string | undefined;
@@ -45,6 +55,9 @@ export default function Aq64lCustom(props: {
   const pad = () => (sel() === null ? null : preset().pads[sel()!]);
   const setPad = (d: Partial<AqPad>) =>
     update((p) => Object.assign(p.pads[sel()!], d));
+  const region = () => aqRegionSettings(preset(), sel()!);
+  const setRegion = (s: Partial<AqRegionSettings>) =>
+    update((p) => aqSetRegion(p, sel()!, s));
 
   const send = async () => {
     const out = props.outputId();
@@ -108,6 +121,49 @@ export default function Aq64lCustom(props: {
         </For>
       </select>
     </label>
+  );
+
+  // option values from `first`
+  const pick = (
+    label: string,
+    opts: string[],
+    v: number,
+    first: number,
+    set: (v: number) => void,
+  ) => (
+    <label class="tiny flex" style={{ gap: '0.3rem' }}>
+      {label}
+      <select onChange={(e) => set(+e.currentTarget.value)}>
+        <For each={opts}>
+          {(o, i) => (
+            <option value={i() + first} selected={i() + first === v}>
+              {o}
+            </option>
+          )}
+        </For>
+      </select>
+    </label>
+  );
+  // the device shows keyboard and drum pads in one of 17 colours
+  const swatches = (label: string, v: number, set: (c: number) => void) => (
+    <span class="tiny flex" style={{ gap: '0.3rem' }}>
+      {label}
+      <For each={AQ_KEY_PALETTE}>
+        {(c) => (
+          <button
+            title={aqHex(c)}
+            onClick={() => set(c)}
+            style={{
+              width: '16px',
+              height: '16px',
+              padding: 0,
+              background: aqHex(c),
+              border: c === v >>> 0 ? '2px solid #fff' : '1px solid #0008',
+            }}
+          />
+        )}
+      </For>
+    </span>
   );
 
   return (
@@ -191,7 +247,7 @@ export default function Aq64lCustom(props: {
       <p class="muted tiny">
         Click a pad to place the tool. Faders fill a column or row, keyboards
         two rows, the drum grid 4 x 4 pads. Shift-click selects a pad without
-        changing it.
+        changing it; on a keyboard or drum grid it opens the region settings.
       </p>
       <div
         style={{
@@ -220,7 +276,13 @@ export default function Aq64lCustom(props: {
                 'font-size': '9px',
               }}
             >
-              {d.type ? AQ_TYPES[d.type].slice(0, 3) : ''}
+              {d.type >= 5 && d.type <= 8
+                ? d.param2 && d.type < 7
+                  ? ''
+                  : `${NOTES[d.note] ?? ''}${OCTAVES[d.octaves] ?? ''}`
+                : d.type
+                  ? AQ_TYPES[d.type].slice(0, 3)
+                  : ''}
             </button>
           )}
         </For>
@@ -231,28 +293,88 @@ export default function Aq64lCustom(props: {
             <p class="hot">
               Pad {sel()! + 1}: {AQ_TYPE_LABEL[AQ_TYPES[d().type] ?? 'none']}
             </p>
-            <div class="flex wrap">
-              <label class="tiny flex" style={{ gap: '0.3rem' }}>
-                primary colour
-                <input
-                  type="color"
-                  value={aqHex(d().colour)}
-                  onChange={(e) =>
-                    setPad({ colour: aqFromHex(e.currentTarget.value) })
-                  }
-                />
-              </label>
-              <label class="tiny flex" style={{ gap: '0.3rem' }}>
-                secondary colour
-                <input
-                  type="color"
-                  value={aqHex(d().onColour)}
-                  onChange={(e) =>
-                    setPad({ onColour: aqFromHex(e.currentTarget.value) })
-                  }
-                />
-              </label>
-            </div>
+            <Show when={AQ_REGION_TYPES.includes(d().type)}>
+              <div class="flex wrap">
+                <Show when={d().type !== 5}>
+                  {pick(
+                    d().type === 7 ? 'start note' : 'root note',
+                    NOTES,
+                    region().note,
+                    0,
+                    (v) => setRegion({ note: v }),
+                  )}
+                </Show>
+                {pick('octave', OCTAVES, region().octaves, 0, (v) =>
+                  setRegion({ octaves: v }),
+                )}
+                <Show when={d().type === 6}>
+                  {pick(
+                    'scale',
+                    AQ_SCALES.map(([n]) => n),
+                    region().mode,
+                    1,
+                    (v) => setRegion({ mode: v }),
+                  )}
+                </Show>
+                <Show when={d().type === 7}>
+                  {pick('midi channel', CHANNELS, region().channel, 1, (v) =>
+                    setRegion({ channel: v }),
+                  )}
+                </Show>
+                <label class="tiny flex" style={{ gap: '0.3rem' }}>
+                  secondary colour
+                  <input
+                    type="color"
+                    value={aqHex(region().onColour)}
+                    onChange={(e) =>
+                      setRegion({ onColour: aqFromHex(e.currentTarget.value) })
+                    }
+                  />
+                </label>
+                <button
+                  class="btn tiny ghost"
+                  onClick={() => update((p) => void aqApplyTool(p, 0, sel()!))}
+                >
+                  remove
+                </button>
+              </div>
+              {d().type === 7
+                ? swatches('colour', region().key, (c) =>
+                    setRegion({ key: c, root: c }),
+                  )
+                : swatches('key colour', region().key, (c) =>
+                    setRegion({ key: c }),
+                  )}
+              <Show when={d().type !== 7}>
+                {swatches('root colour', region().root, (c) =>
+                  setRegion({ root: c }),
+                )}
+              </Show>
+            </Show>
+            <Show when={!AQ_REGION_TYPES.includes(d().type)}>
+              <div class="flex wrap">
+                <label class="tiny flex" style={{ gap: '0.3rem' }}>
+                  primary colour
+                  <input
+                    type="color"
+                    value={aqHex(d().colour)}
+                    onChange={(e) =>
+                      setPad({ colour: aqFromHex(e.currentTarget.value) })
+                    }
+                  />
+                </label>
+                <label class="tiny flex" style={{ gap: '0.3rem' }}>
+                  secondary colour
+                  <input
+                    type="color"
+                    value={aqHex(d().onColour)}
+                    onChange={(e) =>
+                      setPad({ onColour: aqFromHex(e.currentTarget.value) })
+                    }
+                  />
+                </label>
+              </div>
+            </Show>
             <div class="flex wrap">
               <Show when={d().type >= 1 && d().type <= 4}>
                 {channelSel(d())}
@@ -260,7 +382,7 @@ export default function Aq64lCustom(props: {
                   setPad({ param1: v }),
                 )}
               </Show>
-              <Show when={d().type >= 5 && d().type <= 8}>
+              <Show when={d().type === 8}>
                 <label class="tiny flex" style={{ gap: '0.3rem' }}>
                   note
                   <select

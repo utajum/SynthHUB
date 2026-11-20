@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
+  AQ_KEY_PALETTE,
   aqApplyTool,
   aqCustomFrames,
   aqKeyName,
@@ -9,6 +10,9 @@ import {
   aqPreset,
   aqPresetFromJson,
   aqPresetToJson,
+  aqRegion,
+  aqRegionSettings,
+  aqSetRegion,
 } from '../src/devices/_shared/aq64l.ts';
 
 const hex = (b: ArrayLike<number>) =>
@@ -100,13 +104,67 @@ test('.aq64l: Control Tribe JSON round-trip and envelope checks', () => {
   );
 });
 
-test('tools: regions and key strokes', () => {
+test('tools: regions', () => {
   const p = aqPreset();
   assert.deepEqual(aqApplyTool(p, 1, 19), [3, 11, 19, 27, 35, 43, 51, 59]);
   assert.equal(aqApplyTool(p, 5, 0).length, 16);
   assert.equal(p.pads[0].param2, 1); // gap above C
   assert.equal(p.pads[8].note, 0);
   assert.equal(aqApplyTool(p, 7, 63).length, 16);
+  // a tool over a keyboard removes all of it
+  aqApplyTool(p, 8, 15);
+  assert.equal(p.pads.slice(0, 16).filter((d) => d.type === 5).length, 0);
+});
+
+test('regions: scale keyboard, chromatic, drum grid settings', () => {
+  const p = aqPreset();
+  const n = (i: number) => p.pads[i].octaves * 12 + p.pads[i].note;
+  // scale keyboard rows 6-7: bottom-left pad = root (C3 = 60), minor
+  aqApplyTool(p, 6, 50);
+  assert.deepEqual(
+    [56, 57, 58, 59, 60, 61, 62, 63].map(n),
+    [60, 62, 63, 65, 67, 68, 70, 72],
+  );
+  assert.equal(n(48), 72); // the row above: one octave up
+  aqSetRegion(p, 49, { note: 2, mode: 2, octaves: 4 }); // D major, octave 2
+  assert.deepEqual(
+    [56, 57, 58, 59, 60, 61, 62, 63].map(n),
+    [50, 52, 54, 55, 57, 59, 61, 62],
+  );
+  assert.deepEqual(aqRegionSettings(p, 63), {
+    ...aqRegionSettings(p, 56),
+    note: 2,
+    octaves: 4,
+    mode: 2,
+  });
+  assert.ok(p.pads.slice(48).every((d) => d.mode === 2 && d.param1 === 48));
+  // root colour on the roots only
+  aqSetRegion(p, 56, { root: AQ_KEY_PALETTE[0], key: AQ_KEY_PALETTE[3] });
+  assert.equal(p.pads[56].colour, AQ_KEY_PALETTE[0]);
+  assert.equal(p.pads[63].colour, AQ_KEY_PALETTE[0]);
+  assert.equal(p.pads[57].colour, AQ_KEY_PALETTE[3]);
+  // chromatic keyboard: octave only; drum grid: start note, channel id
+  aqApplyTool(p, 5, 0);
+  aqSetRegion(p, 3, { octaves: 6 });
+  assert.equal(n(8), 72);
+  assert.equal(n(1), 73);
+  assert.equal(p.pads[3].param2, 1);
+  aqApplyTool(p, 7, 20);
+  assert.deepEqual(
+    aqRegion(p, 20),
+    [20, 21, 22, 23, 28, 29, 30, 31, 36, 37, 38, 39, 44, 45, 46, 47],
+  );
+  aqSetRegion(p, 20, { note: 2, octaves: 3, channel: 17 });
+  assert.equal(n(44), 38);
+  assert.equal(n(47), 41);
+  assert.equal(n(20), 50);
+  assert.ok(aqRegion(p, 20).every((i) => p.pads[i].channel === 17));
+  // regions stay apart: the keyboards keep their settings
+  assert.equal(aqRegionSettings(p, 0).octaves, 6);
+  assert.equal(aqRegionSettings(p, 63).mode, 2);
+});
+
+test('key strokes', () => {
   const k = aqKeyStroke({
     code: 'KeyS',
     ctrlKey: true,

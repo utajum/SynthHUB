@@ -315,78 +315,43 @@ const GAP = 0xff333333;
 
 // apply a tool at `pad`; returns the pads it changed
 export function aqApplyTool(p: AqPreset, type: number, pad: number): number[] {
+  const t = AQ_TYPES[type];
+  const region = AQ_REGION_TYPES.includes(type);
+  const [h, w] = t === 'drum_grid' ? [4, 4] : [2, 8];
+  const r0 = Math.min(ROW(pad), 8 - h);
+  const c0 = Math.min(COL(pad), 8 - w);
+  const all = (n: number, f: (k: number) => number) =>
+    Array.from({ length: n }, (_, k) => f(k));
+  const pads =
+    t === 'fader_v' || t === 'fader_v_bi'
+      ? all(8, (r) => r * 8 + COL(pad))
+      : t === 'fader_h' || t === 'fader_h_bi'
+        ? all(8, (c) => ROW(pad) * 8 + c)
+        : region
+          ? all(h * w, (k) => (r0 + Math.floor(k / w)) * 8 + c0 + (k % w))
+          : [pad];
+  // a tool over a keyboard or drum grid removes all of it
+  for (const i of pads)
+    if (AQ_REGION_TYPES.includes(p.pads[i].type))
+      for (const j of aqRegion(p, i)) p.pads[j] = aqPad();
   const set = (i: number, d: Partial<AqPad>) => {
     p.pads[i] = aqPad({ enabled: true, type, ...d });
     return i;
   };
-  const t = AQ_TYPES[type];
-  if (t === 'fader_v' || t === 'fader_v_bi') {
-    const colour = t === 'fader_v' ? 0xff90ff90 : 0xffb0ff50;
-    return Array.from({ length: 8 }, (_, r) =>
-      set(r * 8 + COL(pad), { colour, channel: AQ_GLOBAL }),
-    );
+  if (type >= 1 && type <= 4) {
+    const colour = t.endsWith('_bi') ? 0xffb0ff50 : 0xff90ff90;
+    return pads.map((i) => set(i, { colour, channel: AQ_GLOBAL }));
   }
-  if (t === 'fader_h' || t === 'fader_h_bi') {
-    const colour = t === 'fader_h' ? 0xff90ff90 : 0xffb0ff50;
-    return Array.from({ length: 8 }, (_, c) =>
-      set(ROW(pad) * 8 + c, { colour, channel: AQ_GLOBAL }),
-    );
-  }
-  if (t === 'chromatic_keyboard' || t === 'scale_keyboard') {
-    // two rows: sharps above, naturals below (scale: natural minor)
-    const r = Math.min(ROW(pad), 6);
-    const top = t === 'chromatic_keyboard' ? [-1, 1, 3, -1, 6, 8, 10, -1] : [];
-    const low =
-      t === 'chromatic_keyboard'
-        ? [0, 2, 4, 5, 7, 9, 11, 12]
-        : [0, 2, 3, 5, 7, 8, 10, 12];
-    const hi =
-      t === 'chromatic_keyboard'
-        ? low.map((n) => n + 12)
-        : low.map((n) => n + 12);
-    const out: number[] = [];
-    for (let c = 0; c < 8; c++) {
-      const n = top.length ? top[c] : hi[c];
-      out.push(
-        set(
-          r * 8 + c,
-          n < 0
-            ? { colour: GAP, param2: 1 }
-            : {
-                note: n % 12,
-                octaves: 5 + Math.floor(n / 12),
-                colour: n % 12 ? KEY : ROOT,
-              },
-        ),
-      );
-      const m = low[c];
-      out.push(
-        set((r + 1) * 8 + c, {
-          note: m % 12,
-          octaves: 5 + Math.floor(m / 12),
-          colour: m % 12 ? KEY : ROOT,
-        }),
-      );
-    }
-    return out;
-  }
-  if (t === 'drum_grid') {
-    // 4 x 4 pads, notes upward from C 3
-    const r0 = Math.min(ROW(pad), 4);
-    const c0 = Math.min(COL(pad), 4);
-    const out: number[] = [];
-    for (let k = 0; k < 16; k++) {
-      const n = 36 + k;
-      out.push(
-        set((r0 + 3 - (k >> 2)) * 8 + c0 + (k & 3), {
-          note: n % 12,
-          octaves: Math.floor(n / 12),
-          colour: k ? KEY : ROOT,
-          channel: 9,
-        }),
-      );
-    }
-    return out;
+  if (region) {
+    // param1 links the pads (first pad, as itemDropped); the settings sit
+    // in the bottom-left pad
+    const drum = t === 'drum_grid';
+    for (const i of pads)
+      set(i, { param1: pads[0], mode: 1, channel: drum ? 10 : 0 });
+    const a = p.pads[(r0 + h - 1) * 8 + c0];
+    a.octaves = drum ? 3 : 5;
+    aqRelayout(p, pads, { key: KEY, root: drum ? KEY : ROOT });
+    return pads;
   }
   if (t === 'none') return [set(pad, { enabled: false, type: 0 })];
   const colour =
@@ -406,6 +371,143 @@ export function aqApplyTool(p: AqPreset, type: number, pad: number): number[] {
       octaves: t === 'midi_note' ? 5 : 0,
     }),
   ];
+}
+
+// ---- keyboard / drum grid regions (Chromatic / ScaleKeyboard /
+// DrumGridSettingsView). The bottom-left pad holds the root / start note
+// (note, octaves: octave -2..7 as 0..9); every pad holds mode = scale id
+// 1-16 and channel = drum channel id 1-16, 17 Global. Layouts are ours.
+
+// prettier-ignore
+export const AQ_SCALES: [string, number[]][] = [
+  ['Minor', [0, 2, 3, 5, 7, 8, 10]], ['Major', [0, 2, 4, 5, 7, 9, 11]],
+  ['Dorian', [0, 2, 3, 5, 7, 9, 10]], ['Phrygian', [0, 1, 3, 5, 7, 8, 10]],
+  ['Mixolydian', [0, 2, 4, 5, 7, 9, 10]],
+  ['Melodic Minor', [0, 2, 3, 5, 7, 9, 11]],
+  ['Harmonic Minor', [0, 2, 3, 5, 7, 8, 11]],
+  ['Bebop Dorian', [0, 2, 3, 4, 5, 7, 9, 10]], ['Blues', [0, 3, 5, 6, 7, 10]],
+  ['Minor Pentatonic', [0, 3, 5, 7, 10]],
+  ['Hungarian Minor', [0, 2, 3, 6, 7, 8, 11]],
+  ['Ukrainian Dorian', [0, 2, 3, 6, 7, 9, 10]], ['Marva', [0, 1, 4, 6, 7, 9, 11]],
+  ['Todi', [0, 1, 3, 6, 7, 8, 11]], ['Whole Tone', [0, 2, 4, 6, 8, 10]],
+  ['Hirajoshi', [0, 2, 3, 7, 8]],
+];
+export const AQ_REGION_TYPES = [5, 6, 7];
+export const AQ_KEY_PALETTE = PALETTE;
+
+// the connected pads of the same type and link (param1)
+export function aqRegion(p: AqPreset, pad: number): number[] {
+  const { type, param1 } = p.pads[pad];
+  if (!AQ_REGION_TYPES.includes(type)) return [pad];
+  const seen = new Set([pad]);
+  const q = [pad];
+  while (q.length) {
+    const i = q.pop()!;
+    const next = [i - 8, i + 8, COL(i) ? i - 1 : -1, COL(i) < 7 ? i + 1 : -1];
+    for (const j of next)
+      if (
+        j >= 0 &&
+        j < AQ_PADS &&
+        !seen.has(j) &&
+        p.pads[j].type === type &&
+        p.pads[j].param1 === param1
+      ) {
+        seen.add(j);
+        q.push(j);
+      }
+  }
+  return [...seen].sort((a, b) => a - b);
+}
+
+const anchorOf = (pads: number[]) => {
+  const bottom = Math.max(...pads.map(ROW));
+  return Math.min(...pads.filter((i) => ROW(i) === bottom));
+};
+
+// notes and colours from the bottom-left pad, which plays the root:
+// chromatic = naturals with the sharps above, scale = its degrees (each
+// row one octave over the one below), drum grid = up from the start note
+function aqRelayout(
+  p: AqPreset,
+  pads: number[],
+  colours: { key: number; root: number },
+) {
+  const a = p.pads[anchorOf(pads)];
+  const r0 = ROW(anchorOf(pads));
+  const c0 = COL(anchorOf(pads));
+  const w = new Set(pads.map(COL)).size;
+  const base = a.octaves * 12 + (a.type === 5 ? 0 : a.note);
+  const scale = (AQ_SCALES[a.mode - 1] ?? AQ_SCALES[0])[1];
+  const natural = [0, 2, 4, 5, 7, 9, 11];
+  const sharp = [-1, 1, 3, -1, 6, 8, 10];
+  for (const i of pads) {
+    const r = r0 - ROW(i);
+    const c = COL(i) - c0;
+    let n: number;
+    if (a.type === 5) {
+      const k = (r % 2 ? sharp : natural)[c % 7];
+      n = k < 0 ? -1 : base + k + 12 * (Math.floor(r / 2) + Math.floor(c / 7));
+    } else if (a.type === 6) {
+      const deg = c + r * scale.length;
+      n =
+        base + scale[deg % scale.length] + 12 * Math.floor(deg / scale.length);
+    } else n = Math.min(127, base + c + r * w);
+    const d = p.pads[i];
+    Object.assign(d, { mode: a.mode, channel: a.channel });
+    if (n < 0 || n > 127) Object.assign(d, { colour: GAP, param2: 1 });
+    else
+      Object.assign(d, {
+        note: n % 12,
+        octaves: Math.floor(n / 12),
+        param2: 0,
+        colour: (n - base) % 12 ? colours.key : colours.root,
+      });
+  }
+}
+
+export interface AqRegionSettings {
+  note: number;
+  octaves: number;
+  mode: number;
+  channel: number;
+  key: number; // palette colour of the keys
+  root: number; // palette colour of the root notes
+  onColour: number;
+}
+
+export function aqRegionSettings(p: AqPreset, pad: number): AqRegionSettings {
+  const pads = aqRegion(p, pad);
+  const a = p.pads[anchorOf(pads)];
+  const key = pads
+    .map((i) => p.pads[i])
+    .find((d) => !d.param2 && d.note !== a.note);
+  return {
+    note: a.note,
+    octaves: a.octaves,
+    mode: a.mode,
+    channel: a.channel,
+    key: key?.colour ?? a.colour,
+    root: a.colour,
+    onColour: a.onColour,
+  };
+}
+
+// change the settings of the region at `pad` and lay it out again
+export function aqSetRegion(
+  p: AqPreset,
+  pad: number,
+  s: Partial<AqRegionSettings>,
+) {
+  const pads = aqRegion(p, pad);
+  const v = { ...aqRegionSettings(p, pad), ...s };
+  Object.assign(p.pads[anchorOf(pads)], {
+    note: v.note,
+    octaves: v.octaves,
+    mode: v.mode,
+    channel: v.channel,
+  });
+  for (const i of pads) p.pads[i].onColour = v.onColour;
+  aqRelayout(p, pads, { key: v.key, root: v.root });
 }
 
 // ---- key stroke: KeyboardEvent.code -> HID usage (KeyEditor::juceToHID),
