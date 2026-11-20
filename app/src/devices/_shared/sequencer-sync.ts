@@ -131,15 +131,6 @@ export function decodeDump(
   };
 }
 
-// byte-exact write: re-send a previously received 0x78 payload unchanged (the
-// only safe write for unmodeled body formats)
-export function buildRawPatternWrite(
-  variant: DeviceVariant,
-  rawPayload: number[],
-): Uint8Array {
-  return buildPKT78(variant, rawPayload);
-}
-
 // Store ACK (SynthTribe 3.3.x): types whose store waits for `01 <x> <status>`
 // after each 0x78 write; status 0 = stored. No ACK within 3 s = not stored.
 export const STORE_ACK_TYPES = new Set([6, 11, 12]);
@@ -153,6 +144,15 @@ export function parseStoreAck(
   const f = parseFrame(variant, data);
   if (!f || f.cmd !== 0x01 || f.payload.length < 2) return null;
   return f.payload[1];
+}
+
+// byte-exact write: re-send a previously received 0x78 payload unchanged (the
+// only safe write for unmodeled body formats)
+export function buildRawPatternWrite(
+  variant: DeviceVariant,
+  rawPayload: number[],
+): Uint8Array {
+  return buildPKT78(variant, rawPayload);
 }
 
 // TD-3 (type 1) body: 303-style split tracks (HW-verified by clock-driven

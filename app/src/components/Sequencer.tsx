@@ -38,11 +38,11 @@ import {
   buildRawPatternWrite,
   MONO_SYNC_TYPES,
   SONG_PKT_TYPES,
+  SEQ_TYPE_NAMES,
+  seqCaps,
   STORE_ACK_TYPES,
   STORE_ACK_TIMEOUT_MS,
   parseStoreAck,
-  SEQ_TYPE_NAMES,
-  seqCaps,
   type SeqCaps,
 } from '../devices/_shared/sequencer-sync';
 import { hex, splitSysex } from '../lib/midi/sysex';
