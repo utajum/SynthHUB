@@ -164,3 +164,27 @@ test('program page frames match AQ64LProgramPage (emulated)', async () => {
   assert.equal(f(m.aqProgramMode(true)), '66 01');
   assert.equal(f(m.aqProgramReset()), '6c 00');
 });
+
+test('light output matches AQ64L::LightOutput::send (emulated)', async () => {
+  const m = await import('../src/devices/_shared/aq64l.ts');
+  // 6-bit 63 / 32 / 1 -> 7f 41 02; 38 specs per frame
+  const all = m.aqLightFrames(Array(80).fill(0xff8004));
+  assert.deepEqual(
+    all.map((f) => f.length),
+    [8 + 1 + 38 * 5 + 1, 8 + 1 + 38 * 5 + 1, 8 + 1 + 4 * 5 + 1],
+  );
+  assert.equal(
+    hex(all[0]).slice(H.length + 1, H.length + 1 + 32),
+    '70 03 00 7f 41 02 03 01 7f 41 02',
+  );
+  assert.equal(all[1][9 + 1], 38);
+  // a pattern frame sends only what changed
+  const a = Array(80).fill(0);
+  const b = [...a];
+  b[17] = 0x00ff00;
+  assert.equal(
+    hex(m.aqLightFrames(b, a)[0]).slice(H.length + 1, -3),
+    '70 03 11 00 7f 00',
+  );
+  assert.equal(m.aqLightFrames(a, a).length, 0);
+});

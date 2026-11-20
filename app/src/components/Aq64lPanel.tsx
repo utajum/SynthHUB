@@ -3,11 +3,13 @@ import { For, createSignal, type JSX } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
 import Aq64lCustom from './Aq64lCustom';
 import Aq64lProgram from './Aq64lProgram';
+import Aq64lLight from './Aq64lLight';
 
 type Page = (p: { outputId: () => string | undefined }) => JSX.Element;
 const PAGES: [string, Page][] = [
   ['Custom Mode', Aq64lCustom],
   ['Program', Aq64lProgram],
+  ['Light FX', Aq64lLight],
 ];
 
 export default function Aq64lPanel(props: {

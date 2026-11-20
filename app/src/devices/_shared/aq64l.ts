@@ -609,3 +609,27 @@ export function aqToolFrame(
         : [2, i, aqNearest(colour)];
   return aqFrame(0x70, ...leds.flatMap(spec));
 }
+
+// ---- light effects output (AQ64L::LightOutput::send) ----------------------
+// 6-bit RGB per LED as `03 <led> <r7 g7 b7>` specs (x -> x << 1 | x >> 5),
+// at most 38 specs per 70 frame. A pattern frame sends only the LEDs that
+// changed (Pattern::renderFrameDifference).
+
+const SPECS_PER_FRAME = 38;
+const to6 = (c: number, k: number) => ((c >> k) & 0xff) >> 2;
+const x7 = (v: number) => ((v << 1) | (v >> 5)) & 0x7f;
+
+export function aqLightFrames(
+  next: number[],
+  prev: number[] | null = null,
+): Uint8Array[] {
+  const specs: number[][] = [];
+  next.forEach((c, led) => {
+    if (prev && prev[led] === c) return;
+    specs.push([3, led, x7(to6(c, 16)), x7(to6(c, 8)), x7(to6(c, 0))]);
+  });
+  const out: Uint8Array[] = [];
+  for (let i = 0; i < specs.length; i += SPECS_PER_FRAME)
+    out.push(aqFrame(0x70, ...specs.slice(i, i + SPECS_PER_FRAME).flat()));
+  return out;
+}
