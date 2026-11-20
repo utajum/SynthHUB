@@ -276,6 +276,16 @@
     "variantCount": 1
   },
   {
+    "slug": "mini-pops-7",
+    "name": "MINI POPS 7",
+    "pids": ["0x12c9", "0x12ca"],
+    "aliases": ["MINI POPS 7"],
+    "protocols": [3],
+    "functions": ["General", "Sequencer", "Update"],
+    "hasSequencer": true,
+    "variantCount": 1
+  },
+  {
     "slug": "model-15",
     "name": "MODEL 15",
     "pids": ["0x124d", "0x124e"],
@@ -376,6 +386,16 @@
     "variantCount": 1
   },
   {
+    "slug": "polyeight",
+    "name": "Polyeight",
+    "pids": ["0x1283", "0x1284"],
+    "aliases": ["Polyeight"],
+    "protocols": [3],
+    "functions": ["General", "Update"],
+    "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
     "slug": "pro-800",
     "name": "PRO 800",
     "pids": ["0x125f", "0x1260"],
@@ -413,6 +433,16 @@
     "protocols": [2],
     "functions": ["General", "Update"],
     "hasSequencer": false,
+    "variantCount": 1
+  },
+  {
+    "slug": "rd-765",
+    "name": "RD-765",
+    "pids": ["0x12d4", "0x12d5"],
+    "aliases": ["RD-765"],
+    "protocols": [3],
+    "functions": ["General", "Sequencer", "Sample", "Update"],
+    "hasSequencer": true,
     "variantCount": 1
   },
   {
