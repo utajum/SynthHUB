@@ -45,6 +45,7 @@ import PolyChainView from './PolyChain';
 import ControlTribeSettings from './ControlTribeSettings';
 import GuitarTribePresets from './GuitarTribePresets';
 import PatchLibrary from './PatchLibrary';
+import LibrarianPanel from './LibrarianPanel';
 import { deviceImage, deviceImageFull } from '../lib/deviceImages';
 import VirtualSynthPanel from './VirtualSynthPanel';
 import { hasVirtualSynth, virtualId, isVirtualId } from '../lib/virtualsynth';
@@ -377,6 +378,9 @@ function FunctionView(props: {
 }) {
   const name = props.fn.name;
   const params = useApp((s) => s.params[props.slug] ?? {});
+  // UB-Xa 16 / Desktop: dump-file librarian (SynthTribe 3.3.1)
+  const isUbxaLibrarian = () =>
+    name === 'Librarian' && props.driver()?.readKind() === 'ubxa';
 
   return (
     <Show
@@ -663,6 +667,13 @@ function FunctionView(props: {
         </div>
       </Show>
 
+      <Show when={isUbxaLibrarian()}>
+        <LibrarianPanel
+          variant={props.driver()!.variant}
+          outputId={props.outputId}
+        />
+      </Show>
+
       {/* generic view for data/bulk functions without individual settings
           (Sample, Wavetable, WavePreset, Librarian, Preset, ...) */}
       <Show
@@ -671,7 +682,8 @@ function FunctionView(props: {
           !['Sequencer', 'Update', 'PolyChain', 'Device Settings'].includes(
             name,
           ) &&
-          !/alibration/i.test(name)
+          !/alibration/i.test(name) &&
+          !isUbxaLibrarian()
         }
       >
         <GenericFunctionView
