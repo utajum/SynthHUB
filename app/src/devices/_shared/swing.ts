@@ -52,6 +52,31 @@ export function swParse(d: Uint8Array): { cmd: number; data: number[] } | null {
   return { cmd: d[6], data: Array.from(d.subarray(7, d.length - 1)) };
 }
 
+// JAM / JAM PLAY speak the Swing sequencer protocol under their own header
+// (F0 00 20 32 00 01 40|41 7F): the full frame header for a Control Tribe slug
+export function swHeader(slug: string): number[] {
+  const h = ctDevice(slug)?.header;
+  return h ? [0xf0, 0x00, 0x20, 0x32, ...h] : SW_HDR;
+}
+
+// map frames between SW_HDR and `hdr`, so swFrame/swParse users stay unchanged
+export const swRetarget = (d: Uint8Array, from: number[], to: number[]) =>
+  from.every((b, i) => d[i] === b)
+    ? Uint8Array.from([...to, ...d.subarray(from.length)])
+    : null;
+
+export function swIO(io: MidiIO, hdr: number[]): MidiIO {
+  if (hdr === SW_HDR) return io;
+  return {
+    send: (b) => io.send(swRetarget(b, SW_HDR, hdr) ?? b),
+    listen: (cb) =>
+      io.listen((b) => {
+        const m = swRetarget(b, hdr, SW_HDR);
+        if (m) cb(m);
+      }),
+  };
+}
+
 export const swEmptySteps = (): SwStep[] =>
   Array.from({ length: SW_STEPS }, () => ({ ratchet: 1, notes: [] }));
 export const swEmptySeq = (): SwSeq => ({

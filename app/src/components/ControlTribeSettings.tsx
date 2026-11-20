@@ -13,8 +13,8 @@ import {
 import { midi } from '../lib/midi/webmidi';
 import { actions } from '../lib/store-solid';
 import {
-  buildCtQuery,
-  buildCtSet,
+  buildCtAction,
+  buildCtControl,
   buildCtStore,
   ctDevice,
   ctHasSteps,
@@ -48,7 +48,7 @@ export default function ControlTribeSettings(props: Props) {
   // mirror device replies (F0 00 20 32 devId prod cmd value F7) into the UI
   onMount(() => {
     const off = midi.onMessage((data) => {
-      const r = parseCtReply(props.slug, data);
+      const r = parseCtReply(props.slug, data, values());
       if (r) setValues((p) => ({ ...p, [r.id]: r.value }));
     });
     onCleanup(off);
@@ -74,10 +74,19 @@ export default function ControlTribeSettings(props: Props) {
     if (!c) return;
     const v = Math.max(0, Math.min(Math.max(127, c.max), value | 0));
     setValues((p) => ({ ...p, [id]: v }));
-    send(
-      buildCtSet(props.slug, c.cmd, v, c.page),
-      `set 0x${c.cmd.toString(16)}`,
-    );
+    // UI-only selectors (JAM knob layer) send nothing
+    if (!c.local)
+      send(
+        buildCtControl(props.slug, c, v, values()),
+        `set 0x${c.cmd.toString(16)}`,
+      );
+    // controls addressed through this one now point elsewhere: re-read them
+    for (const x of dev()!.controls)
+      if (x.args?.some((a) => a.ref === c.method))
+        send(
+          buildCtControl(props.slug, x, null, values()),
+          `query 0x${x.cmd.toString(16)}`,
+        );
   };
 
   const queryAll = () => {
@@ -88,9 +97,10 @@ export default function ControlTribeSettings(props: Props) {
     }
     let i = 0;
     for (const c of d.controls) {
+      if (c.local) continue;
       // stagger so we don't flood the port
       setTimeout(
-        () => midi.send(out()!, buildCtQuery(props.slug, c.cmd, c.page)),
+        () => midi.send(out()!, buildCtControl(props.slug, c, null, values())),
         i * 12,
       );
       i++;
@@ -147,6 +157,19 @@ export default function ControlTribeSettings(props: Props) {
           <button class="btn tiny ghost" onClick={exportJson}>
             export json
           </button>
+          <For each={dev()!.actions ?? []}>
+            {(a) => (
+              <button
+                class="btn tiny ghost"
+                onClick={() =>
+                  window.confirm(a.confirm) &&
+                  send(buildCtAction(props.slug, a.bytes), a.label)
+                }
+              >
+                {a.label}
+              </button>
+            )}
+          </For>
           <span class="spacer" />
           <Show when={lastFrame()}>
             <span class="pill tiny" title="last frame sent">

@@ -35,6 +35,9 @@ import {
   SwingLink,
   swEmptySteps as emptySteps,
   swFrame,
+  swHeader,
+  swIO,
+  swRetarget,
   swProjectFromJson,
   swProjectToJson,
   swSeqDiff,
@@ -75,7 +78,11 @@ const lenToGate = (l: number) => Math.max(0.1, Math.min(2, l));
 
 export default function SwingSequencer(props: {
   outputId: () => string | undefined;
+  // Control Tribe slug: swing, jam or jam-play (same sequencer protocol)
+  slug?: string;
 }) {
+  const slug = props.slug ?? 'swing';
+  const hdr = swHeader(slug);
   const [seq, setSeq] = createSignal(0);
   const [len, setLen] = createSignal(16);
   const [swing, setSwing] = createSignal(50);
@@ -111,7 +118,7 @@ export default function SwingSequencer(props: {
       actions().pushLog({ dir: 'info', text: 'swing seq: no MIDI output' });
       return false;
     }
-    midi.send(o, bytes);
+    midi.send(o, swRetarget(bytes, HDR, hdr) ?? bytes);
     return true;
   };
 
@@ -279,9 +286,9 @@ export default function SwingSequencer(props: {
   };
 
   onMount(() => {
-    const off = midi.onMessage((d) => {
-      if (d.length < 8) return;
-      for (let i = 0; i < 6; i++) if (d[i] !== HDR[i]) return;
+    const off = midi.onMessage((raw) => {
+      const d = swRetarget(raw, hdr, HDR);
+      if (!d || d.length < 8) return;
       const cmd = d[6];
       // file jobs read through the link and refresh the grid when done
       if (busy()) return;
@@ -443,7 +450,7 @@ export default function SwingSequencer(props: {
   const swLink = () => {
     const o = out();
     if (!o) return undefined;
-    if (link?.o !== o) link = { o, l: new SwingLink(portIO(o)) };
+    if (link?.o !== o) link = { o, l: new SwingLink(swIO(portIO(o), hdr)) };
     return link.l;
   };
   const log = (text: string, dir: 'info' | 'out' = 'info') =>
@@ -739,7 +746,7 @@ export default function SwingSequencer(props: {
         />
       </Show>
       <Show when={showLib()}>
-        <PatternLibrary engine={engine} state={est} slug="swing" />
+        <PatternLibrary engine={engine} state={est} slug={slug} />
       </Show>
       <Show when={showKeys()}>
         <QwertyPiano engine={engine} state={est} outputId={props.outputId} />
@@ -823,20 +830,23 @@ export default function SwingSequencer(props: {
           title="Write a .swingseq file into this sequence"
           then={importSeq}
         />
-        <button
-          class="btn tiny ghost"
-          disabled={reading()}
-          onClick={saveProject}
-          title="Save settings + all 8 sequences as a ControlTribe .swing project"
-        >
-          save project
-        </button>
-        <FileButton
-          label="load project"
-          accept={`.${SW_PROJECT_EXT},.json`}
-          title="Write a .swing project (settings + all 8 sequences) to the device"
-          then={loadProject}
-        />
+        {/* .swing projects carry Swing setting ids */}
+        <Show when={slug === 'swing'}>
+          <button
+            class="btn tiny ghost"
+            disabled={reading()}
+            onClick={saveProject}
+            title="Save settings + all 8 sequences as a ControlTribe .swing project"
+          >
+            save project
+          </button>
+          <FileButton
+            label="load project"
+            accept={`.${SW_PROJECT_EXT},.json`}
+            title="Write a .swing project (settings + all 8 sequences) to the device"
+            then={loadProject}
+          />
+        </Show>
         <button
           class="btn tiny ghost"
           disabled={reading()}

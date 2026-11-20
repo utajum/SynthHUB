@@ -504,6 +504,24 @@
     "protocol": 1
   },
   {
+    "alias": "JAM",
+    "slug": "jam",
+    "variant": "JAM",
+    "protocol": 1
+  },
+  {
+    "alias": "JAM PLAY",
+    "slug": "jam-play",
+    "variant": "JAM PLAY",
+    "protocol": 1
+  },
+  {
+    "alias": "JAMPLAY",
+    "slug": "jam-play",
+    "variant": "JAM PLAY",
+    "protocol": 1
+  },
+  {
     "alias": "BM-11M",
     "slug": "bm-11m",
     "variant": "BM-11M",
