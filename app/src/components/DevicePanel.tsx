@@ -397,7 +397,13 @@ function FunctionView(props: {
       <Show when={name === 'Sequencer' && SWING_SEQ.has(props.slug)}>
         <SwingSequencer outputId={props.outputId} slug={props.slug} />
       </Show>
-      <Show when={name === 'Sequencer' && !SWING_SEQ.has(props.slug)}>
+      <Show
+        when={
+          name === 'Sequencer' &&
+          !SWING_SEQ.has(props.slug) &&
+          props.slug !== 'groove-key'
+        }
+      >
         <SequencerView
           def={props.def}
           fn={props.fn}

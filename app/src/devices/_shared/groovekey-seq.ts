@@ -292,22 +292,6 @@ export function gkFromFile(text: string): Uint8Array | string {
   return gkFromJson(j.project);
 }
 
-// a few readable fields for the overview
-export function gkSummary(img: Uint8Array) {
-  const j = gkToJson(img) as {
-    bpm: number;
-    swing: number;
-    curSong: number;
-    tracks: {
-      curPattern: number;
-      preset: number;
-      patterns: { length: number }[];
-    }[];
-    drumTrack: { curPattern: number; patterns: { length: number }[] };
-  };
-  return j;
-}
-
 // ---- transfer ---------------------------------------------------------------
 
 const isGk = (d: ArrayLike<number>) =>
@@ -361,13 +345,14 @@ export async function gkRead(
   return missed;
 }
 
-// write every item, one ACK per frame (1 s, 3 resends)
+// write every item (or `items`), one ACK per frame (1 s, 3 resends)
 export async function gkWrite(
   out: string,
   img: Uint8Array,
   progress: (i: number, n: number) => void = () => {},
+  items: number[] = Array.from({ length: GK_ITEMS }, (_, i) => i),
 ): Promise<string | null> {
-  for (let n = 0; n < GK_ITEMS; n++) {
+  for (const [i, n] of items.entries()) {
     for (const f of gkWriteFrames(img, n)) {
       let ok = false;
       for (let t = 0; t < 4 && !ok; t++)
@@ -387,7 +372,7 @@ export async function gkWrite(
       if (!ok)
         return `The device did not acknowledge item ${n + 1} of ${GK_ITEMS}.`;
     }
-    progress(n + 1, GK_ITEMS);
+    progress(i + 1, items.length);
   }
   return null;
 }
