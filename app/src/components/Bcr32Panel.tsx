@@ -170,7 +170,7 @@ export default function Bcr32Panel(props: {
     window.confirm(text) && send(bytes, what);
 
   let fileInput!: HTMLInputElement;
-  const off = () => busy() || !props.outputId();
+  const blocked = () => busy() || !props.outputId();
 
   return (
     <div class="stack">
@@ -178,28 +178,28 @@ export default function Bcr32Panel(props: {
       <div class="flex wrap">
         <button
           class="btn tiny"
-          disabled={off()}
+          disabled={blocked()}
           onClick={() => send(bcrControllerMode(), 'Controller mode')}
         >
           Controller mode
         </button>
         <button
           class="btn tiny"
-          disabled={off()}
+          disabled={blocked()}
           onClick={() => send(bcrZaquencerMode(), 'Zaquencer mode')}
         >
           Zaquencer mode
         </button>
         <button
           class="btn tiny ghost"
-          disabled={off()}
+          disabled={blocked()}
           onClick={() => send(bcrSnapshot(), 'snapshot')}
         >
           snapshot
         </button>
         <button
           class="btn tiny ghost"
-          disabled={off()}
+          disabled={blocked()}
           onClick={() => send(bcrNamesRequest(), 'read names')}
         >
           read names
@@ -218,7 +218,7 @@ export default function Bcr32Panel(props: {
         </select>
         <button
           class="btn tiny"
-          disabled={off()}
+          disabled={blocked()}
           onClick={() =>
             send(bcrSelectPreset(preset()), `select preset ${preset() + 1}`)
           }
@@ -227,7 +227,7 @@ export default function Bcr32Panel(props: {
         </button>
         <button
           class="btn tiny ghost"
-          disabled={off()}
+          disabled={blocked()}
           onClick={() =>
             confirmSend(
               bcrErasePreset(preset()),
@@ -255,7 +255,7 @@ export default function Bcr32Panel(props: {
         </select>
         <button
           class="btn tiny"
-          disabled={off()}
+          disabled={blocked()}
           onClick={() => void exportBcl()}
         >
           export .bcl
@@ -273,7 +273,7 @@ export default function Bcr32Panel(props: {
         />
         <button
           class="btn tiny"
-          disabled={off()}
+          disabled={blocked()}
           onClick={() => fileInput.click()}
         >
           import .bcl
@@ -281,7 +281,7 @@ export default function Bcr32Panel(props: {
         <span class="spacer" />
         <button
           class="btn tiny ghost"
-          disabled={off()}
+          disabled={blocked()}
           onClick={() =>
             confirmSend(
               bcrFactoryReset(),
