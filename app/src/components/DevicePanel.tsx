@@ -43,11 +43,11 @@ import {
 } from '../devices/_shared/params-extra';
 import PolyChainView from './PolyChain';
 import ControlTribeSettings from './ControlTribeSettings';
-import GrooveKeySequencer from './GrooveKeySequencer';
 import GuitarTribePresets from './GuitarTribePresets';
 import PatchLibrary from './PatchLibrary';
 import { deviceImage, deviceImageFull } from '../lib/deviceImages';
 import VirtualSynthPanel from './VirtualSynthPanel';
+import GrooveKeySequencer from './GrooveKeySequencer';
 import { hasVirtualSynth, virtualId, isVirtualId } from '../lib/virtualsynth';
 
 interface Props {
