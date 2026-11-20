@@ -2,7 +2,17 @@
 // GrooveKey::Sequencer / SequencerGrid / SequencerLane, DrumSequencer,
 // GrooveKeySongArranger, GrooveKeyInspector) on the ProjectData image of
 // groovekey-seq.ts. Offsets and defaults are ProjectData::resetToDefault's.
-import { GK_PATTERNS, GK_SIZE, GK_TRACKS } from './groovekey-seq';
+import {
+  DRUM_PATTERN as gkDrumPatternOff,
+  DRUM_TRACK as GK_DRUM_OFF,
+  GK_PATTERNS,
+  GK_SIZE,
+  GK_TRACKS,
+  PATTERN as gkPatternOff,
+  TRACK as gkTrackOff,
+} from './groovekey-seq';
+
+export { GK_DRUM_OFF, gkDrumPatternOff, gkPatternOff, gkTrackOff };
 
 export const GK_STEPS = 64;
 export const GK_NOTES = 128; // note slots per pattern
@@ -11,19 +21,20 @@ export const GK_VOICES = 10;
 export const GK_SONGS = 16;
 export const GK_SLOTS = 16;
 
-export const gkTrackOff = (t: number) => 2568 + t * 24942;
-export const gkPatternOff = (t: number, p: number) =>
-  2582 + t * 24942 + p * 1558;
-export const GK_DRUM_OFF = 102336;
-export const gkDrumPatternOff = (p: number) => 102347 + p * 1410;
 // songs[row: track 1-4, drums][song][slot] = <pattern 0 empty | 1-16> <repeat 1-5>
 export const gkSongOff = (row: number, song: number, slot: number) =>
   8 + row * 512 + song * 32 + slot * 2;
 
 // TrackData bytes
-export const GT = { curPattern: 0, mode: 1, muteSolo: 2, swing: 3, preset: 4 };
+export const GK_TRACK_AT = {
+  curPattern: 0,
+  mode: 1,
+  muteSolo: 2,
+  swing: 3,
+  preset: 4,
+};
 // TrackPatternData bytes (stepPages: 4 x u16 step-on bits)
-export const GP = {
+export const GK_PATTERN_AT = {
   stepPages: 0,
   length: 8,
   playMode: 9,
@@ -36,9 +47,9 @@ export const GP = {
   notes: 22, // 128 x 12
 };
 // DrumTrackData bytes
-export const GDT = { muteSolo: 0, swing: 1, curPattern: 10 };
+export const GK_DRUM_TRACK_AT = { muteSolo: 0, swing: 1, curPattern: 10 };
 // DrumPatternData bytes; hits[voice][step] at 130, micro-timing at 770
-export const GDP = {
+export const GK_DRUM_AT = {
   length: 0,
   polyLength: 1, // 10
   randomTrack: 11, // 10
@@ -133,8 +144,8 @@ const NOTE_DEFAULT = [0x00, 0x7f, 0xff, 0x0b, 0x32, 0x00, 0x64, 0, 0, 0, 0, 0];
 
 export const gkNote = (img: Uint8Array, t: number, p: number, slot: number) =>
   img.subarray(
-    gkPatternOff(t, p) + GP.notes + slot * 12,
-    gkPatternOff(t, p) + GP.notes + slot * 12 + 12,
+    gkPatternOff(t, p) + GK_PATTERN_AT.notes + slot * 12,
+    gkPatternOff(t, p) + GK_PATTERN_AT.notes + slot * 12 + 12,
   );
 
 export interface GkNoteRef {
@@ -201,6 +212,34 @@ export function gkDeleteNote(
   reindexStep(img, t, p, step);
 }
 
+// move a note to another step / pitch; false if the target is taken or full
+export function gkMoveNote(
+  img: Uint8Array,
+  t: number,
+  p: number,
+  slot: number,
+  step: number,
+  pitch: number,
+): boolean {
+  const n = gkNote(img, t, p, slot);
+  const from = n[8];
+  const others = gkNotes(img, t, p).filter((x) => x.slot !== slot);
+  if (others.some((x) => x.step === step && x.pitch === pitch)) return false;
+  if (
+    step !== from &&
+    others.filter((x) => x.step === step).length >= GK_PER_STEP
+  )
+    return false;
+  n[0] = pitch;
+  if (step !== from) {
+    n[8] = step;
+    n[9] = GK_PER_STEP;
+    reindexStep(img, t, p, from);
+    reindexStep(img, t, p, step);
+  }
+  return true;
+}
+
 // the note a lane shows for a step: highest pitch (noteAtStepColumn)
 export function gkNoteAtStep(
   img: Uint8Array,
@@ -216,7 +255,7 @@ export function gkNoteAtStep(
 
 // step on bits (SequencerIndex)
 export function gkStepOn(img: Uint8Array, t: number, p: number, step: number) {
-  const o = gkPatternOff(t, p) + GP.stepPages + (step >> 4) * 2;
+  const o = gkPatternOff(t, p) + GK_PATTERN_AT.stepPages + (step >> 4) * 2;
   return (((img[o] | (img[o + 1] << 8)) >> (step & 15)) & 1) === 1;
 }
 export function gkToggleStep(
@@ -226,15 +265,18 @@ export function gkToggleStep(
   step: number,
 ) {
   const o =
-    gkPatternOff(t, p) + GP.stepPages + (step >> 4) * 2 + ((step & 15) >> 3);
+    gkPatternOff(t, p) +
+    GK_PATTERN_AT.stepPages +
+    (step >> 4) * 2 +
+    ((step & 15) >> 3);
   img[o] ^= 1 << (step & 7);
 }
 
 // drum hits
 export const gkHitOff = (p: number, voice: number, step: number) =>
-  gkDrumPatternOff(p) + GDP.hits + voice * 64 + step;
+  gkDrumPatternOff(p) + GK_DRUM_AT.hits + voice * 64 + step;
 export const gkMicroOff = (p: number, voice: number, step: number) =>
-  gkDrumPatternOff(p) + GDP.micro + voice * 64 + step;
+  gkDrumPatternOff(p) + GK_DRUM_AT.micro + voice * 64 + step;
 export const gkBit = (img: Uint8Array, o: number, i: number) =>
   ((img[o + (i >> 3)] >> (i & 7)) & 1) === 1;
 export const gkFlipBit = (img: Uint8Array, o: number, i: number) =>
@@ -255,7 +297,7 @@ export function gkToggleHit(
 // matrix: does a pattern hold anything
 export function gkPatternUsed(img: Uint8Array, t: number, p: number): boolean {
   if (t === GK_TRACKS) {
-    const o = gkDrumPatternOff(p) + GDP.hits;
+    const o = gkDrumPatternOff(p) + GK_DRUM_AT.hits;
     return img.subarray(o, o + GK_VOICES * 64).some((b) => b & 1);
   }
   return gkNotes(img, t, p).length > 0;
@@ -289,18 +331,19 @@ export function gkClearPattern(img: Uint8Array, t: number, p: number) {
 
 function TRACK_PATTERN_DEFAULT(): Uint8Array {
   const d = new Uint8Array(1558);
-  d.set([0x10, 1, 0, 1, 7, 0, 4], GP.length);
-  for (let s = 0; s < GK_NOTES; s++) d.set(NOTE_DEFAULT, GP.notes + s * 12);
+  d.set([0x10, 1, 0, 1, 7, 0, 4], GK_PATTERN_AT.length);
+  for (let s = 0; s < GK_NOTES; s++)
+    d.set(NOTE_DEFAULT, GK_PATTERN_AT.notes + s * 12);
   return d;
 }
 
 function DRUM_PATTERN_DEFAULT(): Uint8Array {
   const d = new Uint8Array(1410);
   d.fill(0x10, 0, 11); // length, poly lengths
-  d[GDP.probability] = 100;
-  d[GDP.stepSize] = 4;
-  d.fill(0xff, GDP.mute, GDP.mute + 4);
-  d[GDP.swing] = 50;
+  d[GK_DRUM_AT.probability] = 100;
+  d[GK_DRUM_AT.stepSize] = 4;
+  d.fill(0xff, GK_DRUM_AT.mute, GK_DRUM_AT.mute + 4);
+  d[GK_DRUM_AT.swing] = 50;
   return d;
 }
 
@@ -312,12 +355,12 @@ export function gkDefault(): Uint8Array {
       for (let k = 0; k < GK_SLOTS; k++) img[gkSongOff(r, s, k) + 1] = 1;
   const config = [0x7f, 0, 0, 0, 0, 0, 0x40, 0x40];
   for (let t = 0; t < GK_TRACKS; t++) {
-    img[gkTrackOff(t) + GT.swing] = 50;
+    img[gkTrackOff(t) + GK_TRACK_AT.swing] = 50;
     img.set(config, gkTrackOff(t) + 5);
     for (let p = 0; p < GK_PATTERNS; p++)
       img.set(TRACK_PATTERN_DEFAULT(), gkPatternOff(t, p));
   }
-  img[GK_DRUM_OFF + GDT.swing] = 50;
+  img[GK_DRUM_OFF + GK_DRUM_TRACK_AT.swing] = 50;
   img.set(config, GK_DRUM_OFF + 2);
   for (let p = 0; p < GK_PATTERNS; p++)
     img.set(DRUM_PATTERN_DEFAULT(), gkDrumPatternOff(p));

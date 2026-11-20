@@ -16,10 +16,10 @@ export const GK_TRACKS = 4; // + the drum track
 export const GK_PATTERNS = 16;
 export const GK_SIZE = 124907;
 
-const TRACK = (t: number) => 2568 + t * 24942;
-const PATTERN = (t: number, p: number) => 2582 + t * 24942 + p * 1558;
-const DRUM_TRACK = 102336;
-const DRUM_PATTERN = (p: number) => 102347 + p * 1410;
+export const TRACK = (t: number) => 2568 + t * 24942;
+export const PATTERN = (t: number, p: number) => 2582 + t * 24942 + p * 1558;
+export const DRUM_TRACK = 102336;
+export const DRUM_PATTERN = (p: number) => 102347 + p * 1410;
 
 export const gkImage = () => new Uint8Array(GK_SIZE);
 export const gkFrame = (...body: number[]) =>
@@ -297,14 +297,16 @@ export function gkFromFile(text: string): Uint8Array | string {
 const isGk = (d: ArrayLike<number>) =>
   d.length > 9 && GK_HDR.slice(1).every((b, i) => d[i + 1] === b);
 
-// read every item; items the device does not answer stay as they were
+// read every item (or `items`); items the device does not answer stay as
+// they were
 export async function gkRead(
   out: string,
   img: Uint8Array,
   progress: (i: number, n: number) => void = () => {},
+  items: number[] = Array.from({ length: GK_ITEMS }, (_, i) => i),
 ): Promise<number> {
   let missed = 0;
-  for (let n = 0; n < GK_ITEMS; n++) {
+  for (const [i, n] of items.entries()) {
     const it = gkItem(n);
     const raw = await new Promise<number[] | null>((resolve) => {
       let acc: number[] = [];
@@ -340,7 +342,7 @@ export async function gkRead(
     });
     if (raw) gkApply(img, n, raw);
     else missed++;
-    progress(n + 1, GK_ITEMS);
+    progress(i + 1, items.length);
   }
   return missed;
 }

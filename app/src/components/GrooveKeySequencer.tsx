@@ -64,6 +64,13 @@ export default function GrooveKeySequencer(props: {
         (await gkWrite(out, img()!, pct('writing'), items)) ??
         `${what} written`,
     );
+  const loadItems = (items: number[], what: string) =>
+    void run(async (out) => {
+      const next = Uint8Array.from(img()!);
+      const missed = await gkRead(out, next, pct('reading'), items);
+      setImg(next);
+      return missed ? `${what}: no answer` : `${what} read`;
+    });
   const load = async (f: File) => {
     const r = gkFromFile(await f.text());
     if (typeof r === 'string') return setStatus(`Import failed: ${r}`);
@@ -137,6 +144,7 @@ export default function GrooveKeySequencer(props: {
           img={() => img()!}
           setImg={setImg}
           send={sendItems}
+          load={loadItems}
           canSend={!blocked()}
         />
       </Show>

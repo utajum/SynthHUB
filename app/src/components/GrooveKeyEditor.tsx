@@ -5,8 +5,8 @@
 import { For, Index, Show, createMemo, createSignal } from 'solid-js';
 import { GK_PATTERNS, GK_TRACKS } from '../devices/_shared/groovekey-seq';
 import {
-  GDP,
-  GDT,
+  GK_DRUM_AT,
+  GK_DRUM_TRACK_AT,
   GK_DIVS,
   GK_DRUMS,
   GK_DRUM_OFF,
@@ -23,8 +23,8 @@ import {
   GK_STYLES,
   GK_TRACK_MODES,
   GK_VOICES,
-  GP,
-  GT,
+  GK_PATTERN_AT,
+  GK_TRACK_AT,
   gkAddNote,
   gkBit,
   gkClearPattern,
@@ -32,6 +32,7 @@ import {
   gkDeleteNote,
   gkDrumPatternOff,
   gkFlipBit,
+  gkMoveNote,
   gkHitOff,
   gkMicroOff,
   gkNote,
@@ -74,6 +75,7 @@ export default function GrooveKeyEditor(props: {
   img: () => Uint8Array;
   setImg: (u: Uint8Array) => void;
   send: (items: number[], what: string) => void;
+  load: (items: number[], what: string) => void;
   canSend: boolean;
 }) {
   const [tab, setTab] = createSignal<'patterns' | 'song'>('patterns');
@@ -96,13 +98,20 @@ export default function GrooveKeyEditor(props: {
   const setU8 = (o: number, v: number) => edit((m) => void (m[o] = v));
   const drum = () => row() === GK_TRACKS;
   const trackBase = () => (drum() ? GK_DRUM_OFF : gkTrackOff(row()));
-  const curOff = () => trackBase() + (drum() ? GDT.curPattern : GT.curPattern);
-  const msOff = () => trackBase() + (drum() ? GDT.muteSolo : GT.muteSolo);
-  const swOff = () => trackBase() + (drum() ? GDT.swing : GT.swing);
+  const curOff = () =>
+    trackBase() +
+    (drum() ? GK_DRUM_TRACK_AT.curPattern : GK_TRACK_AT.curPattern);
+  const msOff = () =>
+    trackBase() + (drum() ? GK_DRUM_TRACK_AT.muteSolo : GK_TRACK_AT.muteSolo);
+  const swOff = () =>
+    trackBase() + (drum() ? GK_DRUM_TRACK_AT.swing : GK_TRACK_AT.swing);
   const pOff = () => gkPatternOff(row(), pat());
   const dOff = () => gkDrumPatternOff(pat());
   const len = () =>
-    Math.max(1, Math.min(64, u8(drum() ? dOff() : pOff() + GP.length)));
+    Math.max(
+      1,
+      Math.min(64, u8(drum() ? dOff() : pOff() + GK_PATTERN_AT.length)),
+    );
 
   const sel1 = (
     label: string,
@@ -197,7 +206,9 @@ export default function GrooveKeyEditor(props: {
 
   // ---- drum grid -----------------------------------------------------------
   const voiceLen = (v: number) =>
-    u8(dOff() + GDP.polymeter) ? u8(dOff() + GDP.polyLength + v) : len();
+    u8(dOff() + GK_DRUM_AT.polymeter)
+      ? u8(dOff() + GK_DRUM_AT.polyLength + v)
+      : len();
   const hitByte = () => {
     const h = hit();
     return h ? u8(gkHitOff(pat(), h[0], h[1])) : 0;
@@ -322,8 +333,8 @@ export default function GrooveKeyEditor(props: {
                     const cur = () =>
                       u8(
                         r() < GK_TRACKS
-                          ? gkTrackOff(r()) + GT.curPattern
-                          : GK_DRUM_OFF + GDT.curPattern,
+                          ? gkTrackOff(r()) + GK_TRACK_AT.curPattern
+                          : GK_DRUM_OFF + GK_DRUM_TRACK_AT.curPattern,
                       ) === p();
                     return (
                       <button
@@ -373,6 +384,17 @@ export default function GrooveKeyEditor(props: {
           </button>
           <button
             class="btn tiny ghost"
+            onClick={() => {
+              setClip([row(), gkCopyPattern(img(), row(), pat())]);
+              edit((m) => gkClearPattern(m, row(), pat()));
+              setSel(null);
+              setHit(null);
+            }}
+          >
+            cut
+          </button>
+          <button
+            class="btn tiny ghost"
             disabled={!clip() || (clip()![0] === GK_TRACKS) !== drum()}
             onClick={() =>
               edit((m) => gkPastePattern(m, row(), pat(), clip()![1]))
@@ -389,6 +411,15 @@ export default function GrooveKeyEditor(props: {
             }}
           >
             clear
+          </button>
+          <button
+            class="btn tiny ghost"
+            disabled={!props.canSend}
+            onClick={() =>
+              props.load([gkPatternItem(row(), pat())], `pattern ${pat() + 1}`)
+            }
+          >
+            load pattern
           </button>
           <button
             class="btn tiny ghost"
@@ -413,12 +444,12 @@ export default function GrooveKeyEditor(props: {
           <Show when={!drum()}>
             {sel1(
               'mode',
-              u8(trackBase() + GT.mode),
+              u8(trackBase() + GK_TRACK_AT.mode),
               named(GK_TRACK_MODES),
-              (v) => setU8(trackBase() + GT.mode, v),
+              (v) => setU8(trackBase() + GK_TRACK_AT.mode, v),
             )}
-            {num('preset', u8(trackBase() + GT.preset), 0, 127, (v) =>
-              setU8(trackBase() + GT.preset, v),
+            {num('preset', u8(trackBase() + GK_TRACK_AT.preset), 0, 127, (v) =>
+              setU8(trackBase() + GK_TRACK_AT.preset, v),
             )}
           </Show>
           {num('swing', u8(swOff()), 50, 75, (v) => setU8(swOff(), v))}
@@ -460,27 +491,47 @@ export default function GrooveKeyEditor(props: {
         <Show when={!drum()}>
           <div class="tiny dim device-app-hdr">Pattern</div>
           <div class="flex wrap">
-            {num('length', len(), 1, 64, (v) => setU8(pOff() + GP.length, v))}
-            {sel1('play', u8(pOff() + GP.playMode), named(GK_PLAY_MODES), (v) =>
-              setU8(pOff() + GP.playMode, v),
+            {num('length', len(), 1, 64, (v) =>
+              setU8(pOff() + GK_PATTERN_AT.length, v),
             )}
-            {sel1('style', u8(pOff() + GP.style), named(GK_STYLES), (v) =>
-              setU8(pOff() + GP.style, v),
+            {sel1(
+              'play',
+              u8(pOff() + GK_PATTERN_AT.playMode),
+              named(GK_PLAY_MODES),
+              (v) => setU8(pOff() + GK_PATTERN_AT.playMode, v),
             )}
-            {sel1('octave', u8(pOff() + GP.octave), named(GK_OCTAVES), (v) =>
-              setU8(pOff() + GP.octave, v),
+            {sel1(
+              'style',
+              u8(pOff() + GK_PATTERN_AT.style),
+              named(GK_STYLES),
+              (v) => setU8(pOff() + GK_PATTERN_AT.style, v),
             )}
-            {sel1('scale', u8(pOff() + GP.scale), named(GK_SCALES), (v) =>
-              setU8(pOff() + GP.scale, v),
+            {sel1(
+              'octave',
+              u8(pOff() + GK_PATTERN_AT.octave),
+              named(GK_OCTAVES),
+              (v) => setU8(pOff() + GK_PATTERN_AT.octave, v),
             )}
-            {sel1('root', u8(pOff() + GP.root), named(GK_ROOTS), (v) =>
-              setU8(pOff() + GP.root, v),
+            {sel1(
+              'scale',
+              u8(pOff() + GK_PATTERN_AT.scale),
+              named(GK_SCALES),
+              (v) => setU8(pOff() + GK_PATTERN_AT.scale, v),
             )}
-            {sel1('time', u8(pOff() + GP.timeDiv), named(GK_DIVS), (v) =>
-              setU8(pOff() + GP.timeDiv, v),
+            {sel1(
+              'root',
+              u8(pOff() + GK_PATTERN_AT.root),
+              named(GK_ROOTS),
+              (v) => setU8(pOff() + GK_PATTERN_AT.root, v),
+            )}
+            {sel1(
+              'time',
+              u8(pOff() + GK_PATTERN_AT.timeDiv),
+              named(GK_DIVS),
+              (v) => setU8(pOff() + GK_PATTERN_AT.timeDiv, v),
             )}
           </div>
-          <Show when={u8(pOff() + GP.style) === 6}>
+          <Show when={u8(pOff() + GK_PATTERN_AT.style) === 6}>
             <div class="flex wrap">
               <span class="tiny dim">custom order</span>
               <Index each={range(7)}>
@@ -489,11 +540,11 @@ export default function GrooveKeyEditor(props: {
                     type="number"
                     min={0}
                     max={8}
-                    value={u8(pOff() + GP.custStyle + k())}
+                    value={u8(pOff() + GK_PATTERN_AT.custStyle + k())}
                     style={{ width: '3rem' }}
                     onChange={(e) =>
                       setU8(
-                        pOff() + GP.custStyle + k(),
+                        pOff() + GK_PATTERN_AT.custStyle + k(),
                         Math.max(0, Math.min(8, +e.currentTarget.value | 0)),
                       )
                     }
@@ -617,7 +668,21 @@ export default function GrooveKeyEditor(props: {
                 {noteBytes(sel()!)[8] + 1}
               </span>
               {num('pitch', noteBytes(sel()!)[0], 0, 127, (v) =>
-                editNote(sel()!, (n) => void (n[0] = v)),
+                edit((m) =>
+                  gkMoveNote(m, row(), pat(), sel()!, noteBytes(sel()!)[8], v),
+                ),
+              )}
+              {num('step', noteBytes(sel()!)[8] + 1, 1, len(), (v) =>
+                edit((m) =>
+                  gkMoveNote(
+                    m,
+                    row(),
+                    pat(),
+                    sel()!,
+                    v - 1,
+                    noteBytes(sel()!)[0],
+                  ),
+                ),
               )}
               <For each={GK_LANES}>
                 {(l) => (
@@ -712,21 +777,30 @@ export default function GrooveKeyEditor(props: {
         <Show when={drum()}>
           <div class="tiny dim device-app-hdr">Drum Pattern</div>
           <div class="flex wrap">
-            {num('length', len(), 1, 64, (v) => setU8(dOff() + GDP.length, v))}
-            {sel1('step', u8(dOff() + GDP.stepSize), named(GK_DIVS), (v) =>
-              setU8(dOff() + GDP.stepSize, v),
+            {num('length', len(), 1, 64, (v) =>
+              setU8(dOff() + GK_DRUM_AT.length, v),
             )}
-            {num('probability', u8(dOff() + GDP.probability), 0, 100, (v) =>
-              setU8(dOff() + GDP.probability, v),
+            {sel1(
+              'step',
+              u8(dOff() + GK_DRUM_AT.stepSize),
+              named(GK_DIVS),
+              (v) => setU8(dOff() + GK_DRUM_AT.stepSize, v),
             )}
-            {num('flam', u8(dOff() + GDP.flam), 0, 8, (v) =>
-              setU8(dOff() + GDP.flam, v),
+            {num(
+              'probability',
+              u8(dOff() + GK_DRUM_AT.probability),
+              0,
+              100,
+              (v) => setU8(dOff() + GK_DRUM_AT.probability, v),
+            )}
+            {num('flam', u8(dOff() + GK_DRUM_AT.flam), 0, 8, (v) =>
+              setU8(dOff() + GK_DRUM_AT.flam, v),
             )}
             {sel1(
               'polymeter',
-              u8(dOff() + GDP.polymeter),
+              u8(dOff() + GK_DRUM_AT.polymeter),
               named(['OFF', 'ON']),
-              (v) => setU8(dOff() + GDP.polymeter, v),
+              (v) => setU8(dOff() + GK_DRUM_AT.polymeter, v),
             )}
           </div>
           <div style={{ overflow: 'auto', 'max-width': '100%' }}>
@@ -743,12 +817,18 @@ export default function GrooveKeyEditor(props: {
                   <button
                     title="random step"
                     onClick={() =>
-                      edit((m) => gkFlipBit(m, dOff() + GDP.randomStep, s()))
+                      edit((m) =>
+                        gkFlipBit(m, dOff() + GK_DRUM_AT.randomStep, s()),
+                      )
                     }
                     style={{
                       height: '10px',
                       padding: 0,
-                      background: gkBit(img(), dOff() + GDP.randomStep, s())
+                      background: gkBit(
+                        img(),
+                        dOff() + GK_DRUM_AT.randomStep,
+                        s(),
+                      )
                         ? '#47d18c'
                         : '#1b1a1a',
                       opacity: s() < len() ? 1 : 0.3,
@@ -764,37 +844,43 @@ export default function GrooveKeyEditor(props: {
                       <span style={{ width: '4.2rem' }}>{GK_DRUMS[v()]}</span>
                       {toggle(
                         'M',
-                        gkBit(img(), dOff() + GDP.mute, v()),
-                        () => edit((m) => gkFlipBit(m, dOff() + GDP.mute, v())),
+                        gkBit(img(), dOff() + GK_DRUM_AT.mute, v()),
+                        () =>
+                          edit((m) =>
+                            gkFlipBit(m, dOff() + GK_DRUM_AT.mute, v()),
+                          ),
                         'mute',
                       )}
                       {toggle(
                         'S',
-                        gkBit(img(), dOff() + GDP.solo, v()),
-                        () => edit((m) => gkFlipBit(m, dOff() + GDP.solo, v())),
+                        gkBit(img(), dOff() + GK_DRUM_AT.solo, v()),
+                        () =>
+                          edit((m) =>
+                            gkFlipBit(m, dOff() + GK_DRUM_AT.solo, v()),
+                          ),
                         'solo',
                       )}
                       {toggle(
                         'R',
-                        !!u8(dOff() + GDP.randomTrack + v()),
+                        !!u8(dOff() + GK_DRUM_AT.randomTrack + v()),
                         () =>
                           setU8(
-                            dOff() + GDP.randomTrack + v(),
-                            u8(dOff() + GDP.randomTrack + v()) ? 0 : 1,
+                            dOff() + GK_DRUM_AT.randomTrack + v(),
+                            u8(dOff() + GK_DRUM_AT.randomTrack + v()) ? 0 : 1,
                           ),
                         'random',
                       )}
-                      <Show when={u8(dOff() + GDP.polymeter)}>
+                      <Show when={u8(dOff() + GK_DRUM_AT.polymeter)}>
                         <input
                           type="number"
                           min={1}
                           max={64}
-                          value={u8(dOff() + GDP.polyLength + v())}
+                          value={u8(dOff() + GK_DRUM_AT.polyLength + v())}
                           style={{ width: '2.8rem' }}
                           title="voice length"
                           onChange={(e) =>
                             setU8(
-                              dOff() + GDP.polyLength + v(),
+                              dOff() + GK_DRUM_AT.polyLength + v(),
                               Math.max(
                                 1,
                                 Math.min(64, +e.currentTarget.value | 0),
@@ -841,7 +927,7 @@ export default function GrooveKeyEditor(props: {
               <span class="tiny dim">auto CV</span>
               <Index each={range(GK_STEPS)}>
                 {(s) => {
-                  const o = () => dOff() + GDP.autoCV + s();
+                  const o = () => dOff() + GK_DRUM_AT.autoCV + s();
                   return (
                     <div
                       title={`${u8(o())}`}

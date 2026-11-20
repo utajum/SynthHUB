@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { midi } from '../src/lib/midi/webmidi.ts';
 import { GK_ITEMS, gkWrite } from '../src/devices/_shared/groovekey-seq.ts';
 import {
-  GDP,
+  GK_DRUM_AT,
   GK_LANES,
   GK_PER_STEP,
   gkAddNote,
@@ -14,6 +14,7 @@ import {
   gkDefault,
   gkDeleteNote,
   gkFlipBit,
+  gkMoveNote,
   gkHitOff,
   gkDrumPatternOff,
   gkNote,
@@ -59,6 +60,20 @@ test('notes: SequencerGrid add / delete / reindex, lanes', () => {
     gkNotes(img, 1, 2).filter((n) => n.step === 9).length,
     GK_PER_STEP,
   );
+  // move: a taken target or a full step is refused; orders follow
+  assert.equal(gkMoveNote(img, 1, 2, 1, 9, 64), false);
+  assert.equal(gkMoveNote(img, 1, 2, 1, 6, 40), true);
+  gkAddNote(img, 1, 2, 6, 41);
+  assert.equal(gkMoveNote(img, 1, 2, 1, 6, 41), false);
+  assert.deepEqual(
+    gkNotes(img, 1, 2)
+      .filter((x) => x.step === 6)
+      .map((x) => [x.pitch, x.order]),
+    [
+      [40, 0],
+      [41, 1],
+    ],
+  );
   const n = gkNote(img, 1, 2, 1);
   const start = GK_LANES[2];
   assert.equal(start.get(n), 0);
@@ -79,7 +94,7 @@ test('steps, hits, patterns, items', () => {
   gkToggleHit(img, 3, 9, 63);
   assert.equal(img[gkHitOff(3, 9, 63)], 1);
   assert.equal(gkPatternUsed(img, 4, 3), true);
-  const o = gkDrumPatternOff(3) + GDP.mute;
+  const o = gkDrumPatternOff(3) + GK_DRUM_AT.mute;
   assert.equal(gkBit(img, o, 9), true); // default: all bits set
   gkFlipBit(img, o, 9);
   assert.equal(img[o + 1], 0xfd);
