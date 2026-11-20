@@ -283,7 +283,9 @@ export async function syxExport(
         const m = await r.next(3000);
         if (!m)
           return `The device did not answer block ${i + 1} of ${reqs.length}.`;
-        if (m[6] !== 0x04 || m[7] !== e.type) continue;
+        if (m[6] === 0x0e)
+          return `The device reported an import error at block ${i + 1} of ${reqs.length}:\n\n${importErrorText(m[7])}`;
+        if (m[7] !== e.type) continue;
         // a status byte above 0F ends the export (device error)
         if (m[11] > 0x0f)
           return `The device stopped the export at block ${i + 1} of ${reqs.length} (status 0x${m[11].toString(16)}).`;

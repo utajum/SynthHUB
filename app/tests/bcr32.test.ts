@@ -203,6 +203,12 @@ test('.syx: requests, file checks, emulated import and export', async () => {
   let k = 0;
   onSend = () => (reply(4, m.CTRL, 1, 0, 0, 9), reply(4, m.ZAQ, 3, 0, 0, k++));
   const got = await m.syxExport('o', m.SYX_EXPORTS[3]);
+  // an error code ends the export, as in the import
+  onSend = () => reply(0x0e, 7);
+  assert.match(
+    String(await m.syxExport('o', m.SYX_EXPORTS[3])),
+    /block 1 of 2:\n\nThe device could not write/,
+  );
   assert.deepEqual(
     (got as Uint8Array[]).map((b) => b[11]),
     [0, 1],
