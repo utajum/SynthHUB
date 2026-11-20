@@ -1,10 +1,11 @@
 // BCR32 presets (Control Tribe 1.12.4 BCR32Controller): preset names and
 // select, BCL export to a .bcl file and BCL import line by line, erase and
-// factory reset.
+// factory reset; .syx preset export / import (BCR32ImportExportThread).
 import { For, Show, createSignal, onCleanup } from 'solid-js';
 import { midi } from '../lib/midi/webmidi';
 import { saveFile } from '../lib/midi/port-io';
 import { actions } from '../lib/store-solid';
+import { splitSysex } from '../lib/midi/sysex';
 import {
   BCL_ALL,
   BCL_GLOBAL,
@@ -26,6 +27,12 @@ import {
   parseBclReply,
   parsePresetName,
   prepareBcl,
+  CTRL,
+  SYX_EXPORTS,
+  ZAQ,
+  syxExport,
+  syxImport,
+  syxImportPlan,
 } from '../devices/_shared/bcr32';
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -169,6 +176,38 @@ export default function Bcr32Panel(props: {
   const confirmSend = (bytes: Uint8Array, what: string, text: string) =>
     window.confirm(text) && send(bytes, what);
 
+  // .syx: the Control Tribe preset file (raw 04 blocks)
+  const [syxKind, setSyxKind] = createSignal(0);
+  const [syxPage, setSyxPage] = createSignal(ZAQ);
+  const [params, setParams] = createSignal(false);
+  const pct = (i: number, n: number) => setStatus(`block ${i}/${n}`);
+  const exportSyx = () =>
+    run(async (out) => {
+      const e = SYX_EXPORTS[syxKind()];
+      const r = await syxExport(out, e, params(), pct);
+      if (typeof r === 'string') return r;
+      const bytes = new Uint8Array(r.reduce((n, m) => n + m.length, 0));
+      r.reduce((o, m) => (bytes.set(m, o), o + m.length), 0);
+      saveFile(`BCR32 ${e.label}.syx`, bytes, 'application/octet-stream');
+      return `exported ${r.length} blocks`;
+    });
+  const importSyx = async (file: File) => {
+    const msgs = splitSysex(new Uint8Array(await file.arrayBuffer()));
+    const plan = syxImportPlan(msgs, syxPage(), params());
+    if (typeof plan === 'string') return setStatus(plan);
+    if (
+      !window.confirm(
+        `Write ${plan.length} blocks from ${file.name} to the device?`,
+      )
+    )
+      return;
+    void run(
+      async (out) =>
+        (await syxImport(out, plan, syxPage(), pct)) ??
+        `imported ${plan.length} blocks`,
+    );
+  };
+  let syxInput!: HTMLInputElement;
   let fileInput!: HTMLInputElement;
   const blocked = () => busy() || !props.outputId();
 
@@ -292,6 +331,63 @@ export default function Bcr32Panel(props: {
         >
           factory reset
         </button>
+      </div>
+      <div class="flex wrap">
+        <select
+          class="tiny"
+          style={{ width: 'auto' }}
+          value={syxKind()}
+          onChange={(e) => setSyxKind(Number(e.currentTarget.value))}
+        >
+          <For each={SYX_EXPORTS}>
+            {(e, i) => <option value={i()}>{e.label}</option>}
+          </For>
+        </select>
+        <button
+          class="btn tiny"
+          disabled={blocked()}
+          onClick={() => void exportSyx()}
+        >
+          export .syx
+        </button>
+        <select
+          class="tiny"
+          style={{ width: 'auto' }}
+          value={syxPage()}
+          onChange={(e) => setSyxPage(Number(e.currentTarget.value))}
+        >
+          <option value={ZAQ}>Zaquencer page</option>
+          <option value={CTRL}>Controller page</option>
+        </select>
+        <input
+          ref={syxInput}
+          type="file"
+          accept=".syx"
+          style={{ display: 'none' }}
+          onChange={(e) => {
+            const f = e.currentTarget.files?.[0];
+            if (f) void importSyx(f);
+            e.currentTarget.value = '';
+          }}
+        />
+        <button
+          class="btn tiny"
+          disabled={blocked()}
+          onClick={() => syxInput.click()}
+        >
+          import .syx
+        </button>
+        <label
+          class="tiny"
+          title="Zaquencer preset parameters need firmware 1.0.3 or later"
+        >
+          <input
+            type="checkbox"
+            checked={params()}
+            onChange={(e) => setParams(e.currentTarget.checked)}
+          />{' '}
+          preset parameters
+        </label>
       </div>
       <Show when={status()}>
         <span class="tiny dim">{status()}</span>
