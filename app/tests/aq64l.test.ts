@@ -117,3 +117,50 @@ test('tools: regions and key strokes', () => {
   assert.deepEqual(k, { key: 0x16, mods: 3 });
   assert.equal(aqKeyName(k.key, k.mods), 'Ctrl+Shift+S');
 });
+
+test('program page frames match AQ64LProgramPage (emulated)', async () => {
+  const m = await import('../src/devices/_shared/aq64l.ts');
+  const f = (x: Uint8Array | null) =>
+    x ? hex(x).slice(H.length + 1, -3) : null;
+  // nearest of the 128 device colours
+  assert.deepEqual(
+    [0xffff0000, 0xff00ff00, 0xff0000ff, 0xff804020].map(m.aqNearest),
+    [5, 21, 45, 105],
+  );
+  assert.equal(f(m.aqToolFrame(0, 0, 0xffff0000, 9)), '70 03 09 7f 00 00');
+  assert.equal(f(m.aqToolFrame(0, 1, 0xffff0000, 9)), '70 01 09 05 00');
+  assert.equal(f(m.aqToolFrame(0, 2, 0xff804020, 9)), '70 02 09 69');
+  assert.equal(f(m.aqToolFrame(0, 0, 0xff804020, 9)), '70 03 09 40 20 10');
+  assert.equal(f(m.aqToolFrame(3, 0, 0xff00ff00, 9)), '6c 15');
+  assert.equal(f(m.aqToolFrame(5, 0, 0, 33)), '68 21 00');
+  assert.equal(m.aqToolFrame(4, 0, 0, 33), null);
+  // LEDs 0-7 top buttons, then rows of 8 pads + the right button: a row
+  // is 8 pads + its right button, a column 8 pads + its top button
+  const leds = (x: Uint8Array | null) =>
+    f(x)!
+      .split(' ')
+      .slice(1)
+      .filter((_, i) => i % 3 === 1)
+      .map((h) => parseInt(h, 16));
+  assert.deepEqual(
+    leds(m.aqToolFrame(1, 2, 0xff0000ff, 9)),
+    [8, 9, 10, 11, 12, 13, 14, 15, 16],
+  );
+  assert.deepEqual(
+    leds(m.aqToolFrame(2, 2, 0xff0000ff, 9)),
+    [1, 9, 18, 27, 36, 45, 54, 63, 72],
+  );
+  assert.deepEqual(
+    leds(m.aqToolFrame(2, 2, 0xff0000ff, 16)),
+    [16, 25, 34, 43, 52, 61, 70, 79],
+  );
+  assert.equal(
+    f(m.aqScrollText(0xff00ff00, true, 'HELLO')),
+    '6f 15 01 48 45 4c 4c 4f',
+  );
+  assert.equal(f(m.aqScrollStop()), '6f 00 00');
+  assert.equal(f(m.aqSaveProgram(2)), '73 01');
+  assert.equal(f(m.aqBrightness(100)), '72 64');
+  assert.equal(f(m.aqProgramMode(true)), '66 01');
+  assert.equal(f(m.aqProgramReset()), '6c 00');
+});
