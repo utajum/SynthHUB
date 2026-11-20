@@ -43,6 +43,7 @@ import {
 } from '../devices/_shared/params-extra';
 import PolyChainView from './PolyChain';
 import ControlTribeSettings from './ControlTribeSettings';
+import GrooveKeySequencer from './GrooveKeySequencer';
 import GuitarTribePresets from './GuitarTribePresets';
 import PatchLibrary from './PatchLibrary';
 import { deviceImage, deviceImageFull } from '../lib/deviceImages';
@@ -412,6 +413,10 @@ function FunctionView(props: {
           variant={props.driver()!.variant}
           outputId={props.outputId}
         />
+      </Show>
+
+      <Show when={name === 'Sequencer' && props.slug === 'groove-key'}>
+        <GrooveKeySequencer outputId={props.outputId} />
       </Show>
 
       <Show when={name === 'Device Settings'}>
