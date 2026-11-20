@@ -134,14 +134,25 @@ test('program page frames match AQ64LProgramPage (emulated)', async () => {
   assert.equal(f(m.aqToolFrame(3, 0, 0xff00ff00, 9)), '6c 15');
   assert.equal(f(m.aqToolFrame(5, 0, 0, 33)), '68 21 00');
   assert.equal(m.aqToolFrame(4, 0, 0, 33), null);
-  // a row: 8 pads + its right button; a column: 8 pads + its top button
-  assert.equal(
-    f(m.aqToolFrame(1, 2, 0xff0000ff, 9))!.split(' ').length,
-    1 + 9 * 3,
+  // LEDs 0-7 top buttons, then rows of 8 pads + the right button: a row
+  // is 8 pads + its right button, a column 8 pads + its top button
+  const leds = (x: Uint8Array | null) =>
+    f(x)!
+      .split(' ')
+      .slice(1)
+      .filter((_, i) => i % 3 === 1)
+      .map((h) => parseInt(h, 16));
+  assert.deepEqual(
+    leds(m.aqToolFrame(1, 2, 0xff0000ff, 9)),
+    [8, 9, 10, 11, 12, 13, 14, 15, 16],
   );
-  assert.equal(
-    f(m.aqToolFrame(2, 2, 0xff0000ff, 9))!.split(' ').length,
-    1 + 9 * 3,
+  assert.deepEqual(
+    leds(m.aqToolFrame(2, 2, 0xff0000ff, 9)),
+    [1, 9, 18, 27, 36, 45, 54, 63, 72],
+  );
+  assert.deepEqual(
+    leds(m.aqToolFrame(2, 2, 0xff0000ff, 16)),
+    [16, 25, 34, 43, 52, 61, 70, 79],
   );
   assert.equal(
     f(m.aqScrollText(0xff00ff00, true, 'HELLO')),

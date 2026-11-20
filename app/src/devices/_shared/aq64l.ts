@@ -501,8 +501,8 @@ export async function aqSendPaced(
 }
 
 // ---- program page: paint the 80 LEDs (AQ64LProgramPage, AQ64L::fill*) ---
-// LED ids: 0-63 pads (row by row), 64-71 the top buttons, 72-79 the right
-// buttons. Frames: 66 <on> program mode, 68 <led> <c> erase / set,
+// LED ids: 0-7 the top buttons, then 8 rows of 9 (8 pads + the right
+// button), as AQ64L::LightOutput maps grid codes 1-8, 11-19 .. 81-89. Frames: 66 <on> program mode, 68 <led> <c> erase / set,
 // 6C <c> fill all, 6F <c> <loop> <text> scrolling text (6F 00 00 stops),
 // 70 <specs> colours, 72 <0-100> brightness, 73 <0|1> save to USER1 / 2.
 // <c> = index into the device's 128 colours.
@@ -559,9 +559,8 @@ export function aqNearest(colour: number): number {
 }
 
 export const aqLedRow = (led: number) =>
-  led < 64 ? led >> 3 : led < 72 ? -1 : led - 72;
-export const aqLedCol = (led: number) =>
-  led < 64 ? led & 7 : led < 72 ? led - 64 : 8;
+  led < 8 ? -1 : Math.floor((led - 8) / 9);
+export const aqLedCol = (led: number) => (led < 8 ? led : (led - 8) % 9);
 
 export const aqProgramMode = (on: boolean) => aqFrame(0x66, on ? 1 : 0);
 export const aqBrightness = (pct: number) =>

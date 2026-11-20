@@ -10,6 +10,8 @@ import {
   AQ_PALETTE,
   AQ_TOOLS,
   aqBrightness,
+  aqLedCol,
+  aqLedRow,
   aqNearest,
   aqProgramMode,
   aqProgramReset,
@@ -48,17 +50,15 @@ export default function Aq64lProgram(props: {
     if (f) send(f, AQ_TOOLS[tool()]);
     // preview what the device now shows (palette colour for flash / pulse)
     const shown = effect() ? AQ_PALETTE[aqNearest(colour())] : colour();
-    const row = (i: number) => (i < 64 ? i >> 3 : i < 72 ? -1 : i - 72);
-    const col = (i: number) => (i < 64 ? i & 7 : i < 72 ? i - 64 : 8);
     setLeds((l) =>
       l.map((c, i) => {
         if (tool() === 3) return AQ_PALETTE[aqNearest(colour())];
         if (tool() === 5) return i === led ? OFF : c;
         const hit =
           tool() === 1
-            ? row(i) === row(led)
+            ? aqLedRow(i) === aqLedRow(led)
             : tool() === 2
-              ? col(i) === col(led)
+              ? aqLedCol(i) === aqLedCol(led)
               : i === led;
         return hit ? shown : c;
       }),
@@ -71,7 +71,7 @@ export default function Aq64lProgram(props: {
       title={`LED ${led}`}
       style={{
         width: wide ? '34px' : '34px',
-        height: led >= 64 && led < 72 ? '18px' : '28px',
+        height: led < 8 ? '18px' : '28px',
         padding: 0,
         background: hex(leds()[led]),
         border: '1px solid #0008',
@@ -142,17 +142,18 @@ export default function Aq64lProgram(props: {
           gap: '4px',
         }}
       >
-        <Index each={Array.from({ length: 8 }, (_, i) => 64 + i)}>
+        <Index each={Array.from({ length: 8 }, (_, i) => i)}>
           {(l) => cell(l())}
         </Index>
         <span />
         <Index each={Array.from({ length: 8 }, (_, r) => r)}>
           {(r) => (
             <>
-              <Index each={Array.from({ length: 8 }, (_, c) => r() * 8 + c)}>
+              <Index
+                each={Array.from({ length: 9 }, (_, c) => 8 + r() * 9 + c)}
+              >
                 {(l) => cell(l())}
               </Index>
-              {cell(72 + r())}
             </>
           )}
         </Index>
