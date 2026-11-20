@@ -49,6 +49,7 @@ import {
   type SeqCaps,
 } from '../devices/_shared/sequencer-sync';
 import { buildPKT, hex, parseFrame, splitSysex } from '../lib/midi/sysex';
+import { saveFile } from '../lib/midi/port-io';
 import { isVirtualId } from '../lib/virtualsynth';
 
 interface Props {
@@ -1006,16 +1007,11 @@ function DeviceSyncBar(props: {
       blocks = [frame];
     }
     const bytes = buildSeqFile(variant.name, '', blocks);
-    const url = URL.createObjectURL(
-      new Blob([bytes.buffer as ArrayBuffer], {
-        type: 'application/octet-stream',
-      }),
+    saveFile(
+      `${props.slug}-pattern-${props.state().pattern + 1}.seq`,
+      bytes,
+      'application/octet-stream',
     );
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${props.slug}-pattern-${props.state().pattern + 1}.seq`;
-    a.click();
-    URL.revokeObjectURL(url);
     log('info', `exported pattern .seq (${bytes.length} bytes)`);
   };
 
