@@ -40,6 +40,10 @@ import {
   swRetarget,
   swProjectFromJson,
   swProjectToJson,
+  JAM_PROJECT,
+  jamProjectCmds,
+  jamProjectFromFile,
+  jamProjectToFile,
   swSeqDiff,
   swSeqFromFile,
   swSeqToFile,
@@ -488,7 +492,9 @@ export default function SwingSequencer(props: {
     return n;
   };
   const readProject = async (l: SwingLink) => {
-    const cmds = (ctDevice('swing')?.controls ?? []).map((c) => c.cmd);
+    const cmds = JAM_PROJECT[slug]
+      ? jamProjectCmds(slug)
+      : (ctDevice('swing')?.controls ?? []).map((c) => c.cmd);
     const settings = await l.readSettings(cmds, { progress: pct('settings') });
     const seqs: SwSeq[] = [];
     for (let s = 0; s < SW_SEQS; s++)
@@ -549,6 +555,40 @@ export default function SwingSequencer(props: {
       for (let s = 0; s < SW_SEQS; s++) frames += await putSeq(l, s, p.seqs[s]);
       log(
         `swing: loaded ${f.name} - ${nSet} settings changed, 8 sequences written (${frames} frames, verified)` +
+          (p.dropped ? `, ${p.dropped} notes dropped` : ''),
+        'out',
+      );
+    });
+  // JAM / JAM PLAY: Control Tribe .jam / .jamplay project
+  const saveJamProject = () =>
+    job('save project', async (l) => {
+      const ext = JAM_PROJECT[slug].ext;
+      saveFile(
+        `${slug}-project.${ext}`,
+        jamProjectToFile(slug, await readProject(l)),
+        'application/octet-stream',
+      );
+      log(`${slug}: saved .${ext} project (settings + 8 sequences)`);
+    });
+  const loadJamProject = (f: File) =>
+    job('load project', async (l) => {
+      const p = jamProjectFromFile(slug, new Uint8Array(await f.arrayBuffer()));
+      if (
+        !window.confirm(
+          `Write ${f.name} (settings + all 8 sequences) to the device?`,
+        )
+      )
+        return;
+      // USB mode (51 <v> 01) switches the USB role; never written from a file
+      delete p.settings[0x51];
+      const cur = await l.readSettings(Object.keys(p.settings).map(Number));
+      const nSet = await l.writeSettings(p.settings, cur, {
+        progress: pct('settings'),
+      });
+      let frames = 0;
+      for (let s = 0; s < SW_SEQS; s++) frames += await putSeq(l, s, p.seqs[s]);
+      log(
+        `${slug}: loaded ${f.name} - ${nSet} settings changed, 8 sequences written (${frames} frames, verified)` +
           (p.dropped ? `, ${p.dropped} notes dropped` : ''),
         'out',
       );
@@ -845,6 +885,22 @@ export default function SwingSequencer(props: {
             accept={`.${SW_PROJECT_EXT},.json`}
             title="Write a .swing project (settings + all 8 sequences) to the device"
             then={loadProject}
+          />
+        </Show>
+        <Show when={JAM_PROJECT[slug]}>
+          <button
+            class="btn tiny ghost"
+            disabled={reading()}
+            onClick={saveJamProject}
+            title={`Save settings + all 8 sequences as a Control Tribe .${JAM_PROJECT[slug].ext} project`}
+          >
+            save project
+          </button>
+          <FileButton
+            label="load project"
+            accept={`.${JAM_PROJECT[slug].ext}`}
+            title="Write a Control Tribe project (settings + all 8 sequences) to the device"
+            then={loadJamProject}
           />
         </Show>
         <button
