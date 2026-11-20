@@ -1,6 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseStoreAck } from '../src/devices/_shared/sequencer-sync.ts';
+import {
+  parseStoreAck,
+  storeAckText,
+} from '../src/devices/_shared/sequencer-sync.ts';
 import { retargetBank } from '../src/devices/_shared/sample.ts';
 import { buildPKT } from '../src/lib/midi/sysex.ts';
 import type { DeviceDef } from '../src/lib/types.ts';
@@ -60,4 +63,13 @@ test('waitStoreAck: counts ACKs, stops at the first error', async () => {
   ack(0);
   ack(4);
   assert.equal(await bad, 4);
+});
+
+test('storeAckText: completed, rejected, no reply', () => {
+  assert.equal(storeAckText(0, 'import', 'bank'), 'import completed');
+  assert.equal(
+    storeAckText(2, 'store', 'pattern'),
+    'store failed: the device rejected the pattern (status 2)',
+  );
+  assert.match(storeAckText(null, 'store', 'pattern', 'x'), /did not respond/);
 });

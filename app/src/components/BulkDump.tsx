@@ -10,7 +10,7 @@ import {
   retargetBank,
   SAMPLE_BANK_COUNT,
 } from '../devices/_shared/sample';
-import { waitStoreAck } from '../devices/_shared/sequencer-sync';
+import { storeAckText, waitStoreAck } from '../devices/_shared/sequencer-sync';
 import { decodeWaveSlotNames } from '../devices/_shared/wavetable';
 
 interface Props {
@@ -60,13 +60,7 @@ export default function BulkDump(props: Props) {
     }
     setBankStatus('importing...');
     void waitStoreAck(v).then((st) =>
-      setBankStatus(
-        st === null
-          ? 'import failed: the device did not respond. The bank may not have been written.'
-          : st === 0
-            ? 'import completed'
-            : `import failed: the device rejected the bank (status ${st})`,
-      ),
+      setBankStatus(storeAckText(st, 'import', 'bank')),
     );
     midi.send(out, msg);
     actions().pushLog({

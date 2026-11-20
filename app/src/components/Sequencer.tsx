@@ -47,6 +47,7 @@ import {
   SEQ_TYPE_NAMES,
   seqCaps,
   STORE_ACK_TYPES,
+  storeAckText,
   waitStoreAck,
   type SeqCaps,
 } from '../devices/_shared/sequencer-sync';
@@ -933,21 +934,9 @@ function DeviceSyncBar(props: {
       setStatus('storing...');
       void waitStoreAck(variant).then((st) => {
         setBusy(false);
-        if (st === null) {
-          setStatus(
-            'store failed: the device did not respond. The pattern may not have been saved.',
-          );
-          return;
-        }
-        log('in', `store ACK: status ${st}`);
-        if (st !== 0) {
-          setStatus(
-            `store failed: the device rejected the pattern (status ${st})`,
-          );
-          return;
-        }
-        props.engine.markClean();
-        setStatus('store completed');
+        if (st !== null) log('in', `store ACK: status ${st}`);
+        if (st === 0) props.engine.markClean();
+        setStatus(storeAckText(st, 'store', 'pattern'));
       });
     }
     props.driver.sendRaw(out, msg);
@@ -1068,14 +1057,17 @@ function DeviceSyncBar(props: {
       const acks = waitStoreAck(variant, frames.length);
       frames.forEach((f) => props.driver.sendRaw(out, f));
       log('out', `import ${file.name}: global, song and pattern blocks sent`);
+      setBusy(true);
       setStatus('storing...');
       const st = await acks;
+      setBusy(false);
       setStatus(
-        st === 0
-          ? `imported ${file.name} into song ${bank + 1} pattern ${pattern + 1}`
-          : st === null
-            ? 'store failed: the device did not respond. The pattern may not have been saved.'
-            : `store failed: the device rejected the pattern (status ${st})`,
+        storeAckText(
+          st,
+          'store',
+          'pattern',
+          `imported ${file.name} into song ${bank + 1} pattern ${pattern + 1}`,
+        ),
       );
       return;
     }

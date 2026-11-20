@@ -174,6 +174,19 @@ export function waitStoreAck(
   });
 }
 
+// status text of a waitStoreAck result; `verb` "store" or "import"
+export function storeAckText(
+  st: number | null,
+  verb: string,
+  what: string,
+  done = `${verb} completed`,
+): string {
+  if (st === 0) return done;
+  return st === null
+    ? `${verb} failed: the device did not respond. The ${what} may not have been stored.`
+    : `${verb} failed: the device rejected the ${what} (status ${st})`;
+}
+
 // byte-exact write: re-send a previously received 0x78 payload unchanged (the
 // only safe write for unmodeled body formats)
 export function buildRawPatternWrite(
