@@ -142,9 +142,11 @@ export default function ControlTribeSettings(props: Props) {
     let i = 0;
     for (const c of d.controls) {
       if (c.local) continue;
-      const q = buildCtControl(props.slug, c, null, values());
       // stagger so we don't flood the port
-      setTimeout(() => midi.send(out()!, q), i * 12);
+      setTimeout(
+        () => midi.send(out()!, buildCtControl(props.slug, c, null, values())),
+        i * 12,
+      );
       i++;
     }
     actions().pushLog({
