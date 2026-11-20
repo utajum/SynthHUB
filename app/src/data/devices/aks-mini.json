@@ -20,6 +20,17 @@
       "name": "General",
       "settings": [
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Preset",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Preset"
+          }
+        },
+        {
           "type": "minipreset",
           "kind": "spinbox",
           "title": "Preset",
@@ -36,23 +47,14 @@
           }
         },
         {
-          "type": "autopoweroff",
-          "kind": "toggle",
-          "title": "Auto Power Off",
-          "default": 0,
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
           "min": 0,
-          "max": 1,
-          "sysex": {
-            "pkt": 116,
-            "spkt": 0
-          },
+          "max": 127,
           "raw": {
-            "type": "autopoweroff",
-            "default": 0,
-            "index": 2,
-            "title": "Auto Power Off",
-            "pkt": 116,
-            "spkt": 0
+            "type": "section",
+            "title": "MIDI & Sync"
           }
         },
         {
@@ -101,26 +103,6 @@
           }
         },
         {
-          "type": "joy_retriger",
-          "kind": "toggle",
-          "title": "JOY Retriger Enable",
-          "default": 0,
-          "min": 0,
-          "max": 1,
-          "sysex": {
-            "pkt": 116,
-            "spkt": 3
-          },
-          "raw": {
-            "type": "joy_retriger",
-            "default": 0,
-            "index": 9,
-            "title": "JOY Retriger Enable",
-            "pkt": 116,
-            "spkt": 3
-          }
-        },
-        {
           "type": "midishortmessage",
           "kind": "spinbox",
           "title": "MIDI Short Message",
@@ -141,24 +123,14 @@
           }
         },
         {
-          "type": "temporange",
+          "type": "section",
           "kind": "spinbox",
-          "title": "Tempo Range",
-          "default": 0,
+          "title": "Performance",
           "min": 0,
           "max": 127,
-          "sysex": {
-            "pkt": 116,
-            "spkt": 1
-          },
           "raw": {
-            "type": "temporange",
-            "range": "10 BPM ~ 600 BPM,56 BPM ~ 200 BPM",
-            "index": 5,
-            "default": 0,
-            "title": "Tempo Range",
-            "pkt": 116,
-            "spkt": 1
+            "type": "section",
+            "title": "Performance"
           }
         },
         {
@@ -280,25 +252,23 @@
           }
         },
         {
-          "type": "newseq",
-          "kind": "spinbox",
-          "title": "Pattern Call",
+          "type": "joy_retriger",
+          "kind": "toggle",
+          "title": "JOY Retriger Enable",
           "default": 0,
           "min": 0,
-          "max": 127,
+          "max": 1,
           "sysex": {
             "pkt": 116,
-            "spkt": 5,
-            "subtype": 0
+            "spkt": 3
           },
           "raw": {
-            "type": "newseq",
-            "title": "Pattern Call",
-            "subtype": 0,
+            "type": "joy_retriger",
             "default": 0,
-            "index": 13,
+            "index": 9,
+            "title": "JOY Retriger Enable",
             "pkt": 116,
-            "spkt": 5
+            "spkt": 3
           }
         },
         {
@@ -319,6 +289,80 @@
             "index": 14,
             "pkt": 20,
             "title": "Multi-Trigger"
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "System",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "System"
+          }
+        },
+        {
+          "type": "autopoweroff",
+          "kind": "toggle",
+          "title": "Auto Power Off",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 0
+          },
+          "raw": {
+            "type": "autopoweroff",
+            "default": 0,
+            "index": 2,
+            "title": "Auto Power Off",
+            "pkt": 116,
+            "spkt": 0
+          }
+        },
+        {
+          "type": "temporange",
+          "kind": "spinbox",
+          "title": "Tempo Range",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 1
+          },
+          "raw": {
+            "type": "temporange",
+            "range": "10 BPM ~ 600 BPM,56 BPM ~ 200 BPM",
+            "index": 5,
+            "default": 0,
+            "title": "Tempo Range",
+            "pkt": 116,
+            "spkt": 1
+          }
+        },
+        {
+          "type": "newseq",
+          "kind": "spinbox",
+          "title": "Pattern Call",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 5,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "newseq",
+            "title": "Pattern Call",
+            "subtype": 0,
+            "default": 0,
+            "index": 13,
+            "pkt": 116,
+            "spkt": 5
           }
         }
       ]

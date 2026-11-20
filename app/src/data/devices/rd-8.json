@@ -20,6 +20,17 @@
       "name": "General",
       "settings": [
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "MIDI & Sync"
+          }
+        },
+        {
           "type": "channel",
           "kind": "dropdown",
           "title": "channel",
@@ -139,6 +150,17 @@
           }
         },
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Voice Assignment",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Voice Assignment"
+          }
+        },
+        {
           "type": "voicenotemap",
           "kind": "composite",
           "title": "Voice Note Map",
@@ -166,22 +188,6 @@
             "index": "14,15,16,17,18,19,20,21,22,23,24",
             "labels": "Low Tom/Low Conga,Mid Tom/Mid Conga,High Tom/High Conga,Rim Shot/Claves,Hand Clap/Maracas,Cowbell,Cymbal,Open Hat,Closed Hat",
             "pkt": 41
-          }
-        },
-        {
-          "type": "chainsongs",
-          "kind": "composite",
-          "title": "End Mode",
-          "default": 2,
-          "sysex": {
-            "pkt": 42
-          },
-          "raw": {
-            "type": "chainsongs",
-            "default": 2,
-            "index": 25,
-            "title": "End Mode",
-            "pkt": 42
           }
         },
         {
@@ -215,6 +221,44 @@
             "indexex": 27,
             "pkt": 44,
             "labels": "BASS,SNARE,LOW TOM,MID TOM,HIGH TOM,RIM SHOT,CLAPS,COWBELL,CYMBAL,OPEN HAT,CLOSED HAT"
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Sequencer",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Sequencer"
+          }
+        },
+        {
+          "type": "chainsongs",
+          "kind": "composite",
+          "title": "End Mode",
+          "default": 2,
+          "sysex": {
+            "pkt": 42
+          },
+          "raw": {
+            "type": "chainsongs",
+            "default": 2,
+            "index": 25,
+            "title": "End Mode",
+            "pkt": 42
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "System",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "System"
           }
         },
         {

@@ -20,6 +20,17 @@
       "name": "General",
       "settings": [
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "MIDI & Sync"
+          }
+        },
+        {
           "type": "channel",
           "kind": "spinbox",
           "title": "channel",
@@ -39,47 +50,6 @@
             "defaultout": 1,
             "indexout": 1,
             "pkt": 14
-          }
-        },
-        {
-          "type": "pitchbend",
-          "kind": "composite",
-          "title": "Pitch Bend Semitones",
-          "min": 0,
-          "max": 12,
-          "default": 12,
-          "sysex": {
-            "pkt": 17,
-            "subtype": 1
-          },
-          "raw": {
-            "type": "pitchbend",
-            "subtype": 1,
-            "default": 12,
-            "index": 6,
-            "min": 0,
-            "max": 12,
-            "pkt": 17,
-            "title": "Pitch Bend Semitones"
-          }
-        },
-        {
-          "type": "velocity",
-          "kind": "composite",
-          "title": "Velocity On",
-          "sysex": {
-            "pkt": 16,
-            "subtype": 1
-          },
-          "raw": {
-            "type": "velocity",
-            "subtype": 1,
-            "defaultonconstant": 1,
-            "indexonconstant": 3,
-            "defaultcurve": 0,
-            "indexcurve": 5,
-            "pkt": 16,
-            "title": "Velocity On"
           }
         },
         {
@@ -137,24 +107,6 @@
           }
         },
         {
-          "type": "accentthreshold",
-          "kind": "spinbox",
-          "title": "Accent Velocity Threshold",
-          "default": 96,
-          "min": 0,
-          "max": 127,
-          "sysex": {
-            "pkt": 28
-          },
-          "raw": {
-            "type": "accentthreshold",
-            "default": 96,
-            "index": 11,
-            "pkt": 28,
-            "title": "Accent Velocity Threshold"
-          }
-        },
-        {
           "type": "midithrough",
           "kind": "composite",
           "title": "midithrough",
@@ -170,6 +122,76 @@
             "defaultu2m": 0,
             "indexu2m": 14,
             "pkt": 40
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Performance",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Performance"
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "default": 12,
+            "index": 6,
+            "min": 0,
+            "max": 12,
+            "pkt": 17,
+            "title": "Pitch Bend Semitones"
+          }
+        },
+        {
+          "type": "velocity",
+          "kind": "composite",
+          "title": "Velocity On",
+          "sysex": {
+            "pkt": 16,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "velocity",
+            "subtype": 1,
+            "defaultonconstant": 1,
+            "indexonconstant": 3,
+            "defaultcurve": 0,
+            "indexcurve": 5,
+            "pkt": 16,
+            "title": "Velocity On"
+          }
+        },
+        {
+          "type": "accentthreshold",
+          "kind": "spinbox",
+          "title": "Accent Velocity Threshold",
+          "default": 96,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 28
+          },
+          "raw": {
+            "type": "accentthreshold",
+            "default": 96,
+            "index": 11,
+            "pkt": 28,
+            "title": "Accent Velocity Threshold"
           }
         }
       ]

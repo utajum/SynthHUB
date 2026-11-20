@@ -20,6 +20,17 @@
       "name": "General",
       "settings": [
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "MIDI & Sync"
+          }
+        },
+        {
           "type": "channel",
           "kind": "dropdown",
           "title": "channel",
@@ -121,6 +132,62 @@
           }
         },
         {
+          "type": "clock",
+          "kind": "composite",
+          "title": "clock",
+          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG"],
+          "sysex": {
+            "subtype": 3
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG",
+            "subtype": 3,
+            "defaultsource": 0,
+            "indexsource": 5,
+            "defaultrate": 100,
+            "indexrate": 6
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "radio",
+          "title": "MIDI Clock Out",
+          "control": "radiobutton",
+          "options": ["Off", "On"],
+          "default": 0,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 2,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "custom_midiclockout",
+            "title": "MIDI Clock Out",
+            "control": "radiobutton",
+            "optionlabel": "Off,On",
+            "from": 0,
+            "to": 1,
+            "default": 0,
+            "index": 29,
+            "pkt": 116,
+            "spkt": 2
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Performance",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Performance"
+          }
+        },
+        {
           "type": "accent_off_level",
           "kind": "spinbox",
           "title": "Accent Off Level",
@@ -161,21 +228,14 @@
           }
         },
         {
-          "type": "clock",
-          "kind": "composite",
-          "title": "clock",
-          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG"],
-          "sysex": {
-            "subtype": 3
-          },
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Sequencer",
+          "min": 0,
+          "max": 127,
           "raw": {
-            "type": "clock",
-            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG",
-            "subtype": 3,
-            "defaultsource": 0,
-            "indexsource": 5,
-            "defaultrate": 100,
-            "indexrate": 6
+            "type": "section",
+            "title": "Sequencer"
           }
         },
         {
@@ -226,30 +286,14 @@
           }
         },
         {
-          "type": "custom",
-          "kind": "radio",
-          "title": "MIDI Clock Out",
-          "control": "radiobutton",
-          "options": ["Off", "On"],
-          "default": 0,
-          "sysex": {
-            "pkt": 116,
-            "spkt": 2,
-            "subtype": 0
-          },
+          "type": "section",
+          "kind": "spinbox",
+          "title": "System",
+          "min": 0,
+          "max": 127,
           "raw": {
-            "type": "custom",
-            "subtype": 0,
-            "name": "custom_midiclockout",
-            "title": "MIDI Clock Out",
-            "control": "radiobutton",
-            "optionlabel": "Off,On",
-            "from": 0,
-            "to": 1,
-            "default": 0,
-            "index": 29,
-            "pkt": 116,
-            "spkt": 2
+            "type": "section",
+            "title": "System"
           }
         },
         {

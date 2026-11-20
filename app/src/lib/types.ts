@@ -58,6 +58,8 @@ export interface DeviceFunction {
   banklabel?: string;
   patternlabel?: string;
   pattern_count?: number;
+  // CSV group (bank) names, e.g. "I,II" (MINI POPS 7)
+  pattern_group_labels?: string;
   settings?: DeviceSetting[];
   cvchannels?: unknown[];
 }
