@@ -75,7 +75,7 @@
         {
           "type": "midiclockout",
           "kind": "toggle",
-          "title": "MIDI Colock Out",
+          "title": "MIDI Clock Out",
           "default": 0,
           "min": 0,
           "max": 1,
@@ -89,7 +89,7 @@
             "default": 0,
             "index": 8,
             "pkt": 23,
-            "title": "MIDI Colock Out:"
+            "title": "MIDI Clock Out:"
           }
         },
         {

@@ -75,6 +75,24 @@
             "indexu2m": 7,
             "pkt": 40
           }
+        },
+        {
+          "type": "sequencerautosync",
+          "kind": "toggle",
+          "title": "Sequencer Auto Sync",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 29
+          },
+          "raw": {
+            "type": "sequencerautosync",
+            "default": 0,
+            "index": 8,
+            "pkt": 29,
+            "title": "Sequencer Auto Sync:"
+          }
         }
       ]
     },

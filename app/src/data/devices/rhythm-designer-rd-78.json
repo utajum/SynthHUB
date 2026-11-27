@@ -40,8 +40,7 @@
             "13",
             "14",
             "15",
-            "16",
-            "All"
+            "16"
           ],
           "sysex": {
             "pkt": 14,
@@ -69,8 +68,7 @@
               "13",
               "14",
               "15",
-              "16",
-              "All"
+              "16"
             ],
             "outlist": [
               "1",
@@ -190,7 +188,7 @@
         {
           "type": "midiclockout",
           "kind": "toggle",
-          "title": "MIDI Colock Out",
+          "title": "MIDI Clock Out",
           "default": 0,
           "min": 0,
           "max": 1,
@@ -204,7 +202,7 @@
             "default": 0,
             "index": 24,
             "pkt": 23,
-            "title": "MIDI Colock Out:"
+            "title": "MIDI Clock Out:"
           }
         }
       ]

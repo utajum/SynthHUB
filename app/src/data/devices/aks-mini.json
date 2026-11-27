@@ -254,7 +254,7 @@
         {
           "type": "joy_retriger",
           "kind": "toggle",
-          "title": "JOY Retriger Enable",
+          "title": "JOY Retrigger Enable",
           "default": 0,
           "min": 0,
           "max": 1,
@@ -266,7 +266,7 @@
             "type": "joy_retriger",
             "default": 0,
             "index": 9,
-            "title": "JOY Retriger Enable",
+            "title": "JOY Retrigger Enable",
             "pkt": 116,
             "spkt": 3
           }

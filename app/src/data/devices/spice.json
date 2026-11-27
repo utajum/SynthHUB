@@ -72,7 +72,7 @@
         {
           "type": "midiclockout",
           "kind": "toggle",
-          "title": "MIDI Colock Out",
+          "title": "MIDI Clock Out",
           "default": 3,
           "min": 0,
           "max": 1,
@@ -85,7 +85,7 @@
             "subtype": 1,
             "default": 3,
             "index": 4,
-            "title": "MIDI Colock Out:",
+            "title": "MIDI Clock Out:",
             "pkt": 23
           }
         },
@@ -221,7 +221,7 @@
         {
           "type": "retrig",
           "kind": "toggle",
-          "title": "Retring",
+          "title": "Retrig",
           "default": 0,
           "min": 0,
           "max": 1,
@@ -232,8 +232,26 @@
             "type": "retrig",
             "default": 0,
             "index": 11,
-            "title": "Retring",
+            "title": "Retrig",
             "pkt": 20
+          }
+        },
+        {
+          "type": "sequencerautosync",
+          "kind": "toggle",
+          "title": "Sequencer Auto Sync",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 29
+          },
+          "raw": {
+            "type": "sequencerautosync",
+            "default": 0,
+            "index": 15,
+            "pkt": 29,
+            "title": "Sequencer Auto Sync:"
           }
         }
       ]
