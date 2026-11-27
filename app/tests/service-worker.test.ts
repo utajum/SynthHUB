@@ -22,12 +22,12 @@ function worker(
   build: string,
   store = new Map<string, Map<string, Response>>(),
 ) {
-  const net = { online: true, body: 'v1' };
+  const net = { online: true, body: 'v1', status: 200 };
   const key = (r: Req | string) =>
     typeof r === 'string' ? new URL(r, ORIGIN).href : r.url;
   const fetch = async (r: Req | string) => {
     if (!net.online) throw new TypeError('offline');
-    const res = new Response(`${net.body} ${key(r)}`);
+    const res = new Response(`${net.body} ${key(r)}`, { status: net.status });
     Object.defineProperty(res, 'type', { value: 'basic' });
     return res;
   };
@@ -98,13 +98,39 @@ test('sw: offline serves the cache, unknown pages get the shell', async () => {
   const w = worker('b1');
   await w.lifecycle('install');
   await w.get(req('/device/td-3', 'navigate'));
+  // the host redirects /about to /about/: online the page is cached there
+  await w.get(req('/about/', 'navigate'));
   w.net.online = false;
   assert.equal(
     await w.get(req('/device/td-3', 'navigate')),
     'v1 https://hub.test/device/td-3',
   );
-  assert.equal(await w.get(req('/about', 'navigate')), 'v1 https://hub.test/');
+  assert.equal(
+    await w.get(req('/about', 'navigate')),
+    'v1 https://hub.test/about/',
+  );
+  assert.equal(
+    await w.get(req('/catalog', 'navigate')),
+    'v1 https://hub.test/',
+  );
   assert.equal(await w.get(req('/never.js')), 'error');
+});
+
+test('sw: partial (206) responses are not cached', async () => {
+  const w = worker('b1');
+  w.net.status = 206;
+  await w.get(req('/a.mp3'));
+  assert.deepEqual([...w.store.keys()], []);
+});
+
+test('sw: /sw.js is prerendered with this build id', async () => {
+  const sw = await import('../src/pages/sw.js.ts');
+  const res = await sw.GET({} as Parameters<typeof sw.GET>[0]);
+  const js = await res.text();
+  assert.equal(sw.prerender, true);
+  assert.match(res.headers.get('Content-Type') ?? '', /javascript/);
+  assert.doesNotMatch(js, /__BUILD__/);
+  assert.match(js, /const CACHE = 'synthhub-[0-9a-z]+';/);
 });
 
 test('sw: /api, other origins and POST are left to the browser', async () => {

@@ -36,17 +36,22 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     fetch(req)
       .then((res) => {
-        if (res.ok && res.type === 'basic') {
+        if (res.status === 200 && res.type === 'basic') {
           const copy = res.clone();
           event.waitUntil(caches.open(CACHE).then((c) => c.put(req, copy)));
         }
         return res;
       })
       .catch(async () => {
-        const hit = await caches.match(req);
-        if (hit) return hit;
-        const shell = req.mode === 'navigate' && (await caches.match('/'));
-        return shell || Response.error();
+        const nav = req.mode === 'navigate';
+        // the host redirects /about to /about/, so the page is cached there
+        const slash = nav && !url.pathname.endsWith('/');
+        return (
+          (await caches.match(req)) ||
+          (slash && (await caches.match(url.pathname + '/'))) ||
+          (nav && (await caches.match('/'))) ||
+          Response.error()
+        );
       }),
   );
 });
