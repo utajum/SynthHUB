@@ -1,0 +1,26 @@
+{
+  "slug": "pk61",
+  "name": "PK61",
+  "app": "controltribe",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "PK61",
+      "aliases": ["POLYKEYS PK61", "PK61"],
+      "pids": ["0x12db"],
+      "protocol": 1,
+      "modelId": ["0x00", "0x01", "0x6b"],
+      "deviceId": "0x00",
+      "cloudFamily": "pk61",
+      "cloudModel": "pk61"
+    }
+  ],
+  "functions": [
+    {
+      "name": "Device Settings"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

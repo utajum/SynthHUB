@@ -3,6 +3,7 @@
 //   .swingseq - one sequence, a JUCE ValueTree "Sequence" (CT's seq export)
 //   .swing    - project JSON: settings + all 8 sequences (CT's "save"; CT's
 //               loader is a stub, so import is ours)
+//   .jam / .jamplay - JAM / JAM PLAY project, a JUCE ValueTree "root"
 // Frame: F0 00 20 32 7F 42 <cmd> [args] F7. Queries are answered with
 // <cmd> + data, every write with an empty <cmd> echo.
 import {
@@ -50,6 +51,31 @@ export function swParse(d: Uint8Array): { cmd: number; data: number[] } | null {
   if (d.length < 8 || d[d.length - 1] !== 0xf7) return null;
   for (let i = 0; i < 6; i++) if (d[i] !== SW_HDR[i]) return null;
   return { cmd: d[6], data: Array.from(d.subarray(7, d.length - 1)) };
+}
+
+// JAM / JAM PLAY speak the Swing sequencer protocol under their own header
+// (F0 00 20 32 00 01 40|41 7F): the full frame header for a Control Tribe slug
+export function swHeader(slug: string): number[] {
+  const h = ctDevice(slug)?.header;
+  return h ? [0xf0, 0x00, 0x20, 0x32, ...h] : SW_HDR;
+}
+
+// map frames between SW_HDR and `hdr`, so swFrame/swParse users stay unchanged
+export const swRetarget = (d: Uint8Array, from: number[], to: number[]) =>
+  from.every((b, i) => d[i] === b)
+    ? Uint8Array.from([...to, ...d.subarray(from.length)])
+    : null;
+
+export function swIO(io: MidiIO, hdr: number[]): MidiIO {
+  if (hdr === SW_HDR) return io;
+  return {
+    send: (b) => io.send(swRetarget(b, SW_HDR, hdr) ?? b),
+    listen: (cb) =>
+      io.listen((b) => {
+        const m = swRetarget(b, hdr, SW_HDR);
+        if (m) cb(m);
+      }),
+  };
 }
 
 export const swEmptySteps = (): SwStep[] =>
@@ -418,6 +444,154 @@ export function swProjectFromJson(
         o.ratchets.forEach((r, i) => {
           if (i < SW_STEPS) q.steps[i].ratchet = clamp(num(r) ?? 1, 0, 4);
         });
+    }
+    seqs.push(q);
+  }
+  return { settings, seqs, dropped };
+}
+
+// ---- .jam / .jamplay (Control Tribe 1.12.4 project) ------------------------
+// MainComponent::saveProject writes Jam(Play)DeviceImp::getDeviceValues as a
+// ValueTree "root": one prop per settings element (JAM-00NN: combobox item
+// text or slider number), then children Seq1..Seq8 with name, JAM-0048
+// length, JAM-0049 swing, JAM-0050 gate ("80%") and notes [[row, beat,
+// velocity 0-1, attribute, ratchet]] (PianoGridNote +104 e8 10c 114 110).
+
+// element number -> wire cmd (getGuiElementValues order of the panel)
+// prettier-ignore
+const JAM_IDS: [number, number][] = [
+  [1, 0x16], [2, 0x07], [3, 0x08], [4, 0x09], [5, 0x10], [6, 0x0e], [7, 0x0f],
+  [8, 0x0a], [9, 0x13], [10, 0x15], [11, 0x19], [12, 0x1a], [13, 0x20],
+  [14, 0x22], [15, 0x25], [16, 0x2c], [17, 0x78], [18, 0x23], [19, 0x24],
+  [21, 0x29], [22, 0x2a], [23, 0x27], [24, 0x21], [25, 0x26], [26, 0x2b],
+  [27, 0x46], [28, 0x4c], [29, 0x4a], [30, 0x4d], [31, 0x4f], [32, 0x4e],
+  [33, 0x47], [35, 0x67], [36, 0x60], [37, 0x61], [38, 0x63], [39, 0x62],
+  [43, 0x14], [44, 0x50], [45, 0x64], [46, 0x65], [47, 0x66], [49, 0x57],
+];
+// prettier-ignore
+const JAMPLAY_IDS: [number, number][] = [
+  ...JAM_IDS,
+  [51, 0x51], [53, 0x7a], [54, 0x7e], [75, 0x5d], [76, 0x7b], [77, 0x7c],
+  [81, 0x5f], [82, 0x2e], [83, 0x2f], [84, 0x30], [85, 0x31], [86, 0x32],
+  [87, 0x33], [88, 0x34], [89, 0x35],
+];
+
+export const JAM_PROJECT: Record<
+  string,
+  { ext: string; prefix: string; ids: [number, number][] }
+> = {
+  jam: { ext: 'jam', prefix: 'JAM', ids: JAM_IDS },
+  'jam-play': { ext: 'jamplay', prefix: 'JAMPLAY', ids: JAMPLAY_IDS },
+};
+
+const jamId = (prefix: string, n: number) =>
+  `${prefix}-${String(n).padStart(4, '0')}`;
+
+// controls of a JAM project, by cmd (args-free ones only)
+function jamControls(slug: string): Map<number, CtControl> {
+  const m = new Map<number, CtControl>();
+  for (const c of ctDevice(slug)?.controls ?? [])
+    if (c.id === undefined && !c.local) m.set(c.cmd, c);
+  return m;
+}
+
+export const jamProjectCmds = (slug: string) =>
+  JAM_PROJECT[slug].ids.map(([, cmd]) => cmd);
+
+export function jamProjectToFile(slug: string, p: SwProject): Uint8Array {
+  const { prefix, ids } = JAM_PROJECT[slug];
+  const byCmd = jamControls(slug);
+  const props: [string, JVar][] = [];
+  for (const [n, cmd] of ids) {
+    const c = byCmd.get(cmd);
+    const v = p.settings[cmd];
+    if (!c || v === undefined) continue;
+    const o = settingOut(c, v);
+    props.push([
+      jamId(prefix, n),
+      typeof o === 'string' ? jStr(o) : jDouble(o),
+    ]);
+  }
+  const children = p.seqs.map((q, k) => {
+    const notes: JVar[] = [];
+    q.steps.forEach((st, i) =>
+      st.notes.forEach((n) =>
+        notes.push(
+          jArr([
+            jInt(127 - n.note),
+            jDouble(i),
+            jDouble(n.vel / 127),
+            jInt(n.len),
+            jInt(st.ratchet),
+          ]),
+        ),
+      ),
+    );
+    return {
+      type: `Seq${k + 1}`,
+      props: [
+        ['name', jStr(`Seq${k + 1}`)],
+        [jamId(prefix, 48), jDouble(q.len)],
+        [jamId(prefix, 49), jDouble(q.swing)],
+        [jamId(prefix, 50), jStr(`${q.gate}%`)],
+        ['notes', jArr(notes)],
+      ] as [string, JVar][],
+      children: [],
+    };
+  });
+  return vtWrite({ type: 'root', props, children });
+}
+
+export function jamProjectFromFile(
+  slug: string,
+  bytes: Uint8Array,
+): SwProject & { dropped: number } {
+  const { prefix, ext, ids } = JAM_PROJECT[slug];
+  let t;
+  try {
+    t = vtRead(bytes);
+  } catch {
+    throw new Error(`not a .${ext} project`);
+  }
+  if (t.type !== 'root' || !t.props.some(([k]) => k.startsWith(`${prefix}-`)))
+    throw new Error(`not a .${ext} project`);
+  const byCmd = jamControls(slug);
+  const settings: Record<number, number> = {};
+  for (const [n, cmd] of ids) {
+    const c = byCmd.get(cmd);
+    const raw = jProp(t, jamId(prefix, n));
+    const v =
+      c && raw
+        ? settingIn(c, raw.t === 'string' ? raw.v : jNum(raw))
+        : undefined;
+    if (v !== undefined) settings[cmd] = v;
+  }
+  let dropped = 0;
+  const seqs: SwSeq[] = [];
+  for (let k = 0; k < SW_SEQS; k++) {
+    const q = swEmptySeq();
+    const c = t.children.find((x) => {
+      const nm = jProp(x, 'name');
+      return nm?.t === 'string' && nm.v === `Seq${k + 1}`;
+    });
+    if (c) {
+      q.len = clamp(jNum(jProp(c, jamId(prefix, 48))) ?? 0, 0, SW_STEPS);
+      q.swing = clamp(jNum(jProp(c, jamId(prefix, 49))) ?? 0, 0, 100);
+      q.gate = clamp(jNum(jProp(c, jamId(prefix, 50))) ?? 0, 0, 100);
+      const notes = jProp(c, 'notes');
+      if (notes?.t === 'array')
+        for (const v of notes.v) {
+          if (v.t !== 'array') continue;
+          const [row, beat, vel, attr, rat] = v.v.map((x) => jNum(x) ?? NaN);
+          const st = Math.round(beat);
+          const ok = pushNote(q.steps, st, {
+            note: 127 - Math.round(row),
+            vel: clamp(vel * 127, 1, 127),
+            len: Number.isFinite(attr) ? clamp(attr, 0, 127) : 3,
+          });
+          if (!ok) dropped++;
+          else if (Number.isFinite(rat)) q.steps[st].ratchet = clamp(rat, 0, 4);
+        }
     }
     seqs.push(q);
   }

@@ -648,5 +648,40 @@
     "slug": "wasp-deluxe",
     "variant": "WASP DELUXE",
     "protocol": 1
+  },
+  "0x128f": {
+    "slug": "jam",
+    "variant": "JAM",
+    "protocol": 1
+  },
+  "0x1291": {
+    "slug": "jam-play",
+    "variant": "JAM PLAY",
+    "protocol": 1
+  },
+  "0x129a": {
+    "slug": "qt32-play",
+    "variant": "QT32 PLAY",
+    "protocol": 1
+  },
+  "0x1293": {
+    "slug": "groove-key",
+    "variant": "GROOVE KEY",
+    "protocol": 1
+  },
+  "0x12db": {
+    "slug": "pk61",
+    "variant": "PK61",
+    "protocol": 1
+  },
+  "0x12e0": {
+    "slug": "aq64l",
+    "variant": "AQ64L",
+    "protocol": 1
+  },
+  "0x12cf": {
+    "slug": "bcr32",
+    "variant": "BCR32",
+    "protocol": 1
   }
 }

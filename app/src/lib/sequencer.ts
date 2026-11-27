@@ -112,9 +112,10 @@ const NOTE_NAMES = [
   'B',
 ];
 
-// "C#4" style display name for a MIDI note number
-export function noteName(n: number): string {
-  return `${NOTE_NAMES[n % 12]}${Math.floor(n / 12) - 1}`;
+// "C#4" style display name for a MIDI note number (Control Tribe: middle
+// C is C3, octave0 -2)
+export function noteName(n: number, octave0 = -1): string {
+  return `${NOTE_NAMES[n % 12]}${Math.floor(n / 12) + octave0}`;
 }
 
 export class Sequencer {

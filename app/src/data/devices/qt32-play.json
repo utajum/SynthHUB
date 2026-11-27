@@ -1,0 +1,26 @@
+{
+  "slug": "qt32-play",
+  "name": "QT32 PLAY",
+  "app": "controltribe",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "QT32 PLAY",
+      "aliases": ["QT32 PLAY"],
+      "pids": ["0x129a"],
+      "protocol": 1,
+      "modelId": ["0x00", "0x01", "0x45"],
+      "deviceId": "0x7f",
+      "cloudFamily": "qt32play",
+      "cloudModel": "qt32play"
+    }
+  ],
+  "functions": [
+    {
+      "name": "Device Settings"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

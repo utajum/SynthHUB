@@ -1,0 +1,29 @@
+{
+  "slug": "jam",
+  "name": "JAM",
+  "app": "controltribe",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "JAM",
+      "aliases": ["JAM"],
+      "pids": ["0x128f"],
+      "protocol": 1,
+      "modelId": ["0x00", "0x01", "0x40"],
+      "deviceId": "0x7f",
+      "cloudFamily": "jam",
+      "cloudModel": "jam"
+    }
+  ],
+  "functions": [
+    {
+      "name": "Device Settings"
+    },
+    {
+      "name": "Sequencer"
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}
