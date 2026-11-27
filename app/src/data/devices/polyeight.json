@@ -1,0 +1,109 @@
+{
+  "slug": "polyeight",
+  "name": "Polyeight",
+  "manufacturerId": ["0x00", "0x20", "0x32"],
+  "variants": [
+    {
+      "name": "Polyeight",
+      "aliases": ["Polyeight"],
+      "pids": ["0x1283", "0x1284"],
+      "protocol": 3,
+      "modelId": ["0x00", "0x01", "0x3B"],
+      "deviceId": "0x00",
+      "cloudFamily": "polyeight",
+      "cloudModel": "polyeight",
+      "introImg": "intro.png"
+    }
+  ],
+  "functions": [
+    {
+      "name": "General",
+      "settings": [
+        {
+          "type": "channel",
+          "kind": "dropdown",
+          "title": "channel",
+          "control": "combobox",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "All"
+          ],
+          "sysex": {
+            "pkt": 14,
+            "subtype": 5
+          },
+          "raw": {
+            "type": "channel",
+            "subtype": 5,
+            "control": "combobox",
+            "inlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "All"
+            ],
+            "defaultin": 1,
+            "indexin": 0,
+            "outlist": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "Same as RX"
+            ],
+            "defaultout": 1,
+            "indexout": 1,
+            "defaultusbin": 1,
+            "indexusbin": 2,
+            "defaultusbout": 1,
+            "indexusbout": 3,
+            "pkt": 14
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update"
+    }
+  ]
+}

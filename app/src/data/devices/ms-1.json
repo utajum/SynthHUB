@@ -31,6 +31,17 @@
       "name": "General",
       "settings": [
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "MIDI & Sync"
+          }
+        },
+        {
           "type": "channel",
           "kind": "spinbox",
           "title": "channel",
@@ -50,6 +61,96 @@
             "defaultout": 1,
             "indexout": 1,
             "pkt": 14
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "clock",
+          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG", "Auto"],
+          "sysex": {
+            "subtype": 1
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG,Auto",
+            "subtype": 1,
+            "defaultsource": 0,
+            "indexsource": 10,
+            "defaultrate": 1,
+            "indexrate": 11,
+            "defaultpolarity": 1,
+            "indexpolarity": 12,
+            "polarity_label": "Rise,Fall"
+          }
+        },
+        {
+          "type": "midiclockout",
+          "kind": "toggle",
+          "title": "MIDI Clock Out",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 23,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "midiclockout",
+            "subtype": 0,
+            "default": 0,
+            "index": 8,
+            "pkt": 23,
+            "title": "MIDI Clock Out"
+          }
+        },
+        {
+          "type": "sequencerautosync",
+          "kind": "toggle",
+          "title": "Sequencer Auto Sync",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 17
+          },
+          "raw": {
+            "type": "sequencerautosync",
+            "default": 0,
+            "index": 9,
+            "title": "Sequencer Auto Sync",
+            "pkt": 17
+          }
+        },
+        {
+          "type": "localkeyboardmode",
+          "kind": "toggle",
+          "title": "Local Keyboard Mode",
+          "default": 0,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 47
+          },
+          "minFirmware": "1.0.1",
+          "raw": {
+            "type": "localkeyboardmode",
+            "default": 0,
+            "index": 14,
+            "versionvisible": "1.0.1",
+            "title": "Local Keyboard Mode",
+            "pkt": 47
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Performance",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Performance"
           }
         },
         {
@@ -94,65 +195,6 @@
           }
         },
         {
-          "type": "clock",
-          "kind": "composite",
-          "title": "clock",
-          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG", "Auto"],
-          "sysex": {
-            "subtype": 1
-          },
-          "raw": {
-            "type": "clock",
-            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG,Auto",
-            "subtype": 1,
-            "defaultsource": 0,
-            "indexsource": 10,
-            "defaultrate": 1,
-            "indexrate": 11,
-            "defaultpolarity": 1,
-            "indexpolarity": 12,
-            "polarity_label": "Rise,Fall"
-          }
-        },
-        {
-          "type": "midiclockout",
-          "kind": "toggle",
-          "title": "MIDI Colock Out",
-          "default": 0,
-          "min": 0,
-          "max": 1,
-          "sysex": {
-            "pkt": 23,
-            "subtype": 0
-          },
-          "raw": {
-            "type": "midiclockout",
-            "subtype": 0,
-            "default": 0,
-            "index": 8,
-            "pkt": 23,
-            "title": "MIDI Colock Out"
-          }
-        },
-        {
-          "type": "sequencerautosync",
-          "kind": "toggle",
-          "title": "Sequencer Auto Sync",
-          "default": 0,
-          "min": 0,
-          "max": 1,
-          "sysex": {
-            "pkt": 17
-          },
-          "raw": {
-            "type": "sequencerautosync",
-            "default": 0,
-            "index": 9,
-            "title": "Sequencer Auto Sync",
-            "pkt": 17
-          }
-        },
-        {
           "type": "accentthreshold",
           "kind": "spinbox",
           "title": "Accent Velocity Threshold",
@@ -186,26 +228,6 @@
             "title": "Glide Mode",
             "pkt": 39,
             "optionlabel": "Normal,Legato"
-          }
-        },
-        {
-          "type": "localkeyboardmode",
-          "kind": "toggle",
-          "title": "Local Keyboard Mode",
-          "default": 0,
-          "min": 0,
-          "max": 1,
-          "sysex": {
-            "pkt": 47
-          },
-          "minFirmware": "1.0.1",
-          "raw": {
-            "type": "localkeyboardmode",
-            "default": 0,
-            "index": 14,
-            "versionvisible": "1.0.1",
-            "title": "Local Keyboard Mode",
-            "pkt": 47
           }
         },
         {

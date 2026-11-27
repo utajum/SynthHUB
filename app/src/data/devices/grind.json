@@ -20,25 +20,38 @@
       "name": "General",
       "settings": [
         {
-          "type": "pitchbend",
-          "kind": "composite",
-          "title": "Pitch Bend Semitones",
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Preset",
           "min": 0,
-          "max": 12,
-          "default": 12,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Preset"
+          }
+        },
+        {
+          "type": "preset_upload",
+          "kind": "button",
+          "title": "preset_upload",
           "sysex": {
-            "pkt": 17,
             "subtype": 1
           },
           "raw": {
-            "type": "pitchbend",
+            "type": "preset_upload",
             "subtype": 1,
-            "default": 12,
-            "index": 0,
-            "title": "Pitch Bend Semitones:",
-            "min": 0,
-            "max": 12,
-            "pkt": 17
+            "icon": "grind"
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "MIDI & Sync"
           }
         },
         {
@@ -82,24 +95,6 @@
           }
         },
         {
-          "type": "assignvalue",
-          "kind": "spinbox",
-          "title": "Assign Value",
-          "default": 0,
-          "min": 0,
-          "max": 127,
-          "sysex": {
-            "pkt": 31
-          },
-          "raw": {
-            "type": "assignvalue",
-            "default": 0,
-            "index": 7,
-            "title": "Assign Value",
-            "pkt": 31
-          }
-        },
-        {
           "type": "sequencerautosync",
           "kind": "toggle",
           "title": "Sequencer Auto Sync",
@@ -115,6 +110,57 @@
             "index": 3,
             "title": "Sequencer Auto Sync",
             "pkt": 29
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Performance",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Performance"
+          }
+        },
+        {
+          "type": "pitchbend",
+          "kind": "composite",
+          "title": "Pitch Bend Semitones",
+          "min": 0,
+          "max": 12,
+          "default": 12,
+          "sysex": {
+            "pkt": 17,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "pitchbend",
+            "subtype": 1,
+            "default": 12,
+            "index": 0,
+            "title": "Pitch Bend Semitones:",
+            "min": 0,
+            "max": 12,
+            "pkt": 17
+          }
+        },
+        {
+          "type": "assignvalue",
+          "kind": "spinbox",
+          "title": "Assign Value",
+          "default": 0,
+          "min": 0,
+          "max": 127,
+          "sysex": {
+            "pkt": 31
+          },
+          "raw": {
+            "type": "assignvalue",
+            "default": 0,
+            "index": 7,
+            "title": "Assign Value",
+            "pkt": 31
           }
         },
         {
@@ -135,19 +181,6 @@
             "min": 0,
             "max": 127,
             "pkt": 28
-          }
-        },
-        {
-          "type": "preset_upload",
-          "kind": "button",
-          "title": "preset_upload",
-          "sysex": {
-            "subtype": 1
-          },
-          "raw": {
-            "type": "preset_upload",
-            "subtype": 1,
-            "icon": "grind"
           }
         }
       ]

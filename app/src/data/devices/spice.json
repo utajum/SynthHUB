@@ -20,6 +20,17 @@
       "name": "General",
       "settings": [
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "MIDI & Sync"
+          }
+        },
+        {
           "type": "channel",
           "kind": "spinbox",
           "title": "channel",
@@ -39,6 +50,72 @@
             "defaultout": 1,
             "indexout": 1,
             "pkt": 14
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "clock",
+          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG"],
+          "sysex": {
+            "subtype": 4
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG",
+            "indexsource": 6,
+            "subtype": 4,
+            "defaultrate": 0,
+            "indexrate": 5
+          }
+        },
+        {
+          "type": "midiclockout",
+          "kind": "toggle",
+          "title": "MIDI Clock Out",
+          "default": 3,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 23,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "midiclockout",
+            "subtype": 1,
+            "default": 3,
+            "index": 4,
+            "title": "MIDI Clock Out:",
+            "pkt": 23
+          }
+        },
+        {
+          "type": "midithrough",
+          "kind": "composite",
+          "title": "midithrough",
+          "sysex": {
+            "pkt": 40
+          },
+          "raw": {
+            "type": "midithrough",
+            "defaultm2u": 0,
+            "indexm2u": 12,
+            "defaultmst": 0,
+            "indexmst": 13,
+            "defaultu2m": 0,
+            "indexu2m": 14,
+            "pkt": 40
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Performance",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Performance"
           }
         },
         {
@@ -79,43 +156,6 @@
             "index": 3,
             "title": "Key Priority: ",
             "pkt": 18
-          }
-        },
-        {
-          "type": "midiclockout",
-          "kind": "toggle",
-          "title": "MIDI Colock Out",
-          "default": 3,
-          "min": 0,
-          "max": 1,
-          "sysex": {
-            "pkt": 23,
-            "subtype": 1
-          },
-          "raw": {
-            "type": "midiclockout",
-            "subtype": 1,
-            "default": 3,
-            "index": 4,
-            "title": "MIDI Colock Out:",
-            "pkt": 23
-          }
-        },
-        {
-          "type": "clock",
-          "kind": "composite",
-          "title": "clock",
-          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG"],
-          "sysex": {
-            "subtype": 4
-          },
-          "raw": {
-            "type": "clock",
-            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG",
-            "indexsource": 6,
-            "subtype": 4,
-            "defaultrate": 0,
-            "indexrate": 5
           }
         },
         {
@@ -181,7 +221,7 @@
         {
           "type": "retrig",
           "kind": "toggle",
-          "title": "Retring",
+          "title": "Retrig",
           "default": 0,
           "min": 0,
           "max": 1,
@@ -192,26 +232,26 @@
             "type": "retrig",
             "default": 0,
             "index": 11,
-            "title": "Retring",
+            "title": "Retrig",
             "pkt": 20
           }
         },
         {
-          "type": "midithrough",
-          "kind": "composite",
-          "title": "midithrough",
+          "type": "sequencerautosync",
+          "kind": "toggle",
+          "title": "Sequencer Auto Sync",
+          "default": 0,
+          "min": 0,
+          "max": 1,
           "sysex": {
-            "pkt": 40
+            "pkt": 29
           },
           "raw": {
-            "type": "midithrough",
-            "defaultm2u": 0,
-            "indexm2u": 12,
-            "defaultmst": 0,
-            "indexmst": 13,
-            "defaultu2m": 0,
-            "indexu2m": 14,
-            "pkt": 40
+            "type": "sequencerautosync",
+            "default": 0,
+            "index": 15,
+            "pkt": 29,
+            "title": "Sequencer Auto Sync:"
           }
         }
       ]

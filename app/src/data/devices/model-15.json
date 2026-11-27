@@ -20,6 +20,17 @@
       "name": "General",
       "settings": [
         {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "MIDI & Sync",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "MIDI & Sync"
+          }
+        },
+        {
           "type": "channel",
           "kind": "spinbox",
           "title": "channel",
@@ -39,6 +50,99 @@
             "defaultout": 1,
             "indexout": 1,
             "pkt": 14
+          }
+        },
+        {
+          "type": "clock",
+          "kind": "composite",
+          "title": "clock",
+          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG"],
+          "sysex": {
+            "subtype": 5
+          },
+          "raw": {
+            "type": "clock",
+            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG",
+            "indexsource": 8,
+            "indexdivision": 9,
+            "subtype": 5,
+            "defaultrate": 0,
+            "indexrate": 5,
+            "clockdivision": "1/4,1/4T,1/8,1/8T,1/16,1/16T,1/32,1/32T"
+          }
+        },
+        {
+          "type": "midiclockout",
+          "kind": "toggle",
+          "title": "MIDI Clock Out",
+          "default": 3,
+          "min": 0,
+          "max": 1,
+          "sysex": {
+            "pkt": 23,
+            "subtype": 1
+          },
+          "raw": {
+            "type": "midiclockout",
+            "subtype": 1,
+            "default": 3,
+            "index": 4,
+            "pkt": 23,
+            "title": "MIDI Clock Out:"
+          }
+        },
+        {
+          "type": "midithrough",
+          "kind": "composite",
+          "title": "midithrough",
+          "sysex": {
+            "pkt": 40
+          },
+          "raw": {
+            "type": "midithrough",
+            "defaultm2u": 0,
+            "indexm2u": 13,
+            "defaultmst": 0,
+            "indexmst": 14,
+            "defaultu2m": 0,
+            "indexu2m": 15,
+            "pkt": 40
+          }
+        },
+        {
+          "type": "custom",
+          "kind": "radio",
+          "title": "Seq play on clock start",
+          "control": "radiobutton",
+          "options": ["Off", "On"],
+          "default": 0,
+          "sysex": {
+            "pkt": 116,
+            "spkt": 6,
+            "subtype": 0
+          },
+          "raw": {
+            "type": "custom",
+            "subtype": 0,
+            "name": "seq_play_on_clock_start",
+            "title": "Seq play on clock start",
+            "optionlabel": "Off,On",
+            "control": "radiobutton",
+            "default": 0,
+            "index": 12,
+            "pkt": 116,
+            "spkt": 6
+          }
+        },
+        {
+          "type": "section",
+          "kind": "spinbox",
+          "title": "Performance",
+          "min": 0,
+          "max": 127,
+          "raw": {
+            "type": "section",
+            "title": "Performance"
           }
         },
         {
@@ -75,49 +179,10 @@
           },
           "raw": {
             "type": "keypriority",
+            "title": "Key Priority:",
             "default": 0,
             "index": 3,
-            "title": "Key Priority: ",
             "pkt": 18
-          }
-        },
-        {
-          "type": "midiclockout",
-          "kind": "toggle",
-          "title": "MIDI Colock Out",
-          "default": 3,
-          "min": 0,
-          "max": 1,
-          "sysex": {
-            "pkt": 23,
-            "subtype": 1
-          },
-          "raw": {
-            "type": "midiclockout",
-            "subtype": 1,
-            "default": 3,
-            "index": 4,
-            "pkt": 23,
-            "title": "MIDI Colock Out:"
-          }
-        },
-        {
-          "type": "clock",
-          "kind": "composite",
-          "title": "clock",
-          "options": ["Internal", "MIDI DIN", "MIDI USB", "TRIG"],
-          "sysex": {
-            "subtype": 5
-          },
-          "raw": {
-            "type": "clock",
-            "clocklabel": "Internal,MIDI DIN,MIDI USB,TRIG",
-            "indexsource": 8,
-            "indexdivision": 9,
-            "subtype": 5,
-            "defaultrate": 0,
-            "indexrate": 5,
-            "clockdivision": "1/4,1/4T,1/8,1/8T,1/16,1/16T,1/32,1/32T"
           }
         },
         {
@@ -171,49 +236,6 @@
             "indexlegato": 11,
             "title": "Glide",
             "pkt": 116
-          }
-        },
-        {
-          "type": "custom",
-          "kind": "radio",
-          "title": "Seq play on clock start",
-          "control": "radiobutton",
-          "options": ["Off", "On"],
-          "default": 0,
-          "sysex": {
-            "pkt": 116,
-            "spkt": 6,
-            "subtype": 0
-          },
-          "raw": {
-            "type": "custom",
-            "subtype": 0,
-            "name": "seq_play_on_clock_start",
-            "title": "Seq play on clock start",
-            "optionlabel": "Off,On",
-            "control": "radiobutton",
-            "default": 0,
-            "index": 12,
-            "pkt": 116,
-            "spkt": 6
-          }
-        },
-        {
-          "type": "midithrough",
-          "kind": "composite",
-          "title": "midithrough",
-          "sysex": {
-            "pkt": 40
-          },
-          "raw": {
-            "type": "midithrough",
-            "defaultm2u": 0,
-            "indexm2u": 13,
-            "defaultmst": 0,
-            "indexmst": 14,
-            "defaultu2m": 0,
-            "indexu2m": 15,
-            "pkt": 40
           }
         }
       ]

@@ -51,6 +51,7 @@ import Bcr32Panel from './Bcr32Panel';
 import Bcr32Zaquencer from './Bcr32Zaquencer';
 import GuitarTribePresets from './GuitarTribePresets';
 import PatchLibrary from './PatchLibrary';
+import LibrarianPanel from './LibrarianPanel';
 import { deviceImage, deviceImageFull } from '../lib/deviceImages';
 import VirtualSynthPanel from './VirtualSynthPanel';
 import GrooveKeySequencer from './GrooveKeySequencer';
@@ -384,6 +385,9 @@ function FunctionView(props: {
 }) {
   const name = props.fn.name;
   const params = useApp((s) => s.params[props.slug] ?? {});
+  // UB-Xa 16 / Desktop: dump-file librarian (SynthTribe 3.3.1)
+  const isUbxaLibrarian = () =>
+    name === 'Librarian' && props.driver()?.readKind() === 'ubxa';
 
   return (
     <Show
@@ -679,18 +683,29 @@ function FunctionView(props: {
             />
           </Show>
           <For each={props.fn.settings}>
-            {(setting, i) => (
-              <SettingControl
-                slug={props.slug}
-                fnName={name}
-                position={i()}
-                setting={setting}
-                driver={props.driver()!}
-                outputId={props.outputId}
-              />
-            )}
+            {(setting, i) =>
+              setting.type === 'section' ? (
+                <div class="tiny dim device-app-hdr">{setting.title}</div>
+              ) : (
+                <SettingControl
+                  slug={props.slug}
+                  fnName={name}
+                  position={i()}
+                  setting={setting}
+                  driver={props.driver()!}
+                  outputId={props.outputId}
+                />
+              )
+            }
           </For>
         </div>
+      </Show>
+
+      <Show when={isUbxaLibrarian()}>
+        <LibrarianPanel
+          variant={props.driver()!.variant}
+          outputId={props.outputId}
+        />
       </Show>
 
       {/* generic view for data/bulk functions without individual settings
@@ -702,7 +717,8 @@ function FunctionView(props: {
           !['Sequencer', 'Update', 'PolyChain', 'Device Settings'].includes(
             name,
           ) &&
-          !/alibration/i.test(name)
+          !/alibration/i.test(name) &&
+          !isUbxaLibrarian()
         }
       >
         <GenericFunctionView

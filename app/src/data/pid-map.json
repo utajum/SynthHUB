@@ -284,6 +284,16 @@
     "variant": "LM DRUM",
     "protocol": 3
   },
+  "0x12c9": {
+    "slug": "mini-pops-7",
+    "variant": "MINI POPS 7",
+    "protocol": 3
+  },
+  "0x12ca": {
+    "slug": "mini-pops-7",
+    "variant": "MINI POPS 7",
+    "protocol": 3
+  },
   "0x124d": {
     "slug": "model-15",
     "variant": "MODEL 15",
@@ -394,6 +404,16 @@
     "variant": "POLY D",
     "protocol": 3
   },
+  "0x1283": {
+    "slug": "polyeight",
+    "variant": "Polyeight",
+    "protocol": 3
+  },
+  "0x1284": {
+    "slug": "polyeight",
+    "variant": "Polyeight",
+    "protocol": 3
+  },
   "0x125f": {
     "slug": "pro-800",
     "variant": "PRO 800",
@@ -433,6 +453,16 @@
     "slug": "provs-mini",
     "variant": "PROVS-MINI",
     "protocol": 2
+  },
+  "0x12d4": {
+    "slug": "rd-765",
+    "variant": "RD-765",
+    "protocol": 3
+  },
+  "0x12d5": {
+    "slug": "rd-765",
+    "variant": "RD-765",
+    "protocol": 3
   },
   "0x0030": {
     "slug": "rd-8",
