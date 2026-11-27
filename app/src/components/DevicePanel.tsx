@@ -47,6 +47,8 @@ import {
 } from '../devices/_shared/params-extra';
 import PolyChainView from './PolyChain';
 import ControlTribeSettings from './ControlTribeSettings';
+import CsvSettings from './CsvSettings';
+import { csvDevice } from '../devices/_shared/csv-settings';
 import Bcr32Panel from './Bcr32Panel';
 import Bcr32Zaquencer from './Bcr32Zaquencer';
 import GuitarTribePresets from './GuitarTribePresets';
@@ -388,6 +390,8 @@ function FunctionView(props: {
   // UB-Xa 16 / Desktop: dump-file librarian (SynthTribe 3.3.1)
   const isUbxaLibrarian = () =>
     name === 'Librarian' && props.driver()?.readKind() === 'ubxa';
+  // JN-80 / PRO-800 / PROTON General: SynthTribe CSV settings page
+  const isCsv = () => name === 'General' && !!csvDevice(props.slug);
 
   return (
     <Show
@@ -416,6 +420,14 @@ function FunctionView(props: {
           outputId={props.outputId}
           driver={props.driver()!}
           slug={props.slug}
+        />
+      </Show>
+
+      <Show when={isCsv()}>
+        <CsvSettings
+          slug={props.slug}
+          variant={props.driver()!.variant}
+          outputId={props.outputId}
         />
       </Show>
 
@@ -718,7 +730,8 @@ function FunctionView(props: {
             name,
           ) &&
           !/alibration/i.test(name) &&
-          !isUbxaLibrarian()
+          !isUbxaLibrarian() &&
+          !isCsv()
         }
       >
         <GenericFunctionView

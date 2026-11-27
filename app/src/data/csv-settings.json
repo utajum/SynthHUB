@@ -1,0 +1,1019 @@
+{
+  "jn-80": {
+    "mode": "block",
+    "sel": [116, 3],
+    "length": 236,
+    "rows": [
+      {
+        "title": "LCD Brightness",
+        "group": "Global",
+        "at": 5,
+        "size": 1,
+        "kind": "number",
+        "min": 0,
+        "max": 10
+      },
+      {
+        "title": "LCD Contrast",
+        "group": "Global",
+        "at": 6,
+        "size": 1,
+        "kind": "number",
+        "min": 0,
+        "max": 10
+      },
+      {
+        "title": "Initial Preset",
+        "group": "Patch",
+        "at": 7,
+        "size": 2,
+        "kind": "number",
+        "min": 0,
+        "max": 65535
+      },
+      {
+        "title": "Recall Preset 1",
+        "group": "Patch",
+        "at": 9,
+        "size": 2,
+        "kind": "number",
+        "min": 0,
+        "max": 65535
+      },
+      {
+        "title": "Recall Preset 2",
+        "group": "Patch",
+        "at": 11,
+        "size": 2,
+        "kind": "number",
+        "min": 0,
+        "max": 65535
+      },
+      {
+        "title": "Recall Preset 3",
+        "group": "Patch",
+        "at": 13,
+        "size": 2,
+        "kind": "number",
+        "min": 0,
+        "max": 65535
+      },
+      {
+        "title": "Recall Preset 4",
+        "group": "Patch",
+        "at": 15,
+        "size": 2,
+        "kind": "number",
+        "min": 0,
+        "max": 65535
+      },
+      {
+        "title": "Sync Source",
+        "group": "MIDI",
+        "at": 17,
+        "size": 1,
+        "kind": "enum",
+        "options": ["Internal", "MIDI", "USB", "Synch IN"]
+      },
+      {
+        "title": "RX Channel",
+        "group": "MIDI",
+        "at": 18,
+        "size": 1,
+        "kind": "enum",
+        "options": [
+          "All channels",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16"
+        ]
+      },
+      {
+        "title": "TX Channel",
+        "group": "MIDI",
+        "at": 19,
+        "size": 1,
+        "kind": "enum",
+        "options": [
+          "Off",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16"
+        ]
+      },
+      {
+        "title": "CC Enable",
+        "group": "MIDI",
+        "at": 20,
+        "size": 1,
+        "kind": "enum",
+        "options": ["OFF", "Receive", "Transmit", "RX+TX"]
+      },
+      {
+        "title": "PC Enable",
+        "group": "MIDI",
+        "at": 21,
+        "size": 1,
+        "kind": "enum",
+        "options": ["OFF", "Receive", "Transmit", "RX+TX"]
+      },
+      {
+        "title": "Keyboard Forward",
+        "group": "MIDI",
+        "at": 22,
+        "size": 1,
+        "kind": "enum",
+        "options": ["OFF", "USB", "MIDI", "USB+MIDI"]
+      },
+      {
+        "title": "Sync Forward",
+        "group": "MIDI",
+        "at": 23,
+        "size": 1,
+        "kind": "enum",
+        "options": ["OFF", "USB", "MIDI", "USB+MIDI"]
+      },
+      {
+        "title": "MIDI PPQN",
+        "group": "MIDI",
+        "at": 24,
+        "size": 1,
+        "kind": "enum",
+        "options": ["24 PPQN", "48 PPQN", "96 PPQN", "192 PPQN"]
+      },
+      {
+        "title": "SyncIn PPQN",
+        "group": "MIDI",
+        "at": 25,
+        "size": 1,
+        "kind": "enum",
+        "options": [
+          "1 PPS",
+          "1 PPQN",
+          "PPQN KORG",
+          "4 PPQN",
+          "24 PPQN",
+          "48 PPQN"
+        ]
+      },
+      {
+        "title": "SyncIn Polarity",
+        "group": "MIDI",
+        "at": 26,
+        "size": 1,
+        "kind": "enum",
+        "options": ["Rising edge", "Falling edge", "Both edges"]
+      },
+      {
+        "title": "SyncIn Start/Stop Enable",
+        "group": "MIDI",
+        "at": 27,
+        "size": 1,
+        "kind": "enum",
+        "options": ["OFF", "ON"]
+      },
+      {
+        "title": "Current Bank",
+        "group": "Patch",
+        "at": 28,
+        "size": 1,
+        "kind": "enum",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "L",
+          "M",
+          "N",
+          "O",
+          "P",
+          "Q",
+          "R",
+          "S",
+          "T"
+        ]
+      },
+      {
+        "title": "Current Number",
+        "group": "Patch",
+        "at": 29,
+        "size": 1,
+        "kind": "enum",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20"
+        ]
+      },
+      {
+        "title": "Bender Range",
+        "group": "Other",
+        "at": 30,
+        "size": 1,
+        "kind": "number",
+        "min": 0,
+        "max": 12
+      },
+      {
+        "title": "Bender Dead Zone",
+        "group": "Other",
+        "at": 31,
+        "size": 2,
+        "kind": "number",
+        "min": 256,
+        "max": 2048
+      },
+      {
+        "title": "Bender Center",
+        "group": "Other",
+        "at": 33,
+        "size": 2,
+        "kind": "number",
+        "min": 0,
+        "max": 65535
+      },
+      {
+        "title": "Bender Min",
+        "group": "Other",
+        "at": 35,
+        "size": 2,
+        "kind": "number",
+        "min": 0,
+        "max": 65535
+      },
+      {
+        "title": "Bender Max",
+        "group": "Other",
+        "at": 37,
+        "size": 2,
+        "kind": "number",
+        "min": 0,
+        "max": 65535
+      },
+      {
+        "title": "Parameter Update Mode",
+        "group": "Patch",
+        "at": 39,
+        "size": 1,
+        "kind": "enum",
+        "options": ["Join", "Immediate"]
+      },
+      {
+        "title": "Quick access 1 to 4 Mode",
+        "group": "Patch",
+        "at": 40,
+        "size": 1,
+        "kind": "enum",
+        "options": ["Global", "Per bank", "First 4 of each bank"]
+      },
+      {
+        "title": "Soft Thru",
+        "group": "MIDI",
+        "at": 41,
+        "size": 1,
+        "kind": "enum",
+        "options": ["OFF", "ON"]
+      },
+      {
+        "title": "Local Enable",
+        "group": "MIDI",
+        "at": 42,
+        "size": 1,
+        "kind": "enum",
+        "options": ["OFF", "ON"]
+      },
+      {
+        "title": "Keybed AT sensitivity",
+        "group": "Global",
+        "at": 43,
+        "size": 1,
+        "kind": "enum",
+        "options": ["Very Low", "Medium", "Very High"]
+      },
+      {
+        "title": "Keybed Hardness",
+        "group": "Global",
+        "at": 44,
+        "size": 1,
+        "kind": "number",
+        "min": 0,
+        "max": 100
+      },
+      {
+        "title": "LCD display Timeout",
+        "group": "Global",
+        "at": 45,
+        "size": 1,
+        "kind": "enum",
+        "options": ["10 sec", "20 sec", "30 sec", "None"]
+      },
+      {
+        "title": "Fan Speed",
+        "group": "Global",
+        "at": 46,
+        "size": 1,
+        "kind": "enum",
+        "options": ["Auto", "Low", "Mid", "Fast", "Off"]
+      },
+      {
+        "title": "Hold Mode",
+        "group": "Global",
+        "at": 47,
+        "size": 1,
+        "kind": "enum",
+        "options": ["Refresh Notes", "Add New Notes"]
+      },
+      {
+        "title": "VCF Resonance Factor",
+        "group": "Other",
+        "at": 48,
+        "size": 1,
+        "kind": "number",
+        "min": 0,
+        "max": 100
+      },
+      {
+        "title": "LFO to DCO CV Offset",
+        "group": "Other",
+        "at": 49,
+        "size": 1,
+        "kind": "number",
+        "min": 150,
+        "max": 255
+      },
+      {
+        "title": "LFO to VCF CV Offset",
+        "group": "Other",
+        "at": 50,
+        "size": 1,
+        "kind": "number",
+        "min": 150,
+        "max": 255
+      },
+      {
+        "title": "Sustain Pedal Polarity",
+        "group": "Global",
+        "at": 51,
+        "size": 1,
+        "kind": "enum",
+        "options": ["Active High", "Active Low", "Auto"]
+      },
+      {
+        "title": "AUTO Legato Threshold Time",
+        "group": "Global",
+        "at": 52,
+        "size": 1,
+        "kind": "number",
+        "min": 50,
+        "max": 250
+      },
+      {
+        "title": "Voicekill",
+        "group": "Global",
+        "at": 75,
+        "size": 1,
+        "kind": "bits",
+        "options": [
+          "Voice 1",
+          "Voice 2",
+          "Voice 3",
+          "Voice 4",
+          "Voice 5",
+          "Voice 6",
+          "Voice 7",
+          "Voice 8"
+        ]
+      }
+    ]
+  },
+  "pro-800": {
+    "mode": "block",
+    "sel": [126, 3],
+    "length": 40,
+    "rows": [
+      {
+        "title": "Current Preset",
+        "group": "Preset",
+        "at": 5,
+        "size": 2,
+        "kind": "number",
+        "min": 0,
+        "max": 99,
+        "presetBankAt": 20
+      },
+      {
+        "title": "Mode",
+        "group": "Preset",
+        "at": 7,
+        "size": 1,
+        "kind": "enum",
+        "options": ["Manual", "Loaded", "Edited"]
+      },
+      {
+        "title": "RX channel",
+        "group": "MIDI",
+        "at": 8,
+        "size": 1,
+        "kind": "enum",
+        "options": [
+          "ALL",
+          "dips",
+          "ch1",
+          "ch2",
+          "ch3",
+          "ch4",
+          "ch5",
+          "ch6",
+          "ch7",
+          "ch8",
+          "ch9",
+          "ch10",
+          "ch11",
+          "ch12",
+          "ch13",
+          "ch14",
+          "ch15",
+          "ch16"
+        ]
+      },
+      {
+        "title": "Voice kill",
+        "group": "General",
+        "at": 9,
+        "size": 1,
+        "kind": "bits",
+        "options": [
+          "Voice0",
+          "Voice1",
+          "Voice2",
+          "Voice3",
+          "Voice4",
+          "Voice5",
+          "Voice6",
+          "Voice7"
+        ]
+      },
+      {
+        "title": "TX channel",
+        "group": "MIDI",
+        "at": 10,
+        "size": 1,
+        "kind": "enum",
+        "options": [
+          "OFF",
+          "dips",
+          "ch1",
+          "ch2",
+          "ch3",
+          "ch4",
+          "ch5",
+          "ch6",
+          "ch7",
+          "ch8",
+          "ch9",
+          "ch10",
+          "ch11",
+          "ch12",
+          "ch13",
+          "ch14",
+          "ch15",
+          "ch16"
+        ]
+      },
+      {
+        "title": "Sync mode",
+        "group": "Arp/Seq",
+        "at": 11,
+        "size": 1,
+        "kind": "enum",
+        "options": ["Internal", "MIDI", "USB", "Extern"]
+      },
+      {
+        "title": "Voice Spread",
+        "group": "Other",
+        "at": 12,
+        "size": 1,
+        "kind": "enum",
+        "options": ["OFF", "ON"]
+      },
+      {
+        "title": "BPM",
+        "group": "Arp/Seq",
+        "at": 13,
+        "size": 2,
+        "kind": "number",
+        "min": 20,
+        "max": 240,
+        "scale": 10
+      },
+      {
+        "title": "PPQN",
+        "group": "Arp/Seq",
+        "at": 15,
+        "size": 1,
+        "kind": "enum",
+        "options": ["24"]
+      },
+      {
+        "title": "Brightness",
+        "group": "General",
+        "at": 16,
+        "size": 1,
+        "kind": "number",
+        "min": 0,
+        "max": 16
+      },
+      {
+        "title": "Modified param display",
+        "group": "General",
+        "at": 17,
+        "size": 1,
+        "kind": "number",
+        "min": 0,
+        "max": 10
+      },
+      {
+        "title": "CC",
+        "group": "MIDI",
+        "at": 18,
+        "size": 1,
+        "kind": "enum",
+        "options": ["OFF", "TX", "RX", "TX+RX"]
+      },
+      {
+        "title": "PC",
+        "group": "MIDI",
+        "at": 19,
+        "size": 1,
+        "kind": "enum",
+        "options": ["OFF", "TX", "RX", "TX+RX"]
+      },
+      {
+        "title": "Bank",
+        "group": "Preset",
+        "at": 20,
+        "size": 1,
+        "kind": "enum",
+        "options": ["A", "B", "C", "D"]
+      },
+      {
+        "title": "Sync IN forward",
+        "group": "Arp/Seq",
+        "at": 21,
+        "size": 1,
+        "kind": "enum",
+        "options": ["OFF", "ON"]
+      },
+      {
+        "title": "External CV Amount",
+        "group": "VCF",
+        "at": 22,
+        "size": 2,
+        "kind": "number",
+        "min": 0,
+        "max": 65535
+      },
+      {
+        "title": "Pitchbend semitones",
+        "group": "Other",
+        "at": 24,
+        "size": 1,
+        "kind": "number",
+        "min": 0,
+        "max": 24
+      },
+      {
+        "title": "Division",
+        "group": "Arp/Seq",
+        "at": 25,
+        "size": 1,
+        "kind": "enum",
+        "options": [
+          "1/4",
+          "1/4 t",
+          "1/8",
+          "1/8 t",
+          "1/16",
+          "1/16 t",
+          "1/32",
+          "1/32 t"
+        ]
+      },
+      {
+        "title": "Note priority",
+        "group": "General",
+        "at": 26,
+        "size": 1,
+        "kind": "enum",
+        "options": ["Last", "Low", "High"]
+      },
+      {
+        "title": "Show preset name",
+        "group": "General",
+        "at": 27,
+        "size": 1,
+        "kind": "enum",
+        "options": ["OFF", "ON"]
+      },
+      {
+        "title": "Sync IN polarity",
+        "group": "Arp/Seq",
+        "at": 28,
+        "size": 1,
+        "kind": "enum",
+        "options": ["High", "Low"]
+      },
+      {
+        "title": "Glide mode",
+        "group": "Other",
+        "at": 29,
+        "size": 1,
+        "kind": "enum",
+        "options": ["time", "speed"]
+      },
+      {
+        "title": "Tuner Precision",
+        "group": "General",
+        "at": 30,
+        "size": 1,
+        "kind": "enum",
+        "options": ["0.5 cent", "1 cent", "1.5 cents", "2 cents"]
+      },
+      {
+        "title": "Sync IN start/stop",
+        "group": "Arp/Seq",
+        "at": 31,
+        "size": 1,
+        "kind": "enum",
+        "options": ["OFF", "ON"]
+      },
+      {
+        "title": "Sync IN PPQN",
+        "group": "Arp/Seq",
+        "at": 32,
+        "size": 1,
+        "kind": "enum",
+        "options": ["1PPS", "1PPQN", "2PPQN", "4PPQN", "24PPQN", "48PPQN"]
+      },
+      {
+        "title": "SeqArp note len",
+        "group": "Arp/Seq",
+        "at": 33,
+        "size": 1,
+        "kind": "number",
+        "min": 5,
+        "max": 100
+      },
+      {
+        "title": "SeqArp swing",
+        "group": "Arp/Seq",
+        "at": 34,
+        "size": 1,
+        "kind": "number",
+        "min": 50,
+        "max": 95
+      },
+      {
+        "title": "Aftertouch VCA polarity",
+        "group": "Arp/Seq",
+        "at": 35,
+        "size": 1,
+        "kind": "enum",
+        "options": ["High", "Low"]
+      },
+      {
+        "title": "Aftertouch VCF polarity",
+        "group": "Arp/Seq",
+        "at": 36,
+        "size": 1,
+        "kind": "enum",
+        "options": ["High", "Low"]
+      },
+      {
+        "title": "Transpose",
+        "group": "Arp/Seq",
+        "at": 37,
+        "size": 1,
+        "kind": "number",
+        "min": -12,
+        "max": 12,
+        "signed": true
+      },
+      {
+        "title": "Local",
+        "group": "MIDI",
+        "at": 38,
+        "size": 1,
+        "kind": "enum",
+        "options": ["OFF", "ON"]
+      },
+      {
+        "title": "Soft Thru",
+        "group": "MIDI",
+        "at": 39,
+        "size": 1,
+        "kind": "enum",
+        "options": ["OFF", "ON"]
+      }
+    ]
+  },
+  "proton": {
+    "mode": "cmd",
+    "rows": [
+      {
+        "title": "Extra Panel Functions",
+        "group": "GEN",
+        "cmd": 33,
+        "kind": "enum",
+        "options": ["Off", "On"]
+      },
+      {
+        "title": "Sub Osc Shape",
+        "group": "OSC",
+        "cmd": 73,
+        "kind": "enum",
+        "options": ["Sine", "Triangle", "Sawtooth", "Square"]
+      },
+      {
+        "title": "Poly-Chain",
+        "group": "OSC",
+        "cmd": 15,
+        "kind": "enum",
+        "options": ["Disabled", "Enabled"]
+      },
+      {
+        "title": "Key Split",
+        "group": "OSC",
+        "cmd": 72,
+        "kind": "enum",
+        "options": ["C0", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"]
+      },
+      {
+        "title": "Blend is",
+        "group": "OSC 1",
+        "cmd": 81,
+        "kind": "enum",
+        "options": ["Enabled", "Disabled"]
+      },
+      {
+        "title": "TUNE 1",
+        "group": "OSC 1",
+        "cmd": 82,
+        "kind": "enum",
+        "options": ["Enabled", "Disabled"]
+      },
+      {
+        "title": "Line FM Mode",
+        "group": "OSC 1",
+        "cmd": 80,
+        "kind": "enum",
+        "options": ["Enabled", "Disabled"]
+      },
+      {
+        "title": "CV",
+        "group": "OSC 1",
+        "cmd": 83,
+        "kind": "enum",
+        "options": ["Enabled", "Disabled"]
+      },
+      {
+        "title": "MIDI",
+        "group": "OSC 1",
+        "cmd": 84,
+        "kind": "enum",
+        "options": ["Enabled", "Disabled"]
+      },
+      {
+        "title": "Key Track Base Note",
+        "group": "OSC 1",
+        "cmd": 46,
+        "kind": "enum",
+        "options": ["C0", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"]
+      },
+      {
+        "title": "Blend is",
+        "group": "OSC 2",
+        "cmd": 93,
+        "kind": "enum",
+        "options": ["Enabled", "Disabled"]
+      },
+      {
+        "title": "TUNE 2",
+        "group": "OSC 2",
+        "cmd": 94,
+        "kind": "enum",
+        "options": ["Enabled", "Disabled"]
+      },
+      {
+        "title": "Line FM Mode",
+        "group": "OSC 2",
+        "cmd": 92,
+        "kind": "enum",
+        "options": ["Enabled", "Disabled"]
+      },
+      {
+        "title": "CV",
+        "group": "OSC 2",
+        "cmd": 95,
+        "kind": "enum",
+        "options": ["Enabled", "Disabled"]
+      },
+      {
+        "title": "MIDI",
+        "group": "OSC 2",
+        "cmd": 96,
+        "kind": "enum",
+        "options": ["Enabled", "Disabled"]
+      },
+      {
+        "title": "Key Track Base Note",
+        "group": "OSC 2",
+        "cmd": 67,
+        "kind": "enum",
+        "options": ["C0", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"]
+      },
+      {
+        "title": "Key Priority In Mono",
+        "group": "NOTE PRIORITY",
+        "cmd": 19,
+        "kind": "enum",
+        "options": ["Low priority", "High priority", "Last priority"]
+      },
+      {
+        "title": "Key Priority in ParaPhonic",
+        "group": "NOTE PRIORITY",
+        "cmd": 20,
+        "kind": "enum",
+        "options": ["Low priority", "High priority", "Last priority"]
+      },
+      {
+        "title": "VCF 1 Modulation Source",
+        "group": "VCF",
+        "cmd": 39,
+        "kind": "enum",
+        "options": ["None", "Velocity", "Modwheel", "After-touch"]
+      },
+      {
+        "title": "VCF 1 Modulation Depth",
+        "group": "VCF",
+        "cmd": 40,
+        "kind": "number",
+        "min": 0,
+        "max": 252
+      },
+      {
+        "title": "VCF 2 Modulation Source",
+        "group": "VCF",
+        "cmd": 43,
+        "kind": "enum",
+        "options": ["None", "Velocity", "Modwheel", "After-touch"]
+      },
+      {
+        "title": "VCF 2 Modulation Depth",
+        "group": "VCF",
+        "cmd": 44,
+        "kind": "number",
+        "min": 0,
+        "max": 252
+      },
+      {
+        "title": "LFO 1 Blend",
+        "group": "LFO",
+        "cmd": 49,
+        "kind": "enum",
+        "options": ["Enabled", "Disabled"]
+      },
+      {
+        "title": "LFO 1 Midi Clock Sync",
+        "group": "LFO",
+        "cmd": 54,
+        "kind": "enum",
+        "options": ["Off", "ON"]
+      },
+      {
+        "title": "LFO 1 Key Track Depth",
+        "group": "LFO",
+        "cmd": 53,
+        "kind": "number",
+        "min": 0,
+        "max": 101
+      },
+      {
+        "title": "LFO 2 Blend",
+        "group": "LFO",
+        "cmd": 59,
+        "kind": "enum",
+        "options": ["Enabled", "Disabled"]
+      },
+      {
+        "title": "LFO 2 Midi Clock Sync",
+        "group": "LFO",
+        "cmd": 64,
+        "kind": "enum",
+        "options": ["Off", "ON"]
+      },
+      {
+        "title": "LFO 2 Key Track Depth",
+        "group": "LFO",
+        "cmd": 63,
+        "kind": "number",
+        "min": 0,
+        "max": 101
+      },
+      {
+        "title": "Assign",
+        "group": "ASSIGN OUT",
+        "cmd": 23,
+        "kind": "enum",
+        "options": ["OSC1-CV", "OSC2-CV", "Velocity", "Modwheel", "After-touch"]
+      },
+      {
+        "title": "MULIT 1/2",
+        "group": "ASSIGN OUT",
+        "cmd": 24,
+        "kind": "enum",
+        "options": ["OSC1-CV", "OSC2-CV", "Velocity", "Modwheel", "After-touch"]
+      },
+      {
+        "title": "Para Env Retrigger",
+        "group": "ASR ENV",
+        "cmd": 101,
+        "kind": "enum",
+        "options": ["Neutron", "Proton"]
+      },
+      {
+        "title": "Assign In Dest",
+        "group": "ASSIGN IN",
+        "cmd": 30,
+        "kind": "enum",
+        "options": ["NONE", "OSC1", "OSC2", "OSC1+2", "VCF1", "VCF2", "VCF1+2"]
+      },
+      {
+        "title": "Assign In Depth",
+        "group": "ASSIGN IN",
+        "cmd": 31,
+        "kind": "number",
+        "min": 0,
+        "max": 101
+      },
+      {
+        "title": "Clock Forwarding",
+        "group": "GEN",
+        "cmd": 29,
+        "kind": "enum",
+        "options": ["Disabled", "Enabled"]
+      }
+    ]
+  }
+}
