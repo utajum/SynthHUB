@@ -12,6 +12,7 @@ import {
   parsePresetSyx,
   parseStPreset,
   patchFile,
+  placeFrom,
   slotTag,
   type PresetFile,
 } from '../src/devices/_shared/librarian.ts';
@@ -40,6 +41,25 @@ test('slot tags and file names follow formatSlotTag', () => {
   assert.equal(slotTag(127), 'A128');
   assert.equal(slotTag(130), 'B003');
   assert.equal(patchFile(130), 'PatchX B003     ');
+});
+
+test('placeFrom: file order from a start slot, none past the last slot', () => {
+  const p = (slot: number): PresetFile => ({
+    slot,
+    name: '',
+    size: 1,
+    data: [],
+  });
+  const list = [p(7), p(3), p(300)];
+  assert.deepEqual(
+    placeFrom(list, 128).map((x) => x.slot),
+    [128, 129, 130],
+  );
+  assert.deepEqual(
+    placeFrom(list, 510).map((x) => x.slot),
+    [510, 511],
+  );
+  assert.equal(list[0].slot, 7);
 });
 
 test('get request: 7f 74 07 03 7f "BIN " + name16 + firmware bytes', () => {

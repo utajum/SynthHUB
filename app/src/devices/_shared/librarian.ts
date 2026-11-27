@@ -222,6 +222,13 @@ export function parseStPreset(bytes: Uint8Array): PresetFile[] | string {
   }
 }
 
+// "Place Starting Here" (SynthTribe 3.3.4 import): the presets in file order
+// from slot `start` on; those past the last slot are dropped
+export const placeFrom = (list: PresetFile[], start: number): PresetFile[] =>
+  list
+    .slice(0, Math.max(0, MAX_SLOTS - start))
+    .map((p, i) => ({ ...p, slot: start + i }));
+
 // .syx export: per preset the exact write stream (header, chunks, EOF)
 export function buildPresetSyx(
   variant: DeviceVariant,

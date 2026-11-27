@@ -1,6 +1,7 @@
-// UB-Xa 16 librarian (SynthTribe 3.3.1): read the patch names, back up the
-// selected presets to .stpreset / .syx, restore a file into its slots, swap
-// two slots. Each preset moves as one dump-file transfer.
+// UB-Xa 16 librarian (SynthTribe 3.3.1, import placement 3.3.4): read the
+// patch names, back up the selected presets to .stpreset / .syx, restore
+// files into their own slots or from a selected slot, swap two slots. Each
+// preset moves as one dump-file transfer.
 import { For, Show, createSignal } from 'solid-js';
 import type { DeviceVariant } from '../lib/types';
 import { queryDeviceFirmware } from '../lib/firmware';
@@ -15,6 +16,7 @@ import {
   parsePresetSyx,
   parseStPreset,
   patchFile,
+  placeFrom,
   readFile,
   slotTag,
   writeFile,
@@ -120,21 +122,36 @@ export default function LibrarianPanel(props: Props) {
       return `exported ${list.length} preset(s) as .${ext}`;
     });
 
-  const importFile = async (file: File) => {
-    const bytes = new Uint8Array(await file.arrayBuffer());
-    const r = /\.syx$/i.test(file.name)
-      ? parsePresetSyx(props.variant, bytes)
-      : parseStPreset(bytes);
-    if (typeof r === 'string') return setStatus(`${file.name}: ${r}`);
-    if (!r.length) return setStatus(`${file.name}: no UB-Xa presets found`);
-    setLoaded(r);
-    setStatus(`${file.name}: ${r.length} preset(s) ready to write`);
+  // one or more .stpreset / .syx files (SynthTribe 3.3.4 multi-file import)
+  const importFiles = async (files: File[]) => {
+    const all: PresetFile[] = [];
+    for (const file of files) {
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      const r = /\.syx$/i.test(file.name)
+        ? parsePresetSyx(props.variant, bytes)
+        : parseStPreset(bytes);
+      if (typeof r === 'string') return setStatus(`${file.name}: ${r}`);
+      if (!r.length) return setStatus(`${file.name}: no UB-Xa presets found`);
+      all.push(...r);
+    }
+    setLoaded(all);
+    const from = files.length === 1 ? files[0].name : `${files.length} files`;
+    setStatus(`${from}: ${all.length} preset(s) ready to write`);
   };
 
-  const writeLoaded = () => {
-    const list = loaded();
+  // write the loaded presets to their own slots, or from slot `start` on
+  const writeLoaded = (start?: number) => {
+    const list = start === undefined ? loaded() : placeFrom(loaded(), start);
     const slots = list.map((p) => slotTag(p.slot)).join(', ');
-    if (!window.confirm(`Overwrite preset slot(s) ${slots} on the device?`))
+    const cut =
+      list.length < loaded().length
+        ? `\n\nOnly ${list.length} fit when starting at ${slotTag(start!)}.`
+        : '';
+    if (
+      !window.confirm(
+        `Overwrite preset slot(s) ${slots} on the device? This can't be undone.${cut}`,
+      )
+    )
       return;
     void run(async (out) => {
       const err = await writeSlots(out, list);
@@ -207,10 +224,11 @@ export default function LibrarianPanel(props: Props) {
           ref={fileInput}
           type="file"
           accept=".stpreset,.syx"
+          multiple
           style={{ display: 'none' }}
           onChange={(e) => {
-            const f = e.currentTarget.files?.[0];
-            if (f) void importFile(f);
+            const fs = Array.from(e.currentTarget.files ?? []);
+            if (fs.length) void importFiles(fs);
             e.currentTarget.value = '';
           }}
         />
@@ -218,8 +236,21 @@ export default function LibrarianPanel(props: Props) {
           import .stpreset / .syx
         </button>
         <Show when={loaded().length}>
-          <button class="btn" disabled={noOut()} onClick={writeLoaded}>
-            WRITE {loaded().length} TO DEVICE
+          <button
+            class="btn"
+            disabled={noOut()}
+            onClick={() => writeLoaded()}
+            title="Write each preset back to the slot stored in the file"
+          >
+            WRITE {loaded().length} TO ORIGINAL SLOTS
+          </button>
+          <button
+            class="btn ghost"
+            disabled={noOut() || !sel().length}
+            onClick={() => writeLoaded(sel()[0])}
+            title="Write the presets in file order from the first selected slot on"
+          >
+            WRITE FROM {sel().length ? slotTag(sel()[0]) : 'SELECTED SLOT'}
           </button>
         </Show>
       </div>
