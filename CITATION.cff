@@ -21,7 +21,7 @@ keywords:
   - synthtribe
   - music-production
 abstract: >-
-  Browser-native Progressive Web App that manages 71 Behringer synthesizers
+  Browser-native Progressive Web App that manages 82 Behringer synthesizers
   over WebUSB and WebMIDI SysEx - device settings editor, step sequencer,
   MIDI recording, patch and pattern libraries. An open alternative to the
   Behringer SynthTribe desktop application.

@@ -4,7 +4,7 @@ import { Show, createEffect, createSignal, onCleanup, onMount } from 'solid-js';
 import { actions, useApp } from '../lib/store-solid';
 import { drawerOpen, setDrawerOpen, logOpen } from '../lib/ui';
 import { slugFromPath, syncUrl } from '../lib/nav';
-import { meta } from '../devices/registry';
+import { deviceIndex, meta } from '../devices/registry';
 import { registerServiceWorker } from '../lib/pwa';
 import { bootstrapAnalyticsIdentity } from '../lib/analytics';
 import { installGlobalHotkeys, onCommand } from '../lib/hotkeys';
@@ -91,8 +91,10 @@ export default function App(props: { initialSlug?: string }) {
                   explore its controls offline.
                 </p>
                 <p class="tiny dim">
-                  71 models - 130 USB IDs - WebUSB discovery + WebMIDI SysEx
-                  control. Everything runs locally in your browser.
+                  {deviceIndex.length} models -{' '}
+                  {new Set(deviceIndex.flatMap((d) => d.pids)).size} USB IDs -
+                  WebUSB discovery + WebMIDI SysEx control. Everything runs
+                  locally in your browser.
                 </p>
                 <DeviceGallery />
               </div>
