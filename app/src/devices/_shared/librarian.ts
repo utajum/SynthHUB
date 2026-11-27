@@ -320,8 +320,8 @@ function nextReply(timeoutMs: number): Promise<Universal | null> {
   });
 }
 
-// write one file, one ACK per frame; a NAK restarts it (3 tries, 300 ms).
-// The EOF ACK is optional: no reply within 500 ms counts as stored.
+// write one file, one ACK per frame; a NAK restarts it after 300 ms, at most
+// 3 times. The EOF ACK is optional: no reply within 500 ms counts as stored.
 export async function writeFile(
   variant: DeviceVariant,
   out: string,
@@ -331,7 +331,7 @@ export async function writeFile(
   fw: number[],
 ): Promise<boolean> {
   const frames = [...buildFileWrite(variant, name16, size, data, fw), FILE_EOF];
-  for (let attempt = 0; attempt < 3; attempt++) {
+  for (let attempt = 0; attempt < 4; attempt++) {
     let nak = false;
     for (const f of frames) {
       const last = f === FILE_EOF;

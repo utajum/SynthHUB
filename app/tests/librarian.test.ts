@@ -119,7 +119,7 @@ test('.syx: write streams per preset round-trip to slots', () => {
 });
 
 // minimal UB-Xa: ACKs a get and sends the file after the host EOF, NAKs a
-// missing file, ACKs writes (NAKs once) but never the final EOF
+// missing file, ACKs writes (NAKs 3 times) but never the final EOF
 test('transfers: readFile/writeFile against an emulated device', async () => {
   const { midi } = await import('../src/lib/midi/webmidi.ts');
   const { readFile, writeFile } =
@@ -131,7 +131,7 @@ test('transfers: readFile/writeFile against an emulated device', async () => {
   const nak = Uint8Array.from([0xf0, 0x7e, 0x00, 0x7e, 0x00, 0xf7]);
   const store = new Map<string, { size: number; data: number[] }>();
   let rx = new FileReceiver(v);
-  let naks = 1;
+  let naks = 3;
   let pending: string | null = null;
   Object.assign(midi, {
     onMessage: (l: (d: Uint8Array) => void) => {
