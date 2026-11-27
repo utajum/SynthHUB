@@ -14,7 +14,7 @@ entirely in your browser.
 The Web App that manages every
 Behringer synthesizer over USB - an alternative to Behringer's SynthTribe
 desktop editor. Edit device settings, run the step sequencer, record MIDI, and
-check firmware status for **71 Behringer models** directly in your browser, with
+check firmware status for **82 Behringer models** directly in your browser, with
 no install and no drivers.
 
 **Supported synths include:** Behringer 2600 (Blue Marvin / Gray Meanie), TD-3,
@@ -24,7 +24,7 @@ Proton, JT-4000, JT-2, CAT, Solina, Vocoder VC340 and many more.
 
 - Device discovery over **WebUSB** (Behringer vendor id `0x1397`).
 - Device control over **WebMIDI** SysEx (USB-MIDI) - settings, sequencer.
-- **71 device models**, **130 USB product IDs**.
+- **82 device models**, **143 USB product IDs**.
 - Per-device settings UI (dropdowns / toggles / spin boxes / radios / sliders),
   a full sequencer editor (ratchets, per-step velocity / gate / probability,
   directions, live MIDI-in recording), CV calibration references and poly-chain.
