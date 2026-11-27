@@ -9,6 +9,8 @@
 **Live at [synth-hub.elevatech.xyz](https://synth-hub.elevatech.xyz/)** - runs
 entirely in your browser.
 
+![SynthHub with two synths connected over USB](.github/screenshots/home.png)
+
 The Web App that manages every
 Behringer synthesizer over USB - an alternative to Behringer's SynthTribe
 desktop editor. Edit device settings, run the step sequencer, record MIDI, and
@@ -31,6 +33,16 @@ Proton, JT-4000, JT-2, CAT, Solina, Vocoder VC340 and many more.
 
 > Not affiliated with, endorsed by, or connected to Behringer / Music Tribe.
 > For interoperability and educational purposes. Firmware update is out of scope of this app.
+
+## Screenshots
+
+| TD-3 sequencer, step record from an MS-1 MK II                    | Piano roll, record from any MIDI input              |
+| ----------------------------------------------------------------- | --------------------------------------------------- |
+| ![TD-3 sequencer](.github/screenshots/td-3-sequencer.png)         | ![Piano roll](.github/screenshots/piano-roll.png)   |
+| **2600 Blue Marvin, WebUSB pairing**                              | **Install as an app (PWA)**                         |
+| ![2600 Blue Marvin settings](.github/screenshots/usb-connect.png) | ![Install app](.github/screenshots/install-pwa.png) |
+| **About, official desktop app downloads**                         |                                                     |
+| ![About page](.github/screenshots/about.png)                      |                                                     |
 
 ## Quick start
 
