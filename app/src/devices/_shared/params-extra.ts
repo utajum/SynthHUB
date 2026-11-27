@@ -11,9 +11,10 @@ import {
 import { decompose } from './controls';
 import { paramKey } from './paramKey';
 
-// poly (family 5) read-back: `77 7e 03`; the reply is a normal 0x76 dump
+// poly (family 5) read-back: `77 7e 03`, JN-80 `77 74 03`
+// (GeneralController::readGlobalParameters); the reply is `78 <sel> <block>`
 function requestPolyReadback(variant: DeviceVariant): Uint8Array {
-  return buildPKT77(variant, 0x7e, 3);
+  return buildPKT77(variant, variant.name === 'JN-80' ? 0x74 : 0x7e, 3);
 }
 
 // UB-Xa read-back: no command/device-id byte, array `7f 74 07 03 7f` + the
