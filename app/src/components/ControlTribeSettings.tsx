@@ -35,6 +35,13 @@ import {
 } from '../devices/_shared/controltribe';
 import CtStepGrid from './CtStepGrid';
 
+// ParamSync pacing (Control Tribe 1.12.4): [resend interval ms, sends];
+// QT32 PLAY, GROOVE KEY and BCR32 use the default
+const PACE: Record<string, [number, number]> = {
+  default: [100, 4],
+  pk61: [50, 5],
+};
+
 interface Props {
   slug: string;
   outputId: () => string | undefined;
@@ -123,17 +130,18 @@ export default function ControlTribeSettings(props: Props) {
   };
 
   // table devices (Control Tribe ParamSync): one frame at a time, the next
-  // after the matching reply; resend after 200 ms, skip after 4 sends
+  // after the matching reply, resent at the PACE interval
   const [syncing, setSyncing] = createSignal('');
   const sendPaced = async (write: boolean) => {
     const o = out();
     if (!o || syncing()) return;
     const frames = ctSyncFrames(props.slug, values(), write);
+    const [ms, sends] = PACE[props.slug] ?? PACE.default;
     let missed = 0;
     for (const [i, f] of frames.entries()) {
       setSyncing(`${write ? 'write' : 'read'} ${i + 1}/${frames.length}`);
       let ok = false;
-      for (let t = 0; t < 4 && !ok; t++) {
+      for (let t = 0; t < sends && !ok; t++) {
         ok = await new Promise<boolean>((resolve) => {
           const off = midi.onMessage((d) => {
             if (f.match.some((b, k) => d[k] !== b)) return;
@@ -144,7 +152,7 @@ export default function ControlTribeSettings(props: Props) {
           const timer = setTimeout(() => {
             off();
             resolve(false);
-          }, 200);
+          }, ms);
           midi.send(o, f.frame);
         });
       }
