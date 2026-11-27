@@ -82,10 +82,10 @@ export function queryDeviceFirmware(
 
 interface FirmwareRelease {
   version: string | null;
-  // pre-signed .syx blob URL (time-limited, no auth)
+  // /api/firmware link that redirects to a fresh pre-signed .syx URL
   downloadUrl?: string;
   filename?: string;
-  // pre-signed release-notes URL (only when it is a real http URL)
+  // same for the release notes (only when the cloud has a notes URL)
   notesUrl?: string;
   // inline release-notes text, when the cloud notes field is not a URL
   notesText?: string;
