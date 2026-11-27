@@ -14,7 +14,6 @@ dist/
 build/
 *.tsbuildinfo
 dev-dist/
-sw.js
 workbox-*.js
 *.log
 npm-debug.log*
